@@ -14,5 +14,5 @@ $_['text_account']      = 'Личный Кабинет';
 $_['text_order']        = 'История заказов';
 $_['text_wishlist']     = 'Заметки';
 $_['text_newsletter']   = 'Подписка';
-$_['text_powered'] 	= ' %s &copy; %s Работает на <a href="http://www.brocart.net" target="_blank">BROcart</a>';
+$_['text_powered'] 	= ' %s &copy; %s Работает на <a href="http://www.brocart.net" target="_blank">Opencart</a>';
 ?>
