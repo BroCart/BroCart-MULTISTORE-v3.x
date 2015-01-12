@@ -29,7 +29,7 @@
     <?php } ?>
     <div class="right">
 	<div itemprop="name"><h1><?php echo $heading_title; ?></h1></div>
-		<div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating"><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="Overall Rating" /><span class="ratingsSep">&nbsp;|&nbsp;</span><span itemprop="ratingValue"><?php echo $rating . '.0'; ?></span><span class="ratingsSep">&nbsp;|&nbsp;</span><span itemprop="reviewCount"><?php echo $reviews_num; ?></span></div>
+		<div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating"><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="Overall Rating" /><meta itemprop="rating" content="<?php echo (int)$rating; ?>"><meta itemprop="count" content="<?php echo (int)$reviews; ?>"><span class="ratingsSep">&nbsp;|&nbsp;</span><span itemprop="ratingValue"><?php echo $rating . '.0'; ?></span><span class="ratingsSep">&nbsp;|&nbsp;</span><span itemprop="reviewCount"><?php echo $reviews_num; ?></span></div>
 	  <div class="description">
         <?php if ($manufacturer) { ?>
         <span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a><br />
@@ -317,7 +317,7 @@
 	<?php } ?>
   <?php if ($review_status) { ?>
   <div id="tab-review" class="tab-content">
-    <div id="review"></div>
+    <div id="review" itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate"></div>
     <h2 id="review-title"><?php echo $text_write; ?></h2>
     <b><?php echo $entry_name; ?></b><br />
     <input type="text" name="name" value="" />
@@ -327,19 +327,17 @@
     <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
     <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
     <br />
-    <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
-    <input type="radio" name="rating" value="1" />
-    &nbsp;
-    <input type="radio" name="rating" value="2" />
-    &nbsp;
-    <input type="radio" name="rating" value="3" />
-    &nbsp;
-    <input type="radio" name="rating" value="4" />
-    &nbsp;
-    <input type="radio" name="rating" value="5" />
-    &nbsp;<span><?php echo $entry_good; ?></span><br />
-    <br />
-    <b><?php echo $entry_captcha; ?></b><br />
+   &nbsp;<fieldset class="ratings">
+    <legend><b><?php echo $entry_rating; ?></b></legend>
+		<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Bomba!">5 stars</label>
+		<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+		<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Tak sebe">3 stars</label>
+		<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Na dvojky">2 stars</label>
+		<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Ny nafig">1 star</label>
+	</fieldset>
+	<br />
+    <br /><br /><br />
+    <b><?php echo $entry_captcha; ?></b><br /><br />
     <input type="text" name="captcha" value="" />	
     <br />
     <img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />

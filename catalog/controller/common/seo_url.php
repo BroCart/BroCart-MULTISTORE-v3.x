@@ -241,7 +241,7 @@ class ControllerCommonSeoUrl extends Controller {
 				$queries = array();
 				foreach ($rows as $row) {
 					$queries[utf8_strtolower($row['keyword'])] = $row['query'];
-			 }
+			}
 
 			reset($parts);
 
@@ -308,7 +308,13 @@ class ControllerCommonSeoUrl extends Controller {
 							$this->request->get['path'] = $url[1];
 						} else {
 							$this->request->get['path'] .= '_' . $url[1];
-						}					 
+						}
+					} elseif ($url[0] == 'gallery_id') {
+						if (!isset($this->request->get['album'])) {
+							$this->request->get['album'] = $url[1];
+						} else {
+							$this->request->get['album'] .= '_' . $url[1];
+						}
 					} elseif (count($url) > 1) {
 						$this->request->get[$url[0]] = $url[1];
 					}
@@ -332,6 +338,8 @@ class ControllerCommonSeoUrl extends Controller {
 				$this->request->get['route'] = 'product/manufacturer/info';
 			} elseif (isset($this->request->get['information_id'])) {
 				$this->request->get['route'] = 'information/information';
+			} elseif (isset($this->request->get['album'])) {
+				$this->request->get['route'] = 'information/gallery';
 			} elseif (isset($this->request->get['search'])) {
 				$this->request->get['route'] = 'product/search'; 
 			 } elseif (isset($this->request->get['tag'])) {
@@ -385,6 +393,14 @@ class ControllerCommonSeoUrl extends Controller {
 					if (!$data['path']) return $link;
 				}
 				break;
+			case 'information/gallery':
+				if (isset($data['album'])) {
+					$album = explode('_', $data['album']);
+					$album = end($album);
+					$data['album'] = $this->getPathByAlbum($album);
+					if (!$data['album']) return $link;
+				}
+				break;
 			case 'product/product/review':			
 			case 'product/search':
 				if (isset($data['search'])) {
@@ -420,12 +436,21 @@ class ControllerCommonSeoUrl extends Controller {
 		foreach ($data as $key => $value) {
 			switch ($key) {
 				case 'product_id':
+				case 'gallery_id':
 				case 'manufacturer_id':				
 				case 'category_id':
 				case 'information_id':
 					$queries[] = $key . '=' . $value;
 					unset($data[$key]);
 					$postfix = 1;
+					break;
+				case 'album':
+					$albums = explode('_', $value);
+					foreach ($albums as $album) {
+					//$album = end($albums);
+						$queries[] = 'gallery_id=' . $album;
+					}
+					unset($data[$key]);
 					break;
 				case 'tag':
 					$queries[] = 'tag=' . $value;
@@ -458,6 +483,7 @@ class ControllerCommonSeoUrl extends Controller {
 				$rows[] = array('query' => $query, 'keyword' => $this->cache_data['queries'][$query]);
 			} else {
 				$query_s = explode('=', $query);
+
 				if ($query_s[0] == 'search') {
 					$rows[] = array('query' => $query_s[0], 'keyword' => $query_s[1]);
 				} elseif ($query_s[0] == 'tag') {
@@ -565,8 +591,8 @@ class ControllerCommonSeoUrl extends Controller {
 			}
 		       $seo_url .=  $o_url . $l_url .  $p_url;
 		}
-	        return $seo_url;
-                
+		
+	    return $seo_url;
 	}       
 
 	private function getPathByProduct($product_id) {
@@ -621,6 +647,39 @@ class ControllerCommonSeoUrl extends Controller {
 		}
 
 		return $path[$category_id];
+	}
+	
+	private function getPathByAlbum($album_id) {
+		$album_id = (int)$album_id;
+		if ($album_id < 1) return false;
+
+		static $album = null;
+		if (!is_array($album)) {
+			$album = $this->cache->get('gallery.seopath');
+			if (!is_array($album)) $album = array();
+		}
+
+		if (!isset($album[$album_id])) {
+			$max_level = 10;
+
+			$sql = "SELECT CONCAT_WS('_'";
+			for ($i = $max_level-1; $i >= 0; --$i) {
+				$sql .= ",t$i.gallery_id";
+			}
+			$sql .= ") AS path FROM " . DB_PREFIX . "gallery t0";
+			for ($i = 1; $i < $max_level; ++$i) {
+				$sql .= " LEFT JOIN " . DB_PREFIX . "gallery t$i ON (t$i.gallery_id = t" . ($i-1) . ".album_id)";
+			}
+			$sql .= " WHERE t0.gallery_id = '" . $album_id . "'";
+
+			$query = $this->queryCacher($sql);
+
+			$album[$album_id] = $query->num_rows ? $query->row['path'] : false;
+
+			$this->cache->set('gallery.seopath', $album);
+		}
+
+		return $album[$album_id];
 	}
 
 	private function validate() {

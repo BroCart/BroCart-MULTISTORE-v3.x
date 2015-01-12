@@ -9,10 +9,10 @@ class ControllerModuleLatest extends Controller {
 	}
 
 	protected function index($setting) {
-		$this->language->load('module/latest');
+		$this->language->load('module/latest');	
 		
-      	$this->data['heading_title'] = $this->language->get('heading_title');
-		
+      	$this->data['heading_title'] = $this->language->get('heading_name');
+	
 		$this->data['button_cart'] = $this->language->get('button_cart');
 		
 		$this->data['button_cart_already'] = $this->language->get('button_cart_already');

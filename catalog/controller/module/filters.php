@@ -18,6 +18,7 @@ class ControllerModuleFilters extends Controller {
             $this->data['filters'] = $filters;
         }
         $this->load->model('filters/filters');
+
         //Manufacturers
 		if ($this->config->get('filter_man') === '1') {
 			$resultSet = $this->model_filters_filters->getManufacturersInACategory($categoryId);
@@ -28,6 +29,7 @@ class ControllerModuleFilters extends Controller {
 		}
         if ($this->config->get('filter_attr') === '1') {
 			$resultAttr = $this->model_filters_filters->getAttributes($categoryId);
+
 			$this->data['productAttributes'] = $resultAttr;
 		} else {
 			$this->data['productAttributes'] = false;
@@ -101,9 +103,7 @@ class ControllerModuleFilters extends Controller {
     }
 
     public function applyFilter() {
-	
-	
-	
+
         $this->language->load('product/category');
 
         $this->load->model('catalog/category');
@@ -303,13 +303,13 @@ class ControllerModuleFilters extends Controller {
                         $productOption = $productOption . ',' . $filter['val'];
                     }
                 } else if (strtolower($filter['param']) == 'manufacturer') {
-				if(isset($this->request->post['filters'])){
+				//if(isset($this->request->post['filters'])){
                     if (!$manufacturerId) {
                         $manufacturerId = $filter['val'];
                     } else {
                         $manufacturerId = $manufacturerId . ',' . $filter['val'];
                     }
-				}
+				//}
 				 } else if (strtolower($filter['param']) == 'product-attribute') {
                     if (!$productAttribute) {
                         $productAttribute = $filter['val'];
@@ -361,6 +361,8 @@ class ControllerModuleFilters extends Controller {
             $this->load->model('filters/filters');
 			
             $results = $this->model_filters_filters->getProducts($data);
+
+            $product_ids = array();
             foreach ($results as $result) {
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
@@ -391,7 +393,8 @@ class ControllerModuleFilters extends Controller {
 				} else {
 					$rating = false;
 				}
-									
+
+                //$product_ids = array();
 				$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -405,8 +408,16 @@ class ControllerModuleFilters extends Controller {
 					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id']),
 				    'weight' 	  => $this->weight->format($result['weight'], $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'))
 				);
+                $product_ids[]= $result['product_id'];
 			}
-			
+
+            $product_ids= implode(",",$product_ids);
+
+            //получаем атрибуты по товарам
+            $attributes = $this->model_filters_filters->getAttributesByProductIds($product_ids);
+//$this->log->write('Pr$attributes:'. print_r($attributes,true));		
+			$manufacturers = $this->model_filters_filters->getManufByProductIds($product_ids);
+
             $url = '';
 
             if (isset($this->request->get['limit'])) {
@@ -551,7 +562,14 @@ class ControllerModuleFilters extends Controller {
                 $this->template = 'default/template/module/filtered_category.tpl';
             }
 
-            $this->response->setOutput($this->render());
+            //отправляем товар и их ид (чтобы не делать новый запрос на получение товаров)
+            //потом по ид получим атрибуты и обновим фильтр атрибутов
+            $result = array(
+                'html_output'=>$this->render(),
+                'attributes'=>$attributes,
+				'manufes'=>$manufacturers
+            );
+            $this->response->setOutput(json_encode($result));
         } else {
             $url = '';
 
@@ -600,9 +618,9 @@ class ControllerModuleFilters extends Controller {
             $this->response->setOutput($this->render());
         }
     }
-	private function getProductOptions($product_id,$tax_class_id){
+
+	private function getProductOptions($product_id,$tax_class_id,$price=0){
 	
-			
 		$options = array();
 			
 		foreach ($this->model_catalog_product->getProductOptions($product_id) as $option) { 
@@ -612,7 +630,7 @@ class ControllerModuleFilters extends Controller {
 				foreach ($option['option_value'] as $option_value) {
 					if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 						if($option['type'] == 'select'){
-								$option_price = $result['price'];
+								$option_price = $price;
 								if ($option_value['price_prefix'] == '+') {
 									$option_price += $option_value['price'];
 								} elseif ($option_value['price_prefix'] == '-') {

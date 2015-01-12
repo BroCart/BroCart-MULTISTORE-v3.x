@@ -23,8 +23,8 @@ class ControllerProductSearch extends Controller {
 			$tag = '';
 		} 
 				
-		if (isset($this->request->get['description'])) {
-			$description = $this->request->get['description'];
+		if (isset($this->request->get['filter_description'])) {
+			$description = $this->request->get['filter_description'];
 		} else {
 			$description = '';
 		} 

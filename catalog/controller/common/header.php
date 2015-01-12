@@ -59,8 +59,8 @@ class ControllerCommonHeader extends Controller {
 		$this->data['home'] = $this->url->link('common/home');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$this->data['logged'] = $this->customer->isLogged();
-		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
-		
+		$this->data['account'] = $this->url->link('account/account', '', 'SSL');		
+		$this->data['gallery'] = $this->url->link('information/gallery', '', 'SSL');		
 		$this->data['special'] = $this->url->link('product/special', '', 'SSL');
 		$this->load->model('setting/setting');
         $settings = $this->model_setting_setting->getSetting('qv_ch');		

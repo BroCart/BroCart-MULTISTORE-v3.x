@@ -52,10 +52,10 @@ class ModelFiltersFilters extends Model {
                     on P.product_id = POD.product_id
                     AND P.status = 1
                     where PTC.category_id =' . (int) $categoryId
-                    . ' group by OD.name,OVD.name';
+                    . ' AND OD.language_id = ' . (int) $this->config->get('config_language_id') . ' AND OVD.language_id = ' . (int) $this->config->get('config_language_id') . ' group by OD.name,OVD.name';
 
 
-          // $this->log->write($query );
+
             $results = $this->queryCacher($query);
 
             $productOptionsData = $results->rows;
@@ -84,9 +84,54 @@ class ModelFiltersFilters extends Model {
 
     }
 
-	public function getAttributes($categoryId) {
+	/**
+	 * получаематрибуты выбранных товаров
+	 * в виде атрибут ид| значение атрибута
+	 * @param array $product_ids
+	 * @return array
+	 */
+	public function getAttributesByProductIds($product_ids){
 
-		$sql = "SELECT DISTINCT pa.text, a.`attribute_id`, ad.`name`, ag.attribute_group_id, agd.name as attribute_group_name FROM `" . DB_PREFIX . "product_attribute` pa" .
+		$sql = "SELECT DISTINCT(CONCAT(attribute_id,'-',text)) as attributes
+				FROM " . DB_PREFIX . "product_attribute
+				WHERE product_id IN (".$product_ids.")";
+
+		$query = $this->db->query($sql);
+
+		$attributes = array();
+		foreach ($query->rows as $row) {
+			$attributes[]=$row['attributes'];
+		}
+
+		return $attributes;
+	}
+	
+	/**
+	 * получаем manufs выбранных товаров
+	 * в виде атрибут ид| значение атрибута
+	 * @param array $product_ids
+	 * @return array
+	 */
+	public function getManufByProductIds($product_ids){
+
+		$sql = "SELECT DISTINCT(CONCAT(manufacturer_id)) as manuf
+				FROM " . DB_PREFIX . "product
+				WHERE product_id IN (".$product_ids.")";
+
+		$query = $this->db->query($sql);
+
+		$manufes = array();
+		foreach ($query->rows as $row) {
+			$manufes[]=$row['manuf'];
+		}
+
+		return $manufes;
+	}
+
+	public function getAttributes($categoryId) {
+	//TODO:смущает меня дистинкт на тексте, а вдруг у разных атрибутов одно одинаковое значение
+		$sql = "SELECT DISTINCT pa.text, a.`attribute_id`, ad.`name`, ag.attribute_group_id, agd.name as attribute_group_name
+				FROM `" . DB_PREFIX . "product_attribute` pa" .
 			   " LEFT JOIN " . DB_PREFIX . "attribute a ON(pa.attribute_id=a.`attribute_id`) " .
 			   " LEFT JOIN " . DB_PREFIX . "attribute_description ad ON(a.attribute_id=ad.`attribute_id`) " .
 			   " LEFT JOIN " . DB_PREFIX . "attribute_group ag ON(ag.attribute_group_id=a.`attribute_group_id`) " .
@@ -111,6 +156,7 @@ class ModelFiltersFilters extends Model {
 
 		$attributes = array();
 		foreach($query->rows as $row) {
+
 			if(!isset($attributes[$row['attribute_group_id']])) {
 				$attributes[$row['attribute_group_id']] = array(
 					'name' => $row['attribute_group_name'],
@@ -119,16 +165,27 @@ class ModelFiltersFilters extends Model {
 			}
 
 			if(!isset($attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']])) {
-				$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']] = array('name' => $row['name'], 'values' => array());
+				$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['name']=$row['name'];
+				$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['values'][]=$row['text'];
+			}
+			
+			$row['text'] = htmlspecialchars_decode($row['text'], ENT_COMPAT);
+			foreach(explode(';', $row['text']) as $text) {
+				if(!in_array($text, $attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['values'])) {
+					$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['values'][] = htmlspecialchars($text, ENT_COMPAT);
+
+				}
 			}
 			
 		}
 
 		foreach($attributes as $attribute_group_id => $attribute_group) {
+
 			foreach($attribute_group['attribute_values'] as $attribute_id => $attribute) {
 				sort($attributes[$attribute_group_id]['attribute_values'][$attribute_id]['values']);
 			}
 		}
+
 		return $attributes;
 	}
 		
@@ -181,8 +238,7 @@ class ModelFiltersFilters extends Model {
 
 			if (!empty($data['productAttribute'])) {
 				$sql .= " JOIN " . DB_PREFIX . "product_attribute PA ON (p.product_id = PA.product_id)";
-                $sql .= " AND PA.attribute_id in (".$data['productAttribute'].")";
-			} 
+			}
 			
             if (!empty($data['manufacturerId'])) {
                 $sql .= " AND p.manufacturer_id in (" .$data['manufacturerId']  . ")";
@@ -201,6 +257,24 @@ class ModelFiltersFilters extends Model {
 		              
 			$sql .= " WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
 
+			if (!empty($data['productAttribute'])) {
+
+				$sql .= " AND (";
+				//attribute_id-text,attribute_id-text
+
+				$productAttribute = explode(",", $data['productAttribute']);
+				$separator = "";
+				foreach ($productAttribute as $attribute) {
+					$attribute = explode("-", $attribute);
+					//значения - распределяем по переменным
+					list($attribute_id, $attribute_text) = $attribute;
+
+					$sql .= $separator." ( PA.attribute_id =" . (int)$attribute_id . "  AND PA.text = '" . $attribute_text . "')";
+					$separator = " OR ";
+				}
+				$sql .= ")";
+			}
+			
 			if (!empty($data['minPrice']) && !empty($data['maxPrice'])) {
                 
 				$sql .= " AND ( (p.price BETWEEN '" . $data['minPrice'] . "' AND '" . $data['maxPrice'] . "' 

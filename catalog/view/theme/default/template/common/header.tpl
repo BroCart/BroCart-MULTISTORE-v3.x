@@ -37,9 +37,9 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
-<script type="text/javascript" src="catalog/view/javascript/commonproof.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/livesearch.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/notify.js"></script>
+<script async type="text/javascript" src="catalog/view/javascript/commonproof.js"></script>
+<script async type="text/javascript" src="catalog/view/javascript/livesearch.js"></script>
+<script async type="text/javascript" src="catalog/view/javascript/notify.js"></script>
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
@@ -166,7 +166,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 			<a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a>
 			<?php } ?>
 			<a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a>
-			
+			<a href="<?php echo $gallery; ?>"><?php echo $text_gallery; ?></a>
 		</div>	
 		
 		<?php echo $currency; ?>

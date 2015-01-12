@@ -12,7 +12,7 @@
                        <p><span class="price-range" id="price"><?php echo $pricemin; ?>&nbsp;(<?php echo $symbol; ?>)&nbsp;&nbsp;-&nbsp;&nbsp;<?php echo $pricemax; ?>&nbsp;(<?php echo $symbol; ?>)</span></p>
                         <div class="price-slide"></div>
                         <input type="hidden" class="price-min" id="price-min" value="<?php echo $pricemin; ?>" />
-                        <input type="hidden" class="price-max" id="price-max" value="<?php echo $pricemax; ?>" />  
+                        <input type="hidden" class="price-max" id="price-max" value="<?php echo $pricemax; ?>" />
                             </div>
                             </div>
 							<div>
@@ -20,36 +20,51 @@
                     <?php } ?>
 		<!-- End Product Price Filters -->
 		<!--Manufactures -->
+		<div id="manufes">
             <?php if (!empty($manufacturers)) { ?>
             <div class="box-heading-checkbox"><?php echo $text_manufacturer_select_option; ?> </div>
                  <div class="checkboxDiv">
                 <?php foreach ($manufacturers as $value) { ?>
                     <div>
                     <div class="checkbox product-options" id="">
-                    <input  type="checkbox" id="manufacturer" name="manufacturers[]" value="<?php echo $value['manufacturer_id']; ?>">
-                    </div>
-                    <label for="<?php echo $value['name']; ?>"><?php echo $value['name']; ?></label>
+                    <input id="<?php echo $value['manufacturer_id']; ?>" type="checkbox" class="myinput large custom" param="manufacturer" name="manufacturers[]" value="<?php echo $value['manufacturer_id']; ?>">
+                    
+					</div>
+                    <label id="<?php echo $value['manufacturer_id']; ?>" for="<?php echo $value['manufacturer_id']; ?>"><?php echo $value['name']; ?></label>
                     </div>
                     
                     <?php } ?>
 					</div>
-				<?php } ?>	
-			<!-- Product Attributes Filters -->			
-				<?php if($productAttributes) { ?>
-					<?php foreach($productAttributes as $attribute) { ?>
-						<div class="box-heading-checkbox"><?php echo  $attribute['name']; ?> </div>
-						<div class="checkboxDiv">
-						<?php foreach($attribute['attribute_values'] as $attribute_id=>$attribute_value) { ?>
-							<div>
-								<div class="checkbox product-options" id="">
-									<input  type="checkbox" id="product-attribute" name="product-attribute[]" value="<?php echo $attribute_id; ?>">
-								</div>
-								<label for="<?php echo  $attribute_value['name']; ?>"><?php echo  $attribute_value['name']; ?></label>
-							</div>
-						<?php } ?>
-						</div>
-					<?php } ?>
 				<?php } ?>
+			</div>
+			<!-- Product Attributes Filters -->
+            <div id="attributes">
+                <?php if($productAttributes) { ?>
+                <?php foreach($productAttributes as $attribute_group_id=>$attribute) { ?>
+
+                <div class="box-heading-checkbox"><?php echo  $attribute['name']; ?> </div>
+                <div class="checkboxDiv">
+                    <?php foreach($attribute['attribute_values'] as $attribute_id=>$attribute_value) { ?>
+                    <fieldset>
+                        <legend><?php echo  $attribute_value['name']; ?></legend>
+                        <?php foreach($attribute_value['values'] as $text) { ?>
+                        <?php $attribute_text = $attribute_id.'-'.$text; ?>
+                        <div>
+                            <div class="checkbox product-options">
+
+                                <input id="<?php echo $attribute_text; ?>" type="checkbox" class="myinput large custom" param="product-attribute" name="product-attribute[<?php echo $attribute_id; ?>]" value="<?php echo  $attribute_text; ?>">
+								
+                            </div>
+                            <label id="lbl-<?php echo $attribute_text; ?>" for="<?php echo $attribute_text; ?>"><?php echo  $text; ?></label>
+                        </div>
+                        <?php } ?>
+                    </fieldset>
+                    <br />
+                    <?php } ?>
+                </div>
+                <?php } ?>
+                <?php } ?>
+             </div>
 				<!-- Product Option Filters -->
 				<?php if($productOptions) { ?>
 					<?php foreach($productOptions as $value) { ?>
@@ -58,9 +73,10 @@
 						<?php unset($value['name']); foreach($value as $child) { ?>
 							<div>
 								<div class="checkbox product-options" id="">
-									<input  type="checkbox" id="product-option" name="product-option[]" value="<?php echo $child['child_id']; ?>">
+									<input  id="<?php echo $child['child_id']; ?>" type="checkbox" class="myinput large custom" param="product-option" name="product-option[]" value="<?php echo $child['child_id']; ?>">
+									<label for="<?php echo $child['child_id']; ?>"><?php echo  $child['child_name']; ?></label>
 								</div>
-								<label for="<?php echo  $child['child_name']; ?>"><?php echo  $child['child_name']; ?></label>
+								
 							</div>
 						<?php } ?>
 						</div>
@@ -115,7 +131,13 @@
           
             $(document).ready(function(){
                 //	$(".radio").dgStyle();
-                $(".checkbox").dgStyle();
+                //$(".checkbox").dgStyle();
+			
+				//  $('input').iCheck({
+				//	checkboxClass: 'icheckbox_minimal',
+				//	radioClass: 'iradio_minimal',
+				//	increaseArea: '10%' // optional
+				//  });
             });
 
             function getSortingParams(){
@@ -161,7 +183,7 @@
                 //Iterating over all the check boxes
                 $("input:checked").each(function() {
                     var item = {};
-                    item.param = $(this).attr('id');
+                    item.param = $(this).attr('param');
                     item.val = $(this).val();
                     arrData.push(item);
                 });
@@ -183,9 +205,10 @@
             $.ajax({
                 url: url,
                 type: "POST",
+				//type: "GET",
                 data: {filters : arrData},
-                dataType: "html"
-            }).done(function( msg ) {   
+                dataType: "json"
+            }).done(function( data ) {
                 $('div').remove('.pagination');            
                 var productDiv;
                 if($('.product-list').length){
@@ -196,8 +219,48 @@
                 $('div').remove(productDiv);
                 $('div').remove('.pagination');
                 $('div').remove('.buttons');
-                $(msg).insertAfter('.product-compare');
+                $(data.html_output).insertAfter('.product-compare');
+			
+				//if (data.attributes) {
+					updateAttibutes(data.attributes);
+				//}
+				//if (data.manufes) {
+					updateManufes(data.manufes);
+				//}
             });
+        }
+
+        function updateAttibutes(attributes){
+            if(attributes.length!=0) {
+                $('#attributes :input').attr('disabled', true);
+                $('#attributes ,label').addClass('disabled');
+                $.each(attributes, function (index, element) {
+console.log(element);
+                    $('#' + element).prop('disabled', false);
+                    $('#lbl-' + element).removeClass('disabled');
+					//$("label[for='"+ element +"']").removeClass('disabled');
+                });
+            }else{
+				$('#attributes :input').attr('disabled', false);
+                $('#attributes ,label').removeClass('disabled');
+            }
+
+        }
+
+		function updateManufes(manufes){
+            if(manufes.length!=0) {
+                $('#manufes :input').attr('disabled', true);
+                $('#manufes ,label').addClass('disabled');
+                $.each(manufes, function (index, element) {
+                    $('#' + element).prop('disabled', false);
+                    $('#' + element).removeClass('disabled');
+					$("label[for='"+ element +"']").removeClass('disabled');
+                });
+            }else{
+				$('#manufes :input').attr('disabled', false);
+                $('#manufes ,label').removeClass('disabled');
+            }
+
         }
 
         //--></script>

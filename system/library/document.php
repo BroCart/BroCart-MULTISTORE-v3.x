@@ -80,6 +80,6 @@ class Document {
 	} 
 	public function getRobots() {
 		return $this->robots;
-	}
+	}	
 }
 ?>

@@ -67,6 +67,14 @@ class Image {
     	if (!$this->info['width'] || !$this->info['height']) {
 			return;
 		}
+		
+		if ($width == 'auto'){
+			$width = $this->info['width'];
+		}
+
+		if ($height == 'auto'){
+			$height = $this->info['height'];
+		}
 
 		$xpos = 0;
 		$ypos = 0;
@@ -91,9 +99,26 @@ class Image {
 		$new_height = (int)($this->info['height'] * $scale);			
     	$xpos = (int)(($width - $new_width) / 2);
    		$ypos = (int)(($height - $new_height) / 2);
+		
+		$new_width = (int)($this->info['width'] * $scale);
+		$new_height = (int)($this->info['height'] * $scale);
+				
+		$original_aspect = $this->info['width'] / $this->info['height'];
+		$thumb_aspect = $width / $height;
+				
+		if ( $original_aspect >= $thumb_aspect ) {
+			$new_height = $height;
+			$new_width = $this->info['width'] / ($this->info['height'] / $height);
+		} else {
+			$new_width = $width;
+			$new_height = $this->info['height'] / ($this->info['width'] / $width);
+		}
+					
+		$xpos = (int)(0 - (($new_width - $width) / 2));
+		$ypos = (int)(0 - (($new_height - $height) / 2));
         		        
        	$image_old = $this->image;
-        $this->image = imagecreatetruecolor($width, $height);
+        $this->image = imagecreatetruecolor($new_width, $new_height);
 			
 		if (isset($this->info['mime']) && $this->info['mime'] == 'image/png') {		
 			imagealphablending($this->image, false);
@@ -106,11 +131,12 @@ class Image {
 		
 		imagefilledrectangle($this->image, 0, 0, $width, $height, $background);
 	
-        imagecopyresampled($this->image, $image_old, $xpos, $ypos, 0, 0, $new_width, $new_height, $this->info['width'], $this->info['height']);
-        imagedestroy($image_old);
+        imagecopyresampled($this->image, $image_old, 0, 0, 0, 0, $new_width, $new_height, $this->info['width'], $this->info['height']);
+
+		imagedestroy($image_old);
            
-        $this->info['width']  = $width;
-        $this->info['height'] = $height;
+		$this->info['width']  = $new_width;
+		$this->info['height'] = $new_height;
     }
     
     public function watermark($file, $position = 'bottomright') {

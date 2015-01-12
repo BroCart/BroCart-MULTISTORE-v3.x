@@ -34,7 +34,7 @@ class ControllerModuleLanguage extends Controller {
 				);
 			}
 		}
-if ($this->config->get('config_seo_url')) {
+
 		if (!isset($this->request->get['route'])) {
 			foreach($this->data['languages'] as $i => $language) {
 				$this->data['languages'][$i]['redirect'] = $this->url->link('common/home', '', 'NONSSL', $language['code']);
@@ -63,37 +63,7 @@ if ($this->config->get('config_seo_url')) {
 				$this->data['languages'][$i]['redirect'] = $this->url->link($route, $url, $connection, $language['code']);
 			}
 		}
-} else {
-		if (!isset($this->request->get['route'])) {
-			foreach($this->data['languages'] as $i => $language) {
-				$this->data['languages'][$i]['redirect'] = $this->url->link('common/home', '', 'NONSSL');
-			}
-		} else {
-			$data = $this->request->get;
-			
-			unset($data['_route_']);
-			
-			$route = $data['route'];
-			
-			unset($data['route']);
-			
-			$url = '';
-			
-			if ($data) {
-				$url = '&' . urldecode(http_build_query($data, '', '&'));
-			}	
-			
-			if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-				$connection = 'SSL';
-			} else {
-				$connection = 'NONSSL';
-			}
-			
-			foreach($this->data['languages'] as $i => $language) {
-				$this->data['languages'][$i]['redirect'] = $this->url->link($route, $url, $connection);
-			}
-		}
-}
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/language.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/language.tpl';
 		} else {

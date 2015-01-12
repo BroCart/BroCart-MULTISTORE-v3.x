@@ -3,7 +3,7 @@
 define('VERSION', '1.5.5.1');
 
 // Version bro
-define('bro', '3.0.5');
+define('bro', '3.0.3');
 
 // Configuration
 if (file_exists('config.php')) {

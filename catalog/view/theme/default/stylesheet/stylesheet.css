@@ -3241,3 +3241,80 @@ INPUT[type="text"]#subscribe_name
 	padding: 0;
 	position: relative;
 }
+
+fieldset {
+	display: block;
+	-webkit-margin-start: 2px;
+	-webkit-margin-end: 2px;
+	-webkit-padding-before: 0.35em;
+	-webkit-padding-start: 0.75em;
+	-webkit-padding-end: 0.75em;
+	-webkit-padding-after: 0.625em;
+	border: 2px groove threedface;
+	border-image-source: initial;
+	border-image-slice: initial;
+	border-image-width: initial;
+	border-image-outset: initial;
+	border-image-repeat: initial;
+	min-width: -webkit-min-content;
+}
+
+.ratings {
+    float:left;
+}
+
+.ratings:not(:checked) > input {
+    position:absolute;
+    /* top:-9999px; */
+	display: none;
+    clip:rect(0,0,0,0);
+}
+
+.ratings:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.ratings:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.ratings > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.ratings:not(:checked) > label:hover,
+.ratings:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.ratings > input:checked + label:hover,
+.ratings > input:checked + label:hover ~ label,
+.ratings > input:checked ~ label:hover,
+.ratings > input:checked ~ label:hover ~ label,
+.ratings > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.ratings > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+.disabled{
+	color: #ccc;
+}
+label,legend{
+	color:#000000;
+}

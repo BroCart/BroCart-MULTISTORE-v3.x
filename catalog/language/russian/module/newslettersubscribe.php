@@ -7,7 +7,7 @@ $_['entry_email'] 		 = 'E-mail';
 $_['entry_name'] 		 = 'Имя';
 
 //Buttons
-$_['entry_button'] 		 = 'Подписатся';
+$_['entry_button'] 		 = 'Подписаться';
 $_['entry_unbutton'] 	 = 'Отписатся';
 
 //text
