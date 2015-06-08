@@ -328,7 +328,7 @@ INPUT:focus, TEXTAREA:focus
 	-webkit-border-radius: 0 5px 5px 0;
 	border-radius: 0 5px 5px 0;
 	-moz-border-radius: 0 5px 5px 0;
-	z-index: 1;
+	z-index: 99999999 !important;
 	position: absolute;
 }
 #cart .heading

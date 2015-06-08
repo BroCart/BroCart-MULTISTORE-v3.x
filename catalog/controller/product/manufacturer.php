@@ -168,12 +168,8 @@ class ControllerProductManufacturer extends Controller {
 			$this->load->model('tool/image');
 			
 			if ($manufacturer_info['image']) {
-				$image_meta = $this->model_tool_image->resize($manufacturer_info['image'], 100,100);
-			} else {
-				$image_meta = '';
-			}
-			
-			$this->document->setOpengraph('og:image', $image_meta);
+				$this->document->setOpengraph('og:image', $this->model_tool_image->resize($manufacturer_info['image'], 100,100));
+			} 
 			$this->document->setOpengraph('og:description', str_replace("\"", "&quot;",utf8_substr(trim(strip_tags(html_entity_decode($manufacturer_info['description'], ENT_QUOTES, 'UTF-8')), " \t\n\r"), 0, 200) . '...'));
 			
 			$this->data['description'] = html_entity_decode($manufacturer_info['description'], ENT_QUOTES, 'UTF-8');

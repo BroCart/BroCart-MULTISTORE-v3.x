@@ -1,27 +1,3 @@
--- Время создания: Фев 03 2014 г., 22:50
--- Версия сервера: 5.1.69-cll-lve
--- Версия PHP: 5.2.17
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- База данных: `bro`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_address`
---
-
-DROP TABLE IF EXISTS `oc_address`;
 CREATE TABLE IF NOT EXISTS `oc_address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
@@ -38,15 +14,8 @@ CREATE TABLE IF NOT EXISTS `oc_address` (
   `zone_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_affiliate`
---
-
-DROP TABLE IF EXISTS `oc_affiliate`;
 CREATE TABLE IF NOT EXISTS `oc_affiliate` (
   `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(32) NOT NULL,
@@ -82,13 +51,6 @@ CREATE TABLE IF NOT EXISTS `oc_affiliate` (
   PRIMARY KEY (`affiliate_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_affiliate_transaction`
---
-
-DROP TABLE IF EXISTS `oc_affiliate_transaction`;
 CREATE TABLE IF NOT EXISTS `oc_affiliate_transaction` (
   `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `affiliate_id` int(11) NOT NULL,
@@ -99,23 +61,12 @@ CREATE TABLE IF NOT EXISTS `oc_affiliate_transaction` (
   PRIMARY KEY (`affiliate_transaction_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_attribute`
---
-
-DROP TABLE IF EXISTS `oc_attribute`;
 CREATE TABLE IF NOT EXISTS `oc_attribute` (
   `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
   `attribute_group_id` int(11) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`attribute_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
-
---
--- Дамп данных таблицы `oc_attribute`
---
 
 INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) VALUES
 (1, 6, 1),
@@ -130,23 +81,12 @@ INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) 
 (10, 3, 7),
 (11, 3, 8);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_attribute_description`
---
-
-DROP TABLE IF EXISTS `oc_attribute_description`;
 CREATE TABLE IF NOT EXISTS `oc_attribute_description` (
   `attribute_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`attribute_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_attribute_description`
---
 
 INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) VALUES
 (1, 1, 'Description'),
@@ -183,22 +123,11 @@ INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) V
 (11, 3, 'test 8'),
 (3, 3, 'Clockspeed');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_attribute_group`
---
-
-DROP TABLE IF EXISTS `oc_attribute_group`;
 CREATE TABLE IF NOT EXISTS `oc_attribute_group` (
   `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`attribute_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
---
--- Дамп данных таблицы `oc_attribute_group`
---
 
 INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
 (3, 2),
@@ -206,23 +135,12 @@ INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
 (5, 3),
 (6, 4);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_attribute_group_description`
---
-
-DROP TABLE IF EXISTS `oc_attribute_group_description`;
 CREATE TABLE IF NOT EXISTS `oc_attribute_group_description` (
   `attribute_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`attribute_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_attribute_group_description`
---
 
 INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id`, `name`) VALUES
 (3, 1, 'Memory'),
@@ -238,23 +156,12 @@ INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id
 (5, 3, 'Motherboard'),
 (6, 3, 'Processor');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_banner`
---
-
-DROP TABLE IF EXISTS `oc_banner`;
 CREATE TABLE IF NOT EXISTS `oc_banner` (
   `banner_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`banner_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
-
---
--- Дамп данных таблицы `oc_banner`
---
 
 INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
 (6, 'HP Products', 1),
@@ -277,58 +184,41 @@ INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
 (23, 'Footer-bottom-left', 1),
 (24, 'Footer-bottom-right', 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_banner_image`
---
-
-DROP TABLE IF EXISTS `oc_banner_image`;
 CREATE TABLE IF NOT EXISTS `oc_banner_image` (
   `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `banner_id` int(11) NOT NULL,
   `link` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
+  `sort_order` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`banner_image_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=94 ;
 
---
--- Дамп данных таблицы `oc_banner_image`
---
+INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `link`, `image`, `sort_order`) VALUES
+(54, 7, 'index.php?route=product/product&amp;path=57&amp;product_id=49', 'data/demo/samsung_banner.jpg', 0),
+(77, 6, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=7', 'data/demo/hp_banner.jpg', 0),
+(75, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=5', 'data/demo/htc_logo.jpg', 0),
+(73, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=8', 'data/demo/apple_logo.jpg', 0),
+(74, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=9', 'data/demo/canon_logo.jpg', 0),
+(71, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=10', 'data/demo/sony_logo.jpg', 0),
+(72, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=6', 'data/demo/palm_logo.jpg', 0),
+(76, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=7', 'data/demo/hp_logo.jpg', 0),
+(78, 9, '', 'data/positions/HeaderTop 980.png', 0),
+(79, 10, '', 'data/positions/HeaderTopLeft 485.png', 0),
+(80, 11, '', 'data/positions/HeaderTopRight 485.png', 0),
+(81, 12, '', 'data/positions/Slider Content 440.png', 0),
+(82, 13, '', 'data/positions/Slider Content 710.png', 0),
+(83, 14, '', 'data/positions/Slider Content Left 260.png', 0),
+(84, 15, '', 'data/positions/Slider Content Right 260.png', 0),
+(85, 16, '', 'data/positions/Slider Top 980.png', 0),
+(86, 17, '', 'data/positions/Slider Left 485.png', 0),
+(87, 18, '', 'data/positions/Slider Right 485.png', 0),
+(88, 19, '', 'data/positions/Footer Top 980.png', 0),
+(89, 20, '', 'data/positions/Footer Top Left 485.png', 0),
+(90, 21, '', 'data/positions/Footer Top Right 485.png', 0),
+(91, 22, '', 'data/positions/Footer Bottom 980.png', 0),
+(92, 23, '', 'data/positions/Footer Bottom Left 485.png', 0),
+(93, 24, '', 'data/positions/Footer Bottom Right 485.png', 0);
 
-INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `link`, `image`) VALUES
-(54, 7, 'index.php?route=product/product&amp;path=57&amp;product_id=49', 'data/demo/samsung_banner.jpg'),
-(77, 6, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=7', 'data/demo/hp_banner.jpg'),
-(75, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=5', 'data/demo/htc_logo.jpg'),
-(73, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=8', 'data/demo/apple_logo.jpg'),
-(74, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=9', 'data/demo/canon_logo.jpg'),
-(71, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=10', 'data/demo/sony_logo.jpg'),
-(72, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=6', 'data/demo/palm_logo.jpg'),
-(76, 8, 'index.php?route=product/manufacturer/info&amp;manufacturer_id=7', 'data/demo/hp_logo.jpg'),
-(78, 9, '', 'data/positions/HeaderTop 980.png'),
-(79, 10, '', 'data/positions/HeaderTopLeft 485.png'),
-(80, 11, '', 'data/positions/HeaderTopRight 485.png'),
-(81, 12, '', 'data/positions/Slider Content 440.png'),
-(82, 13, '', 'data/positions/Slider Content 710.png'),
-(83, 14, '', 'data/positions/Slider Content Left 260.png'),
-(84, 15, '', 'data/positions/Slider Content Right 260.png'),
-(85, 16, '', 'data/positions/Slider Top 980.png'),
-(86, 17, '', 'data/positions/Slider Left 485.png'),
-(87, 18, '', 'data/positions/Slider Right 485.png'),
-(88, 19, '', 'data/positions/Footer Top 980.png'),
-(89, 20, '', 'data/positions/Footer Top Left 485.png'),
-(90, 21, '', 'data/positions/Footer Top Right 485.png'),
-(91, 22, '', 'data/positions/Footer Bottom 980.png'),
-(92, 23, '', 'data/positions/Footer Bottom Left 485.png'),
-(93, 24, '', 'data/positions/Footer Bottom Right 485.png');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_banner_image_description`
---
-
-DROP TABLE IF EXISTS `oc_banner_image_description`;
 CREATE TABLE IF NOT EXISTS `oc_banner_image_description` (
   `banner_image_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -336,10 +226,6 @@ CREATE TABLE IF NOT EXISTS `oc_banner_image_description` (
   `title` varchar(64) NOT NULL,
   PRIMARY KEY (`banner_image_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_banner_image_description`
---
 
 INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `banner_id`, `title`) VALUES
 (54, 1, 7, 'Samsung Tab 10.1'),
@@ -415,13 +301,6 @@ INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `ba
 (93, 2, 24, 'Footer-bottom-right'),
 (93, 3, 24, 'Footer-bottom-right');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_category`
---
-
-DROP TABLE IF EXISTS `oc_category`;
 CREATE TABLE IF NOT EXISTS `oc_category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
@@ -434,10 +313,6 @@ CREATE TABLE IF NOT EXISTS `oc_category` (
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`category_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
-
---
--- Дамп данных таблицы `oc_category`
---
 
 INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
 (25, '', 0, 1, 1, 3, 1, '2009-01-31 01:04:25', '2011-05-30 12:14:55'),
@@ -479,13 +354,6 @@ INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`,
 (57, '', 0, 1, 1, 3, 1, '2011-04-26 08:53:16', '2011-05-30 12:15:05'),
 (58, '', 52, 0, 0, 0, 1, '2011-05-08 13:44:16', '2011-05-08 13:44:16');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_category_description`
---
-
-DROP TABLE IF EXISTS `oc_category_description`;
 CREATE TABLE IF NOT EXISTS `oc_category_description` (
   `category_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -500,13 +368,9 @@ CREATE TABLE IF NOT EXISTS `oc_category_description` (
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_category_description`
---
-
 INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`, `u_title`, `u_h1`, `u_h2`) VALUES
 (28, 1, 'Monitors', '', '', '', '', '', ''),
-(33, 1, 'Cameras', '', '', 'Cameras', 'Title сторінки a', 'Заголовок Title (Н1) a', 'Другорядний заголовок Title (Н2) a'),
+(33, 1, 'Cameras', '', '', 'Cameras', '', '', 'Другорядний заголовок Title (Н2) a'),
 (32, 1, 'Web Cameras', '', '', '', '', '', ''),
 (31, 1, 'Scanners', '', '', '', '', '', ''),
 (30, 1, 'Printers', '', '', '', '', '', ''),
@@ -543,45 +407,45 @@ INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `de
 (56, 1, 'test 24', '', '', '', '', '', ''),
 (57, 1, 'Tablets', '', '', '', '', '', ''),
 (58, 1, 'test 25', '', '', '', '', '', ''),
-(28, 2, 'Monitors', '', '', '', '', '', ''),
-(32, 2, 'Web Cameras', '', '', '', '', '', ''),
-(31, 2, 'Scanners', '', '', '', '', '', ''),
-(30, 2, 'Printers', '', '', '', '', '', ''),
-(29, 2, 'Mice and Trackballs', '', '', '', '', '', ''),
-(27, 2, 'Mac', '', '', '', '', '', ''),
-(26, 2, 'PC', '', '', '', '', '', ''),
-(17, 2, 'Software', '', '', '', '', '', ''),
-(25, 2, 'Components', '', '', '', '', '', ''),
-(24, 2, 'Phones &amp; PDAs', '', '', '', '', '', ''),
-(20, 2, 'Desktops', '&lt;p&gt;Example of category description text&lt;/p&gt;\r\n', 'Example of category description', '', '', '', ''),
-(35, 2, 'test 1', '', '', '', '', '', ''),
-(36, 2, 'test 2', '', '', '', '', '', ''),
-(37, 2, 'test 5', '', '', '', '', '', ''),
-(38, 2, 'test 4', '', '', '', '', '', ''),
-(39, 2, 'test 6', '', '', '', '', '', ''),
-(40, 2, 'test 7', '', '', '', '', '', ''),
-(41, 2, 'test 8', '', '', '', '', '', ''),
-(42, 2, 'test 9', '', '', '', '', '', ''),
-(43, 2, 'test 11', '', '', '', '', '', ''),
-(34, 2, 'MP3 Players', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', '', '', '', ''),
-(18, 2, 'Laptops &amp; Notebooks', '&lt;p&gt;Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', '', '', '', ''),
-(44, 2, 'test 12', '', '', '', '', '', ''),
-(45, 2, 'Windows', '', '', '', '', '', ''),
-(46, 2, 'Macs', '', '', '', '', '', ''),
-(47, 2, 'test 15', '', '', '', '', '', ''),
-(48, 2, 'test 16', '', '', '', '', '', ''),
-(49, 2, 'test 17', '', '', '', '', '', ''),
-(50, 2, 'test 18', '', '', '', '', '', ''),
-(51, 2, 'test 19', '', '', '', '', '', ''),
-(52, 2, 'test 20', '', '', '', '', '', ''),
-(53, 2, 'test 21', '', '', '', '', '', ''),
-(54, 2, 'test 22', '', '', '', '', '', ''),
-(55, 2, 'test 23', '', '', '', '', '', ''),
-(56, 2, 'test 24', '', '', '', '', '', ''),
-(57, 2, 'Tablets', '', '', '', '', '', ''),
-(58, 2, 'test 25', '', '', '', '', '', ''),
+(28, 2, 'Monitors', '', '', '', 'Monitors. Купить Monitors в Москве', '', ''),
+(32, 2, 'Web Cameras', '', '', '', 'Web Cameras. Купить Web Cameras в Москве', '', ''),
+(31, 2, 'Scanners', '', '', '', 'Scanners. Купить Scanners в Москве', '', ''),
+(30, 2, 'Printers', '', '', '', 'Printers. Купить Printers в Москве', '', ''),
+(29, 2, 'Mice and Trackballs', '', '', '', 'Mice and Trackballs. Купить Mice and Trackballs в Москве', '', ''),
+(27, 2, 'Mac', '', '', '', 'Mac. Купить Mac в Москве', '', ''),
+(26, 2, 'PC', '', '', '', 'PC. Купить PC в Москве', '', ''),
+(17, 2, 'Software', '', '', '', 'Software. Купить Software в Москве', '', ''),
+(25, 2, 'Components', '', '', '', 'Components. Купить Components в Москве', '', ''),
+(24, 2, 'Phones &amp; PDAs', '', '', '', 'Phones &amp;amp; PDAs. Купить Phones &amp;amp; PDAs в Москве', '', ''),
+(20, 2, 'Desktops', '&lt;p&gt;Example of category description text&lt;/p&gt;\r\n', '', '', 'Desktops. Купить Desktops в Москве', '', ''),
+(35, 2, 'test 1', '', '', '', 'test 1. Купить test 1 в Москве', '', ''),
+(36, 2, 'test 2', '', '', '', 'test 2. Купить test 2 в Москве', '', ''),
+(37, 2, 'test 5', '', '', '', 'test 5. Купить test 5 в Москве', '', ''),
+(38, 2, 'test 4', '', '', '', 'test 4. Купить test 4 в Москве', '', ''),
+(39, 2, 'test 6', '', '', '', 'test 6. Купить test 6 в Москве', '', ''),
+(40, 2, 'test 7', '', '', '', 'test 7. Купить test 7 в Москве', '', ''),
+(41, 2, 'test 8', '', '', '', 'test 8. Купить test 8 в Москве', '', ''),
+(42, 2, 'test 9', '', '', '', 'test 9. Купить test 9 в Москве', '', ''),
+(43, 2, 'test 11', '', '', '', 'test 11. Купить test 11 в Москве', '', ''),
+(34, 2, 'MP3 Players', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', '', 'MP3 Players. Купить MP3 Players в Москве', '', ''),
+(18, 2, 'Laptops &amp; Notebooks', '&lt;p&gt;Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', '', 'Laptops &amp;amp; Notebooks. Купить Laptops &amp;amp; Notebooks в Москве', '', ''),
+(44, 2, 'test 12', '', '', '', 'test 12. Купить test 12 в Москве', '', ''),
+(45, 2, 'Windows', '', '', '', 'Windows. Купить Windows в Москве', '', ''),
+(46, 2, 'Macs', '', '', '', 'Macs. Купить Macs в Москве', '', ''),
+(47, 2, 'test 15', '', '', '', 'test 15. Купить test 15 в Москве', '', ''),
+(48, 2, 'test 16', '', '', '', 'test 16. Купить test 16 в Москве', '', ''),
+(49, 2, 'test 17', '', '', '', 'test 17. Купить test 17 в Москве', '', ''),
+(50, 2, 'test 18', '', '', '', 'test 18. Купить test 18 в Москве', '', ''),
+(51, 2, 'test 19', '', '', '', 'test 19. Купить test 19 в Москве', '', ''),
+(52, 2, 'test 20', '', '', '', 'test 20. Купить test 20 в Москве', '', ''),
+(53, 2, 'test 21', '', '', '', 'test 21. Купить test 21 в Москве', '', ''),
+(54, 2, 'test 22', '', '', '', 'test 22. Купить test 22 в Москве', '', ''),
+(55, 2, 'test 23', '', '', '', 'test 23. Купить test 23 в Москве', '', ''),
+(56, 2, 'test 24', '', '', '', 'test 24. Купить test 24 в Москве', '', ''),
+(57, 2, 'Tablets', '', '', '', 'Tablets. Купить Tablets в Москве', '', ''),
+(58, 2, 'test 25', '', '', '', 'test 25. Купить test 25 в Москве', '', ''),
 (28, 3, 'Monitors', '', '', '', '', '', ''),
-(33, 2, 'Cameras', '', '', 'Cameras', 'Title сторінки p', 'Заголовок Title (Н1) p', 'Другорядний заголовок Title (Н2) p'),
+(33, 2, 'Cameras', '', '', 'Cameras', 'Cameras. Купить Cameras в Москве', '', 'Другорядний заголовок Title (Н2) p'),
 (32, 3, 'Web Cameras', '', '', '', '', '', ''),
 (31, 3, 'Scanners', '', '', '', '', '', ''),
 (30, 3, 'Printers', '', '', '', '', '', ''),
@@ -591,7 +455,7 @@ INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `de
 (17, 3, 'Software', '', '', '', '', '', ''),
 (25, 3, 'Components', '', '', '', '', '', ''),
 (24, 3, 'Phones &amp; PDAs', '', '', '', '', '', ''),
-(20, 1, 'Desktops', '&lt;p&gt;Example of category description text&lt;/p&gt;\r\n', 'Example of category description', '', '', '', ''),
+(20, 1, 'Desktops', '&lt;p&gt;Example of category description text&lt;/p&gt;\r\n', '', '', '', '', ''),
 (35, 3, 'test 1', '', '', '', '', '', ''),
 (36, 3, 'test 2', '', '', '', '', '', ''),
 (37, 3, 'test 5', '', '', '', '', '', ''),
@@ -618,35 +482,17 @@ INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `de
 (56, 3, 'test 24', '', '', '', '', '', ''),
 (57, 3, 'Tablets', '', '', '', '', '', ''),
 (58, 3, 'test 25', '', '', '', '', '', ''),
-(33, 3, 'Cameras', '', '', 'Cameras', 'Title сторінки y', 'Заголовок Title (Н1) y', 'Другорядний заголовок Title (Н2) y');
+(33, 3, 'Cameras', '', '', '', '', '', 'Другорядний заголовок Title (Н2) y');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_category_filter`
---
-
-DROP TABLE IF EXISTS `oc_category_filter`;
 CREATE TABLE IF NOT EXISTS `oc_category_filter` (
   `category_id` int(11) NOT NULL,
   `filter_id` int(11) NOT NULL,
   PRIMARY KEY (`category_id`,`filter_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_category_filter`
---
-
 INSERT INTO `oc_category_filter` (`category_id`, `filter_id`) VALUES
 (20, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_category_path`
---
-
-DROP TABLE IF EXISTS `oc_category_path`;
 CREATE TABLE IF NOT EXISTS `oc_category_path` (
   `category_id` int(11) NOT NULL,
   `path_id` int(11) NOT NULL,
@@ -654,90 +500,79 @@ CREATE TABLE IF NOT EXISTS `oc_category_path` (
   PRIMARY KEY (`category_id`,`path_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_category_path`
---
-
 INSERT INTO `oc_category_path` (`category_id`, `path_id`, `level`) VALUES
 (25, 25, 0),
-(28, 25, 0),
 (28, 28, 1),
-(35, 25, 0),
-(35, 28, 1),
+(28, 25, 0),
 (35, 35, 2),
-(36, 25, 0),
-(36, 28, 1),
+(35, 28, 1),
+(35, 25, 0),
 (36, 36, 2),
-(29, 25, 0),
+(36, 28, 1),
+(36, 25, 0),
 (29, 29, 1),
-(30, 25, 0),
+(29, 25, 0),
 (30, 30, 1),
-(31, 25, 0),
+(30, 25, 0),
 (31, 31, 1),
-(32, 25, 0),
+(31, 25, 0),
 (32, 32, 1),
+(32, 25, 0),
 (20, 20, 0),
-(27, 20, 0),
 (27, 27, 1),
-(26, 20, 0),
+(27, 20, 0),
 (26, 26, 1),
+(26, 20, 0),
 (24, 24, 0),
 (18, 18, 0),
-(45, 18, 0),
 (45, 45, 1),
-(46, 18, 0),
+(45, 18, 0),
 (46, 46, 1),
+(46, 18, 0),
 (17, 17, 0),
 (33, 33, 0),
 (34, 34, 0),
-(37, 34, 0),
 (37, 37, 1),
-(38, 34, 0),
+(37, 34, 0),
 (38, 38, 1),
-(39, 34, 0),
+(38, 34, 0),
 (39, 39, 1),
-(40, 34, 0),
+(39, 34, 0),
 (40, 40, 1),
-(41, 34, 0),
+(40, 34, 0),
 (41, 41, 1),
-(42, 34, 0),
+(41, 34, 0),
 (42, 42, 1),
-(43, 34, 0),
+(42, 34, 0),
 (43, 43, 1),
-(44, 34, 0),
+(43, 34, 0),
 (44, 44, 1),
-(47, 34, 0),
+(44, 34, 0),
 (47, 47, 1),
-(48, 34, 0),
+(47, 34, 0),
 (48, 48, 1),
-(49, 34, 0),
+(48, 34, 0),
 (49, 49, 1),
-(50, 34, 0),
+(49, 34, 0),
 (50, 50, 1),
-(51, 34, 0),
+(50, 34, 0),
 (51, 51, 1),
-(52, 34, 0),
+(51, 34, 0),
 (52, 52, 1),
-(58, 34, 0),
-(58, 52, 1),
+(52, 34, 0),
 (58, 58, 2),
-(53, 34, 0),
+(58, 52, 1),
+(58, 34, 0),
 (53, 53, 1),
-(54, 34, 0),
+(53, 34, 0),
 (54, 54, 1),
-(55, 34, 0),
+(54, 34, 0),
 (55, 55, 1),
-(56, 34, 0),
+(55, 34, 0),
 (56, 56, 1),
+(56, 34, 0),
 (57, 57, 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_category_to_layout`
---
-
-DROP TABLE IF EXISTS `oc_category_to_layout`;
 CREATE TABLE IF NOT EXISTS `oc_category_to_layout` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -745,22 +580,11 @@ CREATE TABLE IF NOT EXISTS `oc_category_to_layout` (
   PRIMARY KEY (`category_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_category_to_store`
---
-
-DROP TABLE IF EXISTS `oc_category_to_store`;
 CREATE TABLE IF NOT EXISTS `oc_category_to_store` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`category_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_category_to_store`
---
 
 INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
 (17, 0),
@@ -802,13 +626,6 @@ INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
 (57, 0),
 (58, 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_country`
---
-
-DROP TABLE IF EXISTS `oc_country`;
 CREATE TABLE IF NOT EXISTS `oc_country` (
   `country_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -819,10 +636,6 @@ CREATE TABLE IF NOT EXISTS `oc_country` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`country_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=240 ;
-
---
--- Дамп данных таблицы `oc_country`
---
 
 INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
 (1, 'Афганистан', 'AF', 'AFG', '', 0, 1),
@@ -905,7 +718,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (78, 'Габон', 'GA', 'GAB', '', 0, 1),
 (79, 'Гамбия', 'GM', 'GMB', '', 0, 1),
 (80, 'Грузия', 'GE', 'GEO', '', 0, 1),
-(81, 'Германия', 'DE', 'DEU', '{company}\r\n{firstname} {lastname}\r\n{address_1}\r\n{address_2}\r\n{postcode} {city}\r\n{country}', 0, 1),
+(81, 'Германия', 'DE', 'DEU', '', 0, 1),
 (82, 'Гана', 'GH', 'GHA', '', 0, 1),
 (83, 'Гибралтар', 'GI', 'GIB', '', 0, 1),
 (84, 'Греция', 'GR', 'GRC', '', 0, 1),
@@ -1013,7 +826,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (186, 'Сейшельские острова', 'SC', 'SYC', '', 0, 1),
 (187, 'Сьерра-Леоне', 'SL', 'SLE', '', 0, 1),
 (188, 'Сингапур', 'SG', 'SGP', '', 0, 1),
-(189, 'Словакия', 'SK', 'SVK', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city} {postcode}\r\n{zone}\r\n{country}', 0, 1),
+(189, 'Словакия', 'SK', 'SVK', '', 0, 1),
 (190, 'Словения', 'SI', 'SVN', '', 0, 1),
 (191, 'Соломоновы острова', 'SB', 'SLB', '', 0, 1),
 (192, 'Сомали', 'SO', 'SOM', '', 0, 1),
@@ -1047,7 +860,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (220, 'Украина', 'UA', 'UKR', '', 0, 1),
 (221, 'Объединенные Арабские Эмираты', 'AE', 'ARE', '', 0, 1),
 (222, 'Великобритания', 'GB', 'GBR', '', 1, 1),
-(223, 'Соединенные Штаты Америки', 'US', 'USA', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', 0, 1),
+(223, 'Соединенные Штаты Америки', 'US', 'USA', '', 0, 1),
 (224, 'Мелкие отдаленные острова США', 'UM', 'UMI', '', 0, 1),
 (225, 'Уругвай', 'UY', 'URY', '', 0, 1),
 (226, 'Узбекистан', 'UZ', 'UZB', '', 0, 1),
@@ -1065,13 +878,6 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (238, 'Замбия', 'ZM', 'ZMB', '', 0, 1),
 (239, 'Зимбабве', 'ZW', 'ZWE', '', 0, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_coupon`
---
-
-DROP TABLE IF EXISTS `oc_coupon`;
 CREATE TABLE IF NOT EXISTS `oc_coupon` (
   `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -1090,35 +896,17 @@ CREATE TABLE IF NOT EXISTS `oc_coupon` (
   PRIMARY KEY (`coupon_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
---
--- Дамп данных таблицы `oc_coupon`
---
-
 INSERT INTO `oc_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logged`, `shipping`, `total`, `date_start`, `date_end`, `uses_total`, `uses_customer`, `status`, `date_added`) VALUES
 (4, '-10% Скидка', '2222', 'P', '10.0000', 0, 0, '0.0000', '2011-01-01', '2014-05-28', 100, '10', 1, '2009-01-27 13:55:03'),
 (5, 'Free Shipping', '3333', 'P', '0.0000', 0, 1, '100.0000', '2009-03-01', '2009-08-31', 10, '10', 1, '2009-03-14 21:13:53'),
 (6, '-10.00 Discount', '1111', 'F', '10.0000', 0, 0, '10.0000', '1970-11-01', '2020-11-01', 100000, '10000', 1, '2009-03-14 21:15:18');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_coupon_category`
---
-
-DROP TABLE IF EXISTS `oc_coupon_category`;
 CREATE TABLE IF NOT EXISTS `oc_coupon_category` (
   `coupon_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`coupon_id`,`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_coupon_history`
---
-
-DROP TABLE IF EXISTS `oc_coupon_history`;
 CREATE TABLE IF NOT EXISTS `oc_coupon_history` (
   `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_id` int(11) NOT NULL,
@@ -1129,13 +917,6 @@ CREATE TABLE IF NOT EXISTS `oc_coupon_history` (
   PRIMARY KEY (`coupon_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_coupon_product`
---
-
-DROP TABLE IF EXISTS `oc_coupon_product`;
 CREATE TABLE IF NOT EXISTS `oc_coupon_product` (
   `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_id` int(11) NOT NULL,
@@ -1143,13 +924,6 @@ CREATE TABLE IF NOT EXISTS `oc_coupon_product` (
   PRIMARY KEY (`coupon_product_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_currency`
---
-
-DROP TABLE IF EXISTS `oc_currency`;
 CREATE TABLE IF NOT EXISTS `oc_currency` (
   `currency_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(32) NOT NULL,
@@ -1163,22 +937,11 @@ CREATE TABLE IF NOT EXISTS `oc_currency` (
   PRIMARY KEY (`currency_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
---
--- Дамп данных таблицы `oc_currency`
---
-
 INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Рубль', 'RUB', '', ' Р', '2', 3.37330008, 1, '2013-04-22 13:19:13'),
-(2, 'US Dollar', 'USD', '$', '', '2', 0.12500000, 1, '2013-04-22 13:19:53'),
+(1, 'Рубль', 'RUB', '', ' Р', '2', 2.54999995, 1, '2015-03-07 14:30:34'),
+(2, 'US Dollar', 'USD', '$', '', '2', 0.04000000, 1, '2015-03-07 23:27:32'),
 (3, 'Гривна', 'UAH', '', ' ₴', '2', 1.00000000, 1, '2013-04-22 13:20:10');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer`
---
-
-DROP TABLE IF EXISTS `oc_customer`;
 CREATE TABLE IF NOT EXISTS `oc_customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
@@ -1200,15 +963,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer` (
   `token` varchar(255) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_ban_ip`
---
-
-DROP TABLE IF EXISTS `oc_customer_ban_ip`;
 CREATE TABLE IF NOT EXISTS `oc_customer_ban_ip` (
   `customer_ban_ip_id` int(11) NOT NULL AUTO_INCREMENT,
   `ip` varchar(40) NOT NULL,
@@ -1216,13 +972,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_ban_ip` (
   KEY `ip` (`ip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_field`
---
-
-DROP TABLE IF EXISTS `oc_customer_field`;
 CREATE TABLE IF NOT EXISTS `oc_customer_field` (
   `customer_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
@@ -1233,13 +982,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_field` (
   PRIMARY KEY (`customer_id`,`custom_field_id`,`custom_field_value_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_group`
---
-
-DROP TABLE IF EXISTS `oc_customer_group`;
 CREATE TABLE IF NOT EXISTS `oc_customer_group` (
   `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `approval` int(1) NOT NULL,
@@ -1251,20 +993,9 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group` (
   PRIMARY KEY (`customer_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Дамп данных таблицы `oc_customer_group`
---
-
 INSERT INTO `oc_customer_group` (`customer_group_id`, `approval`, `company_id_display`, `company_id_required`, `tax_id_display`, `tax_id_required`, `sort_order`) VALUES
 (1, 0, 0, 0, 0, 0, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_group_description`
---
-
-DROP TABLE IF EXISTS `oc_customer_group_description`;
 CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
   `customer_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -1273,22 +1004,11 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
   PRIMARY KEY (`customer_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_customer_group_description`
---
-
 INSERT INTO `oc_customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`) VALUES
 (1, 3, 'Default', 'test'),
 (1, 2, 'Default', 'test'),
 (1, 1, 'Default', 'test');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_history`
---
-
-DROP TABLE IF EXISTS `oc_customer_history`;
 CREATE TABLE IF NOT EXISTS `oc_customer_history` (
   `customer_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
@@ -1297,13 +1017,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_history` (
   PRIMARY KEY (`customer_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_ip`
---
-
-DROP TABLE IF EXISTS `oc_customer_ip`;
 CREATE TABLE IF NOT EXISTS `oc_customer_ip` (
   `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
@@ -1311,15 +1024,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_ip` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`customer_ip_id`),
   KEY `ip` (`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_online`
---
-
-DROP TABLE IF EXISTS `oc_customer_online`;
 CREATE TABLE IF NOT EXISTS `oc_customer_online` (
   `ip` varchar(40) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -1329,13 +1035,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_online` (
   PRIMARY KEY (`ip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_reward`
---
-
-DROP TABLE IF EXISTS `oc_customer_reward`;
 CREATE TABLE IF NOT EXISTS `oc_customer_reward` (
   `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL DEFAULT '0',
@@ -1346,13 +1045,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_reward` (
   PRIMARY KEY (`customer_reward_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_customer_transaction`
---
-
-DROP TABLE IF EXISTS `oc_customer_transaction`;
 CREATE TABLE IF NOT EXISTS `oc_customer_transaction` (
   `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
@@ -1363,13 +1055,6 @@ CREATE TABLE IF NOT EXISTS `oc_customer_transaction` (
   PRIMARY KEY (`customer_transaction_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_custom_field`
---
-
-DROP TABLE IF EXISTS `oc_custom_field`;
 CREATE TABLE IF NOT EXISTS `oc_custom_field` (
   `custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
@@ -1381,13 +1066,6 @@ CREATE TABLE IF NOT EXISTS `oc_custom_field` (
   PRIMARY KEY (`custom_field_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_custom_field_description`
---
-
-DROP TABLE IF EXISTS `oc_custom_field_description`;
 CREATE TABLE IF NOT EXISTS `oc_custom_field_description` (
   `custom_field_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -1395,26 +1073,12 @@ CREATE TABLE IF NOT EXISTS `oc_custom_field_description` (
   PRIMARY KEY (`custom_field_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_custom_field_to_customer_group`
---
-
-DROP TABLE IF EXISTS `oc_custom_field_to_customer_group`;
 CREATE TABLE IF NOT EXISTS `oc_custom_field_to_customer_group` (
   `custom_field_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   PRIMARY KEY (`custom_field_id`,`customer_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_custom_field_value`
---
-
-DROP TABLE IF EXISTS `oc_custom_field_value`;
 CREATE TABLE IF NOT EXISTS `oc_custom_field_value` (
   `custom_field_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `custom_field_id` int(11) NOT NULL,
@@ -1422,13 +1086,6 @@ CREATE TABLE IF NOT EXISTS `oc_custom_field_value` (
   PRIMARY KEY (`custom_field_value_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_custom_field_value_description`
---
-
-DROP TABLE IF EXISTS `oc_custom_field_value_description`;
 CREATE TABLE IF NOT EXISTS `oc_custom_field_value_description` (
   `custom_field_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -1437,13 +1094,6 @@ CREATE TABLE IF NOT EXISTS `oc_custom_field_value_description` (
   PRIMARY KEY (`custom_field_value_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_download`
---
-
-DROP TABLE IF EXISTS `oc_download`;
 CREATE TABLE IF NOT EXISTS `oc_download` (
   `download_id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(128) NOT NULL,
@@ -1453,13 +1103,6 @@ CREATE TABLE IF NOT EXISTS `oc_download` (
   PRIMARY KEY (`download_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_download_description`
---
-
-DROP TABLE IF EXISTS `oc_download_description`;
 CREATE TABLE IF NOT EXISTS `oc_download_description` (
   `download_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -1467,23 +1110,12 @@ CREATE TABLE IF NOT EXISTS `oc_download_description` (
   PRIMARY KEY (`download_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_extension`
---
-
-DROP TABLE IF EXISTS `oc_extension`;
 CREATE TABLE IF NOT EXISTS `oc_extension` (
   `extension_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
   `code` varchar(32) NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=456 ;
-
---
--- Дамп данных таблицы `oc_extension`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=458 ;
 
 INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 (23, 'payment', 'cod'),
@@ -1520,15 +1152,10 @@ INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 (449, 'module', 'vqmod_manager'),
 (451, 'payment', 'bank_transfer'),
 (452, 'module', 'bro_conf'),
-(455, 'module', 'callback');
+(455, 'module', 'callback'),
+(456, 'module', 'gallery'),
+(457, 'shipping', 'pickup');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_filter`
---
-
-DROP TABLE IF EXISTS `oc_filter`;
 CREATE TABLE IF NOT EXISTS `oc_filter` (
   `filter_id` int(11) NOT NULL AUTO_INCREMENT,
   `filter_group_id` int(11) NOT NULL,
@@ -1536,20 +1163,9 @@ CREATE TABLE IF NOT EXISTS `oc_filter` (
   PRIMARY KEY (`filter_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Дамп данных таблицы `oc_filter`
---
-
 INSERT INTO `oc_filter` (`filter_id`, `filter_group_id`, `sort_order`) VALUES
 (1, 1, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_filter_description`
---
-
-DROP TABLE IF EXISTS `oc_filter_description`;
 CREATE TABLE IF NOT EXISTS `oc_filter_description` (
   `filter_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -1558,42 +1174,20 @@ CREATE TABLE IF NOT EXISTS `oc_filter_description` (
   PRIMARY KEY (`filter_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_filter_description`
---
-
 INSERT INTO `oc_filter_description` (`filter_id`, `language_id`, `filter_group_id`, `name`) VALUES
 (1, 1, 1, 'Filter parametr 1'),
 (1, 2, 1, 'Параметр фильтра 1'),
 (1, 3, 1, 'Параметр фільтра 1');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_filter_group`
---
-
-DROP TABLE IF EXISTS `oc_filter_group`;
 CREATE TABLE IF NOT EXISTS `oc_filter_group` (
   `filter_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`filter_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Дамп данных таблицы `oc_filter_group`
---
-
 INSERT INTO `oc_filter_group` (`filter_group_id`, `sort_order`) VALUES
 (1, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_filter_group_description`
---
-
-DROP TABLE IF EXISTS `oc_filter_group_description`;
 CREATE TABLE IF NOT EXISTS `oc_filter_group_description` (
   `filter_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -1601,22 +1195,11 @@ CREATE TABLE IF NOT EXISTS `oc_filter_group_description` (
   PRIMARY KEY (`filter_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_filter_group_description`
---
-
 INSERT INTO `oc_filter_group_description` (`filter_group_id`, `language_id`, `name`) VALUES
 (1, 1, 'Test filter'),
 (1, 2, 'Тестовый фильтр'),
 (1, 3, 'Тестовий фільтр');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_gallery`
---
-
-DROP TABLE IF EXISTS `oc_gallery`;
 CREATE TABLE IF NOT EXISTS `oc_gallery` (
   `gallery_id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) NOT NULL,
@@ -1626,23 +1209,13 @@ CREATE TABLE IF NOT EXISTS `oc_gallery` (
   `date_added` datetime DEFAULT NULL,
   `date_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`gallery_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Дамп данных таблицы `oc_gallery`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 INSERT INTO `oc_gallery` (`gallery_id`, `image`, `album_id`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
-(1, 'data/demo/iphone_2.jpg', 0, 0, 1, '2013-04-25 00:07:59', '2013-04-25 00:45:18'),
-(2, 'data/demo/hp_2.jpg', 0, 0, 1, '2013-04-26 13:03:41', '2013-04-26 13:04:10');
+(1, 'data/demo/iphone_2.jpg', 2, 0, 1, '2013-04-25 00:07:59', '2015-01-01 12:05:29'),
+(2, 'data/demo/hp_2.jpg', 0, 0, 1, '2013-04-26 13:03:41', '2013-04-26 13:04:10'),
+(3, 'data/demo/ipod_shuffle_4.jpg', 1, 4, 1, '2015-01-01 20:56:46', '2015-01-01 21:01:54');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_gallery_description`
---
-
-DROP TABLE IF EXISTS `oc_gallery_description`;
 CREATE TABLE IF NOT EXISTS `oc_gallery_description` (
   `gallery_id` int(11) NOT NULL DEFAULT '0',
   `language_id` int(11) NOT NULL DEFAULT '1',
@@ -1652,51 +1225,35 @@ CREATE TABLE IF NOT EXISTS `oc_gallery_description` (
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_gallery_description`
---
-
 INSERT INTO `oc_gallery_description` (`gallery_id`, `language_id`, `name`, `description`) VALUES
-(1, 2, 'Руская назва галереи', '&lt;p&gt;Русское описание галлереи&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;Русское описание галлереи&amp;nbsp;Русское описание галлереи&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;/p&gt;\r\n'),
-(1, 3, 'Українська назва галереї', '&lt;p&gt;&amp;nbsp;Український опис галереї&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Український опис галереї&lt;/span&gt;&lt;/p&gt;\r\n'),
-(1, 1, 'Eng name gallery', '&lt;p&gt;Eng description gallery&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Eng description gallery&lt;/span&gt;&lt;/p&gt;\r\n'),
+(1, 2, 'Руская назва галереи', '&lt;p&gt;Русское описание галлереи&amp;nbsp;&lt;span style=&quot;font-size:13px&quot;&gt;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;Русское описание галлереи&amp;nbsp;Русское описание галлереи&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;Русское описание галлереи&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;Русское описание галлереи&lt;/span&gt;&lt;/p&gt;\r\n'),
+(1, 3, 'Українська назва галереї', '&lt;p&gt;&amp;nbsp;Український опис галереї&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&amp;nbsp;Український опис галереї&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;Український опис галереї&lt;/span&gt;&lt;/p&gt;\r\n'),
 (2, 1, 'Тестова', '&lt;p&gt;Тестова&lt;/p&gt;\r\n'),
 (2, 2, 'Тестова', ''),
-(2, 3, 'Тестова', '');
+(2, 3, 'Тестова', ''),
+(1, 1, 'Eng name gallery', '&lt;p&gt;Eng description gallery&amp;nbsp;&lt;span style=&quot;font-size:13px&quot;&gt;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;Eng description gallery&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;Eng description gallery&lt;/span&gt;&lt;/p&gt;\r\n'),
+(3, 3, '1234567', '&lt;p&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&lt;/p&gt;\r\n'),
+(3, 1, '1234567', '&lt;p&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&lt;/p&gt;\r\n'),
+(3, 2, '1234567', '&lt;p&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&amp;nbsp;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание:&lt;/span&gt;&lt;/p&gt;\r\n');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_gallery_image`
---
-
-DROP TABLE IF EXISTS `oc_gallery_image`;
 CREATE TABLE IF NOT EXISTS `oc_gallery_image` (
   `gallery_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `gallery_id` int(11) NOT NULL DEFAULT '0',
   `image` varchar(255) NOT NULL,
   `image_title` varchar(255) NOT NULL,
   PRIMARY KEY (`gallery_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
-
---
--- Дамп данных таблицы `oc_gallery_image`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 INSERT INTO `oc_gallery_image` (`gallery_image_id`, `gallery_id`, `image`, `image_title`) VALUES
-(9, 1, 'data/demo/ipod_nano_5.jpg', 'назва зображення 1'),
-(8, 1, 'data/demo/iphone_3.jpg', 'назва зображення 2'),
-(7, 1, 'data/demo/sony_vaio_3.jpg', 'назва зображення 3'),
+(19, 1, 'data/demo/ipod_nano_5.jpg', 'назва зображення 1'),
+(18, 1, 'data/demo/iphone_3.jpg', 'назва зображення 2'),
+(17, 1, 'data/demo/sony_vaio_3.jpg', 'назва зображення 3'),
 (12, 2, 'data/demo/samsung_tab_3.jpg', ''),
-(13, 2, 'data/demo/apple_logo.jpg', '');
+(13, 2, 'data/demo/apple_logo.jpg', ''),
+(25, 3, 'data/demo/gift-voucher-birthday.jpg', '555'),
+(24, 3, 'data/demo/hp_logo.jpg', '444'),
+(23, 3, 'data/demo/apple_cinema_30.jpg', '333');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_geo_zone`
---
-
-DROP TABLE IF EXISTS `oc_geo_zone`;
 CREATE TABLE IF NOT EXISTS `oc_geo_zone` (
   `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -1706,21 +1263,10 @@ CREATE TABLE IF NOT EXISTS `oc_geo_zone` (
   PRIMARY KEY (`geo_zone_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
---
--- Дамп данных таблицы `oc_geo_zone`
---
-
 INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
 (3, 'UK VAT Zone', 'UK VAT', '2010-02-26 22:33:24', '2009-01-06 23:26:25'),
 (4, 'UK Shipping', 'UK Shipping Zones', '2010-12-15 15:18:13', '2009-06-23 01:14:53');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_information`
---
-
-DROP TABLE IF EXISTS `oc_information`;
 CREATE TABLE IF NOT EXISTS `oc_information` (
   `information_id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
@@ -1731,56 +1277,37 @@ CREATE TABLE IF NOT EXISTS `oc_information` (
   PRIMARY KEY (`information_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
---
--- Дамп данных таблицы `oc_information`
---
-
 INSERT INTO `oc_information` (`information_id`, `image`, `bottom`, `news`, `sort_order`, `status`) VALUES
 (3, 'data/demo/checkout-light.png', 1, 0, 3, 1),
 (4, 'data/demo/checkout-dark.png', 1, 1, 1, 1),
 (5, 'data/demo/korzinapusta.jpg', 1, 1, 4, 1),
 (6, 'data/demo/empty-cart-dark.png', 1, 1, 2, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_information_description`
---
-
-DROP TABLE IF EXISTS `oc_information_description`;
 CREATE TABLE IF NOT EXISTS `oc_information_description` (
   `information_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
   `description` text NOT NULL,
+  `u_title` varchar(255) NOT NULL,
+  `u_h1` varchar(255) NOT NULL,
+  `u_h2` varchar(255) NOT NULL,
   PRIMARY KEY (`information_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_information_description`
---
+INSERT INTO `oc_information_description` (`information_id`, `language_id`, `title`, `description`, `u_title`, `u_h1`, `u_h2`) VALUES
+(4, 2, 'About Us', '&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;About Us and test text for mor information''s about.&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(4, 3, 'About Us', '&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;About Us and test text for mor information''s about.&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(6, 2, 'Delivery Information', '&lt;p&gt;Delivery Information&lt;/p&gt;\r\n', '', '', ''),
+(6, 3, 'Delivery Information', '&lt;p&gt;Delivery Information&lt;/p&gt;\r\n', '', '', ''),
+(3, 3, 'Privacy Policy', '&lt;p&gt;Privacy Policy&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(3, 1, 'Privacy Policy', '&lt;p&gt;Privacy Policy&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(3, 2, 'Privacy Policy', '&lt;p&gt;Privacy Policy&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(5, 2, 'Terms &amp; Conditions', '&lt;p&gt;Terms &amp;amp; Conditions&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(5, 3, 'Terms &amp; Conditions', '&lt;p&gt;Terms &amp;amp; Conditions&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(4, 1, 'About Us', '&lt;p&gt;About Us and test text for mor information''s about.&lt;/p&gt;\r\n', '', '', ''),
+(6, 1, 'Delivery Information', '&lt;p&gt;Delivery Information more informations -&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n', '', '', ''),
+(5, 1, 'Terms &amp; Conditions', '&lt;p&gt;Terms &amp;amp; Conditions&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;- &amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;- &amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;- &amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;/p&gt;\r\n', '', '', '');
 
-INSERT INTO `oc_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
-(4, 2, 'About Us', '&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;About Us and test text for mor information''s about.&lt;/span&gt;&lt;/p&gt;\r\n'),
-(4, 3, 'About Us', '&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;About Us and test text for mor information''s about.&lt;/span&gt;&lt;/p&gt;\r\n'),
-(6, 2, 'Delivery Information', '&lt;p&gt;Delivery Information&lt;/p&gt;\r\n'),
-(6, 3, 'Delivery Information', '&lt;p&gt;Delivery Information&lt;/p&gt;\r\n'),
-(3, 3, 'Privacy Policy', '&lt;p&gt;Privacy Policy&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n'),
-(3, 1, 'Privacy Policy', '&lt;p&gt;Privacy Policy&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n'),
-(3, 2, 'Privacy Policy', '&lt;p&gt;Privacy Policy&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n'),
-(5, 2, 'Terms &amp; Conditions', '&lt;p&gt;Terms &amp;amp; Conditions&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;/p&gt;\r\n'),
-(5, 3, 'Terms &amp; Conditions', '&lt;p&gt;Terms &amp;amp; Conditions&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;/p&gt;\r\n'),
-(4, 1, 'About Us', '&lt;p&gt;About Us and test text for mor information''s about.&lt;/p&gt;\r\n'),
-(6, 1, 'Delivery Information', '&lt;p&gt;Delivery Information more informations -&amp;nbsp;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;more informations...&lt;/span&gt;&lt;/p&gt;\r\n'),
-(5, 1, 'Terms &amp; Conditions', '&lt;p&gt;Terms &amp;amp; Conditions&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;- &amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;- &amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;more informations&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;more informations&lt;/span&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;-&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;&amp;nbsp;- &amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size:13px&quot;&gt;more informations&lt;/span&gt;&lt;/p&gt;\r\n');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_information_to_layout`
---
-
-DROP TABLE IF EXISTS `oc_information_to_layout`;
 CREATE TABLE IF NOT EXISTS `oc_information_to_layout` (
   `information_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -1788,22 +1315,11 @@ CREATE TABLE IF NOT EXISTS `oc_information_to_layout` (
   PRIMARY KEY (`information_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_information_to_store`
---
-
-DROP TABLE IF EXISTS `oc_information_to_store`;
 CREATE TABLE IF NOT EXISTS `oc_information_to_store` (
   `information_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`information_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_information_to_store`
---
 
 INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
 (3, 0),
@@ -1811,13 +1327,35 @@ INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
 (5, 0),
 (6, 0);
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `oc_label_block` (
+  `incr_auto_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lable_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `stick_main` int(5) NOT NULL DEFAULT '0',
+  `stick_text` varchar(64) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `sort_order` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`incr_auto_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=19 ;
 
---
--- Структура таблицы `oc_language`
---
+INSERT INTO `oc_label_block` (`incr_auto_id`, `lable_id`, `language_id`, `image`, `stick_main`, `stick_text`, `sort_order`) VALUES
+(18, 1, 3, 'data/demo/-10.png', 0, 'Тест (укр)', 3),
+(17, 1, 1, 'data/demo/-50.png', 0, 'Тест (англ)', 3),
+(16, 1, 2, 'data/demo/sale.png', 0, 'Тест (рус)', 3),
+(15, 2, 3, 'data/demo/palm_logo.jpg', 1, 'Тест 2 (укр)', 5),
+(14, 2, 1, 'data/demo/korzinapusta.jpg', 2, 'Тест 2 (англ)', 5),
+(13, 2, 2, 'data/demo/freeshipping.png', 1, 'Тест 2 (рус)', 5);
 
-DROP TABLE IF EXISTS `oc_language`;
+CREATE TABLE IF NOT EXISTS `oc_label_to_product` (
+  `auto_incr` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `label_id` int(11) NOT NULL,
+  `date_begin` date NOT NULL DEFAULT '0000-00-00',
+  `date_end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`auto_incr`),
+  KEY `auto_incr` (`auto_incr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+
 CREATE TABLE IF NOT EXISTS `oc_language` (
   `language_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -1832,31 +1370,16 @@ CREATE TABLE IF NOT EXISTS `oc_language` (
   KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
---
--- Дамп данных таблицы `oc_language`
---
-
 INSERT INTO `oc_language` (`language_id`, `name`, `code`, `locale`, `image`, `directory`, `filename`, `sort_order`, `status`) VALUES
 (1, 'English', 'en', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 'english', 1, 1),
 (2, 'Русский', 'ru', 'ru_RU.UTF-8,ru_RU,russian', 'ru.png', 'russian', 'russian', 2, 1),
 (3, 'Українська', 'ua', 'ua_UA.utf-8, ua_ua, ukrainian', 'ua.png', 'ukrainian', 'ukrainian', 3, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_layout`
---
-
-DROP TABLE IF EXISTS `oc_layout`;
 CREATE TABLE IF NOT EXISTS `oc_layout` (
   `layout_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`layout_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
-
---
--- Дамп данных таблицы `oc_layout`
---
 
 INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 (1, 'Home'),
@@ -1872,13 +1395,6 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 (11, 'Information'),
 (12, 'All products');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_layout_route`
---
-
-DROP TABLE IF EXISTS `oc_layout_route`;
 CREATE TABLE IF NOT EXISTS `oc_layout_route` (
   `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
   `layout_id` int(11) NOT NULL,
@@ -1886,10 +1402,6 @@ CREATE TABLE IF NOT EXISTS `oc_layout_route` (
   `route` varchar(255) NOT NULL,
   PRIMARY KEY (`layout_route_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
-
---
--- Дамп данных таблицы `oc_layout_route`
---
 
 INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
 (30, 6, 0, 'account'),
@@ -1904,35 +1416,17 @@ INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 (32, 9, 0, 'information/sitemap'),
 (33, 12, 0, 'product/allproducts');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_length_class`
---
-
-DROP TABLE IF EXISTS `oc_length_class`;
 CREATE TABLE IF NOT EXISTS `oc_length_class` (
   `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `value` decimal(15,8) NOT NULL,
   PRIMARY KEY (`length_class_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
---
--- Дамп данных таблицы `oc_length_class`
---
-
 INSERT INTO `oc_length_class` (`length_class_id`, `value`) VALUES
 (1, '1.00000000'),
 (2, '10.00000000'),
 (3, '100.00000000');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_length_class_description`
---
-
-DROP TABLE IF EXISTS `oc_length_class_description`;
 CREATE TABLE IF NOT EXISTS `oc_length_class_description` (
   `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
@@ -1940,10 +1434,6 @@ CREATE TABLE IF NOT EXISTS `oc_length_class_description` (
   `unit` varchar(4) NOT NULL,
   PRIMARY KEY (`length_class_id`,`language_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Дамп данных таблицы `oc_length_class_description`
---
 
 INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `title`, `unit`) VALUES
 (3, 2, 'Метр', 'м'),
@@ -1956,13 +1446,6 @@ INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `ti
 (2, 3, 'Міліметр', 'мм'),
 (3, 3, 'Метр', 'м');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_manufacturer`
---
-
-DROP TABLE IF EXISTS `oc_manufacturer`;
 CREATE TABLE IF NOT EXISTS `oc_manufacturer` (
   `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -1970,10 +1453,6 @@ CREATE TABLE IF NOT EXISTS `oc_manufacturer` (
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`manufacturer_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- Дамп данных таблицы `oc_manufacturer`
---
 
 INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES
 (5, 'HTC', 'data/demo/htc_logo.jpg', 0),
@@ -1983,13 +1462,6 @@ INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 (9, 'Canon', 'data/demo/canon_logo.jpg', 0),
 (10, 'Sony', 'data/demo/sony_logo.jpg', 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_manufacturer_description`
---
-
-DROP TABLE IF EXISTS `oc_manufacturer_description`;
 CREATE TABLE IF NOT EXISTS `oc_manufacturer_description` (
   `manufacturer_id` int(11) NOT NULL DEFAULT '0',
   `language_id` int(11) NOT NULL DEFAULT '0',
@@ -2000,10 +1472,6 @@ CREATE TABLE IF NOT EXISTS `oc_manufacturer_description` (
   `seo_h1` varchar(255) NOT NULL,
   PRIMARY KEY (`manufacturer_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_manufacturer_description`
---
 
 INSERT INTO `oc_manufacturer_description` (`manufacturer_id`, `language_id`, `description`, `meta_description`, `meta_keyword`, `seo_title`, `seo_h1`) VALUES
 (5, 1, '', '', '', '', ''),
@@ -2019,22 +1487,11 @@ INSERT INTO `oc_manufacturer_description` (`manufacturer_id`, `language_id`, `de
 (9, 2, '', '', '', '', ''),
 (10, 2, '', '', '', '', '');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_manufacturer_to_store`
---
-
-DROP TABLE IF EXISTS `oc_manufacturer_to_store`;
 CREATE TABLE IF NOT EXISTS `oc_manufacturer_to_store` (
   `manufacturer_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`manufacturer_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_manufacturer_to_store`
---
 
 INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 (5, 0),
@@ -2044,51 +1501,32 @@ INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 (9, 0),
 (10, 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_manuf_description`
---
-
-DROP TABLE IF EXISTS `oc_manuf_description`;
 CREATE TABLE IF NOT EXISTS `oc_manuf_description` (
   `manufacturer_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `description` text NOT NULL,
   `meta_description` varchar(255) NOT NULL,
   `meta_keyword` varchar(255) NOT NULL,
+  `u_title` varchar(255) NOT NULL,
+  `u_h1` varchar(255) NOT NULL,
+  `u_h2` varchar(255) NOT NULL,
   PRIMARY KEY (`manufacturer_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_manuf_description`
---
+INSERT INTO `oc_manuf_description` (`manufacturer_id`, `language_id`, `description`, `meta_description`, `meta_keyword`, `u_title`, `u_h1`, `u_h2`) VALUES
+(8, 1, '&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание производителя:en&lt;/span&gt;&lt;/p&gt;\r\n', 'Мета описание: en', 'Мета keywords: en', '', '', ''),
+(8, 2, '&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание производителя:ru&lt;/span&gt;&lt;/p&gt;\r\n', 'Мета описание: ru', 'Мета keywords: ru', '', '', ''),
+(8, 3, '&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание производителя:ua&lt;/span&gt;&lt;/p&gt;\r\n', 'Мета описание: ua', 'Мета keywords: ua', '', '', ''),
+(9, 1, '', '', '', '', '', ''),
+(9, 2, '', '', '', '', '', ''),
+(9, 3, '', '', '', '', '', '');
 
-INSERT INTO `oc_manuf_description` (`manufacturer_id`, `language_id`, `description`, `meta_description`, `meta_keyword`) VALUES
-(8, 1, '&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание производителя:en&lt;/span&gt;&lt;/p&gt;\r\n', 'Мета описание: en', 'Мета keywords: en'),
-(8, 2, '&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание производителя:ru&lt;/span&gt;&lt;/p&gt;\r\n', 'Мета описание: ru', 'Мета keywords: ru'),
-(8, 3, '&lt;p&gt;&lt;span style=&quot;background-color:rgb(250, 250, 250); color:rgb(0, 0, 0); font-family:verdana,arial,helvetica,sans-serif; font-size:12px&quot;&gt;Описание производителя:ua&lt;/span&gt;&lt;/p&gt;\r\n', 'Мета описание: ua', 'Мета keywords: ua'),
-(9, 1, '', '', ''),
-(9, 2, '', '', ''),
-(9, 3, '', '', '');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_option`
---
-
-DROP TABLE IF EXISTS `oc_option`;
 CREATE TABLE IF NOT EXISTS `oc_option` (
   `option_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
-
---
--- Дамп данных таблицы `oc_option`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
 (1, 'radio', 2),
@@ -2101,25 +1539,15 @@ INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
 (9, 'time', 8),
 (10, 'datetime', 9),
 (11, 'select', 1),
-(12, 'date', 1);
+(12, 'date', 1),
+(13, 'mixed', 2);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_option_description`
---
-
-DROP TABLE IF EXISTS `oc_option_description`;
 CREATE TABLE IF NOT EXISTS `oc_option_description` (
   `option_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`option_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_option_description`
---
 
 INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
 (1, 1, 'Radio'),
@@ -2154,26 +1582,18 @@ INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
 (9, 3, 'Time'),
 (10, 3, 'Date &amp; Time'),
 (12, 3, 'Delivery Date'),
-(11, 3, 'Size');
+(11, 3, 'Size'),
+(13, 1, 'Test_image_option'),
+(13, 2, 'Тестовая опция с рисунком'),
+(13, 3, 'Тестова опція з малюнком');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_option_value`
---
-
-DROP TABLE IF EXISTS `oc_option_value`;
 CREATE TABLE IF NOT EXISTS `oc_option_value` (
   `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `option_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
-
---
--- Дамп данных таблицы `oc_option_value`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `image`, `sort_order`) VALUES
 (43, 1, '', 3),
@@ -2189,15 +1609,11 @@ INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `image`, `sort_or
 (24, 2, '', 2),
 (46, 11, '', 1),
 (47, 11, '', 2),
-(48, 11, '', 3);
+(48, 11, '', 3),
+(49, 13, 'data/demo/checkout-dark.png', 2),
+(50, 13, 'data/demo/checkout-light.png', 1),
+(51, 13, 'data/demo/empty-cart-dark.png', 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_option_value_description`
---
-
-DROP TABLE IF EXISTS `oc_option_value_description`;
 CREATE TABLE IF NOT EXISTS `oc_option_value_description` (
   `option_value_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -2205,10 +1621,6 @@ CREATE TABLE IF NOT EXISTS `oc_option_value_description` (
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`option_value_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_option_value_description`
---
 
 INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
 (43, 1, 1, 'Large'),
@@ -2252,15 +1664,17 @@ INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `op
 (24, 3, 2, 'Checkbox 2'),
 (48, 3, 11, 'Large'),
 (47, 3, 11, 'Medium'),
-(46, 3, 11, 'Small');
+(46, 3, 11, 'Small'),
+(49, 1, 13, 'Test_1'),
+(49, 2, 13, 'Тест_1'),
+(49, 3, 13, 'Тест_1'),
+(50, 1, 13, 'Test_2'),
+(50, 2, 13, 'Тест_2'),
+(50, 3, 13, 'Тест_2'),
+(51, 1, 13, 'Test_3'),
+(51, 2, 13, 'Тест_3'),
+(51, 3, 13, 'Тест_3');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order`
---
-
-DROP TABLE IF EXISTS `oc_order`;
 CREATE TABLE IF NOT EXISTS `oc_order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
@@ -2321,25 +1735,24 @@ CREATE TABLE IF NOT EXISTS `oc_order` (
   `date_added` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
-
---
--- Дамп данных таблицы `oc_order`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
 
 INSERT INTO `oc_order` (`order_id`, `invoice_no`, `invoice_prefix`, `store_id`, `store_name`, `store_url`, `customer_id`, `customer_group_id`, `firstname`, `lastname`, `email`, `telephone`, `fax`, `payment_firstname`, `payment_lastname`, `payment_company`, `payment_company_id`, `payment_tax_id`, `payment_address_1`, `payment_address_2`, `payment_city`, `payment_postcode`, `payment_country`, `payment_country_id`, `payment_zone`, `payment_zone_id`, `payment_address_format`, `payment_method`, `payment_code`, `shipping_firstname`, `shipping_lastname`, `shipping_company`, `shipping_address_1`, `shipping_address_2`, `shipping_city`, `shipping_postcode`, `shipping_country`, `shipping_country_id`, `shipping_zone`, `shipping_zone_id`, `shipping_address_format`, `shipping_method`, `shipping_code`, `comment`, `total`, `order_status_id`, `affiliate_id`, `commission`, `language_id`, `currency_id`, `currency_code`, `currency_value`, `ip`, `forwarded_ip`, `user_agent`, `accept_language`, `date_added`, `date_modified`) VALUES
 (2, 0, 'ЗАКАЗ_№-2013-00', 0, 'Your Store', 'http://www.str.baco.pp.ua/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Киев', 3491, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Киев', 3491, '', 'Фиксированная стоимость доставки', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 3, 'UAH', '1.00000000', '46.219.32.18', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,fa;q=0.2,fr;q=0.2,id;q=0.2,it;q=0.2,lv;q=0.2,pt;q=0.2,uk;q=0.2', '2013-12-05 22:41:11', '2013-12-05 22:41:11'),
 (3, 0, 'ЗАКАЗ_№-2013-00', 0, 'Your Store', 'http://www.str.baco.pp.ua/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Киев', 3491, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Киев', 3491, '', 'Фиксированная стоимость доставки', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 3, 'UAH', '1.00000000', '46.219.32.18', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,fa;q=0.2,fr;q=0.2,id;q=0.2,it;q=0.2,lv;q=0.2,pt;q=0.2,uk;q=0.2', '2013-12-05 23:00:42', '2013-12-05 23:00:42'),
 (4, 0, 'ЗАКАЗ_№-2013-00', 0, 'Your Store', 'http://www.str.baco.pp.ua/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Полтава', 3496, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Полтава', 3496, '', 'Фиксированная стоимость доставки', 'flat.flat', '', '205.0000', 0, 0, '0.0000', 2, 3, 'UAH', '1.00000000', '46.219.32.18', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,fa;q=0.2,fr;q=0.2,id;q=0.2,it;q=0.2,lv;q=0.2,pt;q=0.2,uk;q=0.2', '2013-12-21 11:03:43', '2013-12-21 11:03:43'),
-(6, 0, 'ЗАКАЗ_№-2013-00', 0, 'Your Store', 'http://www.str.baco.pp.ua/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Луганск', 3492, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Луганск', 3492, '', 'Фиксированная стоимость доставки', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 3, 'UAH', '1.00000000', '46.219.32.18', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,fa;q=0.2,fr;q=0.2,id;q=0.2,it;q=0.2,lv;q=0.2,pt;q=0.2,uk;q=0.2', '2013-12-21 22:04:31', '2013-12-21 22:04:31');
+(6, 0, 'ЗАКАЗ_№-2013-00', 0, 'Your Store', 'http://www.str.baco.pp.ua/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Луганск', 3492, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Луганск', 3492, '', 'Фиксированная стоимость доставки', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 3, 'UAH', '1.00000000', '46.219.32.18', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,fa;q=0.2,fr;q=0.2,id;q=0.2,it;q=0.2,lv;q=0.2,pt;q=0.2,uk;q=0.2', '2013-12-21 22:04:31', '2013-12-21 22:04:31'),
+(10, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Судан', 199, 'Al Jazirah', 3037, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Судан', 199, 'Al Jazirah', 3037, '', 'Фиксированная ', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 1, 'RUB', '3.37330008', '188.32.247.179', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0', 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3', '2014-12-23 10:21:50', '2014-12-23 10:21:50'),
+(55, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Львов', 3493, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Львов', 3493, '', 'Фиксированная ', 'flat.flat', '', '4506.0000', 1, 0, '0.0000', 2, 3, 'UAH', '1.00000000', '194.44.201.146', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 'uk-UA,uk;q=0.8,ru;q=0.6,en-US;q=0.4,en;q=0.2', '2015-06-08 16:03:47', '2015-06-08 16:04:14'),
+(56, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Львов', 3493, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Львов', 3493, '', 'Фиксированная ', 'flat.flat', '', '1005.0000', 0, 0, '0.0000', 2, 3, 'UAH', '1.00000000', '194.44.201.146', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0', 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3', '2015-06-08 16:04:53', '2015-06-08 16:04:53'),
+(16, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Российская Федерация', 176, 'Ставропольский край', 2786, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Российская Федерация', 176, 'Ставропольский край', 2786, '', 'Фиксированная ', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 1, 'RUB', '3.37330008', '94.255.70.103', '', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4', '2015-01-07 21:22:04', '2015-01-07 21:22:04'),
+(19, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Севастополь', 3498, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Севастополь', 3498, '', 'Фиксированная ', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 1, 'RUB', '3.37330008', '213.227.217.134', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,uk;q=0.2', '2015-01-13 17:08:12', '2015-01-13 17:08:12'),
+(28, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Донецк', 3485, '', 'Банковский перевод', 'bank_transfer', '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', '501.0000', 0, 0, '0.0000', 2, 1, 'RUB', '3.37330008', '213.186.254.136', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 YaBrowser/14.12.2125.10034 Safari/537.36', 'ru,en;q=0.8', '2015-02-28 11:31:18', '2015-02-28 11:31:18'),
+(29, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, 'vbvb', 'vbvb', 'zolotovm@rambler', '333', 'Нет данных!', 'vbvb', 'vbvb', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Российская Федерация', 176, 'Санкт-Петербург', 2785, '', 'Банковский перевод', 'bank_transfer', 'vbvb', 'vbvb', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Российская Федерация', 176, 'Санкт-Петербург', 2785, '', 'Фиксированная ', 'flat.flat', '', '308.0000', 0, 0, '0.0000', 2, 1, 'RUB', '3.37330008', '5.18.181.104', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36 OPR/27.0.1689.76', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4', '2015-03-01 14:51:19', '2015-03-01 14:51:19'),
+(37, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, 'tester', 'test', 'edward1995@ukr.net', '+3809886889369', 'Нет данных!', 'tester', 'test', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Харьков', 3487, '', 'Банковский перевод', 'bank_transfer', 'tester', 'test', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Харьков', 3487, '', 'Фиксированная ', 'flat.flat', 'fesfdadsfdsf', '308.0000', 0, 0, '0.0000', 2, 1, 'RUB', '2.54999995', '82.117.252.30', '', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4', '2015-03-20 15:03:49', '2015-03-20 15:03:49'),
+(47, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Ровно', 3497, '', 'Банковский перевод', 'bank_transfer', '', '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', '501.0000', 0, 0, '0.0000', 2, 1, 'RUB', '2.54999995', '46.188.125.233', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4', '2015-04-26 15:13:45', '2015-04-26 15:13:45'),
+(48, 0, 'ЗАКАЗ_№-2014-01', 0, 'Your Store', 'http://demo.brocart.net/', 0, 1, '', '', 'No mail', '', 'Нет данных!', '', '', 'Нет данных!', '', '', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Донецк', 3485, '', 'Банковский перевод', 'bank_transfer', '', '', 'Нет данных!', 'Нет данных!', 'Нет данных!', '', 'Нет данных', 'Украина', 220, 'Донецк', 3485, '', 'Фиксированная ', 'flat.flat', '', '128.0000', 0, 0, '0.0000', 2, 1, 'RUB', '2.54999995', '46.201.68.224', '', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4', '2015-04-28 09:46:58', '2015-04-28 09:46:58');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order_download`
---
-
-DROP TABLE IF EXISTS `oc_order_download`;
 CREATE TABLE IF NOT EXISTS `oc_order_download` (
   `order_download_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -2351,13 +1764,6 @@ CREATE TABLE IF NOT EXISTS `oc_order_download` (
   PRIMARY KEY (`order_download_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order_field`
---
-
-DROP TABLE IF EXISTS `oc_order_field`;
 CREATE TABLE IF NOT EXISTS `oc_order_field` (
   `order_id` int(11) NOT NULL,
   `custom_field_id` int(11) NOT NULL,
@@ -2368,13 +1774,6 @@ CREATE TABLE IF NOT EXISTS `oc_order_field` (
   PRIMARY KEY (`order_id`,`custom_field_id`,`custom_field_value_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order_fraud`
---
-
-DROP TABLE IF EXISTS `oc_order_fraud`;
 CREATE TABLE IF NOT EXISTS `oc_order_fraud` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -2432,13 +1831,6 @@ CREATE TABLE IF NOT EXISTS `oc_order_fraud` (
   PRIMARY KEY (`order_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order_history`
---
-
-DROP TABLE IF EXISTS `oc_order_history`;
 CREATE TABLE IF NOT EXISTS `oc_order_history` (
   `order_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -2447,15 +1839,11 @@ CREATE TABLE IF NOT EXISTS `oc_order_history` (
   `comment` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_history_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
 
--- --------------------------------------------------------
+INSERT INTO `oc_order_history` (`order_history_id`, `order_id`, `order_status_id`, `notify`, `comment`, `date_added`) VALUES
+(43, 55, 1, 1, 'Инструкции по банковскому переводу\n\ntest ru\n\nЗаказ не будет обработан, пока деньги не поступят на наш расчетный счет.', '2015-06-08 16:04:14');
 
---
--- Структура таблицы `oc_order_option`
---
-
-DROP TABLE IF EXISTS `oc_order_option`;
 CREATE TABLE IF NOT EXISTS `oc_order_option` (
   `order_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -2466,15 +1854,12 @@ CREATE TABLE IF NOT EXISTS `oc_order_option` (
   `value` text NOT NULL,
   `type` varchar(32) NOT NULL,
   PRIMARY KEY (`order_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
--- --------------------------------------------------------
+INSERT INTO `oc_order_option` (`order_option_id`, `order_id`, `order_product_id`, `product_option_id`, `product_option_value_id`, `name`, `value`, `type`) VALUES
+(6, 37, 45, 232, 0, 'Delivery Date', '2015-03-13', 'date'),
+(9, 48, 57, 226, 15, 'Select', 'Red', 'select');
 
---
--- Структура таблицы `oc_order_product`
---
-
-DROP TABLE IF EXISTS `oc_order_product`;
 CREATE TABLE IF NOT EXISTS `oc_order_product` (
   `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -2487,36 +1872,34 @@ CREATE TABLE IF NOT EXISTS `oc_order_product` (
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `reward` int(8) NOT NULL,
   PRIMARY KEY (`order_product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- Дамп данных таблицы `oc_order_product`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
 
 INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `name`, `model`, `quantity`, `price`, `total`, `tax`, `reward`) VALUES
 (2, 2, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
 (3, 3, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
 (4, 4, 34, 'iPod Shuffle', 'Product 7', 1, '100.0000', '100.0000', '0.0000', 0),
 (5, 4, 41, 'iMac', 'Product 14', 1, '100.0000', '100.0000', '0.0000', 0),
-(7, 6, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0);
+(7, 6, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
+(11, 10, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
+(65, 55, 44, 'MacBook Air', 'Product 17', 1, '1000.0000', '1000.0000', '0.0000', 700),
+(66, 55, 43, 'MacBook', 'Product 16', 1, '501.0000', '501.0000', '0.0000', 600),
+(67, 55, 46, 'Sony VAIO', 'Product 19', 1, '1000.0000', '1000.0000', '0.0000', 0),
+(68, 55, 45, 'MacBook Pro', 'Product 18', 1, '2000.0000', '2000.0000', '0.0000', 800),
+(17, 16, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
+(69, 56, 46, 'Sony VAIO', 'Product 19', 1, '1000.0000', '1000.0000', '0.0000', 0),
+(20, 19, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
+(33, 28, 43, 'MacBook', 'Product 16', 1, '501.0000', '501.0000', '0.0000', 600),
+(34, 29, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
+(45, 37, 40, 'iPhone', 'product 11', 3, '101.0000', '303.0000', '0.0000', 0),
+(56, 47, 43, 'MacBook', 'Product 16', 1, '501.0000', '501.0000', '0.0000', 600),
+(57, 48, 30, 'Canon EOS 544453', 'Product 7', 1, '123.0000', '123.0000', '0.0000', 200);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order_status`
---
-
-DROP TABLE IF EXISTS `oc_order_status`;
 CREATE TABLE IF NOT EXISTS `oc_order_status` (
   `order_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`order_status_id`,`language_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
-
---
--- Дамп данных таблицы `oc_order_status`
---
 
 INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 (12, 3, 'Обмін'),
@@ -2559,13 +1942,6 @@ INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 (8, 3, 'Заблокований'),
 (13, 3, 'Відшкодований');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order_total`
---
-
-DROP TABLE IF EXISTS `oc_order_total`;
 CREATE TABLE IF NOT EXISTS `oc_order_total` (
   `order_total_id` int(10) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -2576,11 +1952,7 @@ CREATE TABLE IF NOT EXISTS `oc_order_total` (
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`order_total_id`),
   KEY `idx_orders_total_orders_id` (`order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
-
---
--- Дамп данных таблицы `oc_order_total`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=162 ;
 
 INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `text`, `value`, `sort_order`) VALUES
 (5, 2, 'shipping', 'Фиксированная стоимость доставки', '5,00 ₴', '5.0000', 3),
@@ -2594,15 +1966,36 @@ INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `te
 (12, 4, 'total', 'Итого', '205,00 ₴', '205.0000', 9),
 (16, 6, 'sub_total', 'Сумма', '303,00 ₴', '303.0000', 1),
 (17, 6, 'shipping', 'Фиксированная стоимость доставки', '5,00 ₴', '5.0000', 3),
-(18, 6, 'total', 'Итого', '308,00 ₴', '308.0000', 9);
+(18, 6, 'total', 'Итого', '308,00 ₴', '308.0000', 9),
+(28, 10, 'sub_total', 'Сумма', '1022,11 Р', '303.0000', 1),
+(29, 10, 'shipping', 'Фиксированная ', '16,87 Р', '5.0000', 3),
+(30, 10, 'total', 'Итого', '1038,98 Р', '308.0000', 9),
+(159, 56, 'sub_total', 'Сумма', '1000,00 ₴', '1000.0000', 1),
+(158, 55, 'total', 'Итого', '4506,00 ₴', '4506.0000', 9),
+(156, 55, 'sub_total', 'Сумма', '4501,00 ₴', '4501.0000', 1),
+(157, 55, 'shipping', 'Фиксированная ', '5,00 ₴', '5.0000', 3),
+(160, 56, 'shipping', 'Фиксированная ', '5,00 ₴', '5.0000', 3),
+(161, 56, 'total', 'Итого', '1005,00 ₴', '1005.0000', 9),
+(46, 16, 'sub_total', 'Сумма', '1022,11 Р', '303.0000', 1),
+(47, 16, 'shipping', 'Фиксированная ', '16,87 Р', '5.0000', 3),
+(48, 16, 'total', 'Итого', '1038,98 Р', '308.0000', 9),
+(55, 19, 'sub_total', 'Сумма', '1022,11 Р', '303.0000', 1),
+(56, 19, 'shipping', 'Фиксированная ', '16,87 Р', '5.0000', 3),
+(57, 19, 'total', 'Итого', '1038,98 Р', '308.0000', 9),
+(79, 28, 'sub_total', 'Сумма', '1690,02 Р', '501.0000', 1),
+(80, 28, 'total', 'Итого', '1690,02 Р', '501.0000', 9),
+(81, 29, 'sub_total', 'Сумма', '1022,11 Р', '303.0000', 1),
+(82, 29, 'shipping', 'Фиксированная ', '16,87 Р', '5.0000', 3),
+(83, 29, 'total', 'Итого', '1038,98 Р', '308.0000', 9),
+(105, 37, 'sub_total', 'Сумма', '772,65 Р', '303.0000', 1),
+(106, 37, 'shipping', 'Фиксированная ', '12,75 Р', '5.0000', 3),
+(107, 37, 'total', 'Итого', '785,40 Р', '308.0000', 9),
+(133, 47, 'sub_total', 'Сумма', '1277,55 Р', '501.0000', 1),
+(134, 47, 'total', 'Итого', '1277,55 Р', '501.0000', 9),
+(135, 48, 'sub_total', 'Сумма', '313,65 Р', '123.0000', 1),
+(136, 48, 'shipping', 'Фиксированная ', '12,75 Р', '5.0000', 3),
+(137, 48, 'total', 'Итого', '326,40 Р', '128.0000', 9);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_order_voucher`
---
-
-DROP TABLE IF EXISTS `oc_order_voucher`;
 CREATE TABLE IF NOT EXISTS `oc_order_voucher` (
   `order_voucher_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -2619,13 +2012,6 @@ CREATE TABLE IF NOT EXISTS `oc_order_voucher` (
   PRIMARY KEY (`order_voucher_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product`
---
-
-DROP TABLE IF EXISTS `oc_product`;
 CREATE TABLE IF NOT EXISTS `oc_product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `model` varchar(64) NOT NULL,
@@ -2661,38 +2047,27 @@ CREATE TABLE IF NOT EXISTS `oc_product` (
   PRIMARY KEY (`product_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
---
--- Дамп данных таблицы `oc_product`
---
-
 INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(28, 'Product 1', '', '', '', '', '', '', '', 919, 7, 'data/demo/htc_touch_hd_1.jpg', 5, 1, '1240.0000', 200, 9, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2014-01-23 12:58:54', 16),
-(29, 'Product 2', '', '', '', '', '', '', '', 999, 6, 'data/demo/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00000000', 2, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-09-30 01:06:08', 39),
-(30, 'Product 7', '&lt;span id=&quot;&quot;&gt;F&lt;/span&gt;', '', '', '', '', '', '', 7699, 6, 'data/demo/canon_eos_5d_1.jpg', 9, 1, '150.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2013-12-18 11:33:48', 20),
-(31, 'Product 4', '', '', '', '', '', '', '', 1000, 6, 'data/demo/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2013-04-25 19:31:56', 8),
-(32, 'Product 5', '', '', '', '', '', '', '', 999, 6, 'data/demo/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-09-30 01:07:22', 6),
-(33, 'Product 6', '', '', '', '', '', '', '6', 1000, 6, 'data/demo/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2014-02-02 23:26:04', 42),
-(34, 'Product 7', '', '', '', '', '', '', '', 1000, 6, 'data/demo/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2013-12-20 20:13:29', 5),
-(35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-09-30 01:06:17', 3),
-(36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'data/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-09-30 01:07:12', 7),
-(40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 3, 0, 1, '2009-02-03 21:07:12', '2013-12-05 21:49:32', 75),
-(41, 'Product 14', '', '', '', '', '', '', '', 976, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2013-12-20 20:11:35', 109),
-(42, 'Product 13368', '', '', '', '', '', '', '0', 998, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '130.0000', 400, 9, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, '2009-02-03 21:07:37', '2014-02-02 21:58:31', 44),
-(43, 'Product 16', '', '', '', '', '', '', '', 929, 5, 'data/demo/macbook_1.jpg', 8, 0, '501.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2013-12-13 19:42:01', 29),
-(44, 'Product 17', '', '', '', '', '', '', '', 1000, 5, 'data/demo/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2013-04-24 11:08:40', 16),
-(45, 'Product 18', '', '', '', '', '', '', '', 998, 5, 'data/demo/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 100, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-09-15 22:22:01', 7),
-(46, 'Product 19', '', '', '', '', '', '', '', 999, 5, 'data/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2013-04-19 15:07:49', 18),
-(47, 'Product 567', '', '', '', '', '', '', '', 7, 5, 'data/demo/hp_1.jpg', 7, 1, '107.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, '2009-02-03 21:08:40', '2013-04-25 19:36:22', 14),
-(48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'data/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-09-30 01:07:06', 14),
-(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'data/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-09-30 01:06:23', 47);
+(28, 'Product 1', '', '', '', '', '', '', '', 919, 7, 'data/demo/htc_touch_hd_1.jpg', 5, 1, '1240.0000', 200, 9, '2009-02-03', '146.40000000', 2, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2014-01-23 12:58:54', 173),
+(29, 'Product 2', '', '', '', '', '', '', '', 999, 6, 'data/demo/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00000000', 2, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-09-30 01:06:08', 139),
+(30, 'Product 7', '&lt;span id=&quot;&quot;&gt;F&lt;/span&gt;', '', '', '', '', '', '', 7699, 6, 'data/demo/canon_eos_5d_1.jpg', 9, 1, '150.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2015-01-30 10:31:01', 269),
+(31, 'Product 4', '', '', '', '', '', '', '', 1000, 6, 'data/demo/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2013-04-25 19:31:56', 141),
+(32, 'Product 5', '', '', '', '', '', '', '', 999, 6, 'data/demo/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-09-30 01:07:22', 123),
+(33, 'Product 6', '', '', '', '', '', '', '6', 1000, 6, 'data/demo/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2014-02-02 23:26:04', 218),
+(34, 'Product 7', '', '', '', '', '', '', '', 1000, 6, 'data/demo/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2013-12-20 20:13:29', 146),
+(35, 'Product 8', '', '', '', '', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-09-30 01:06:17', 133),
+(36, 'Product 9', '', '', '', '', '', '', '', 994, 6, 'data/demo/ipod_nano_1.jpg', 8, 0, '100.0000', 100, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-09-30 01:07:12', 148),
+(40, 'product 11', '', '', '', '', '', '', '', 970, 5, 'data/demo/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 3, 0, 1, '2009-02-03 21:07:12', '2015-05-18 23:34:37', 618),
+(41, 'Product 14', '', '', '', '', '', '', '', 976, 5, 'data/demo/imac_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2013-12-20 20:11:35', 204),
+(42, 'Product 13368', '', '', '', '', '', '', '0', 998, 5, 'data/demo/apple_cinema_30.jpg', 8, 1, '130.0000', 400, 9, '2009-02-04', '12.50000000', 1, '1.00000000', '2.00000000', '3.00000000', 1, 1, 2, 0, 1, '2009-02-03 21:07:37', '2014-02-02 21:58:31', 909),
+(43, 'Product 16', '', '', '', '', '', '', '', 928, 5, 'data/demo/macbook_1.jpg', 8, 0, '501.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2013-12-13 19:42:01', 384),
+(44, 'Product 17', '', '', '', '', '', '', '', 999, 5, 'data/demo/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2013-04-24 11:08:40', 133),
+(45, 'Product 18', '', '', '', '', '', '', '', 997, 5, 'data/demo/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 100, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-09-15 22:22:01', 120),
+(46, 'Product 19', '', '', '', '', '', '', '', 998, 5, 'data/demo/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2013-04-19 15:07:49', 281),
+(47, 'Product 567', '', '', '', '', '', '', '', 7, 5, 'data/demo/hp_1.jpg', 7, 1, '107.0000', 400, 9, '2009-02-03', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 0, 1, 0, 1, '2009-02-03 21:08:40', '2013-04-25 19:36:22', 230),
+(48, 'product 20', 'test 1', '', '', '', '', '', 'test 2', 995, 5, 'data/demo/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2015-02-22 03:06:10', 185),
+(49, 'SAM1', '', '', '', '', '', '', '', 0, 8, 'data/demo/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00000000', 1, '0.00000000', '0.00000000', '0.00000000', 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-09-30 01:06:23', 326);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_productcomments`
---
-
-DROP TABLE IF EXISTS `oc_productcomments`;
 CREATE TABLE IF NOT EXISTS `oc_productcomments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
@@ -2707,13 +2082,6 @@ CREATE TABLE IF NOT EXISTS `oc_productcomments` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_attribute`
---
-
-DROP TABLE IF EXISTS `oc_product_attribute`;
 CREATE TABLE IF NOT EXISTS `oc_product_attribute` (
   `product_id` int(11) NOT NULL,
   `attribute_id` int(11) NOT NULL,
@@ -2721,10 +2089,6 @@ CREATE TABLE IF NOT EXISTS `oc_product_attribute` (
   `text` text NOT NULL,
   PRIMARY KEY (`product_id`,`attribute_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_product_attribute`
---
 
 INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
 (47, 4, 2, '16GB'),
@@ -2741,15 +2105,11 @@ INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`,
 (47, 2, 1, '4'),
 (43, 2, 2, '1'),
 (43, 2, 1, '1'),
-(43, 4, 3, '8gb');
+(43, 4, 3, '8gb'),
+(40, 3, 3, 'Текст 123'),
+(40, 3, 2, 'Текст 123'),
+(40, 3, 1, 'Текст 123');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_description`
---
-
-DROP TABLE IF EXISTS `oc_product_description`;
 CREATE TABLE IF NOT EXISTS `oc_product_description` (
   `product_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -2765,14 +2125,11 @@ CREATE TABLE IF NOT EXISTS `oc_product_description` (
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_product_description`
---
-
 INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`, `tag`, `u_title`, `u_h1`, `u_h2`) VALUES
 (35, 1, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', '', '', '', '', ''),
-(48, 1, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
-(40, 1, 'iPhone', '&lt;p&gt;iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', 'add', '', '', ''),
+(48, 1, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n&lt;div&gt;\r\n&lt;p&gt;&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
+(48, 2, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n&lt;div&gt;\r\n&lt;p&gt;&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
+(40, 3, 'iPhone', '&lt;p&gt;iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', 'add', '', '', 'Вторичный заголовок Title (Н2) укр'),
 (44, 3, 'MacBook Air', '&lt;div&gt;MacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don’t lose inches and pounds overnight. It’s the result of rethinking conventions. Of multiple wireless innovations. And of breakthrough design. With MacBook Air, mobile computing suddenly has a new standard.&lt;/div&gt;\r\n', '', '', '3,2,1', '', '', ''),
 (45, 1, 'MacBook Pro', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Latest Intel mobile architecture&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Powered by the most advanced mobile processors from Intel, the new Core 2 Duo MacBook Pro is over 50% faster than the original Core Duo MacBook Pro and now supports up to 4GB of RAM.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Leading-edge graphics&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			The NVIDIA GeForce 8600M GT delivers exceptional graphics processing power. For the ultimate creative canvas, you can even configure the 17-inch model with a 1920-by-1200 resolution display.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Designed for life on the road&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Innovations such as a magnetic power connection and an illuminated keyboard with ambient light sensor put the MacBook Pro in a class by itself.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Connect. Create. Communicate.&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Quickly set up a video conference with the built-in iSight camera. Control presentations and media from up to 30 feet away with the included Apple Remote. Connect to high-bandwidth peripherals with FireWire 800 and DVI.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Next-generation wireless&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Featuring 802.11n wireless technology, the MacBook Pro delivers up to five times the performance and up to twice the range of previous-generation technologies.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
 (29, 1, 'Palm Treo Pro', '&lt;p&gt;\r\n	Redefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to business and personal email, stay on top of appointments and contacts, and use Wi-Fi or GPS when you&amp;rsquo;re out and about. Then watch a video on YouTube, catch up with news and sports on the web, or listen to a few songs. Balance your work and play the way you like it, with the Palm Treo Pro.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Edition&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Qualcomm&amp;reg; MSM7201 400MHz Processor&lt;/li&gt;\r\n	&lt;li&gt;\r\n		320x320 transflective colour TFT touchscreen&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/UMTS/EDGE/GPRS/GSM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Tri-band UMTS &amp;mdash; 850MHz, 1900MHz, 2100MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM &amp;mdash; 850/900/1800/1900&lt;/li&gt;\r\n	&lt;li&gt;\r\n		802.11b/g with WPA, WPA2, and 801.1x authentication&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in GPS&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth Version: 2.0 + Enhanced Data Rate&lt;/li&gt;\r\n	&lt;li&gt;\r\n		256MB storage (100MB user available), 128MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2.0 megapixel camera, up to 8x digital zoom and video capture&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Removable, rechargeable 1500mAh lithium-ion battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Up to 5.0 hours talk time and up to 250 hours standby&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroSDHC card expansion (up to 32GB supported)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroUSB 2.0 for synchronization and charging&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.5mm stereo headset jack&lt;/li&gt;\r\n	&lt;li&gt;\r\n		60mm (W) x 114mm (L) x 13.5mm (D) / 133g&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', '', '', ''),
@@ -2786,10 +2143,8 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 (31, 1, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n&lt;div&gt;Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon''s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n&lt;br /&gt;\r\nSimilar to the D3, the D300 features Nikon''s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera''s new features. The D300 features a new 51-point autofocus system with Nikon''s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera''s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon''s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
 (31, 2, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n&lt;div&gt;Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon''s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n&lt;br /&gt;\r\nSimilar to the D3, the D300 features Nikon''s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera''s new features. The D300 features a new 51-point autofocus system with Nikon''s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera''s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon''s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
 (49, 1, 'Samsung Galaxy Tab 10.1', '&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1, is the world&amp;rsquo;s thinnest tablet, measuring 8.6 mm thickness, running with Android 3.0 Honeycomb OS on a 1GHz dual-core Tegra 2 processor, similar to its younger brother Samsung Galaxy Tab 8.9.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 gives pure Android 3.0 experience, adding its new TouchWiz UX or TouchWiz 4.0 &amp;ndash; includes a live panel, which lets you to customize with different content, such as your pictures, bookmarks, and social feeds, sporting a 10.1 inches WXGA capacitive touch screen with 1280 x 800 pixels of resolution, equipped with 3 megapixel rear camera with LED flash and a 2 megapixel front camera, HSPA+ connectivity up to 21Mbps, 720p HD video recording capability, 1080p HD playback, DLNA support, Bluetooth 2.1, USB 2.0, gyroscope, Wi-Fi 802.11 a/b/g/n, micro-SD slot, 3.5mm headphone jack, and SIM slot, including the Samsung Stick &amp;ndash; a Bluetooth microphone that can be carried in a pocket like a pen and sound dock with powered subwoofer.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 will come in 16GB / 32GB / 64GB verities and pre-loaded with Social Hub, Reader&amp;rsquo;s Hub, Music Hub and Samsung Mini Apps Tray &amp;ndash; which gives you access to more commonly used apps to help ease multitasking and it is capable of Adobe Flash Player 10.2, powered by 6860mAh battery that gives you 10hours of video-playback time.&amp;nbsp;&amp;auml;&amp;ouml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
-(30, 3, 'Canon EOS 544453', '&lt;p&gt;Canon&amp;#39;s press material for the EOS 5D states that it &amp;#39;defines (a) new D-SLR category&amp;#39;, while we&amp;#39;re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably &amp;#39;chunkier&amp;#39;). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR&amp;#39;s, an important difference when compared to the latter is that the EOS 5D doesn&amp;#39;t have any environmental seals. While Canon don&amp;#39;t specifically refer to the EOS 5D as a &amp;#39;professional&amp;#39; digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they&amp;#39;ve not bought too many EF-S lenses...) &amp;auml;&amp;euml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
 (35, 2, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', '', '', '', '', ''),
-(48, 2, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
-(40, 2, 'iPhone', '&lt;p&gt;iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', 'add', '', '', ''),
+(48, 3, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n&lt;div&gt;\r\n&lt;p&gt;&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
 (28, 3, 'HTC Touch HD', '&lt;p&gt;HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', '', '', ''),
 (44, 2, 'MacBook Air', '&lt;div&gt;MacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don’t lose inches and pounds overnight. It’s the result of rethinking conventions. Of multiple wireless innovations. And of breakthrough design. With MacBook Air, mobile computing suddenly has a new standard.&lt;/div&gt;\r\n', '', '', '1,3,2', '', '', ''),
 (45, 2, 'MacBook Pro', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Latest Intel mobile architecture&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Powered by the most advanced mobile processors from Intel, the new Core 2 Duo MacBook Pro is over 50% faster than the original Core Duo MacBook Pro and now supports up to 4GB of RAM.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Leading-edge graphics&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			The NVIDIA GeForce 8600M GT delivers exceptional graphics processing power. For the ultimate creative canvas, you can even configure the 17-inch model with a 1920-by-1200 resolution display.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Designed for life on the road&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Innovations such as a magnetic power connection and an illuminated keyboard with ambient light sensor put the MacBook Pro in a class by itself.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Connect. Create. Communicate.&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Quickly set up a video conference with the built-in iSight camera. Control presentations and media from up to 30 feet away with the included Apple Remote. Connect to high-bandwidth peripherals with FireWire 800 and DVI.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Next-generation wireless&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Featuring 802.11n wireless technology, the MacBook Pro delivers up to five times the performance and up to twice the range of previous-generation technologies.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
@@ -2804,13 +2159,10 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 (43, 2, 'MacBook', '&lt;div&gt;\r\n&lt;p&gt;&lt;strong&gt;Intel Core 2 Duo processor&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;1GB memory, larger hard drives&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Sleek, 1.08-inch-thin design&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Built-in iSight camera&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', 'add', '', '', ''),
 (31, 3, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n&lt;div&gt;Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon''s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n&lt;br /&gt;\r\nSimilar to the D3, the D300 features Nikon''s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera''s new features. The D300 features a new 51-point autofocus system with Nikon''s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera''s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon''s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
 (49, 2, 'Samsung Galaxy Tab 10.1', '&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1, is the world&amp;rsquo;s thinnest tablet, measuring 8.6 mm thickness, running with Android 3.0 Honeycomb OS on a 1GHz dual-core Tegra 2 processor, similar to its younger brother Samsung Galaxy Tab 8.9.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 gives pure Android 3.0 experience, adding its new TouchWiz UX or TouchWiz 4.0 &amp;ndash; includes a live panel, which lets you to customize with different content, such as your pictures, bookmarks, and social feeds, sporting a 10.1 inches WXGA capacitive touch screen with 1280 x 800 pixels of resolution, equipped with 3 megapixel rear camera with LED flash and a 2 megapixel front camera, HSPA+ connectivity up to 21Mbps, 720p HD video recording capability, 1080p HD playback, DLNA support, Bluetooth 2.1, USB 2.0, gyroscope, Wi-Fi 802.11 a/b/g/n, micro-SD slot, 3.5mm headphone jack, and SIM slot, including the Samsung Stick &amp;ndash; a Bluetooth microphone that can be carried in a pocket like a pen and sound dock with powered subwoofer.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 will come in 16GB / 32GB / 64GB verities and pre-loaded with Social Hub, Reader&amp;rsquo;s Hub, Music Hub and Samsung Mini Apps Tray &amp;ndash; which gives you access to more commonly used apps to help ease multitasking and it is capable of Adobe Flash Player 10.2, powered by 6860mAh battery that gives you 10hours of video-playback time.&amp;nbsp;&amp;auml;&amp;ouml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
-(42, 3, 'Apple Cine4ma 30&quot;', '&lt;p&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&lt;br /&gt;\r\n&lt;br /&gt;\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&lt;br /&gt;\r\n&lt;br /&gt;\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/p&gt;\r\n\r\n&lt;h3&gt;Features:&lt;/h3&gt;\r\n\r\n&lt;p&gt;Unrivaled display performance&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Simple setup and operation&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Sleek, elegant design&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;h3&gt;Technical specifications&lt;/h3&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen size (diagonal viewable image size)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen type&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Resolutions&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Display colors (maximum)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Viewing angle (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Brightness (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Contrast ratio (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Response time (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Pixel pitch&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen treatment&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;User controls (hardware and software)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Display Power,&lt;/li&gt;\r\n	&lt;li&gt;System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;Brightness&lt;/li&gt;\r\n	&lt;li&gt;Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Connectors and cables&lt;/strong&gt;&lt;br /&gt;\r\nCable&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Connectors&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;VESA mount adapter&lt;/strong&gt;&lt;br /&gt;\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Electrical requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Environmental requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Agency approvals&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55024&lt;/li&gt;\r\n	&lt;li&gt;VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;MPR II&lt;/li&gt;\r\n	&lt;li&gt;IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;UL 60950&lt;/li&gt;\r\n	&lt;li&gt;CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;EN60950&lt;/li&gt;\r\n	&lt;li&gt;ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Size and weight&lt;/strong&gt;&lt;br /&gt;\r\n30-inch Apple Cinema HD Display&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;System Requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easi', 'Apple,Cine4ma,30,quot', '', '', '', '');
+(42, 3, 'Apple Cine4ma 30&quot;', '&lt;p&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&lt;br /&gt;\r\n&lt;br /&gt;\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&lt;br /&gt;\r\n&lt;br /&gt;\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/p&gt;\r\n\r\n&lt;h3&gt;Features:&lt;/h3&gt;\r\n\r\n&lt;p&gt;Unrivaled display performance&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Simple setup and operation&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Sleek, elegant design&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;h3&gt;Technical specifications&lt;/h3&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen size (diagonal viewable image size)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen type&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Resolutions&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Display colors (maximum)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Viewing angle (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Brightness (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Contrast ratio (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Response time (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Pixel pitch&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen treatment&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;User controls (hardware and software)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Display Power,&lt;/li&gt;\r\n	&lt;li&gt;System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;Brightness&lt;/li&gt;\r\n	&lt;li&gt;Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Connectors and cables&lt;/strong&gt;&lt;br /&gt;\r\nCable&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Connectors&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;VESA mount adapter&lt;/strong&gt;&lt;br /&gt;\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Electrical requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Environmental requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Agency approvals&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55024&lt;/li&gt;\r\n	&lt;li&gt;VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;MPR II&lt;/li&gt;\r\n	&lt;li&gt;IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;UL 60950&lt;/li&gt;\r\n	&lt;li&gt;CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;EN60950&lt;/li&gt;\r\n	&lt;li&gt;ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Size and weight&lt;/strong&gt;&lt;br /&gt;\r\n30-inch Apple Cinema HD Display&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;System Requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', '', '', '');
 INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`, `tag`, `u_title`, `u_h1`, `u_h2`) VALUES
-(42, 2, 'Apple Cine4ma 30&quot;', '&lt;p&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&lt;br /&gt;\r\n&lt;br /&gt;\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&lt;br /&gt;\r\n&lt;br /&gt;\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/p&gt;\r\n\r\n&lt;h3&gt;Features:&lt;/h3&gt;\r\n\r\n&lt;p&gt;Unrivaled display performance&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Simple setup and operation&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Sleek, elegant design&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;h3&gt;Technical specifications&lt;/h3&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen size (diagonal viewable image size)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen type&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Resolutions&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Display colors (maximum)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Viewing angle (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Brightness (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Contrast ratio (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Response time (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Pixel pitch&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen treatment&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;User controls (hardware and software)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Display Power,&lt;/li&gt;\r\n	&lt;li&gt;System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;Brightness&lt;/li&gt;\r\n	&lt;li&gt;Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Connectors and cables&lt;/strong&gt;&lt;br /&gt;\r\nCable&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Connectors&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;VESA mount adapter&lt;/strong&gt;&lt;br /&gt;\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Electrical requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Environmental requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Agency approvals&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55024&lt;/li&gt;\r\n	&lt;li&gt;VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;MPR II&lt;/li&gt;\r\n	&lt;li&gt;IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;UL 60950&lt;/li&gt;\r\n	&lt;li&gt;CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;EN60950&lt;/li&gt;\r\n	&lt;li&gt;ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Size and weight&lt;/strong&gt;&lt;br /&gt;\r\n30-inch Apple Cinema HD Display&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;System Requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easi', 'Apple,Cine4ma,30,quot', '', '321', '123', ''),
-(30, 2, 'Canon EOS 544453', '&lt;p&gt;Canon&amp;#39;s press material for the EOS 5D states that it &amp;#39;defines (a) new D-SLR category&amp;#39;, while we&amp;#39;re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably &amp;#39;chunkier&amp;#39;). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR&amp;#39;s, an important difference when compared to the latter is that the EOS 5D doesn&amp;#39;t have any environmental seals. While Canon don&amp;#39;t specifically refer to the EOS 5D as a &amp;#39;professional&amp;#39; digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they&amp;#39;ve not bought too many EF-S lenses...) &amp;auml;&amp;euml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
+(42, 2, 'Apple Cine4ma 30&quot;', '&lt;p&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&lt;br /&gt;\r\n&lt;br /&gt;\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&lt;br /&gt;\r\n&lt;br /&gt;\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/p&gt;\r\n\r\n&lt;h3&gt;Features:&lt;/h3&gt;\r\n\r\n&lt;p&gt;Unrivaled display performance&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Simple setup and operation&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Sleek, elegant design&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;h3&gt;Technical specifications&lt;/h3&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen size (diagonal viewable image size)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen type&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Resolutions&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Display colors (maximum)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Viewing angle (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Brightness (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Contrast ratio (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Response time (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Pixel pitch&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen treatment&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;User controls (hardware and software)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Display Power,&lt;/li&gt;\r\n	&lt;li&gt;System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;Brightness&lt;/li&gt;\r\n	&lt;li&gt;Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Connectors and cables&lt;/strong&gt;&lt;br /&gt;\r\nCable&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Connectors&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;VESA mount adapter&lt;/strong&gt;&lt;br /&gt;\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Electrical requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Environmental requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Agency approvals&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55024&lt;/li&gt;\r\n	&lt;li&gt;VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;MPR II&lt;/li&gt;\r\n	&lt;li&gt;IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;UL 60950&lt;/li&gt;\r\n	&lt;li&gt;CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;EN60950&lt;/li&gt;\r\n	&lt;li&gt;ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Size and weight&lt;/strong&gt;&lt;br /&gt;\r\n30-inch Apple Cinema HD Display&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;System Requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', '', '', ''),
 (35, 3, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', '', '', '', '', ''),
-(48, 3, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', '', '', '', '', ''),
-(40, 3, 'iPhone', '&lt;p&gt;iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', 'add', '', '', ''),
 (28, 1, 'HTC Touch HD', '&lt;p&gt;HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', '', '', ''),
 (28, 2, 'HTC Touch HD', '&lt;p&gt;HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', '', '', ''),
 (44, 1, 'MacBook Air', '&lt;div&gt;MacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don’t lose inches and pounds overnight. It’s the result of rethinking conventions. Of multiple wireless innovations. And of breakthrough design. With MacBook Air, mobile computing suddenly has a new standard.&lt;/div&gt;\r\n', '', '', '1,2,3', '', '', ''),
@@ -2823,19 +2175,16 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 (41, 2, 'iMac', '&lt;div&gt;Just when you thought iMac had everything, now there&amp;acute;s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife &amp;acute;08, and it&amp;acute;s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n', '', '', '', '', '', ''),
 (33, 3, 'Samsung SyncMaster 941BW', '&lt;div&gt;Imagine the advantages of going big without slowing down. The big 19&amp;quot; 941BW monitor combines wide aspect ratio with fast pixel response time, for bigger images, more room to work and crisp motion. In addition, the exclusive MagicBright 2, MagicColor and MagicTune technologies help deliver the ideal image in every situation, while sleek, narrow bezels and adjustable stands deliver style just the way you want it. With the Samsung 941BW widescreen analog/digital LCD monitor, it&amp;#39;s not hard to imagine.&lt;/div&gt;\r\n', '', '', '', '', '', ''),
 (34, 3, 'iPod Shuffle', '&lt;div&gt;&lt;strong&gt;Born to be worn.&lt;/strong&gt;\r\n&lt;p&gt;Clip on the worlds most wearable music player and take up to 240 songs with you anywhere. Choose from five colors including four new hues to make your musical fashion statement.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Random meets rhythm.&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;With iTunes autofill, iPod shuffle can deliver a new musical experience every time you sync. For more randomness, you can shuffle songs during playback with the slide of a switch.&lt;/p&gt;\r\n&lt;strong&gt;Everything is easy.&lt;/strong&gt;\r\n\r\n&lt;p&gt;Charge and sync with the included USB dock. Operate the iPod shuffle controls with one hand. Enjoy up to 12 hours straight of skip-free music playback.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', '', '', '', ''),
-(43, 1, 'MacBook', '&lt;div&gt;\r\n&lt;p&gt;&lt;strong&gt;Intel Core 2 Duo processor&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;1GB memory, larger hard drives&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Sleek, 1.08-inch-thin design&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Built-in iSight camera&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', 'add', 't', 'h1', 'h2'),
+(43, 1, 'MacBook', '&lt;div&gt;\r\n&lt;p&gt;&lt;strong&gt;Intel Core 2 Duo processor&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;1GB memory, larger hard drives&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Sleek, 1.08-inch-thin design&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Built-in iSight camera&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;p&gt;Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', '', 'add', '', '', 'h2'),
 (49, 3, 'Samsung Galaxy Tab 10.1', '&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1, is the world&amp;rsquo;s thinnest tablet, measuring 8.6 mm thickness, running with Android 3.0 Honeycomb OS on a 1GHz dual-core Tegra 2 processor, similar to its younger brother Samsung Galaxy Tab 8.9.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 gives pure Android 3.0 experience, adding its new TouchWiz UX or TouchWiz 4.0 &amp;ndash; includes a live panel, which lets you to customize with different content, such as your pictures, bookmarks, and social feeds, sporting a 10.1 inches WXGA capacitive touch screen with 1280 x 800 pixels of resolution, equipped with 3 megapixel rear camera with LED flash and a 2 megapixel front camera, HSPA+ connectivity up to 21Mbps, 720p HD video recording capability, 1080p HD playback, DLNA support, Bluetooth 2.1, USB 2.0, gyroscope, Wi-Fi 802.11 a/b/g/n, micro-SD slot, 3.5mm headphone jack, and SIM slot, including the Samsung Stick &amp;ndash; a Bluetooth microphone that can be carried in a pocket like a pen and sound dock with powered subwoofer.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 will come in 16GB / 32GB / 64GB verities and pre-loaded with Social Hub, Reader&amp;rsquo;s Hub, Music Hub and Samsung Mini Apps Tray &amp;ndash; which gives you access to more commonly used apps to help ease multitasking and it is capable of Adobe Flash Player 10.2, powered by 6860mAh battery that gives you 10hours of video-playback time.&amp;nbsp;&amp;auml;&amp;ouml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
-(42, 1, 'Apple Cine4ma 30&quot;', '&lt;p&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&lt;br /&gt;\r\n&lt;br /&gt;\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&lt;br /&gt;\r\n&lt;br /&gt;\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/p&gt;\r\n\r\n&lt;h3&gt;Features:&lt;/h3&gt;\r\n\r\n&lt;p&gt;Unrivaled display performance&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Simple setup and operation&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Sleek, elegant design&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;h3&gt;Technical specifications&lt;/h3&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen size (diagonal viewable image size)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen type&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Resolutions&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Display colors (maximum)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Viewing angle (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Brightness (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Contrast ratio (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Response time (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Pixel pitch&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen treatment&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;User controls (hardware and software)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Display Power,&lt;/li&gt;\r\n	&lt;li&gt;System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;Brightness&lt;/li&gt;\r\n	&lt;li&gt;Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Connectors and cables&lt;/strong&gt;&lt;br /&gt;\r\nCable&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Connectors&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;VESA mount adapter&lt;/strong&gt;&lt;br /&gt;\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Electrical requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Environmental requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Agency approvals&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55024&lt;/li&gt;\r\n	&lt;li&gt;VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;MPR II&lt;/li&gt;\r\n	&lt;li&gt;IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;UL 60950&lt;/li&gt;\r\n	&lt;li&gt;CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;EN60950&lt;/li&gt;\r\n	&lt;li&gt;ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Size and weight&lt;/strong&gt;&lt;br /&gt;\r\n30-inch Apple Cinema HD Display&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;System Requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', 'The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easi', 'Apple,Cine4ma,30,quot', '', '123', '123', ''),
+(42, 1, 'Apple Cine4ma 30&quot;', '&lt;p&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data.&lt;br /&gt;\r\n&lt;br /&gt;\r\nOffering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications.&lt;br /&gt;\r\n&lt;br /&gt;\r\nHoused in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment.&lt;br /&gt;\r\n&lt;br /&gt;\r\nThe Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;/p&gt;\r\n\r\n&lt;h3&gt;Features:&lt;/h3&gt;\r\n\r\n&lt;p&gt;Unrivaled display performance&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Simple setup and operation&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Sleek, elegant design&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;h3&gt;Technical specifications&lt;/h3&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen size (diagonal viewable image size)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen type&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Resolutions&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Display colors (maximum)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Viewing angle (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Brightness (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Contrast ratio (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Response time (typical)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Pixel pitch&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Screen treatment&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;User controls (hardware and software)&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Display Power,&lt;/li&gt;\r\n	&lt;li&gt;System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;Brightness&lt;/li&gt;\r\n	&lt;li&gt;Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Connectors and cables&lt;/strong&gt;&lt;br /&gt;\r\nCable&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;Connectors&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;VESA mount adapter&lt;/strong&gt;&lt;br /&gt;\r\nRequires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Electrical requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Environmental requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Agency approvals&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;EN55024&lt;/li&gt;\r\n	&lt;li&gt;VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;MPR II&lt;/li&gt;\r\n	&lt;li&gt;IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;UL 60950&lt;/li&gt;\r\n	&lt;li&gt;CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;EN60950&lt;/li&gt;\r\n	&lt;li&gt;ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;Size and weight&lt;/strong&gt;&lt;br /&gt;\r\n30-inch Apple Cinema HD Display&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n\r\n&lt;p&gt;&lt;strong&gt;System Requirements&lt;/strong&gt;&lt;/p&gt;\r\n\r\n&lt;ul&gt;\r\n	&lt;li&gt;Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '', '', '', '', ''),
+(41, 1, 'iMac', '&lt;div&gt;Just when you thought iMac had everything, now there&amp;acute;s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife &amp;acute;08, and it&amp;acute;s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n', '', '', '', '', '', ''),
 (30, 1, 'Canon EOS 544453', '&lt;p&gt;Canon&amp;#39;s press material for the EOS 5D states that it &amp;#39;defines (a) new D-SLR category&amp;#39;, while we&amp;#39;re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably &amp;#39;chunkier&amp;#39;). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR&amp;#39;s, an important difference when compared to the latter is that the EOS 5D doesn&amp;#39;t have any environmental seals. While Canon don&amp;#39;t specifically refer to the EOS 5D as a &amp;#39;professional&amp;#39; digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they&amp;#39;ve not bought too many EF-S lenses...) &amp;auml;&amp;euml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
-(41, 1, 'iMac', '&lt;div&gt;Just when you thought iMac had everything, now there&amp;acute;s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife &amp;acute;08, and it&amp;acute;s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n', '', '', '', '', '', '');
+(30, 3, 'Canon EOS 544453', '&lt;p&gt;Canon&amp;#39;s press material for the EOS 5D states that it &amp;#39;defines (a) new D-SLR category&amp;#39;, while we&amp;#39;re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably &amp;#39;chunkier&amp;#39;). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR&amp;#39;s, an important difference when compared to the latter is that the EOS 5D doesn&amp;#39;t have any environmental seals. While Canon don&amp;#39;t specifically refer to the EOS 5D as a &amp;#39;professional&amp;#39; digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they&amp;#39;ve not bought too many EF-S lenses...) &amp;auml;&amp;euml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
+(40, 1, 'iPhone', '&lt;p&gt;iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', 'add', '', '', ''),
+(30, 2, 'Canon EOS 544453', '&lt;p&gt;Canon&amp;#39;s press material for the EOS 5D states that it &amp;#39;defines (a) new D-SLR category&amp;#39;, while we&amp;#39;re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably &amp;#39;chunkier&amp;#39;). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR&amp;#39;s, an important difference when compared to the latter is that the EOS 5D doesn&amp;#39;t have any environmental seals. While Canon don&amp;#39;t specifically refer to the EOS 5D as a &amp;#39;professional&amp;#39; digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they&amp;#39;ve not bought too many EF-S lenses...) &amp;auml;&amp;euml;&lt;/p&gt;\r\n', '', '', '', '', '', ''),
+(40, 2, 'Айфон', '&lt;p&gt;iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', '', 'add', '', '', '');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_discount`
---
-
-DROP TABLE IF EXISTS `oc_product_discount`;
 CREATE TABLE IF NOT EXISTS `oc_product_discount` (
   `product_discount_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -2849,61 +2198,35 @@ CREATE TABLE IF NOT EXISTS `oc_product_discount` (
   KEY `product_id` (`product_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=472 ;
 
---
--- Дамп данных таблицы `oc_product_discount`
---
-
 INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `customer_group_id`, `quantity`, `priority`, `price`, `date_start`, `date_end`) VALUES
 (466, 31, 1, 2, 1, '133.0000', '0000-00-00', '0000-00-00'),
 (465, 31, 1, 2, 1, '122.0000', '2013-04-01', '2013-04-30'),
 (471, 42, 1, 30, 1, '66.0000', '0000-00-00', '0000-00-00');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_filter`
---
-
-DROP TABLE IF EXISTS `oc_product_filter`;
 CREATE TABLE IF NOT EXISTS `oc_product_filter` (
   `product_id` int(11) NOT NULL,
   `filter_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`filter_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_product_filter`
---
-
 INSERT INTO `oc_product_filter` (`product_id`, `filter_id`) VALUES
 (42, 1),
 (44, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_image`
---
-
-DROP TABLE IF EXISTS `oc_product_image`;
 CREATE TABLE IF NOT EXISTS `oc_product_image` (
   `product_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2524 ;
-
---
--- Дамп данных таблицы `oc_product_image`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2572 ;
 
 INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`, `sort_order`) VALUES
-(2504, 30, 'data/demo/canon_eos_5d_2.jpg', 0),
+(2545, 30, 'data/demo/canon_eos_5d_3.jpg', 0),
 (2419, 47, 'data/demo/hp_3.jpg', 0),
 (2518, 28, 'data/demo/htc_touch_hd_3.jpg', 0),
 (2508, 41, 'data/demo/imac_3.jpg', 0),
-(2498, 40, 'data/demo/iphone_6.jpg', 0),
+(2571, 40, 'data/demo/iphone_6.jpg', 0),
 (2001, 36, 'data/demo/ipod_nano_5.jpg', 0),
 (2000, 36, 'data/demo/ipod_nano_4.jpg', 0),
 (2516, 34, 'data/demo/ipod_shuffle_5.jpg', 0),
@@ -2922,17 +2245,17 @@ INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`, `sort
 (1988, 29, 'data/demo/palm_treo_pro_3.jpg', 0),
 (2427, 46, 'data/demo/sony_vaio_5.jpg', 0),
 (2426, 46, 'data/demo/sony_vaio_4.jpg', 0),
-(1991, 48, 'data/demo/ipod_classic_4.jpg', 0),
-(1990, 48, 'data/demo/ipod_classic_3.jpg', 0),
-(2497, 40, 'data/demo/iphone_2.jpg', 0),
-(2496, 40, 'data/demo/iphone_5.jpg', 0),
-(2503, 30, 'data/demo/canon_eos_5d_3.jpg', 0),
+(2561, 48, 'data/demo/ipod_classic_2.jpg', 0),
+(2560, 48, 'data/demo/ipod_classic_3.jpg', 0),
+(2570, 40, 'data/demo/iphone_2.jpg', 0),
+(2569, 40, 'data/demo/iphone_5.jpg', 0),
+(2544, 30, 'data/demo/canon_eos_5d_2.jpg', 0),
 (2418, 47, 'data/demo/hp_2.jpg', 0),
 (2517, 28, 'data/demo/htc_touch_hd_2.jpg', 0),
 (2507, 41, 'data/demo/imac_2.jpg', 0),
-(2495, 40, 'data/demo/iphone_3.jpg', 0),
-(2494, 40, 'data/demo/iphone_4.jpg', 0),
-(1989, 48, 'data/demo/ipod_classic_2.jpg', 0),
+(2568, 40, 'data/demo/iphone_3.jpg', 0),
+(2567, 40, 'data/demo/iphone_4.jpg', 0),
+(2559, 48, 'data/demo/ipod_classic_4.jpg', 0),
 (1999, 36, 'data/demo/ipod_nano_2.jpg', 0),
 (1998, 36, 'data/demo/ipod_nano_3.jpg', 0),
 (2514, 34, 'data/demo/ipod_shuffle_2.jpg', 0),
@@ -2961,13 +2284,6 @@ INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`, `sort
 (2519, 42, 'data/demo/canon_logo.jpg', 0),
 (2523, 42, 'data/demo/canon_eos_5d_2.jpg', 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_option`
---
-
-DROP TABLE IF EXISTS `oc_product_option`;
 CREATE TABLE IF NOT EXISTS `oc_product_option` (
   `product_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -2975,11 +2291,7 @@ CREATE TABLE IF NOT EXISTS `oc_product_option` (
   `option_value` text NOT NULL,
   `required` tinyint(1) NOT NULL,
   PRIMARY KEY (`product_option_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=227 ;
-
---
--- Дамп данных таблицы `oc_product_option`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=233 ;
 
 INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
 (224, 35, 11, '', 1),
@@ -2988,20 +2300,16 @@ INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`,
 (218, 42, 1, '', 1),
 (217, 42, 5, '', 1),
 (209, 42, 6, '', 1),
-(226, 30, 5, '', 1),
+(226, 30, 5, '', 0),
 (223, 42, 2, '', 1),
 (220, 42, 10, '2011-02-20 22:25', 1),
 (219, 42, 8, '2011-02-20', 1),
 (222, 42, 7, '', 1),
-(221, 42, 9, '22:25', 1);
+(221, 42, 9, '22:25', 1),
+(232, 40, 12, '', 1),
+(231, 48, 5, '', 1),
+(230, 48, 2, '', 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_option_value`
---
-
-DROP TABLE IF EXISTS `oc_product_option_value`;
 CREATE TABLE IF NOT EXISTS `oc_product_option_value` (
   `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_option_id` int(11) NOT NULL,
@@ -3017,11 +2325,7 @@ CREATE TABLE IF NOT EXISTS `oc_product_option_value` (
   `weight` decimal(15,8) NOT NULL,
   `weight_prefix` varchar(1) NOT NULL,
   PRIMARY KEY (`product_option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
-
---
--- Дамп данных таблицы `oc_product_option_value`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
 (6, 218, 42, 1, 31, 146, 1, '20.0000', '+', 2, '-', '20.00000000', '+'),
@@ -3032,31 +2336,25 @@ INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_optio
 (12, 224, 35, 11, 46, 0, 1, '5.0000', '+', 0, '+', '0.00000000', '+'),
 (13, 224, 35, 11, 47, 10, 1, '10.0000', '+', 0, '+', '0.00000000', '+'),
 (14, 224, 35, 11, 48, 15, 1, '15.0000', '+', 0, '+', '0.00000000', '+'),
-(16, 226, 30, 5, 40, 5, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
 (15, 226, 30, 5, 39, 2, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
+(16, 226, 30, 5, 40, 5, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
 (3, 217, 42, 5, 40, 300, 0, '3.0000', '+', 0, '+', '3.00000000', '+'),
 (8, 223, 42, 2, 23, 48, 1, '10.0000', '+', 0, '+', '10.00000000', '+'),
 (9, 223, 42, 2, 24, 194, 1, '20.0000', '+', 0, '+', '20.00000000', '+'),
 (11, 223, 42, 2, 45, 3998, 1, '40.0000', '+', 0, '+', '40.00000000', '+'),
 (10, 223, 42, 2, 44, 2696, 1, '30.0000', '+', 0, '+', '30.00000000', '+'),
-(5, 218, 42, 1, 32, 96, 1, '10.0000', '+', 1, '+', '10.00000000', '+');
+(5, 218, 42, 1, 32, 96, 1, '10.0000', '+', 1, '+', '10.00000000', '+'),
+(29, 231, 48, 5, 39, 111, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
+(28, 231, 48, 5, 40, 111, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
+(27, 230, 48, 2, 44, 12, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
+(26, 230, 48, 2, 24, 11, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
+(25, 230, 48, 2, 23, 11, 1, '0.0000', '+', 0, '+', '0.00000000', '+');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_related`
---
-
-DROP TABLE IF EXISTS `oc_product_related`;
 CREATE TABLE IF NOT EXISTS `oc_product_related` (
   `product_id` int(11) NOT NULL,
   `related_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`related_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_product_related`
---
 
 INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
 (40, 42),
@@ -3064,24 +2362,13 @@ INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
 (42, 40),
 (42, 41);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_reward`
---
-
-DROP TABLE IF EXISTS `oc_product_reward`;
 CREATE TABLE IF NOT EXISTS `oc_product_reward` (
   `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
   `points` int(8) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_reward_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=596 ;
-
---
--- Дамп данных таблицы `oc_product_reward`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=607 ;
 
 INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_group_id`, `points`) VALUES
 (591, 42, 1, 100),
@@ -3089,9 +2376,9 @@ INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_gr
 (590, 28, 1, 400),
 (584, 43, 1, 600),
 (339, 29, 1, 0),
-(343, 48, 1, 0),
-(583, 40, 1, 0),
-(585, 30, 1, 200),
+(604, 48, 1, 0),
+(606, 40, 1, 0),
+(600, 30, 1, 200),
 (575, 44, 1, 700),
 (333, 45, 1, 800),
 (561, 31, 1, 0),
@@ -3104,13 +2391,6 @@ INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_gr
 (355, 32, 1, 0),
 (521, 49, 1, 1000);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_special`
---
-
-DROP TABLE IF EXISTS `oc_product_special`;
 CREATE TABLE IF NOT EXISTS `oc_product_special` (
   `product_special_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -3121,24 +2401,13 @@ CREATE TABLE IF NOT EXISTS `oc_product_special` (
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`product_special_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=463 ;
-
---
--- Дамп данных таблицы `oc_product_special`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=465 ;
 
 INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_group_id`, `priority`, `price`, `date_start`, `date_end`) VALUES
 (462, 42, 1, 1, '945.0000', '0000-00-00', '0000-00-00'),
-(461, 30, 1, 2, '123.0000', '0000-00-00', '0000-00-00'),
-(460, 30, 1, 1, '123.0000', '0000-00-00', '0000-00-00');
+(464, 30, 1, 2, '123.0000', '0000-00-00', '0000-00-00'),
+(463, 30, 1, 1, '123.0000', '0000-00-00', '0000-00-00');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_tab`
---
-
-DROP TABLE IF EXISTS `oc_product_tab`;
 CREATE TABLE IF NOT EXISTS `oc_product_tab` (
   `product_id` int(11) NOT NULL,
   `tab_id` int(11) NOT NULL,
@@ -3149,22 +2418,11 @@ CREATE TABLE IF NOT EXISTS `oc_product_tab` (
   PRIMARY KEY (`product_id`,`tab_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_product_tab`
---
-
 INSERT INTO `oc_product_tab` (`product_id`, `tab_id`, `language_id`, `text`, `position`, `show_empty`) VALUES
 (46, 1, 3, '&lt;p&gt;Це тестовий опис для тестовой закладки&lt;/p&gt;\r\n', NULL, NULL),
 (46, 1, 2, '&lt;p&gt;Это тестовое описание для тестовой вкладки&lt;/p&gt;\r\n', NULL, NULL),
 (46, 1, 1, '&lt;p&gt;This is test description for test tub&lt;/p&gt;\r\n', NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_to_category`
---
-
-DROP TABLE IF EXISTS `oc_product_to_category`;
 CREATE TABLE IF NOT EXISTS `oc_product_to_category` (
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -3172,17 +2430,13 @@ CREATE TABLE IF NOT EXISTS `oc_product_to_category` (
   PRIMARY KEY (`product_id`,`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_product_to_category`
---
-
 INSERT INTO `oc_product_to_category` (`product_id`, `category_id`, `main_category`) VALUES
 (28, 24, 0),
 (28, 20, 1),
 (29, 20, 0),
 (29, 24, 0),
-(30, 20, 1),
 (30, 33, 0),
+(30, 20, 1),
 (31, 33, 1),
 (32, 34, 0),
 (33, 20, 1),
@@ -3204,32 +2458,18 @@ INSERT INTO `oc_product_to_category` (`product_id`, `category_id`, `main_categor
 (46, 20, 0),
 (47, 18, 1),
 (47, 20, 0),
-(48, 20, 0),
+(48, 20, 1),
 (48, 34, 0),
 (49, 57, 0),
 (41, 27, 0),
 (34, 34, 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_to_download`
---
-
-DROP TABLE IF EXISTS `oc_product_to_download`;
 CREATE TABLE IF NOT EXISTS `oc_product_to_download` (
   `product_id` int(11) NOT NULL,
   `download_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`download_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_to_layout`
---
-
-DROP TABLE IF EXISTS `oc_product_to_layout`;
 CREATE TABLE IF NOT EXISTS `oc_product_to_layout` (
   `product_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -3237,22 +2477,11 @@ CREATE TABLE IF NOT EXISTS `oc_product_to_layout` (
   PRIMARY KEY (`product_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_to_store`
---
-
-DROP TABLE IF EXISTS `oc_product_to_store`;
 CREATE TABLE IF NOT EXISTS `oc_product_to_store` (
   `product_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_product_to_store`
---
 
 INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
 (28, 0),
@@ -3275,13 +2504,6 @@ INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
 (48, 0),
 (49, 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_return`
---
-
-DROP TABLE IF EXISTS `oc_return`;
 CREATE TABLE IF NOT EXISTS `oc_return` (
   `return_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -3305,23 +2527,12 @@ CREATE TABLE IF NOT EXISTS `oc_return` (
   PRIMARY KEY (`return_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_return_action`
---
-
-DROP TABLE IF EXISTS `oc_return_action`;
 CREATE TABLE IF NOT EXISTS `oc_return_action` (
   `return_action_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`return_action_id`,`language_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Дамп данных таблицы `oc_return_action`
---
 
 INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUES
 (1, 1, 'Refunded'),
@@ -3334,13 +2545,6 @@ INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUE
 (2, 3, 'Credit Issued'),
 (3, 3, 'Replacement Sent');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_return_history`
---
-
-DROP TABLE IF EXISTS `oc_return_history`;
 CREATE TABLE IF NOT EXISTS `oc_return_history` (
   `return_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `return_id` int(11) NOT NULL,
@@ -3351,23 +2555,12 @@ CREATE TABLE IF NOT EXISTS `oc_return_history` (
   PRIMARY KEY (`return_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_return_reason`
---
-
-DROP TABLE IF EXISTS `oc_return_reason`;
 CREATE TABLE IF NOT EXISTS `oc_return_reason` (
   `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`return_reason_id`,`language_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
---
--- Дамп данных таблицы `oc_return_reason`
---
 
 INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
 (1, 1, 'Dead On Arrival'),
@@ -3386,23 +2579,12 @@ INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUE
 (4, 3, 'Faulty, please supply details'),
 (5, 3, 'Other, please supply details');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_return_status`
---
-
-DROP TABLE IF EXISTS `oc_return_status`;
 CREATE TABLE IF NOT EXISTS `oc_return_status` (
   `return_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`return_status_id`,`language_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Дамп данных таблицы `oc_return_status`
---
 
 INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUES
 (1, 2, 'Ожидание'),
@@ -3415,13 +2597,6 @@ INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUE
 (1, 3, 'Очікування'),
 (3, 3, 'Завершено');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_review`
---
-
-DROP TABLE IF EXISTS `oc_review`;
 CREATE TABLE IF NOT EXISTS `oc_review` (
   `review_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -3434,23 +2609,27 @@ CREATE TABLE IF NOT EXISTS `oc_review` (
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`review_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Дамп данных таблицы `oc_review`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 INSERT INTO `oc_review` (`review_id`, `product_id`, `customer_id`, `author`, `text`, `rating`, `status`, `date_added`, `date_modified`) VALUES
-(1, 40, 0, 'Alex', 'этот телефон - лучшее что я видел в своей короткой жизни', 5, 1, '2013-04-23 14:08:09', '0000-00-00 00:00:00'),
-(2, 33, 0, 'sdfgdsfg', 'sdfg dfsgdfg dsfgsdfg sdfgsdfg', 5, 0, '2014-02-02 22:50:28', '0000-00-00 00:00:00');
+(1, 40, 0, 'Alex', 'этот телефон - лучшее что я видел в своей короткой жизни', 5, 1, '2013-04-23 14:08:09', '0000-00-00 00:00:00');
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `oc_seo_main` (
+  `main_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL,
+  `main_h1` varchar(255) NOT NULL,
+  `main_desc` text NOT NULL,
+  `main_title` varchar(255) NOT NULL,
+  `main_meta_desc` varchar(255) NOT NULL,
+  `main_meta_keyw` varchar(255) NOT NULL,
+  PRIMARY KEY (`main_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
---
--- Структура таблицы `oc_setting`
---
+INSERT INTO `oc_seo_main` (`main_id`, `language_id`, `main_h1`, `main_desc`, `main_title`, `main_meta_desc`, `main_meta_keyw`) VALUES
+(1, 1, '', '&lt;p&gt;&amp;amp;&lt;/p&gt;\r\n', 'Заголовок англ', 'Мета-тег Description англ', 'Мета-тег Keywords англ'),
+(2, 2, '', '&lt;p&gt;&amp;amp;&lt;/p&gt;\r\n', 'Заголовок рус', 'Мета-тег Description рус', 'Мета-тег Keyword рус'),
+(3, 3, '', '&lt;p&gt;&amp;amp;&lt;/p&gt;\r\n', 'Заголовок укр', 'Мета-тег Description укр', 'Мета-тег Keywords укр');
 
-DROP TABLE IF EXISTS `oc_setting`;
 CREATE TABLE IF NOT EXISTS `oc_setting` (
   `setting_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
@@ -3459,11 +2638,7 @@ CREATE TABLE IF NOT EXISTS `oc_setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8320 ;
-
---
--- Дамп данных таблицы `oc_setting`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9753 ;
 
 INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `serialized`) VALUES
 (1, 0, 'shipping', 'shipping_sort_order', '3', 0),
@@ -3498,24 +2673,18 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (5170, 0, 'category', 'category_module', 'a:2:{i:0;a:4:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"1";}i:1;a:4:{s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
 (60, 0, 'account', 'account_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"6";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
 (8175, 0, 'callback', 'callback_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(8319, 0, 'bro_conf', 'config_seo_ratingdesc', '', 0),
-(8318, 0, 'bro_conf', 'config_seo_ratingasc', '', 0),
-(8317, 0, 'bro_conf', 'config_seo_modeldesc', '', 0),
-(8316, 0, 'bro_conf', 'config_seo_modelasc', '', 0),
-(8278, 0, 'config', 'config_error_filename', 'error.log', 0),
-(8279, 0, 'config', 'config_google_analytics', '', 0),
-(8280, 0, 'config', 'config_yandex_metrika', '', 0),
-(8272, 0, 'config', 'config_maintenance', '0', 0),
-(8273, 0, 'config', 'config_password', '0', 0),
-(8274, 0, 'config', 'config_encryption', '9b78bf07507fddcad1f84678e3cca0c7', 0),
-(8275, 0, 'config', 'config_compression', '0', 0),
-(8276, 0, 'config', 'config_error_display', '1', 0),
-(8277, 0, 'config', 'config_error_log', '1', 0),
-(8269, 0, 'config', 'config_seo_url', '0', 0),
-(8270, 0, 'config', 'config_file_extension_allowed', 'txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods', 0),
-(8271, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/jpeg\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/tiff\r\nimage/svg+xml\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/postscript\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
-(8315, 0, 'bro_conf', 'config_seo_namedesc', '', 0),
-(8314, 0, 'bro_conf', 'config_seo_nameasc', '', 0),
+(9428, 0, 'pickup', 'pickup_sort_order', '2', 0),
+(9427, 0, 'pickup', 'pickup_status', '1', 0),
+(9426, 0, 'pickup', 'pickup_geo_zone_id', '0', 0),
+(9747, 0, 'config', 'config_compression', '7', 0),
+(9748, 0, 'config', 'config_error_display', '0', 0),
+(9749, 0, 'config', 'config_error_log', '1', 0),
+(9750, 0, 'config', 'config_error_filename', 'error.log', 0),
+(9751, 0, 'config', 'config_google_analytics', '', 0),
+(9752, 0, 'config', 'config_yandex_metrika', '', 0),
+(9745, 0, 'config', 'config_password', '0', 0),
+(9746, 0, 'config', 'config_encryption', 'b9a061b0e4365be9940d1082221f3029', 0),
+(9316, 0, 'bro_conf', 'config_seo_ratingasc', '', 0),
 (94, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (95, 0, 'voucher', 'voucher_status', '1', 0),
 (8174, 0, 'sseo', 'url', 'search', 0),
@@ -3523,112 +2692,79 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (103, 0, 'free_checkout', 'free_checkout_status', '1', 0),
 (104, 0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
 (108, 0, 'slideshow', 'slideshow_module', 'a:1:{i:0;a:8:{s:9:"banner_id";s:1:"7";s:5:"width";s:3:"980";s:6:"height";s:3:"280";s:11:"resize_type";s:7:"default";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"content_top";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(8283, 0, 'banner', 'banner_module', 'a:17:{i:0;a:7:{s:9:"banner_id";s:1:"6";s:5:"width";s:3:"182";s:6:"height";s:3:"182";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"4";}i:1;a:7:{s:9:"banner_id";s:1:"9";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:10:"header_top";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:2;a:7:{s:9:"banner_id";s:2:"10";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:15:"header_top_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:3;a:7:{s:9:"banner_id";s:2:"11";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:16:"header_top_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:4;a:7:{s:9:"banner_id";s:2:"16";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:10:"slider_top";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:5;a:7:{s:9:"banner_id";s:2:"17";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"slider_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:6;a:7:{s:9:"banner_id";s:2:"18";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:12:"slider_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:7;a:7:{s:9:"banner_id";s:2:"13";s:5:"width";s:3:"710";s:6:"height";s:3:"260";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"slider_content";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:8;a:7:{s:9:"banner_id";s:2:"12";s:5:"width";s:3:"440";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"slider_content";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:9;a:7:{s:9:"banner_id";s:2:"14";s:5:"width";s:3:"260";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:19:"slider_content_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:10;a:7:{s:9:"banner_id";s:2:"15";s:5:"width";s:3:"260";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:20:"slider_content_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:11;a:7:{s:9:"banner_id";s:2:"19";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:10:"footer_top";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:12;a:7:{s:9:"banner_id";s:2:"20";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:15:"footer_top_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:13;a:7:{s:9:"banner_id";s:2:"21";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:16:"footer_top_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:14;a:7:{s:9:"banner_id";s:2:"22";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:13:"footer_bottom";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:15;a:7:{s:9:"banner_id";s:2:"23";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:18:"footer_bottom_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:16;a:7:{s:9:"banner_id";s:2:"24";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:19:"footer_bottom_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}}', 1),
-(8313, 0, 'bro_conf', 'config_seo_pricedesc', '', 0),
-(8312, 0, 'bro_conf', 'config_seo_priceasc', '', 0),
-(8311, 0, 'bro_conf', 'config_seo_default', '', 0),
-(8310, 0, 'bro_conf', 'config_seo_show', '', 0),
-(8309, 0, 'bro_conf', 'config_seo_page', '', 0),
-(8308, 0, 'bro_conf', 'config_seo_url_include_path', 'on', 0),
-(8307, 0, 'bro_conf', 'hide_mpn', 'on', 0),
-(8306, 0, 'bro_conf', 'hide_isbn', 'on', 0),
-(8305, 0, 'bro_conf', 'hide_jan', 'on', 0),
-(8304, 0, 'bro_conf', 'hide_ean', 'on', 0),
-(8303, 0, 'bro_conf', 'loc_change', '0', 0),
-(8302, 0, 'bro_conf', 'comment_enabled', '0', 0),
-(8301, 0, 'bro_conf', 'required_phone', 'on', 0),
-(8048, 0, 'productcomments', 'pcconf_email', '', 0),
-(8049, 0, 'productcomments', 'pcconf_perpage', '5', 0),
-(8300, 0, 'bro_conf', 'show_email', 'on', 0),
-(8299, 0, 'bro_conf', 'show_name', 'on', 0),
-(8298, 0, 'bro_conf', 'config_top_image', 'data/demo/back-to-top.png', 0),
-(8297, 0, 'bro_conf', 'config_to_top', '1', 0),
-(8296, 0, 'bro_conf', 'categ_disp', '0', 0),
-(8047, 0, 'productcomments', 'pcconf_maxlen', '500', 0),
-(8046, 0, 'productcomments', 'pcconf_enforce_customer_data', '1', 0),
-(8045, 0, 'productcomments', 'pcconf_allow_guests', '1', 0),
-(8044, 0, 'productcomments', 'pcconf_enable_customer_captcha', '1', 0),
+(8323, 0, 'banner', 'banner_module', 'a:17:{i:0;a:7:{s:9:"banner_id";s:1:"6";s:5:"width";s:3:"182";s:6:"height";s:3:"182";s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"0";s:10:"sort_order";s:1:"4";}i:1;a:7:{s:9:"banner_id";s:1:"9";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:10:"header_top";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:2;a:7:{s:9:"banner_id";s:2:"10";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:15:"header_top_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:3;a:7:{s:9:"banner_id";s:2:"11";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:16:"header_top_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:4;a:7:{s:9:"banner_id";s:2:"16";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:10:"slider_top";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:5;a:7:{s:9:"banner_id";s:2:"17";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:11:"slider_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:6;a:7:{s:9:"banner_id";s:2:"18";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:12:"slider_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:7;a:7:{s:9:"banner_id";s:2:"13";s:5:"width";s:3:"710";s:6:"height";s:3:"260";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"slider_content";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:8;a:7:{s:9:"banner_id";s:2:"12";s:5:"width";s:3:"440";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:14:"slider_content";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:9;a:7:{s:9:"banner_id";s:2:"14";s:5:"width";s:3:"260";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:19:"slider_content_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:10;a:7:{s:9:"banner_id";s:2:"15";s:5:"width";s:3:"260";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:20:"slider_content_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:11;a:7:{s:9:"banner_id";s:2:"19";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:10:"footer_top";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:12;a:7:{s:9:"banner_id";s:2:"20";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:15:"footer_top_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:13;a:7:{s:9:"banner_id";s:2:"21";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:16:"footer_top_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:14;a:7:{s:9:"banner_id";s:2:"22";s:5:"width";s:3:"980";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:13:"footer_bottom";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:15;a:7:{s:9:"banner_id";s:2:"23";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:18:"footer_bottom_left";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}i:16;a:7:{s:9:"banner_id";s:2:"24";s:5:"width";s:3:"485";s:6:"height";s:2:"80";s:9:"layout_id";s:1:"1";s:8:"position";s:19:"footer_bottom_right";s:6:"status";s:1:"0";s:10:"sort_order";s:0:"";}}', 1),
+(9315, 0, 'bro_conf', 'config_seo_modeldesc', '', 0),
+(9314, 0, 'bro_conf', 'config_seo_modelasc', '', 0),
+(9313, 0, 'bro_conf', 'config_seo_namedesc', '', 0),
+(9312, 0, 'bro_conf', 'config_seo_nameasc', '', 0),
+(9311, 0, 'bro_conf', 'config_seo_pricedesc', '', 0),
+(9310, 0, 'bro_conf', 'config_seo_priceasc', '', 0),
+(9309, 0, 'bro_conf', 'config_seo_default', '', 0),
+(9308, 0, 'bro_conf', 'config_seo_show', '', 0),
+(9307, 0, 'bro_conf', 'config_seo_page', '', 0),
+(8464, 0, 'productcomments', 'pcconf_allow_guests', '1', 0),
+(9306, 0, 'bro_conf', 'config_seo_url_include_path', 'on', 0),
+(9305, 0, 'bro_conf', 'config_seo_query', 'on', 0),
+(9304, 0, 'bro_conf', 'loc_change', '0', 0),
+(8463, 0, 'productcomments', 'pcconf_enforce_customer_data', '1', 0),
+(8462, 0, 'productcomments', 'pcconf_maxlen', '500', 0),
+(8461, 0, 'productcomments', 'pcconf_perpage', '5', 0),
+(8460, 0, 'productcomments', 'pcconf_email', '', 0),
 (8173, 0, 'sseo', 'route', 'product/search', 0),
-(4937, 0, 'qv_ch', 'country_required', '0', 0),
-(4936, 0, 'qv_ch', 'country_status', '1', 0),
-(4935, 0, 'qv_ch', 'postcode_required', '0', 0),
-(4934, 0, 'qv_ch', 'postcode_status', '0', 0),
-(4933, 0, 'qv_ch', 'city_required', '0', 0),
-(4932, 0, 'qv_ch', 'city_status', '0', 0),
-(4931, 0, 'qv_ch', 'address_2_required', '0', 0),
-(4930, 0, 'qv_ch', 'address_2_status', '0', 0),
-(4929, 0, 'qv_ch', 'address_1_required', '0', 0),
-(4928, 0, 'qv_ch', 'address_1_status', '0', 0),
-(4927, 0, 'qv_ch', 'company_required', '0', 0),
-(4926, 0, 'qv_ch', 'company_status', '0', 0),
-(4925, 0, 'qv_ch', 'fax_required', '0', 0),
-(4924, 0, 'qv_ch', 'fax_status', '0', 0),
-(4923, 0, 'qv_ch', 'telephone_required', '0', 0),
-(4922, 0, 'qv_ch', 'telephone_status', '1', 0),
-(4921, 0, 'qv_ch', 'email_required', '0', 0),
-(4918, 0, 'qv_ch', 'lastname_status', '1', 0),
+(8500, 0, 'qv_ch', 'address_1_required', '0', 0),
+(8499, 0, 'qv_ch', 'address_1_status', '0', 0),
+(8498, 0, 'qv_ch', 'company_required', '0', 0),
+(8497, 0, 'qv_ch', 'company_status', '0', 0),
+(8496, 0, 'qv_ch', 'fax_required', '0', 0),
+(8495, 0, 'qv_ch', 'fax_status', '0', 0),
+(8494, 0, 'qv_ch', 'telephone_required', '0', 0),
+(8493, 0, 'qv_ch', 'telephone_status', '1', 0),
+(8492, 0, 'qv_ch', 'email_required', '0', 0),
+(8491, 0, 'qv_ch', 'email_status', '1', 0),
+(8490, 0, 'qv_ch', 'lastname_required', '0', 0),
+(8489, 0, 'qv_ch', 'lastname_status', '1', 0),
+(8488, 0, 'qv_ch', 'firstname_required', '0', 0),
+(8487, 0, 'qv_ch', 'firstname_status', '1', 0),
 (2210, 0, 'google_sitemap', 'google_sitemap_status', '1', 0),
-(2211, 0, 'yandex_market', 'yandex_market_status', '1', 0),
-(2212, 0, 'yandex_market', 'yandex_market_shopname', '123', 0),
-(2213, 0, 'yandex_market', 'yandex_market_company', '123', 0),
-(2214, 0, 'yandex_market', 'yandex_market_categories', '33,25,29,28,35,36,30,31,32,20,27,26,18,46,45,34,43,44,47,48,49,50,51,52,58,53,54,55,56,38,37,39,40,41,42,24,17,57', 0),
-(2215, 0, 'yandex_market', 'yandex_market_currency', 'RUB', 0),
-(2216, 0, 'yandex_market', 'yandex_market_in_stock', '7', 0),
-(2217, 0, 'yandex_market', 'yandex_market_out_of_stock', '5', 0),
-(8268, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
-(4920, 0, 'qv_ch', 'email_status', '1', 0),
-(4919, 0, 'qv_ch', 'lastname_required', '0', 0),
-(4917, 0, 'qv_ch', 'firstname_required', '0', 0),
-(4916, 0, 'qv_ch', 'firstname_status', '1', 0),
-(4915, 0, 'qv_ch', 'status', '1', 0),
-(4914, 0, 'qv_ch', 'config_conf_disp', '1', 0),
-(4913, 0, 'qv_ch', 'config_co_disp', '0', 0),
-(4912, 0, 'qv_ch', 'config_post_req', '0', 0),
-(4911, 0, 'qv_ch', 'config_post_disp', '0', 0),
-(4910, 0, 'qv_ch', 'config_city_req', '0', 0),
-(4909, 0, 'qv_ch', 'config_city_disp', '0', 0),
-(4908, 0, 'qv_ch', 'config_addr2_req', '1', 0),
-(4907, 0, 'qv_ch', 'config_addr2_disp', '0', 0),
-(4906, 0, 'qv_ch', 'config_addr_req', '0', 0),
-(4905, 0, 'qv_ch', 'config_addr_disp', '0', 0),
-(4904, 0, 'qv_ch', 'config_comp_req', '0', 0),
-(4903, 0, 'qv_ch', 'config_comp_disp', '0', 0),
-(4902, 0, 'qv_ch', 'config_fax_req', '0', 0),
-(4901, 0, 'qv_ch', 'config_fax_disp', '0', 0),
-(4898, 0, 'qv_ch', 'config_lastname_req', '0', 0),
-(4900, 0, 'qv_ch', 'config_tel_req', '0', 0),
-(4899, 0, 'qv_ch', 'config_tel_disp', '1', 0),
-(4897, 0, 'qv_ch', 'config_lastname_disp', '1', 0),
-(4896, 0, 'qv_ch', 'config_firstname_req', '1', 0),
-(4895, 0, 'qv_ch', 'config_firstname_disp', '1', 0),
-(8266, 0, 'config', 'config_secure', '0', 0),
-(8267, 0, 'config', 'config_shared', '0', 0),
+(9317, 0, 'bro_conf', 'config_seo_ratingdesc', '', 0),
+(9303, 0, 'bro_conf', 'comment_enabled', '1', 0),
+(9265, 0, 'yandex_market', 'yandex_market_out_of_stock', '5', 0),
+(9264, 0, 'yandex_market', 'yandex_market_in_stock', '7', 0),
+(9263, 0, 'yandex_market', 'yandex_market_currency', 'RUB', 0),
+(9261, 0, 'yandex_market', 'yandex_market_company', '123', 0),
+(9262, 0, 'yandex_market', 'yandex_market_categories', '33,25,29,28,35,36,30,31,32,20,27,26,18,46,45,34,43,44,47,48,49,50,51,52,58,53,54,55,56,38,37,39,40,41,42,24,17,57', 0),
+(9260, 0, 'yandex_market', 'yandex_market_shopname', '123', 0),
+(9259, 0, 'yandex_market', 'yandex_market_status', '1', 0),
+(9744, 0, 'config', 'config_maintenance', '0', 0),
+(9301, 0, 'bro_conf', 'show_comment', 'on', 0),
+(9302, 0, 'bro_conf', 'required_phone', 'on', 0),
+(9743, 0, 'config', 'config_file_mime_allowed', 'text/plain\r\nimage/png\r\nimage/jpeg\r\nimage/gif\r\nimage/bmp\r\nimage/vnd.microsoft.icon\r\nimage/tiff\r\nimage/svg+xml\r\napplication/zip\r\napplication/x-rar-compressed\r\napplication/x-msdownload\r\napplication/vnd.ms-cab-compressed\r\naudio/mpeg\r\nvideo/quicktime\r\napplication/pdf\r\nimage/vnd.adobe.photoshop\r\napplication/postscript\r\napplication/msword\r\napplication/rtf\r\napplication/vnd.ms-excel\r\napplication/vnd.ms-powerpoint\r\napplication/vnd.oasis.opendocument.text\r\napplication/vnd.oasis.opendocument.spreadsheet', 0),
+(9738, 0, 'config', 'config_secure', '0', 0),
+(9739, 0, 'config', 'config_shared', '0', 0),
+(9740, 0, 'config', 'config_robots', 'abot\r\ndbot\r\nebot\r\nhbot\r\nkbot\r\nlbot\r\nmbot\r\nnbot\r\nobot\r\npbot\r\nrbot\r\nsbot\r\ntbot\r\nvbot\r\nybot\r\nzbot\r\nbot.\r\nbot/\r\n_bot\r\n.bot\r\n/bot\r\n-bot\r\n:bot\r\n(bot\r\ncrawl\r\nslurp\r\nspider\r\nseek\r\naccoona\r\nacoon\r\nadressendeutschland\r\nah-ha.com\r\nahoy\r\naltavista\r\nananzi\r\nanthill\r\nappie\r\narachnophilia\r\narale\r\naraneo\r\naranha\r\narchitext\r\naretha\r\narks\r\nasterias\r\natlocal\r\natn\r\natomz\r\naugurfind\r\nbackrub\r\nbannana_bot\r\nbaypup\r\nbdfetch\r\nbig brother\r\nbiglotron\r\nbjaaland\r\nblackwidow\r\nblaiz\r\nblog\r\nblo.\r\nbloodhound\r\nboitho\r\nbooch\r\nbradley\r\nbutterfly\r\ncalif\r\ncassandra\r\nccubee\r\ncfetch\r\ncharlotte\r\nchurl\r\ncienciaficcion\r\ncmc\r\ncollective\r\ncomagent\r\ncombine\r\ncomputingsite\r\ncsci\r\ncurl\r\ncusco\r\ndaumoa\r\ndeepindex\r\ndelorie\r\ndepspid\r\ndeweb\r\ndie blinde kuh\r\ndigger\r\nditto\r\ndmoz\r\ndocomo\r\ndownload express\r\ndtaagent\r\ndwcp\r\nebiness\r\nebingbong\r\ne-collector\r\nejupiter\r\nemacs-w3 search engine\r\nesther\r\nevliya celebi\r\nezresult\r\nfalcon\r\nfelix ide\r\nferret\r\nfetchrover\r\nfido\r\nfindlinks\r\nfireball\r\nfish search\r\nfouineur\r\nfunnelweb\r\ngazz\r\ngcreep\r\ngenieknows\r\ngetterroboplus\r\ngeturl\r\nglx\r\ngoforit\r\ngolem\r\ngrabber\r\ngrapnel\r\ngralon\r\ngriffon\r\ngromit\r\ngrub\r\ngulliver\r\nhamahakki\r\nharvest\r\nhavindex\r\nhelix\r\nheritrix\r\nhku www octopus\r\nhomerweb\r\nhtdig\r\nhtml index\r\nhtml_analyzer\r\nhtmlgobble\r\nhubater\r\nhyper-decontextualizer\r\nia_archiver\r\nibm_planetwide\r\nichiro\r\niconsurf\r\niltrovatore\r\nimage.kapsi.net\r\nimagelock\r\nincywincy\r\nindexer\r\ninfobee\r\ninformant\r\ningrid\r\ninktomisearch.com\r\ninspector web\r\nintelliagent\r\ninternet shinchakubin\r\nip3000\r\niron33\r\nisraeli-search\r\nivia\r\njack\r\njakarta\r\njavabee\r\njetbot\r\njumpstation\r\nkatipo\r\nkdd-explorer\r\nkilroy\r\nknowledge\r\nkototoi\r\nkretrieve\r\nlabelgrabber\r\nlachesis\r\nlarbin\r\nlegs\r\nlibwww\r\nlinkalarm\r\nlink validator\r\nlinkscan\r\nlockon\r\nlwp\r\nlycos\r\nmagpie\r\nmantraagent\r\nmapoftheinternet\r\nmarvin/\r\nmattie\r\nmediafox\r\nmediapartners\r\nmercator\r\nmerzscope\r\nmicrosoft url control\r\nminirank\r\nmiva\r\nmj12\r\nmnogosearch\r\nmoget\r\nmonster\r\nmoose\r\nmotor\r\nmultitext\r\nmuncher\r\nmuscatferret\r\nmwd.search\r\nmyweb\r\nnajdi\r\nnameprotect\r\nnationaldirectory\r\nnazilla\r\nncsa beta\r\nnec-meshexplorer\r\nnederland.zoek\r\nnetcarta webmap engine\r\nnetmechanic\r\nnetresearchserver\r\nnetscoop\r\nnewscan-online\r\nnhse\r\nnokia6682/\r\nnomad\r\nnoyona\r\nnutch\r\nnzexplorer\r\nobjectssearch\r\noccam\r\nomni\r\nopen text\r\nopenfind\r\nopenintelligencedata\r\norb search\r\nosis-project\r\npack rat\r\npageboy\r\npagebull\r\npage_verifier\r\npanscient\r\nparasite\r\npartnersite\r\npatric\r\npear.\r\npegasus\r\nperegrinator\r\npgp key agent\r\nphantom\r\nphpdig\r\npicosearch\r\npiltdownman\r\npimptrain\r\npinpoint\r\npioneer\r\npiranha\r\nplumtreewebaccessor\r\npogodak\r\npoirot\r\npompos\r\npoppelsdorf\r\npoppi\r\npopular iconoclast\r\npsycheclone\r\npublisher\r\npython\r\nrambler\r\nraven search\r\nroach\r\nroad runner\r\nroadhouse\r\nrobbie\r\nrobofox\r\nrobozilla\r\nrules\r\nsalty\r\nsbider\r\nscooter\r\nscoutjet\r\nscrubby\r\nsearch.\r\nsearchprocess\r\nsemanticdiscovery\r\nsenrigan\r\nsg-scout\r\nshai''hulud\r\nshark\r\nshopwiki\r\nsidewinder\r\nsift\r\nsilk\r\nsimmany\r\nsite searcher\r\nsite valet\r\nsitetech-rover\r\nskymob.com\r\nsleek\r\nsmartwit\r\nsna-\r\nsnappy\r\nsnooper\r\nsohu\r\nspeedfind\r\nsphere\r\nsphider\r\nspinner\r\nspyder\r\nsteeler/\r\nsuke\r\nsuntek\r\nsupersnooper\r\nsurfnomore\r\nsven\r\nsygol\r\nszukacz\r\ntach black widow\r\ntarantula\r\ntempleton\r\n/teoma\r\nt-h-u-n-d-e-r-s-t-o-n-e\r\ntheophrastus\r\ntitan\r\ntitin\r\ntkwww\r\ntoutatis\r\nt-rex\r\ntutorgig\r\ntwiceler\r\ntwisted\r\nucsd\r\nudmsearch\r\nurl check\r\nupdated\r\nvagabondo\r\nvalkyrie\r\nverticrawl\r\nvictoria\r\nvision-search\r\nvolcano\r\nvoyager/\r\nvoyager-hc\r\nw3c_validator\r\nw3m2\r\nw3mir\r\nwalker\r\nwallpaper\r\nwanderer\r\nwauuu\r\nwavefire\r\nweb core\r\nweb hopper\r\nweb wombat\r\nwebbandit\r\nwebcatcher\r\nwebcopy\r\nwebfoot\r\nweblayers\r\nweblinker\r\nweblog monitor\r\nwebmirror\r\nwebmonkey\r\nwebquest\r\nwebreaper\r\nwebsitepulse\r\nwebsnarf\r\nwebstolperer\r\nwebvac\r\nwebwalk\r\nwebwatch\r\nwebwombat\r\nwebzinger\r\nwhizbang\r\nwhowhere\r\nwild ferret\r\nworldlight\r\nwwwc\r\nwwwster\r\nxenu\r\nxget\r\nxift\r\nxirq\r\nyandex\r\nyanga\r\nyeti\r\nyodao\r\nzao\r\nzippp\r\nzyborg', 0),
+(8486, 0, 'qv_ch', 'status', '1', 0),
+(8485, 0, 'qv_ch', 'config_conf_disp', '1', 0),
+(8484, 0, 'qv_ch', 'config_co_disp', '0', 0),
+(8483, 0, 'qv_ch', 'config_post_req', '0', 0),
+(8482, 0, 'qv_ch', 'config_post_disp', '0', 0),
+(8481, 0, 'qv_ch', 'config_city_req', '0', 0),
+(8480, 0, 'qv_ch', 'config_city_disp', '0', 0),
+(8479, 0, 'qv_ch', 'config_addr2_req', '1', 0),
+(8478, 0, 'qv_ch', 'config_addr2_disp', '0', 0),
+(8477, 0, 'qv_ch', 'config_addr_req', '0', 0),
+(8476, 0, 'qv_ch', 'config_addr_disp', '0', 0),
+(8475, 0, 'qv_ch', 'config_comp_req', '0', 0),
+(8474, 0, 'qv_ch', 'config_comp_disp', '0', 0),
+(8473, 0, 'qv_ch', 'config_fax_req', '0', 0),
+(8472, 0, 'qv_ch', 'config_fax_disp', '0', 0),
+(8471, 0, 'qv_ch', 'config_tel_req', '0', 0),
+(8470, 0, 'qv_ch', 'config_tel_disp', '1', 0),
+(8469, 0, 'qv_ch', 'config_lastname_req', '0', 0),
+(8468, 0, 'qv_ch', 'config_lastname_disp', '1', 0),
+(8467, 0, 'qv_ch', 'config_firstname_req', '1', 0),
+(8466, 0, 'qv_ch', 'config_firstname_disp', '1', 0),
 (5164, 0, 'featured', 'product', '', 0),
 (8281, 0, 'smart_menu', 'smart_menu_module', 'a:1:{i:0;a:5:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"config";a:5:{s:10:"color_Main";s:7:"#ffffff";s:9:"text_main";s:7:"#000000";s:9:"color_sub";s:7:"#3B5998";s:8:"Text_sub";s:7:"#feef7c";s:10:"Active_cat";s:7:"#d7141d";}s:6:"status";s:1:"1";s:10:"sort_order";s:1:"2";}}', 1),
-(8265, 0, 'config', 'config_fraud_status_id', '7', 0),
-(8264, 0, 'config', 'config_fraud_score', '', 0),
-(8263, 0, 'config', 'config_fraud_key', '', 0),
-(8262, 0, 'config', 'config_fraud_detection', '0', 0),
-(8261, 0, 'config', 'config_alert_emails', '', 0),
-(8260, 0, 'config', 'config_account_mail', '0', 0),
-(8259, 0, 'config', 'config_alert_mail', '0', 0),
-(8258, 0, 'config', 'config_smtp_timeout', '5', 0),
-(8257, 0, 'config', 'config_smtp_port', '25', 0),
-(8256, 0, 'config', 'config_smtp_password', '', 0),
-(8255, 0, 'config', 'config_smtp_username', '', 0),
-(8254, 0, 'config', 'config_smtp_host', '', 0),
-(8253, 0, 'config', 'config_mail_parameter', '', 0),
-(8252, 0, 'config', 'config_mail_protocol', 'mail', 0),
-(8251, 0, 'config', 'config_ftp_status', '0', 0),
-(8250, 0, 'config', 'config_ftp_root', '', 0),
-(8249, 0, 'config', 'config_ftp_password', '', 0),
-(8248, 0, 'config', 'config_ftp_username', '', 0),
-(8246, 0, 'config', 'config_ftp_host', '', 0),
-(8247, 0, 'config', 'config_ftp_port', '', 0),
-(8245, 0, 'config', 'config_image_cart_height', '47', 0),
-(8244, 0, 'config', 'config_image_cart_width', '47', 0),
-(8243, 0, 'config', 'config_image_wishlist_height', '47', 0),
-(8242, 0, 'config', 'config_image_wishlist_width', '47', 0),
 (8290, 0, 'newslettersubscribe', 'newslettersubscribe_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"5";}}', 1),
 (8288, 0, 'newslettersubscribe', 'newslettersubscribe_option_field', '4', 0),
 (8289, 0, 'newslettersubscribe', 'newslettersubscribe_option_field1', 'Спешите подписаться и получить скидку !', 0),
@@ -3637,7 +2773,6 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (8285, 0, 'newslettersubscribe', 'newslettersubscribe_mail_status', '1', 0),
 (8284, 0, 'newslettersubscribe', 'option_unsubscribe', '0', 0),
 (8282, 0, 'filters', 'filters_module', 'a:1:{i:1;a:4:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"3";}}', 1),
-(8241, 0, 'config', 'config_image_compare_height', '90', 0),
 (5303, 0, 'bank_transfer', 'bank_transfer_bank_1', 'test en', 0),
 (5304, 0, 'bank_transfer', 'bank_transfer_bank_2', 'test ru', 0),
 (5305, 0, 'bank_transfer', 'bank_transfer_bank_3', 'test ua', 0),
@@ -3646,94 +2781,133 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (5308, 0, 'bank_transfer', 'bank_transfer_geo_zone_id', '0', 0),
 (5309, 0, 'bank_transfer', 'bank_transfer_status', '1', 0),
 (5310, 0, 'bank_transfer', 'bank_transfer_sort_order', '3', 0),
-(8295, 0, 'bro_conf', 'filter_stock', '1', 0),
-(8294, 0, 'bro_conf', 'filter_attr', '0', 0),
-(8293, 0, 'bro_conf', 'filter_opt', '1', 0),
-(8291, 0, 'bro_conf', 'homepage_sound', '0', 0),
-(8292, 0, 'bro_conf', 'filter_man', '1', 0),
-(8240, 0, 'config', 'config_image_compare_width', '90', 0),
-(8239, 0, 'config', 'config_image_related_height', '80', 0),
-(8238, 0, 'config', 'config_image_related_width', '80', 0),
-(8237, 0, 'config', 'config_image_additional_height', '74', 0),
-(8236, 0, 'config', 'config_image_additional_width', '74', 0),
-(8234, 0, 'config', 'config_image_product_width', '160', 0),
-(8235, 0, 'config', 'config_image_product_height', '160', 0),
-(8233, 0, 'config', 'config_image_popup_height', '500', 0),
-(8232, 0, 'config', 'config_image_popup_width', '500', 0),
-(8231, 0, 'config', 'config_image_thumb_height', '228', 0),
-(8230, 0, 'config', 'config_image_thumb_width', '228', 0),
-(8229, 0, 'config', 'config_image_category_height', '80', 0),
-(8228, 0, 'config', 'config_image_category_width', '80', 0),
-(8226, 0, 'config', 'config_logo', 'data/logo.png', 0),
-(8227, 0, 'config', 'config_icon', 'data/1391561754_shopping_cart.png', 0),
-(8225, 0, 'config', 'config_return_status_id', '2', 0),
-(8224, 0, 'config', 'config_return_id', '5', 0),
-(8223, 0, 'config', 'config_commission', '5', 0),
-(8222, 0, 'config', 'config_affiliate_id', '4', 0),
-(8221, 0, 'config', 'config_stock_status_id', '5', 0),
-(8220, 0, 'config', 'config_stock_checkout', '1', 0),
-(8219, 0, 'config', 'config_stock_warning', '1', 0),
-(8218, 0, 'config', 'config_stock_display', '1', 0),
-(8217, 0, 'config', 'config_complete_status_id', '5', 0),
-(8216, 0, 'config', 'config_order_status_id', '1', 0),
-(8215, 0, 'config', 'config_invoice_prefix', 'ЗАКАЗ_№-2014-01', 0),
-(8214, 0, 'config', 'config_order_edit', '100', 0),
-(8213, 0, 'config', 'config_checkout_id', '5', 0),
-(8212, 0, 'config', 'config_guest_checkout', '1', 0),
-(8211, 0, 'config', 'config_cart_weight', '0', 0),
-(8210, 0, 'config', 'config_account_id', '3', 0),
-(8208, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
-(8209, 0, 'config', 'config_customer_price', '0', 0),
-(8207, 0, 'config', 'config_customer_group_id', '1', 0),
-(8206, 0, 'config', 'config_customer_online', '0', 0),
-(8205, 0, 'config', 'config_tax_customer', 'shipping', 0),
-(8204, 0, 'config', 'config_tax_default', 'payment', 0),
-(8203, 0, 'config', 'config_vat', '0', 0),
-(8202, 0, 'config', 'config_tax', '0', 0),
-(8201, 0, 'config', 'config_voucher_max', '1000', 0),
-(8200, 0, 'config', 'config_voucher_min', '1', 0),
-(8199, 0, 'config', 'config_download', '1', 0),
-(8198, 0, 'config', 'config_review_status', '1', 0),
-(8197, 0, 'config', 'config_product_count', '0', 0),
-(8196, 0, 'config', 'config_admin_limit', '40', 0),
-(8195, 0, 'config', 'config_catalog_limit', '15', 0),
-(8194, 0, 'config', 'config_weight_class_id', '1', 0),
-(8193, 0, 'config', 'config_length_class_id', '1', 0),
-(8192, 0, 'config', 'config_currency_auto', '0', 0),
-(8191, 0, 'config', 'config_currency', 'RUB', 0),
-(8190, 0, 'config', 'config_admin_language', 'ru', 0),
-(8189, 0, 'config', 'config_language', 'ru', 0),
-(8188, 0, 'config', 'config_zone_id', '3493', 0),
-(8187, 0, 'config', 'config_country_id', '220', 0),
-(8186, 0, 'config', 'config_layout_id', '4', 0),
-(8185, 0, 'config', 'config_template', 'default', 0),
-(8184, 0, 'config', 'config_meta_keywords', 'My Store, BROcart, Opencart, Купить в Росии', 0),
-(8183, 0, 'config', 'config_meta_description', 'Мой магазин', 0),
-(8182, 0, 'config', 'config_title', 'Мой Магазин', 0),
-(8181, 0, 'config', 'config_fax', '', 0),
-(8180, 0, 'config', 'config_telephone', '123456789', 0),
-(8179, 0, 'config', 'config_email', 'baco@mail.ua', 0),
-(8178, 0, 'config', 'config_address', 'Address 1', 0),
-(8177, 0, 'config', 'config_owner', 'Your Name', 0),
-(8176, 0, 'config', 'config_name', 'Your Store', 0);
+(9300, 0, 'bro_conf', 'required_name', 'on', 0),
+(9299, 0, 'bro_conf', 'show_name', 'on', 0),
+(9298, 0, 'bro_conf', 'config_top_image', 'data/demo/back-to-top.png', 0),
+(9741, 0, 'config', 'config_seo_url', '1', 0),
+(9742, 0, 'config', 'config_file_extension_allowed', 'txt\r\npng\r\njpe\r\njpeg\r\njpg\r\ngif\r\nbmp\r\nico\r\ntiff\r\ntif\r\nsvg\r\nsvgz\r\nzip\r\nrar\r\nmsi\r\ncab\r\nmp3\r\nqt\r\nmov\r\npdf\r\npsd\r\nai\r\neps\r\nps\r\ndoc\r\nrtf\r\nxls\r\nppt\r\nodt\r\nods', 0),
+(9737, 0, 'config', 'config_fraud_status_id', '7', 0),
+(9736, 0, 'config', 'config_fraud_score', '', 0),
+(9735, 0, 'config', 'config_fraud_key', '', 0),
+(9734, 0, 'config', 'config_fraud_detection', '0', 0),
+(9733, 0, 'config', 'config_alert_emails', '', 0),
+(9732, 0, 'config', 'config_account_mail', '0', 0),
+(9731, 0, 'config', 'config_alert_mail', '0', 0),
+(9730, 0, 'config', 'config_smtp_timeout', '5', 0),
+(9729, 0, 'config', 'config_smtp_port', '25', 0),
+(9728, 0, 'config', 'config_smtp_password', '', 0),
+(9727, 0, 'config', 'config_smtp_username', '', 0),
+(9726, 0, 'config', 'config_smtp_host', '', 0),
+(9725, 0, 'config', 'config_mail_parameter', '', 0),
+(9724, 0, 'config', 'config_mail_protocol', 'mail', 0),
+(9723, 0, 'config', 'config_ftp_status', '0', 0),
+(9722, 0, 'config', 'config_ftp_root', '', 0),
+(9721, 0, 'config', 'config_ftp_password', '', 0),
+(9720, 0, 'config', 'config_ftp_username', '', 0),
+(9719, 0, 'config', 'config_ftp_port', '21', 0),
+(9718, 0, 'config', 'config_ftp_host', 'demo.brocart.net', 0),
+(9717, 0, 'config', 'config_image_cart_height', '47', 0),
+(9716, 0, 'config', 'config_image_cart_width', '47', 0),
+(9715, 0, 'config', 'config_image_wishlist_height', '47', 0),
+(9714, 0, 'config', 'config_image_wishlist_width', '47', 0),
+(9713, 0, 'config', 'config_image_compare_height', '90', 0),
+(9712, 0, 'config', 'config_image_compare_width', '90', 0),
+(9711, 0, 'config', 'config_image_related_height', '80', 0),
+(9710, 0, 'config', 'config_image_related_width', '80', 0),
+(9709, 0, 'config', 'config_image_additional_height', '74', 0),
+(9708, 0, 'config', 'config_image_additional_width', '74', 0),
+(9707, 0, 'config', 'config_image_product_height', '160', 0),
+(9706, 0, 'config', 'config_image_product_width', '160', 0),
+(9705, 0, 'config', 'config_image_popup_height', '500', 0),
+(9704, 0, 'config', 'config_image_popup_width', '500', 0),
+(9703, 0, 'config', 'config_image_thumb_height', '228', 0),
+(9702, 0, 'config', 'config_image_thumb_width', '228', 0),
+(9701, 0, 'config', 'config_image_category_height', '80', 0),
+(9700, 0, 'config', 'config_image_category_width', '80', 0),
+(9699, 0, 'config', 'config_icon', 'data/1391561754_shopping_cart.png', 0),
+(9698, 0, 'config', 'config_logo', 'data/logo.png', 0),
+(9697, 0, 'config', 'config_return_status_id', '2', 0),
+(9696, 0, 'config', 'config_return_id', '5', 0),
+(9695, 0, 'config', 'config_commission', '5', 0),
+(9694, 0, 'config', 'config_affiliate_id', '4', 0),
+(9690, 0, 'config', 'config_stock_display', '1', 0),
+(9691, 0, 'config', 'config_stock_warning', '1', 0),
+(9693, 0, 'config', 'config_stock_status_id', '5', 0),
+(9692, 0, 'config', 'config_stock_checkout', '1', 0),
+(9689, 0, 'config', 'config_cancel_status_id', '1', 0),
+(9688, 0, 'config', 'config_complete_status_id', '5', 0),
+(9687, 0, 'config', 'config_order_status_id', '1', 0),
+(9685, 0, 'config', 'config_order_edit', '100', 0),
+(9686, 0, 'config', 'config_invoice_prefix', 'ЗАКАЗ_№-2014-01', 0),
+(9684, 0, 'config', 'config_checkout_id', '5', 0),
+(9683, 0, 'config', 'config_guest_checkout', '1', 0),
+(9682, 0, 'config', 'config_cart_weight', '0', 0),
+(9681, 0, 'config', 'config_account_id', '3', 0),
+(9680, 0, 'config', 'config_customer_price', '0', 0),
+(9678, 0, 'config', 'config_customer_group_id', '1', 0),
+(9679, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:"1";}', 1),
+(9677, 0, 'config', 'config_customer_online', '0', 0),
+(9676, 0, 'config', 'config_tax_customer', 'shipping', 0),
+(9675, 0, 'config', 'config_tax_default', 'payment', 0),
+(9674, 0, 'config', 'config_vat', '0', 0),
+(9673, 0, 'config', 'config_tax', '0', 0),
+(9672, 0, 'config', 'config_voucher_max', '1000', 0),
+(9671, 0, 'config', 'config_voucher_min', '1', 0),
+(9670, 0, 'config', 'config_download', '1', 0),
+(9669, 0, 'config', 'config_review_status', '1', 0),
+(9668, 0, 'config', 'config_product_count', '0', 0),
+(9667, 0, 'config', 'config_admin_limit', '40', 0),
+(9666, 0, 'config', 'config_catalog_limit', '5', 0),
+(9665, 0, 'config', 'config_weight_class_id', '1', 0),
+(9664, 0, 'config', 'config_length_class_id', '1', 0),
+(9659, 0, 'config', 'config_zone_id', '3493', 0),
+(9663, 0, 'config', 'config_currency_auto', '0', 0),
+(9662, 0, 'config', 'config_currency', 'UAH', 0),
+(9661, 0, 'config', 'config_admin_language', 'ru', 0),
+(9660, 0, 'config', 'config_language', 'ru', 0),
+(9658, 0, 'config', 'config_country_id', '220', 0),
+(9657, 0, 'config', 'config_layout_id', '4', 0),
+(9656, 0, 'config', 'config_template', 'default', 0),
+(9651, 0, 'config', 'main_title', 'a:3:{i:1;s:27:"Заголовок англ";i:2;s:25:"Заголовок рус";i:3;s:25:"Заголовок укр";}', 1),
+(9655, 0, 'config', 'main_desc', 'a:3:{i:1;s:30:"&lt;p&gt;&amp;amp;&lt;/p&gt;\r\n";i:2;s:30:"&lt;p&gt;&amp;amp;&lt;/p&gt;\r\n";i:3;s:30:"&lt;p&gt;&amp;amp;&lt;/p&gt;\r\n";}', 1),
+(9654, 0, 'config', 'main_meta_keyw', 'a:3:{i:1;s:33:"Мета-тег Keywords англ";i:2;s:30:"Мета-тег Keyword рус";i:3;s:31:"Мета-тег Keywords укр";}', 1),
+(9653, 0, 'config', 'main_meta_desc', 'a:3:{i:1;s:36:"Мета-тег Description англ";i:2;s:34:"Мета-тег Description рус";i:3;s:34:"Мета-тег Description укр";}', 1),
+(9652, 0, 'config', 'main_h1', 'a:3:{i:1;s:0:"";i:2;s:0:"";i:3;s:0:"";}', 1),
+(9650, 0, 'config', 'config_fax', '', 0),
+(9649, 0, 'config', 'config_telephone', '+123456789', 0),
+(9297, 0, 'bro_conf', 'config_to_top', '1', 0),
+(9296, 0, 'bro_conf', 'categ_disp', '1', 0),
+(9295, 0, 'bro_conf', 'filter_stock', '1', 0),
+(9294, 0, 'bro_conf', 'filter_attr', '1', 0),
+(9293, 0, 'bro_conf', 'filter_opt', '1', 0),
+(8465, 0, 'productcomments', 'pcconf_enable_customer_captcha', '1', 0),
+(8501, 0, 'qv_ch', 'address_2_status', '0', 0),
+(8502, 0, 'qv_ch', 'address_2_required', '0', 0),
+(8503, 0, 'qv_ch', 'city_status', '0', 0),
+(8504, 0, 'qv_ch', 'city_required', '0', 0),
+(8505, 0, 'qv_ch', 'postcode_status', '0', 0),
+(8506, 0, 'qv_ch', 'postcode_required', '0', 0),
+(8507, 0, 'qv_ch', 'country_status', '1', 0),
+(8508, 0, 'qv_ch', 'country_required', '0', 0),
+(9292, 0, 'bro_conf', 'filter_man', '1', 0),
+(9291, 0, 'bro_conf', 'homepage_sound', '1', 0),
+(8537, 0, 'gallery', 'gallery_status', '1', 0),
+(8538, 0, 'gallery', 'config_gallery_thumb_width', '100', 0),
+(8539, 0, 'gallery', 'config_gallery_thumb_height', '100', 0),
+(8540, 0, 'gallery', 'config_gallery_popup_width', '400', 0),
+(8541, 0, 'gallery', 'config_gallery_popup_height', '400', 0),
+(8542, 0, 'gallery', 'config_gallery_limit', '20', 0),
+(9648, 0, 'config', 'config_email', 'test@test.ua', 0),
+(9647, 0, 'config', 'config_address', 'Address 1', 0),
+(9646, 0, 'config', 'config_owner', 'Your Name', 0),
+(9645, 0, 'config', 'config_name', 'Your Store', 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_stock_status`
---
-
-DROP TABLE IF EXISTS `oc_stock_status`;
 CREATE TABLE IF NOT EXISTS `oc_stock_status` (
   `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`stock_status_id`,`language_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- Дамп данных таблицы `oc_stock_status`
---
 
 INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 (7, 2, 'В наличии'),
@@ -3749,13 +2923,6 @@ INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 (5, 3, 'Нема на складі'),
 (8, 3, 'Передзамовлення');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_store`
---
-
-DROP TABLE IF EXISTS `oc_store`;
 CREATE TABLE IF NOT EXISTS `oc_store` (
   `store_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -3764,13 +2931,6 @@ CREATE TABLE IF NOT EXISTS `oc_store` (
   PRIMARY KEY (`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_subscribe`
---
-
-DROP TABLE IF EXISTS `oc_subscribe`;
 CREATE TABLE IF NOT EXISTS `oc_subscribe` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email_id` varchar(225) NOT NULL,
@@ -3778,25 +2938,8 @@ CREATE TABLE IF NOT EXISTS `oc_subscribe` (
   `option1` varchar(225) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Index_2` (`email_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
---
--- Дамп данных таблицы `oc_subscribe`
---
-
-INSERT INTO `oc_subscribe` (`id`, `email_id`, `name`, `option1`) VALUES
-(2, 'dasfg@sdgf.dsf', 'afsdf', '2222'),
-(3, 'sadfg@dsfg.fg', 'sdgf', '2222'),
-(4, 'fgsdg@mhgf.fd', '', '2222'),
-(5, 'ama@yandex.ru', 'Валентин', '2222');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_tab`
---
-
-DROP TABLE IF EXISTS `oc_tab`;
 CREATE TABLE IF NOT EXISTS `oc_tab` (
   `tab_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(3) NOT NULL,
@@ -3804,22 +2947,13 @@ CREATE TABLE IF NOT EXISTS `oc_tab` (
   `position` tinyint(1) NOT NULL DEFAULT '1',
   `show_empty` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tab_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `oc_tab`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 INSERT INTO `oc_tab` (`tab_id`, `sort_order`, `status`, `position`, `show_empty`) VALUES
-(1, 3, 1, 3, 0);
+(1, 3, 1, 4, 0),
+(2, 2, 1, 5, 0),
+(3, 1, 1, 1, 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_tab_description`
---
-
-DROP TABLE IF EXISTS `oc_tab_description`;
 CREATE TABLE IF NOT EXISTS `oc_tab_description` (
   `tab_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -3827,22 +2961,17 @@ CREATE TABLE IF NOT EXISTS `oc_tab_description` (
   PRIMARY KEY (`tab_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_tab_description`
---
-
 INSERT INTO `oc_tab_description` (`tab_id`, `language_id`, `name`) VALUES
 (1, 2, 'Вкладка'),
+(1, 3, 'Закладка'),
 (1, 1, 'Тab'),
-(1, 3, 'Закладка');
+(2, 1, 'rot'),
+(2, 2, 'rot'),
+(2, 3, 'rot'),
+(3, 1, 'nmn'),
+(3, 2, 'mnkn'),
+(3, 3, 'nknmm');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_tax_class`
---
-
-DROP TABLE IF EXISTS `oc_tax_class`;
 CREATE TABLE IF NOT EXISTS `oc_tax_class` (
   `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(32) NOT NULL,
@@ -3852,21 +2981,10 @@ CREATE TABLE IF NOT EXISTS `oc_tax_class` (
   PRIMARY KEY (`tax_class_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
---
--- Дамп данных таблицы `oc_tax_class`
---
-
 INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`, `date_modified`) VALUES
 (9, 'Taxable Goods', 'Taxed Stuff', '2009-01-06 23:21:53', '2011-09-23 14:07:50'),
 (10, 'Downloadable Products', 'Downloadable', '2011-09-21 22:19:39', '2011-09-22 10:27:36');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_tax_rate`
---
-
-DROP TABLE IF EXISTS `oc_tax_rate`;
 CREATE TABLE IF NOT EXISTS `oc_tax_rate` (
   `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,
   `geo_zone_id` int(11) NOT NULL DEFAULT '0',
@@ -3878,42 +2996,20 @@ CREATE TABLE IF NOT EXISTS `oc_tax_rate` (
   PRIMARY KEY (`tax_rate_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
 
---
--- Дамп данных таблицы `oc_tax_rate`
---
-
 INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`, `date_added`, `date_modified`) VALUES
 (86, 3, 'VAT (17.5%)', '17.5000', 'P', '2011-03-09 21:17:10', '2011-09-22 22:24:29'),
 (87, 3, 'Eco Tax (-2.00)', '2.0000', 'F', '2011-09-21 21:49:23', '2011-09-23 00:40:19');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_tax_rate_to_customer_group`
---
-
-DROP TABLE IF EXISTS `oc_tax_rate_to_customer_group`;
 CREATE TABLE IF NOT EXISTS `oc_tax_rate_to_customer_group` (
   `tax_rate_id` int(11) NOT NULL,
   `customer_group_id` int(11) NOT NULL,
   PRIMARY KEY (`tax_rate_id`,`customer_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `oc_tax_rate_to_customer_group`
---
-
 INSERT INTO `oc_tax_rate_to_customer_group` (`tax_rate_id`, `customer_group_id`) VALUES
 (86, 1),
 (87, 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_tax_rule`
---
-
-DROP TABLE IF EXISTS `oc_tax_rule`;
 CREATE TABLE IF NOT EXISTS `oc_tax_rule` (
   `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,
   `tax_class_id` int(11) NOT NULL,
@@ -3923,23 +3019,12 @@ CREATE TABLE IF NOT EXISTS `oc_tax_rule` (
   PRIMARY KEY (`tax_rule_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=129 ;
 
---
--- Дамп данных таблицы `oc_tax_rule`
---
-
 INSERT INTO `oc_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`, `priority`) VALUES
 (121, 10, 86, 'payment', 1),
 (120, 10, 87, 'store', 0),
 (128, 9, 86, 'shipping', 1),
 (127, 9, 87, 'shipping', 2);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_translate`
---
-
-DROP TABLE IF EXISTS `oc_translate`;
 CREATE TABLE IF NOT EXISTS `oc_translate` (
   `translation_id` int(11) NOT NULL AUTO_INCREMENT,
   `interface` varchar(32) NOT NULL,
@@ -3953,10 +3038,6 @@ CREATE TABLE IF NOT EXISTS `oc_translate` (
   KEY `path` (`interface`,`directory`,`filename`),
   FULLTEXT KEY `value` (`value`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
-
---
--- Дамп данных таблицы `oc_translate`
---
 
 INSERT INTO `oc_translate` (`translation_id`, `interface`, `directory`, `filename`, `key`, `value`, `original`) VALUES
 (1, 'admin', 'russian', 'le/le', 'text_customer_field', 'text_customer_field', NULL),
@@ -3982,86 +3063,75 @@ INSERT INTO `oc_translate` (`translation_id`, `interface`, `directory`, `filenam
 (21, 'admin', 'russian', 'extension/shipping', 'text_confirm', 'Подтвердить', NULL),
 (22, 'admin', 'ukrainian', 'extension/shipping', 'text_confirm', 'Підтвердити', NULL);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_url_alias`
---
-
-DROP TABLE IF EXISTS `oc_url_alias`;
 CREATE TABLE IF NOT EXISTS `oc_url_alias` (
   `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   `seo_mod` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`url_alias_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=959 ;
-
---
--- Дамп данных таблицы `oc_url_alias`
---
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=975 ;
 
 INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`, `seo_mod`) VALUES
-(704, 'product_id=48', '48-ipod-classic', 0),
-(938, 'category_id=20', '20-desktops', 0),
-(503, 'category_id=26', '26-pc', 0),
-(888, 'category_id=27', '27-mac', 0),
+(972, 'product_id=48', 'ipod-classic', 0),
+(938, 'category_id=20', 'desktops', 0),
+(503, 'category_id=26', 'pc', 0),
+(888, 'category_id=27', 'mac', 0),
 (929, 'manufacturer_id=8', 'apple', 0),
 (872, 'information_id=4', 'about-us', 0),
-(767, 'category_id=34', '34-mp3-players', 0),
-(536, 'category_id=36', '36-test-2', 0),
+(767, 'category_id=34', 'mp3-players', 0),
+(536, 'category_id=36', 'test-2', 0),
 (906, 'account/login', 'login', 1),
 (900, 'account/voucher', 'voucher', 0),
 (873, 'information_id=6', 'delivery-information', 0),
 (889, 'information/gallery', 'gallery', 0),
-(881, 'category_id=33', '33-cameras', 0),
-(933, 'product_id=30', '30-canon-eos-544453', 0),
-(781, 'product_id=35', '35-product-8', 0),
-(930, 'product_id=40', '40-iphone', 0),
-(939, 'product_id=28', '28-htc-touch-hd', 0),
-(919, 'product_id=44', '44-macbook-air', 0),
-(785, 'product_id=45', '45-macbook-pro', 0),
-(786, 'product_id=29', '29-palm-treo-pro', 0),
-(787, 'product_id=36', '36-ipod-nano', 0),
-(899, 'product_id=46', '46-sony-vaio', 0),
-(896, 'product_id=47', '47-hp-lp3065', 0),
-(790, 'product_id=32', '32-ipod-touch', 0),
-(935, 'product_id=41', '41-imac', 0),
-(956, 'product_id=33', '33-samsung-syncmaster-941bw', 0),
-(894, 'product_id=31', '31-nikon-d300', 0),
-(796, 'product_id=49', '49-samsung-galaxy-tab-10-1', 0),
-(936, 'category_id=28', '28-monitors', 0),
-(798, 'category_id=32', '32-web-cameras', 0),
-(799, 'category_id=31', '31-scanners', 0),
-(800, 'category_id=30', '30-printers', 0),
-(801, 'category_id=29', '29-mice-and-trackballs', 0),
-(802, 'category_id=17', '17-software', 0),
-(803, 'category_id=25', '25-components', 0),
-(921, 'category_id=24', '24-phones--pdas', 0),
-(805, 'category_id=35', '35-test-1', 0),
-(806, 'category_id=37', '37-test-5', 0),
-(807, 'category_id=38', '38-test-4', 0),
-(808, 'category_id=39', '39-test-6', 0),
-(809, 'category_id=40', '40-test-7', 0),
-(810, 'category_id=41', '41-test-8', 0),
-(811, 'category_id=42', '42-test-9', 0),
-(812, 'category_id=43', '43-test-11', 0),
-(949, 'category_id=18', '18-laptops--notebooks', 0),
-(814, 'category_id=44', '44-test-12', 0),
-(815, 'category_id=45', '45-windows', 0),
-(816, 'category_id=46', '46-macs', 0),
-(817, 'category_id=47', '47-test-15', 0),
-(818, 'category_id=48', '48-test-16', 0),
-(819, 'category_id=49', '49-test-17', 0),
-(820, 'category_id=50', '50-test-18', 0),
-(821, 'category_id=51', '51-test-19', 0),
-(940, 'product_id=34', '34-ipod-shuffle', 0),
-(823, 'category_id=53', '53-test-21', 0),
-(824, 'category_id=54', '54-test-22', 0),
-(825, 'category_id=55', '55-test-23', 0),
-(826, 'category_id=56', '56-test-24', 0),
-(827, 'category_id=57', '57-tablets', 0),
-(828, 'category_id=58', '58-test-25', 0),
+(881, 'category_id=33', 'cameras', 0),
+(968, 'product_id=30', 'canon-eos-544453', 0),
+(781, 'product_id=35', 'product-8', 0),
+(974, 'product_id=40', 'iphone', 0),
+(939, 'product_id=28', 'htc-touch-hd', 0),
+(919, 'product_id=44', 'macbook-air', 0),
+(785, 'product_id=45', 'macbook-pro', 0),
+(786, 'product_id=29', 'palm-treo-pro', 0),
+(787, 'product_id=36', 'ipod-nano', 0),
+(899, 'product_id=46', 'sony-vaio', 0),
+(896, 'product_id=47', 'hp-lp3065', 0),
+(790, 'product_id=32', 'ipod-touch', 0),
+(935, 'product_id=41', 'imac', 0),
+(956, 'product_id=33', 'samsung-syncmaster-941bw', 0),
+(894, 'product_id=31', 'nikon-d300', 0),
+(796, 'product_id=49', 'samsung-galaxy-tab-10-1', 0),
+(936, 'category_id=28', 'monitors', 0),
+(798, 'category_id=32', 'web-cameras', 0),
+(799, 'category_id=31', 'scanners', 0),
+(800, 'category_id=30', 'printers', 0),
+(801, 'category_id=29', 'mice-and-trackballs', 0),
+(802, 'category_id=17', 'software', 0),
+(803, 'category_id=25', 'components', 0),
+(921, 'category_id=24', 'phones--pdas', 0),
+(805, 'category_id=35', 'test-1', 0),
+(806, 'category_id=37', 'test-5', 0),
+(807, 'category_id=38', 'test-4', 0),
+(808, 'category_id=39', 'test-6', 0),
+(809, 'category_id=40', 'test-7', 0),
+(810, 'category_id=41', 'test-8', 0),
+(811, 'category_id=42', 'test-9', 0),
+(812, 'category_id=43', 'test-11', 0),
+(949, 'category_id=18', 'laptops--notebooks', 0),
+(814, 'category_id=44', 'test-12', 0),
+(815, 'category_id=45', 'windows', 0),
+(816, 'category_id=46', 'macs', 0),
+(817, 'category_id=47', 'test-15', 0),
+(818, 'category_id=48', 'test-16', 0),
+(819, 'category_id=49', 'test-17', 0),
+(820, 'category_id=50', 'test-18', 0),
+(821, 'category_id=51', 'test-19', 0),
+(940, 'product_id=34', 'ipod-shuffle', 0),
+(823, 'category_id=53', 'test-21', 0),
+(824, 'category_id=54', 'test-22', 0),
+(825, 'category_id=55', 'test-23', 0),
+(826, 'category_id=56', 'test-24', 0),
+(827, 'category_id=57', 'tablets', 0),
+(828, 'category_id=58', 'test-25', 0),
 (829, 'common/home', '', 0),
 (830, 'account/wishlist', 'wishlist', 0),
 (831, 'account/account', 'my-account', 0),
@@ -4097,9 +3167,8 @@ INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`, `seo_mod`) VALUE
 (863, 'affiliate/register', 'create-affiliate-account', 0),
 (864, 'affiliate/login', 'affiliate-login', 0),
 (865, 'product/special', 'special', 0),
-(879, 'gallery_id=1', '123', 0),
-(932, 'product_id=43', '43-macbook', 0),
-(950, 'product_id=42', '42-apple-cine4ma-30-', 0),
+(932, 'product_id=43', 'macbook', 0),
+(950, 'product_id=42', 'apple-cine4ma-30-', 0),
 (908, 'gallery_id=2', 'tested-galery', 0),
 (909, 'checkout/success', 'success', 1),
 (931, 'manufacturer_id=9', 'canon', 0),
@@ -4108,15 +3177,11 @@ INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`, `seo_mod`) VALUE
 (944, 'manufacturer_id=7', 'hewlett-packard', 0),
 (945, 'manufacturer_id=10', 'sony', 0),
 (946, 'information_id=3', 'privacy-policy', 0),
-(954, 'information_id=5', 'terms--conditions', 0);
+(954, 'information_id=5', 'terms--conditions', 0),
+(959, 'category_id=52', 'test-20', 0),
+(961, 'gallery_id=1', '123-ntc', 0),
+(963, 'gallery_id=3', '1234567', 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_user`
---
-
-DROP TABLE IF EXISTS `oc_user`;
 CREATE TABLE IF NOT EXISTS `oc_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
@@ -4131,14 +3196,8 @@ CREATE TABLE IF NOT EXISTS `oc_user` (
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
-
---
--- Структура таблицы `oc_user_group`
---
-
-DROP TABLE IF EXISTS `oc_user_group`;
 CREATE TABLE IF NOT EXISTS `oc_user_group` (
   `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -4146,21 +3205,10 @@ CREATE TABLE IF NOT EXISTS `oc_user_group` (
   PRIMARY KEY (`user_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
---
--- Дамп данных таблицы `oc_user_group`
---
-
 INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', 'a:2:{s:6:"access";a:150:{i:0;s:29:"LanguageEditor/LanguageEditor";i:1;s:17:"catalog/attribute";i:2;s:23:"catalog/attribute_group";i:3;s:20:"catalog/cachemanager";i:4;s:16:"catalog/category";i:5;s:16:"catalog/download";i:6;s:14:"catalog/filter";i:7;s:19:"catalog/information";i:8;s:20:"catalog/manufacturer";i:9;s:14:"catalog/option";i:10;s:15:"catalog/product";i:11;s:14:"catalog/review";i:12;s:11:"catalog/tab";i:13;s:16:"common/elmanager";i:14;s:18:"common/filemanager";i:15;s:13:"common/seogen";i:16;s:13:"design/banner";i:17;s:19:"design/custom_field";i:18;s:13:"design/layout";i:19;s:14:"extension/feed";i:20;s:17:"extension/manager";i:21;s:16:"extension/module";i:22;s:17:"extension/payment";i:23;s:18:"extension/shipping";i:24;s:15:"extension/total";i:25;s:16:"feed/google_base";i:26;s:19:"feed/google_sitemap";i:27;s:18:"feed/yandex_market";i:28;s:20:"localisation/country";i:29;s:21:"localisation/currency";i:30;s:21:"localisation/geo_zone";i:31;s:21:"localisation/language";i:32;s:25:"localisation/length_class";i:33;s:25:"localisation/order_status";i:34;s:26:"localisation/return_action";i:35;s:26:"localisation/return_reason";i:36;s:26:"localisation/return_status";i:37;s:25:"localisation/stock_status";i:38;s:22:"localisation/tax_class";i:39;s:21:"localisation/tax_rate";i:40;s:25:"localisation/weight_class";i:41;s:17:"localisation/zone";i:42;s:14:"module/account";i:43;s:16:"module/affiliate";i:44;s:13:"module/banner";i:45;s:17:"module/bestseller";i:46;s:15:"module/carousel";i:47;s:15:"module/category";i:48;s:15:"module/featured";i:49;s:13:"module/filter";i:50;s:14:"module/filters";i:51;s:14:"module/gallery";i:52;s:18:"module/google_talk";i:53;s:18:"module/information";i:54;s:13:"module/latest";i:55;s:26:"module/newslettersubscribe";i:56;s:22:"module/productcomments";i:57;s:12:"module/qv_ch";i:58;s:16:"module/slideshow";i:59;s:17:"module/smart_menu";i:60;s:14:"module/special";i:61;s:12:"module/store";i:62;s:16:"module/super_seo";i:63;s:16:"module/translate";i:64;s:20:"module/vqmod_manager";i:65;s:14:"module/welcome";i:66;s:24:"payment/authorizenet_aim";i:67;s:21:"payment/bank_transfer";i:68;s:14:"payment/cheque";i:69;s:11:"payment/cod";i:70;s:21:"payment/free_checkout";i:71;s:22:"payment/klarna_account";i:72;s:22:"payment/klarna_invoice";i:73;s:14:"payment/liqpay";i:74;s:20:"payment/moneybookers";i:75;s:14:"payment/nochex";i:76;s:15:"payment/paymate";i:77;s:16:"payment/paypoint";i:78;s:13:"payment/payza";i:79;s:26:"payment/perpetual_payments";i:80;s:14:"payment/pp_pro";i:81;s:17:"payment/pp_pro_uk";i:82;s:19:"payment/pp_standard";i:83;s:15:"payment/sagepay";i:84;s:22:"payment/sagepay_direct";i:85;s:18:"payment/sagepay_us";i:86;s:19:"payment/twocheckout";i:87;s:28:"payment/web_payment_software";i:88;s:16:"payment/worldpay";i:89;s:27:"report/affiliate_commission";i:90;s:22:"report/customer_credit";i:91;s:22:"report/customer_online";i:92;s:21:"report/customer_order";i:93;s:22:"report/customer_reward";i:94;s:24:"report/product_purchased";i:95;s:21:"report/product_viewed";i:96;s:18:"report/sale_coupon";i:97;s:17:"report/sale_order";i:98;s:18:"report/sale_return";i:99;s:20:"report/sale_shipping";i:100;s:15:"report/sale_tax";i:101;s:14:"sale/affiliate";i:102;s:12:"sale/contact";i:103;s:11:"sale/coupon";i:104;s:13:"sale/customer";i:105;s:20:"sale/customer_ban_ip";i:106;s:19:"sale/customer_group";i:107;s:20:"sale/newssubscribers";i:108;s:10:"sale/order";i:109;s:11:"sale/return";i:110;s:12:"sale/voucher";i:111;s:18:"sale/voucher_theme";i:112;s:15:"setting/setting";i:113;s:13:"setting/store";i:114;s:16:"shipping/auspost";i:115;s:17:"shipping/citylink";i:116;s:14:"shipping/fedex";i:117;s:13:"shipping/flat";i:118;s:13:"shipping/free";i:119;s:13:"shipping/item";i:120;s:23:"shipping/parcelforce_48";i:121;s:15:"shipping/pickup";i:122;s:19:"shipping/royal_mail";i:123;s:12:"shipping/ups";i:124;s:13:"shipping/usps";i:125;s:15:"shipping/weight";i:126;s:11:"tool/backup";i:127;s:14:"tool/error_log";i:128;s:12:"total/coupon";i:129;s:12:"total/credit";i:130;s:14:"total/handling";i:131;s:16:"total/klarna_fee";i:132;s:26:"total/large_order_discount";i:133;s:19:"total/low_order_fee";i:134;s:8:"total/pd";i:135;s:12:"total/reward";i:136;s:14:"total/shipping";i:137;s:15:"total/sub_total";i:138;s:9:"total/tax";i:139;s:11:"total/total";i:140;s:13:"total/voucher";i:141;s:9:"user/user";i:142;s:20:"user/user_permission";i:143;s:20:"module/vqmod_manager";i:144;s:14:"module/filters";i:145;s:21:"payment/bank_transfer";i:146;s:15:"module/bro_conf";i:147;s:22:"module/productcomments";i:148;s:22:"module/productcomments";i:149;s:15:"module/callback";}s:6:"modify";a:150:{i:0;s:29:"LanguageEditor/LanguageEditor";i:1;s:17:"catalog/attribute";i:2;s:23:"catalog/attribute_group";i:3;s:20:"catalog/cachemanager";i:4;s:16:"catalog/category";i:5;s:16:"catalog/download";i:6;s:14:"catalog/filter";i:7;s:19:"catalog/information";i:8;s:20:"catalog/manufacturer";i:9;s:14:"catalog/option";i:10;s:15:"catalog/product";i:11;s:14:"catalog/review";i:12;s:11:"catalog/tab";i:13;s:16:"common/elmanager";i:14;s:18:"common/filemanager";i:15;s:13:"common/seogen";i:16;s:13:"design/banner";i:17;s:19:"design/custom_field";i:18;s:13:"design/layout";i:19;s:14:"extension/feed";i:20;s:17:"extension/manager";i:21;s:16:"extension/module";i:22;s:17:"extension/payment";i:23;s:18:"extension/shipping";i:24;s:15:"extension/total";i:25;s:16:"feed/google_base";i:26;s:19:"feed/google_sitemap";i:27;s:18:"feed/yandex_market";i:28;s:20:"localisation/country";i:29;s:21:"localisation/currency";i:30;s:21:"localisation/geo_zone";i:31;s:21:"localisation/language";i:32;s:25:"localisation/length_class";i:33;s:25:"localisation/order_status";i:34;s:26:"localisation/return_action";i:35;s:26:"localisation/return_reason";i:36;s:26:"localisation/return_status";i:37;s:25:"localisation/stock_status";i:38;s:22:"localisation/tax_class";i:39;s:21:"localisation/tax_rate";i:40;s:25:"localisation/weight_class";i:41;s:17:"localisation/zone";i:42;s:14:"module/account";i:43;s:16:"module/affiliate";i:44;s:13:"module/banner";i:45;s:17:"module/bestseller";i:46;s:15:"module/carousel";i:47;s:15:"module/category";i:48;s:15:"module/featured";i:49;s:13:"module/filter";i:50;s:14:"module/filters";i:51;s:14:"module/gallery";i:52;s:18:"module/google_talk";i:53;s:18:"module/information";i:54;s:13:"module/latest";i:55;s:26:"module/newslettersubscribe";i:56;s:22:"module/productcomments";i:57;s:12:"module/qv_ch";i:58;s:16:"module/slideshow";i:59;s:17:"module/smart_menu";i:60;s:14:"module/special";i:61;s:12:"module/store";i:62;s:16:"module/super_seo";i:63;s:16:"module/translate";i:64;s:20:"module/vqmod_manager";i:65;s:14:"module/welcome";i:66;s:24:"payment/authorizenet_aim";i:67;s:21:"payment/bank_transfer";i:68;s:14:"payment/cheque";i:69;s:11:"payment/cod";i:70;s:21:"payment/free_checkout";i:71;s:22:"payment/klarna_account";i:72;s:22:"payment/klarna_invoice";i:73;s:14:"payment/liqpay";i:74;s:20:"payment/moneybookers";i:75;s:14:"payment/nochex";i:76;s:15:"payment/paymate";i:77;s:16:"payment/paypoint";i:78;s:13:"payment/payza";i:79;s:26:"payment/perpetual_payments";i:80;s:14:"payment/pp_pro";i:81;s:17:"payment/pp_pro_uk";i:82;s:19:"payment/pp_standard";i:83;s:15:"payment/sagepay";i:84;s:22:"payment/sagepay_direct";i:85;s:18:"payment/sagepay_us";i:86;s:19:"payment/twocheckout";i:87;s:28:"payment/web_payment_software";i:88;s:16:"payment/worldpay";i:89;s:27:"report/affiliate_commission";i:90;s:22:"report/customer_credit";i:91;s:22:"report/customer_online";i:92;s:21:"report/customer_order";i:93;s:22:"report/customer_reward";i:94;s:24:"report/product_purchased";i:95;s:21:"report/product_viewed";i:96;s:18:"report/sale_coupon";i:97;s:17:"report/sale_order";i:98;s:18:"report/sale_return";i:99;s:20:"report/sale_shipping";i:100;s:15:"report/sale_tax";i:101;s:14:"sale/affiliate";i:102;s:12:"sale/contact";i:103;s:11:"sale/coupon";i:104;s:13:"sale/customer";i:105;s:20:"sale/customer_ban_ip";i:106;s:19:"sale/customer_group";i:107;s:20:"sale/newssubscribers";i:108;s:10:"sale/order";i:109;s:11:"sale/return";i:110;s:12:"sale/voucher";i:111;s:18:"sale/voucher_theme";i:112;s:15:"setting/setting";i:113;s:13:"setting/store";i:114;s:16:"shipping/auspost";i:115;s:17:"shipping/citylink";i:116;s:14:"shipping/fedex";i:117;s:13:"shipping/flat";i:118;s:13:"shipping/free";i:119;s:13:"shipping/item";i:120;s:23:"shipping/parcelforce_48";i:121;s:15:"shipping/pickup";i:122;s:19:"shipping/royal_mail";i:123;s:12:"shipping/ups";i:124;s:13:"shipping/usps";i:125;s:15:"shipping/weight";i:126;s:11:"tool/backup";i:127;s:14:"tool/error_log";i:128;s:12:"total/coupon";i:129;s:12:"total/credit";i:130;s:14:"total/handling";i:131;s:16:"total/klarna_fee";i:132;s:26:"total/large_order_discount";i:133;s:19:"total/low_order_fee";i:134;s:8:"total/pd";i:135;s:12:"total/reward";i:136;s:14:"total/shipping";i:137;s:15:"total/sub_total";i:138;s:9:"total/tax";i:139;s:11:"total/total";i:140;s:13:"total/voucher";i:141;s:9:"user/user";i:142;s:20:"user/user_permission";i:143;s:20:"module/vqmod_manager";i:144;s:14:"module/filters";i:145;s:21:"payment/bank_transfer";i:146;s:15:"module/bro_conf";i:147;s:22:"module/productcomments";i:148;s:22:"module/productcomments";i:149;s:15:"module/callback";}}'),
-(10, 'Demonstration', 'a:2:{s:6:"access";a:135:{i:0;s:29:"LanguageEditor/LanguageEditor";i:1;s:17:"catalog/attribute";i:2;s:23:"catalog/attribute_group";i:3;s:20:"catalog/cachemanager";i:4;s:16:"catalog/category";i:5;s:16:"catalog/download";i:6;s:14:"catalog/filter";i:7;s:19:"catalog/information";i:8;s:20:"catalog/manufacturer";i:9;s:14:"catalog/option";i:10;s:15:"catalog/product";i:11;s:14:"catalog/review";i:12;s:11:"catalog/tab";i:13;s:16:"common/elmanager";i:14;s:18:"common/filemanager";i:15;s:13:"design/banner";i:16;s:19:"design/custom_field";i:17;s:13:"design/layout";i:18;s:14:"extension/feed";i:19;s:17:"extension/manager";i:20;s:16:"extension/module";i:21;s:17:"extension/payment";i:22;s:18:"extension/shipping";i:23;s:15:"extension/total";i:24;s:16:"feed/google_base";i:25;s:19:"feed/google_sitemap";i:26;s:20:"localisation/country";i:27;s:21:"localisation/currency";i:28;s:21:"localisation/geo_zone";i:29;s:21:"localisation/language";i:30;s:25:"localisation/length_class";i:31;s:25:"localisation/order_status";i:32;s:26:"localisation/return_action";i:33;s:26:"localisation/return_reason";i:34;s:26:"localisation/return_status";i:35;s:25:"localisation/stock_status";i:36;s:22:"localisation/tax_class";i:37;s:21:"localisation/tax_rate";i:38;s:25:"localisation/weight_class";i:39;s:17:"localisation/zone";i:40;s:14:"module/account";i:41;s:16:"module/affiliate";i:42;s:13:"module/banner";i:43;s:17:"module/bestseller";i:44;s:15:"module/carousel";i:45;s:15:"module/category";i:46;s:17:"module/exchange1c";i:47;s:15:"module/featured";i:48;s:13:"module/filter";i:49;s:18:"module/google_talk";i:50;s:18:"module/information";i:51;s:13:"module/latest";i:52;s:22:"module/productcomments";i:53;s:12:"module/qv_ch";i:54;s:19:"module/rek_category";i:55;s:16:"module/slideshow";i:56;s:14:"module/special";i:57;s:12:"module/store";i:58;s:16:"module/super_seo";i:59;s:16:"module/translate";i:60;s:14:"module/welcome";i:61;s:24:"payment/authorizenet_aim";i:62;s:21:"payment/bank_transfer";i:63;s:14:"payment/cheque";i:64;s:11:"payment/cod";i:65;s:21:"payment/free_checkout";i:66;s:22:"payment/klarna_account";i:67;s:22:"payment/klarna_invoice";i:68;s:14:"payment/liqpay";i:69;s:20:"payment/moneybookers";i:70;s:14:"payment/nochex";i:71;s:15:"payment/paymate";i:72;s:16:"payment/paypoint";i:73;s:13:"payment/payza";i:74;s:26:"payment/perpetual_payments";i:75;s:14:"payment/pp_pro";i:76;s:17:"payment/pp_pro_uk";i:77;s:19:"payment/pp_standard";i:78;s:15:"payment/sagepay";i:79;s:22:"payment/sagepay_direct";i:80;s:18:"payment/sagepay_us";i:81;s:19:"payment/twocheckout";i:82;s:28:"payment/web_payment_software";i:83;s:16:"payment/worldpay";i:84;s:27:"report/affiliate_commission";i:85;s:22:"report/customer_credit";i:86;s:22:"report/customer_online";i:87;s:21:"report/customer_order";i:88;s:22:"report/customer_reward";i:89;s:17:"report/export_xls";i:90;s:24:"report/product_purchased";i:91;s:21:"report/product_viewed";i:92;s:18:"report/sale_coupon";i:93;s:17:"report/sale_order";i:94;s:18:"report/sale_return";i:95;s:20:"report/sale_shipping";i:96;s:15:"report/sale_tax";i:97;s:14:"sale/affiliate";i:98;s:12:"sale/contact";i:99;s:11:"sale/coupon";i:100;s:13:"sale/customer";i:101;s:20:"sale/customer_ban_ip";i:102;s:19:"sale/customer_group";i:103;s:10:"sale/order";i:104;s:11:"sale/return";i:105;s:12:"sale/voucher";i:106;s:18:"sale/voucher_theme";i:107;s:15:"setting/setting";i:108;s:13:"setting/store";i:109;s:16:"shipping/auspost";i:110;s:17:"shipping/citylink";i:111;s:14:"shipping/fedex";i:112;s:13:"shipping/flat";i:113;s:13:"shipping/free";i:114;s:13:"shipping/item";i:115;s:23:"shipping/parcelforce_48";i:116;s:15:"shipping/pickup";i:117;s:19:"shipping/royal_mail";i:118;s:12:"shipping/ups";i:119;s:13:"shipping/usps";i:120;s:15:"shipping/weight";i:121;s:14:"tool/error_log";i:122;s:12:"total/coupon";i:123;s:12:"total/credit";i:124;s:14:"total/handling";i:125;s:16:"total/klarna_fee";i:126;s:19:"total/low_order_fee";i:127;s:12:"total/reward";i:128;s:14:"total/shipping";i:129;s:15:"total/sub_total";i:130;s:9:"total/tax";i:131;s:11:"total/total";i:132;s:13:"total/voucher";i:133;s:13:"shipping/item";i:134;s:14:"module/special";}s:6:"modify";a:135:{i:0;s:29:"LanguageEditor/LanguageEditor";i:1;s:17:"catalog/attribute";i:2;s:23:"catalog/attribute_group";i:3;s:20:"catalog/cachemanager";i:4;s:16:"catalog/category";i:5;s:16:"catalog/download";i:6;s:14:"catalog/filter";i:7;s:19:"catalog/information";i:8;s:20:"catalog/manufacturer";i:9;s:14:"catalog/option";i:10;s:15:"catalog/product";i:11;s:14:"catalog/review";i:12;s:11:"catalog/tab";i:13;s:16:"common/elmanager";i:14;s:18:"common/filemanager";i:15;s:13:"design/banner";i:16;s:19:"design/custom_field";i:17;s:13:"design/layout";i:18;s:14:"extension/feed";i:19;s:17:"extension/manager";i:20;s:16:"extension/module";i:21;s:17:"extension/payment";i:22;s:18:"extension/shipping";i:23;s:15:"extension/total";i:24;s:16:"feed/google_base";i:25;s:19:"feed/google_sitemap";i:26;s:20:"localisation/country";i:27;s:21:"localisation/currency";i:28;s:21:"localisation/geo_zone";i:29;s:21:"localisation/language";i:30;s:25:"localisation/length_class";i:31;s:25:"localisation/order_status";i:32;s:26:"localisation/return_action";i:33;s:26:"localisation/return_reason";i:34;s:26:"localisation/return_status";i:35;s:25:"localisation/stock_status";i:36;s:22:"localisation/tax_class";i:37;s:21:"localisation/tax_rate";i:38;s:25:"localisation/weight_class";i:39;s:17:"localisation/zone";i:40;s:14:"module/account";i:41;s:16:"module/affiliate";i:42;s:13:"module/banner";i:43;s:17:"module/bestseller";i:44;s:15:"module/carousel";i:45;s:15:"module/category";i:46;s:17:"module/exchange1c";i:47;s:15:"module/featured";i:48;s:13:"module/filter";i:49;s:18:"module/google_talk";i:50;s:18:"module/information";i:51;s:13:"module/latest";i:52;s:22:"module/productcomments";i:53;s:12:"module/qv_ch";i:54;s:19:"module/rek_category";i:55;s:16:"module/slideshow";i:56;s:14:"module/special";i:57;s:12:"module/store";i:58;s:16:"module/super_seo";i:59;s:16:"module/translate";i:60;s:14:"module/welcome";i:61;s:24:"payment/authorizenet_aim";i:62;s:21:"payment/bank_transfer";i:63;s:14:"payment/cheque";i:64;s:11:"payment/cod";i:65;s:21:"payment/free_checkout";i:66;s:22:"payment/klarna_account";i:67;s:22:"payment/klarna_invoice";i:68;s:14:"payment/liqpay";i:69;s:20:"payment/moneybookers";i:70;s:14:"payment/nochex";i:71;s:15:"payment/paymate";i:72;s:16:"payment/paypoint";i:73;s:13:"payment/payza";i:74;s:26:"payment/perpetual_payments";i:75;s:14:"payment/pp_pro";i:76;s:17:"payment/pp_pro_uk";i:77;s:19:"payment/pp_standard";i:78;s:15:"payment/sagepay";i:79;s:22:"payment/sagepay_direct";i:80;s:18:"payment/sagepay_us";i:81;s:19:"payment/twocheckout";i:82;s:28:"payment/web_payment_software";i:83;s:16:"payment/worldpay";i:84;s:27:"report/affiliate_commission";i:85;s:22:"report/customer_credit";i:86;s:22:"report/customer_online";i:87;s:21:"report/customer_order";i:88;s:22:"report/customer_reward";i:89;s:17:"report/export_xls";i:90;s:24:"report/product_purchased";i:91;s:21:"report/product_viewed";i:92;s:18:"report/sale_coupon";i:93;s:17:"report/sale_order";i:94;s:18:"report/sale_return";i:95;s:20:"report/sale_shipping";i:96;s:15:"report/sale_tax";i:97;s:14:"sale/affiliate";i:98;s:12:"sale/contact";i:99;s:11:"sale/coupon";i:100;s:13:"sale/customer";i:101;s:20:"sale/customer_ban_ip";i:102;s:19:"sale/customer_group";i:103;s:10:"sale/order";i:104;s:11:"sale/return";i:105;s:12:"sale/voucher";i:106;s:18:"sale/voucher_theme";i:107;s:15:"setting/setting";i:108;s:13:"setting/store";i:109;s:16:"shipping/auspost";i:110;s:17:"shipping/citylink";i:111;s:14:"shipping/fedex";i:112;s:13:"shipping/flat";i:113;s:13:"shipping/free";i:114;s:13:"shipping/item";i:115;s:23:"shipping/parcelforce_48";i:116;s:15:"shipping/pickup";i:117;s:19:"shipping/royal_mail";i:118;s:12:"shipping/ups";i:119;s:13:"shipping/usps";i:120;s:15:"shipping/weight";i:121;s:14:"tool/error_log";i:122;s:12:"total/coupon";i:123;s:12:"total/credit";i:124;s:14:"total/handling";i:125;s:16:"total/klarna_fee";i:126;s:19:"total/low_order_fee";i:127;s:12:"total/reward";i:128;s:14:"total/shipping";i:129;s:15:"total/sub_total";i:130;s:9:"total/tax";i:131;s:11:"total/total";i:132;s:13:"total/voucher";i:133;s:13:"shipping/item";i:134;s:14:"module/special";}}');
+(1, 'Top Administrator', 'a:2:{s:6:"access";a:152:{i:0;s:29:"LanguageEditor/LanguageEditor";i:1;s:17:"catalog/attribute";i:2;s:23:"catalog/attribute_group";i:3;s:20:"catalog/cachemanager";i:4;s:16:"catalog/category";i:5;s:16:"catalog/download";i:6;s:14:"catalog/filter";i:7;s:19:"catalog/information";i:8;s:20:"catalog/manufacturer";i:9;s:14:"catalog/option";i:10;s:15:"catalog/product";i:11;s:14:"catalog/review";i:12;s:11:"catalog/tab";i:13;s:16:"common/elmanager";i:14;s:18:"common/filemanager";i:15;s:13:"common/seogen";i:16;s:13:"design/banner";i:17;s:19:"design/custom_field";i:18;s:13:"design/layout";i:19;s:14:"extension/feed";i:20;s:17:"extension/manager";i:21;s:16:"extension/module";i:22;s:17:"extension/payment";i:23;s:18:"extension/shipping";i:24;s:15:"extension/total";i:25;s:16:"feed/google_base";i:26;s:19:"feed/google_sitemap";i:27;s:18:"feed/yandex_market";i:28;s:20:"localisation/country";i:29;s:21:"localisation/currency";i:30;s:21:"localisation/geo_zone";i:31;s:21:"localisation/language";i:32;s:25:"localisation/length_class";i:33;s:25:"localisation/order_status";i:34;s:26:"localisation/return_action";i:35;s:26:"localisation/return_reason";i:36;s:26:"localisation/return_status";i:37;s:25:"localisation/stock_status";i:38;s:22:"localisation/tax_class";i:39;s:21:"localisation/tax_rate";i:40;s:25:"localisation/weight_class";i:41;s:17:"localisation/zone";i:42;s:14:"module/account";i:43;s:16:"module/affiliate";i:44;s:13:"module/banner";i:45;s:17:"module/bestseller";i:46;s:15:"module/carousel";i:47;s:15:"module/category";i:48;s:15:"module/featured";i:49;s:13:"module/filter";i:50;s:14:"module/filters";i:51;s:14:"module/gallery";i:52;s:18:"module/google_talk";i:53;s:18:"module/information";i:54;s:13:"module/latest";i:55;s:26:"module/newslettersubscribe";i:56;s:22:"module/productcomments";i:57;s:12:"module/qv_ch";i:58;s:16:"module/slideshow";i:59;s:17:"module/smart_menu";i:60;s:14:"module/special";i:61;s:12:"module/store";i:62;s:16:"module/super_seo";i:63;s:16:"module/translate";i:64;s:20:"module/vqmod_manager";i:65;s:14:"module/welcome";i:66;s:24:"payment/authorizenet_aim";i:67;s:21:"payment/bank_transfer";i:68;s:14:"payment/cheque";i:69;s:11:"payment/cod";i:70;s:21:"payment/free_checkout";i:71;s:22:"payment/klarna_account";i:72;s:22:"payment/klarna_invoice";i:73;s:14:"payment/liqpay";i:74;s:20:"payment/moneybookers";i:75;s:14:"payment/nochex";i:76;s:15:"payment/paymate";i:77;s:16:"payment/paypoint";i:78;s:13:"payment/payza";i:79;s:26:"payment/perpetual_payments";i:80;s:14:"payment/pp_pro";i:81;s:17:"payment/pp_pro_uk";i:82;s:19:"payment/pp_standard";i:83;s:15:"payment/sagepay";i:84;s:22:"payment/sagepay_direct";i:85;s:18:"payment/sagepay_us";i:86;s:19:"payment/twocheckout";i:87;s:28:"payment/web_payment_software";i:88;s:16:"payment/worldpay";i:89;s:27:"report/affiliate_commission";i:90;s:22:"report/customer_credit";i:91;s:22:"report/customer_online";i:92;s:21:"report/customer_order";i:93;s:22:"report/customer_reward";i:94;s:24:"report/product_purchased";i:95;s:21:"report/product_viewed";i:96;s:18:"report/sale_coupon";i:97;s:17:"report/sale_order";i:98;s:18:"report/sale_return";i:99;s:20:"report/sale_shipping";i:100;s:15:"report/sale_tax";i:101;s:14:"sale/affiliate";i:102;s:12:"sale/contact";i:103;s:11:"sale/coupon";i:104;s:13:"sale/customer";i:105;s:20:"sale/customer_ban_ip";i:106;s:19:"sale/customer_group";i:107;s:20:"sale/newssubscribers";i:108;s:10:"sale/order";i:109;s:11:"sale/return";i:110;s:12:"sale/voucher";i:111;s:18:"sale/voucher_theme";i:112;s:15:"setting/setting";i:113;s:13:"setting/store";i:114;s:16:"shipping/auspost";i:115;s:17:"shipping/citylink";i:116;s:14:"shipping/fedex";i:117;s:13:"shipping/flat";i:118;s:13:"shipping/free";i:119;s:13:"shipping/item";i:120;s:23:"shipping/parcelforce_48";i:121;s:15:"shipping/pickup";i:122;s:19:"shipping/royal_mail";i:123;s:12:"shipping/ups";i:124;s:13:"shipping/usps";i:125;s:15:"shipping/weight";i:126;s:11:"tool/backup";i:127;s:14:"tool/error_log";i:128;s:12:"total/coupon";i:129;s:12:"total/credit";i:130;s:14:"total/handling";i:131;s:16:"total/klarna_fee";i:132;s:26:"total/large_order_discount";i:133;s:19:"total/low_order_fee";i:134;s:8:"total/pd";i:135;s:12:"total/reward";i:136;s:14:"total/shipping";i:137;s:15:"total/sub_total";i:138;s:9:"total/tax";i:139;s:11:"total/total";i:140;s:13:"total/voucher";i:141;s:9:"user/user";i:142;s:20:"user/user_permission";i:143;s:20:"module/vqmod_manager";i:144;s:14:"module/filters";i:145;s:21:"payment/bank_transfer";i:146;s:15:"module/bro_conf";i:147;s:22:"module/productcomments";i:148;s:22:"module/productcomments";i:149;s:15:"module/callback";i:150;s:14:"module/gallery";i:151;s:15:"shipping/pickup";}s:6:"modify";a:152:{i:0;s:29:"LanguageEditor/LanguageEditor";i:1;s:17:"catalog/attribute";i:2;s:23:"catalog/attribute_group";i:3;s:20:"catalog/cachemanager";i:4;s:16:"catalog/category";i:5;s:16:"catalog/download";i:6;s:14:"catalog/filter";i:7;s:19:"catalog/information";i:8;s:20:"catalog/manufacturer";i:9;s:14:"catalog/option";i:10;s:15:"catalog/product";i:11;s:14:"catalog/review";i:12;s:11:"catalog/tab";i:13;s:16:"common/elmanager";i:14;s:18:"common/filemanager";i:15;s:13:"common/seogen";i:16;s:13:"design/banner";i:17;s:19:"design/custom_field";i:18;s:13:"design/layout";i:19;s:14:"extension/feed";i:20;s:17:"extension/manager";i:21;s:16:"extension/module";i:22;s:17:"extension/payment";i:23;s:18:"extension/shipping";i:24;s:15:"extension/total";i:25;s:16:"feed/google_base";i:26;s:19:"feed/google_sitemap";i:27;s:18:"feed/yandex_market";i:28;s:20:"localisation/country";i:29;s:21:"localisation/currency";i:30;s:21:"localisation/geo_zone";i:31;s:21:"localisation/language";i:32;s:25:"localisation/length_class";i:33;s:25:"localisation/order_status";i:34;s:26:"localisation/return_action";i:35;s:26:"localisation/return_reason";i:36;s:26:"localisation/return_status";i:37;s:25:"localisation/stock_status";i:38;s:22:"localisation/tax_class";i:39;s:21:"localisation/tax_rate";i:40;s:25:"localisation/weight_class";i:41;s:17:"localisation/zone";i:42;s:14:"module/account";i:43;s:16:"module/affiliate";i:44;s:13:"module/banner";i:45;s:17:"module/bestseller";i:46;s:15:"module/carousel";i:47;s:15:"module/category";i:48;s:15:"module/featured";i:49;s:13:"module/filter";i:50;s:14:"module/filters";i:51;s:14:"module/gallery";i:52;s:18:"module/google_talk";i:53;s:18:"module/information";i:54;s:13:"module/latest";i:55;s:26:"module/newslettersubscribe";i:56;s:22:"module/productcomments";i:57;s:12:"module/qv_ch";i:58;s:16:"module/slideshow";i:59;s:17:"module/smart_menu";i:60;s:14:"module/special";i:61;s:12:"module/store";i:62;s:16:"module/super_seo";i:63;s:16:"module/translate";i:64;s:20:"module/vqmod_manager";i:65;s:14:"module/welcome";i:66;s:24:"payment/authorizenet_aim";i:67;s:21:"payment/bank_transfer";i:68;s:14:"payment/cheque";i:69;s:11:"payment/cod";i:70;s:21:"payment/free_checkout";i:71;s:22:"payment/klarna_account";i:72;s:22:"payment/klarna_invoice";i:73;s:14:"payment/liqpay";i:74;s:20:"payment/moneybookers";i:75;s:14:"payment/nochex";i:76;s:15:"payment/paymate";i:77;s:16:"payment/paypoint";i:78;s:13:"payment/payza";i:79;s:26:"payment/perpetual_payments";i:80;s:14:"payment/pp_pro";i:81;s:17:"payment/pp_pro_uk";i:82;s:19:"payment/pp_standard";i:83;s:15:"payment/sagepay";i:84;s:22:"payment/sagepay_direct";i:85;s:18:"payment/sagepay_us";i:86;s:19:"payment/twocheckout";i:87;s:28:"payment/web_payment_software";i:88;s:16:"payment/worldpay";i:89;s:27:"report/affiliate_commission";i:90;s:22:"report/customer_credit";i:91;s:22:"report/customer_online";i:92;s:21:"report/customer_order";i:93;s:22:"report/customer_reward";i:94;s:24:"report/product_purchased";i:95;s:21:"report/product_viewed";i:96;s:18:"report/sale_coupon";i:97;s:17:"report/sale_order";i:98;s:18:"report/sale_return";i:99;s:20:"report/sale_shipping";i:100;s:15:"report/sale_tax";i:101;s:14:"sale/affiliate";i:102;s:12:"sale/contact";i:103;s:11:"sale/coupon";i:104;s:13:"sale/customer";i:105;s:20:"sale/customer_ban_ip";i:106;s:19:"sale/customer_group";i:107;s:20:"sale/newssubscribers";i:108;s:10:"sale/order";i:109;s:11:"sale/return";i:110;s:12:"sale/voucher";i:111;s:18:"sale/voucher_theme";i:112;s:15:"setting/setting";i:113;s:13:"setting/store";i:114;s:16:"shipping/auspost";i:115;s:17:"shipping/citylink";i:116;s:14:"shipping/fedex";i:117;s:13:"shipping/flat";i:118;s:13:"shipping/free";i:119;s:13:"shipping/item";i:120;s:23:"shipping/parcelforce_48";i:121;s:15:"shipping/pickup";i:122;s:19:"shipping/royal_mail";i:123;s:12:"shipping/ups";i:124;s:13:"shipping/usps";i:125;s:15:"shipping/weight";i:126;s:11:"tool/backup";i:127;s:14:"tool/error_log";i:128;s:12:"total/coupon";i:129;s:12:"total/credit";i:130;s:14:"total/handling";i:131;s:16:"total/klarna_fee";i:132;s:26:"total/large_order_discount";i:133;s:19:"total/low_order_fee";i:134;s:8:"total/pd";i:135;s:12:"total/reward";i:136;s:14:"total/shipping";i:137;s:15:"total/sub_total";i:138;s:9:"total/tax";i:139;s:11:"total/total";i:140;s:13:"total/voucher";i:141;s:9:"user/user";i:142;s:20:"user/user_permission";i:143;s:20:"module/vqmod_manager";i:144;s:14:"module/filters";i:145;s:21:"payment/bank_transfer";i:146;s:15:"module/bro_conf";i:147;s:22:"module/productcomments";i:148;s:22:"module/productcomments";i:149;s:15:"module/callback";i:150;s:14:"module/gallery";i:151;s:15:"shipping/pickup";}}'),
+(10, 'Demonstration', 'a:2:{s:6:"access";a:151:{i:0;s:29:"LanguageEditor/LanguageEditor";i:1;s:17:"catalog/attribute";i:2;s:23:"catalog/attribute_group";i:3;s:20:"catalog/cachemanager";i:4;s:16:"catalog/category";i:5;s:16:"catalog/download";i:6;s:14:"catalog/filter";i:7;s:19:"catalog/information";i:8;s:14:"catalog/lables";i:9;s:20:"catalog/manufacturer";i:10;s:14:"catalog/option";i:11;s:15:"catalog/product";i:12;s:14:"catalog/review";i:13;s:11:"catalog/tab";i:14;s:16:"common/elmanager";i:15;s:18:"common/filemanager";i:16;s:13:"common/seogen";i:17;s:13:"design/banner";i:18;s:19:"design/custom_field";i:19;s:13:"design/layout";i:20;s:14:"extension/feed";i:21;s:17:"extension/manager";i:22;s:16:"extension/module";i:23;s:17:"extension/payment";i:24;s:18:"extension/shipping";i:25;s:15:"extension/total";i:26;s:16:"feed/google_base";i:27;s:19:"feed/google_sitemap";i:28;s:18:"feed/yandex_market";i:29;s:20:"localisation/country";i:30;s:21:"localisation/currency";i:31;s:21:"localisation/geo_zone";i:32;s:21:"localisation/language";i:33;s:25:"localisation/length_class";i:34;s:25:"localisation/order_status";i:35;s:26:"localisation/return_action";i:36;s:26:"localisation/return_reason";i:37;s:26:"localisation/return_status";i:38;s:25:"localisation/stock_status";i:39;s:22:"localisation/tax_class";i:40;s:21:"localisation/tax_rate";i:41;s:25:"localisation/weight_class";i:42;s:17:"localisation/zone";i:43;s:14:"module/account";i:44;s:16:"module/affiliate";i:45;s:13:"module/banner";i:46;s:17:"module/bestseller";i:47;s:15:"module/bro_conf";i:48;s:15:"module/callback";i:49;s:15:"module/carousel";i:50;s:15:"module/category";i:51;s:15:"module/featured";i:52;s:13:"module/filter";i:53;s:14:"module/filters";i:54;s:14:"module/gallery";i:55;s:18:"module/google_talk";i:56;s:18:"module/information";i:57;s:13:"module/latest";i:58;s:26:"module/newslettersubscribe";i:59;s:22:"module/productcomments";i:60;s:12:"module/qv_ch";i:61;s:16:"module/slideshow";i:62;s:17:"module/smart_menu";i:63;s:14:"module/special";i:64;s:12:"module/store";i:65;s:16:"module/super_seo";i:66;s:16:"module/translate";i:67;s:20:"module/vqmod_manager";i:68;s:14:"module/welcome";i:69;s:24:"payment/authorizenet_aim";i:70;s:21:"payment/bank_transfer";i:71;s:14:"payment/cheque";i:72;s:11:"payment/cod";i:73;s:21:"payment/free_checkout";i:74;s:22:"payment/klarna_account";i:75;s:22:"payment/klarna_invoice";i:76;s:14:"payment/liqpay";i:77;s:20:"payment/moneybookers";i:78;s:14:"payment/nochex";i:79;s:15:"payment/paymate";i:80;s:16:"payment/paypoint";i:81;s:13:"payment/payza";i:82;s:26:"payment/perpetual_payments";i:83;s:14:"payment/pp_pro";i:84;s:17:"payment/pp_pro_uk";i:85;s:19:"payment/pp_standard";i:86;s:15:"payment/sagepay";i:87;s:22:"payment/sagepay_direct";i:88;s:18:"payment/sagepay_us";i:89;s:19:"payment/twocheckout";i:90;s:28:"payment/web_payment_software";i:91;s:16:"payment/worldpay";i:92;s:27:"report/affiliate_commission";i:93;s:22:"report/customer_credit";i:94;s:22:"report/customer_online";i:95;s:21:"report/customer_order";i:96;s:22:"report/customer_reward";i:97;s:24:"report/product_purchased";i:98;s:21:"report/product_viewed";i:99;s:18:"report/sale_coupon";i:100;s:17:"report/sale_order";i:101;s:18:"report/sale_return";i:102;s:20:"report/sale_shipping";i:103;s:15:"report/sale_tax";i:104;s:14:"sale/affiliate";i:105;s:12:"sale/contact";i:106;s:11:"sale/coupon";i:107;s:13:"sale/customer";i:108;s:20:"sale/customer_ban_ip";i:109;s:19:"sale/customer_group";i:110;s:20:"sale/newssubscribers";i:111;s:10:"sale/order";i:112;s:11:"sale/return";i:113;s:12:"sale/voucher";i:114;s:18:"sale/voucher_theme";i:115;s:15:"setting/setting";i:116;s:13:"setting/store";i:117;s:16:"shipping/auspost";i:118;s:17:"shipping/citylink";i:119;s:23:"shipping/courierautolux";i:120;s:14:"shipping/fedex";i:121;s:13:"shipping/flat";i:122;s:13:"shipping/free";i:123;s:15:"shipping/gunsel";i:124;s:15:"shipping/intime";i:125;s:13:"shipping/item";i:126;s:17:"shipping/nexpress";i:127;s:19:"shipping/novaposhta";i:128;s:23:"shipping/parcelforce_48";i:129;s:15:"shipping/pickup";i:130;s:19:"shipping/royal_mail";i:131;s:12:"shipping/ups";i:132;s:13:"shipping/usps";i:133;s:15:"shipping/weight";i:134;s:11:"tool/backup";i:135;s:14:"tool/error_log";i:136;s:12:"total/coupon";i:137;s:12:"total/credit";i:138;s:14:"total/handling";i:139;s:16:"total/klarna_fee";i:140;s:26:"total/large_order_discount";i:141;s:19:"total/low_order_fee";i:142;s:8:"total/pd";i:143;s:12:"total/reward";i:144;s:14:"total/shipping";i:145;s:15:"total/sub_total";i:146;s:9:"total/tax";i:147;s:11:"total/total";i:148;s:13:"total/voucher";i:149;s:9:"user/user";i:150;s:20:"user/user_permission";}s:6:"modify";a:6:{i:0;s:14:"catalog/lables";i:1;s:11:"catalog/tab";i:2;s:13:"common/seogen";i:3;s:15:"module/bro_conf";i:4;s:12:"module/qv_ch";i:5;s:14:"tool/error_log";}}');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_voucher`
---
-
-DROP TABLE IF EXISTS `oc_voucher`;
 CREATE TABLE IF NOT EXISTS `oc_voucher` (
   `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -4177,13 +3225,6 @@ CREATE TABLE IF NOT EXISTS `oc_voucher` (
   PRIMARY KEY (`voucher_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_voucher_history`
---
-
-DROP TABLE IF EXISTS `oc_voucher_history`;
 CREATE TABLE IF NOT EXISTS `oc_voucher_history` (
   `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `voucher_id` int(11) NOT NULL,
@@ -4193,45 +3234,23 @@ CREATE TABLE IF NOT EXISTS `oc_voucher_history` (
   PRIMARY KEY (`voucher_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_voucher_theme`
---
-
-DROP TABLE IF EXISTS `oc_voucher_theme`;
 CREATE TABLE IF NOT EXISTS `oc_voucher_theme` (
   `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`voucher_theme_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
---
--- Дамп данных таблицы `oc_voucher_theme`
---
-
 INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
 (8, 'data/demo/canon_eos_5d_2.jpg'),
 (7, 'data/demo/gift-voucher-birthday.jpg'),
 (6, 'data/demo/apple_logo.jpg');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_voucher_theme_description`
---
-
-DROP TABLE IF EXISTS `oc_voucher_theme_description`;
 CREATE TABLE IF NOT EXISTS `oc_voucher_theme_description` (
   `voucher_theme_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`voucher_theme_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `oc_voucher_theme_description`
---
 
 INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `name`) VALUES
 (6, 2, 'Рождественсткий'),
@@ -4244,35 +3263,17 @@ INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 (8, 3, 'Головний'),
 (6, 3, 'Різдв''яний');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_weight_class`
---
-
-DROP TABLE IF EXISTS `oc_weight_class`;
 CREATE TABLE IF NOT EXISTS `oc_weight_class` (
   `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `value` decimal(15,8) NOT NULL DEFAULT '0.00000000',
   PRIMARY KEY (`weight_class_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
---
--- Дамп данных таблицы `oc_weight_class`
---
-
 INSERT INTO `oc_weight_class` (`weight_class_id`, `value`) VALUES
 (1, '1.00000000'),
 (2, '1000.00000000'),
 (6, '35.27400000');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_weight_class_description`
---
-
-DROP TABLE IF EXISTS `oc_weight_class_description`;
 CREATE TABLE IF NOT EXISTS `oc_weight_class_description` (
   `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
@@ -4280,10 +3281,6 @@ CREATE TABLE IF NOT EXISTS `oc_weight_class_description` (
   `unit` varchar(4) NOT NULL,
   PRIMARY KEY (`weight_class_id`,`language_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
---
--- Дамп данных таблицы `oc_weight_class_description`
---
 
 INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `title`, `unit`) VALUES
 (1, 3, 'Кілограм', 'кг'),
@@ -4296,13 +3293,6 @@ INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `ti
 (6, 1, 'Ounce', 'oz'),
 (2, 3, 'Грам', 'г');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_zone`
---
-
-DROP TABLE IF EXISTS `oc_zone`;
 CREATE TABLE IF NOT EXISTS `oc_zone` (
   `zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
@@ -4311,10 +3301,6 @@ CREATE TABLE IF NOT EXISTS `oc_zone` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`zone_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3971 ;
-
---
--- Дамп данных таблицы `oc_zone`
---
 
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (1, 1, 'Бадахшан', 'BDS', 1),
@@ -8265,13 +7251,6 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
 (3969, 101, 'Alborz', 'ALB', 1),
 (3970, 220, 'Херсон', 'KE', 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_zone_to_geo_zone`
---
-
-DROP TABLE IF EXISTS `oc_zone_to_geo_zone`;
 CREATE TABLE IF NOT EXISTS `oc_zone_to_geo_zone` (
   `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
@@ -8282,14 +7261,6 @@ CREATE TABLE IF NOT EXISTS `oc_zone_to_geo_zone` (
   PRIMARY KEY (`zone_to_geo_zone_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
---
--- Дамп данных таблицы `oc_zone_to_geo_zone`
---
-
 INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES
 (57, 222, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00'),
 (65, 222, 0, 4, '2010-12-15 15:18:13', '0000-00-00 00:00:00');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

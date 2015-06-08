@@ -5,7 +5,7 @@
         <div class="box-filters">
 		<!-- Product Price Filters -->	
 		<!-- Price Range -->
-                    <?php if (!empty($priceRangeArray)) { ?>
+                    <?php if (!empty($priceRangeArray) && $pricemin != $pricemax) { ?>
                     <div class="box-heading-checkbox"><?php echo  $text_price_filter; ?> </div>
                     <div class="checkboxSli">
                     <div>	 
@@ -19,9 +19,9 @@
                     </div>
                     <?php } ?>
 		<!-- End Product Price Filters -->
-		<!--Manufactures -->
-		<div id="manufes">
+		<!--Manufactures -->		
             <?php if (!empty($manufacturers)) { ?>
+			<div id="manufes">
             <div class="box-heading-checkbox"><?php echo $text_manufacturer_select_option; ?> </div>
                  <div class="checkboxDiv">
                 <?php foreach ($manufacturers as $value) { ?>
@@ -30,32 +30,30 @@
                     <input id="<?php echo $value['manufacturer_id']; ?>" type="checkbox" class="myinput large custom" param="manufacturer" name="manufacturers[]" value="<?php echo $value['manufacturer_id']; ?>">
                     
 					</div>
-                    <label id="<?php echo $value['manufacturer_id']; ?>" for="<?php echo $value['manufacturer_id']; ?>"><?php echo $value['name']; ?></label>
+                    <label id="<?php echo $value['manufacturer_id']; ?>" for="<?php echo $value['manufacturer_id']; ?>" class="ma"><?php echo $value['name']; ?></label>
                     </div>
                     
                     <?php } ?>
 					</div>
-				<?php } ?>
-			</div>
-			<!-- Product Attributes Filters -->
-            <div id="attributes">
+				</div>
+			<?php } ?>			
+			<!-- Product Attributes Filters -->            
                 <?php if($productAttributes) { ?>
+				<div id="attributes">
                 <?php foreach($productAttributes as $attribute_group_id=>$attribute) { ?>
 
                 <div class="box-heading-checkbox"><?php echo  $attribute['name']; ?> </div>
                 <div class="checkboxDiv">
-                    <?php foreach($attribute['attribute_values'] as $attribute_id=>$attribute_value) { ?>
+                    <?php foreach($attribute['attribute_values'] as $attribute_id => $attribute_value) { ?>
                     <fieldset>
                         <legend><?php echo  $attribute_value['name']; ?></legend>
-                        <?php foreach($attribute_value['values'] as $text) { ?>
-                        <?php $attribute_text = $attribute_id.'-'.$text; ?>
-                        <div>
-                            <div class="checkbox product-options">
+                        <?php foreach($attribute_value['values'] as $pa_id => $text) { ?>
 
-                                <input id="<?php echo $attribute_text; ?>" type="checkbox" class="myinput large custom" param="product-attribute" name="product-attribute[<?php echo $attribute_id; ?>]" value="<?php echo  $attribute_text; ?>">
-								
+                        <div>
+                            <div class="checkbox product-options" id="">
+                                <input id="<?php echo $pa_id; ?>" type="checkbox" class="myinput large custom" param="product-attribute" name="product-attribute[]" value="<?php echo  $pa_id; ?>">								
                             </div>
-                            <label id="lbl-<?php echo $attribute_text; ?>" for="<?php echo $attribute_text; ?>"><?php echo  $text; ?></label>
+                            <label id="pa-<?php echo $pa_id; ?>" for="<?php echo $pa_id; ?>" class="pa"><?php echo  $text; ?></label>
                         </div>
                         <?php } ?>
                     </fieldset>
@@ -63,10 +61,11 @@
                     <?php } ?>
                 </div>
                 <?php } ?>
-                <?php } ?>
-             </div>
-				<!-- Product Option Filters -->
+				</div>
+                <?php } ?>             
+				<!-- Product Option Filters -->				
 				<?php if($productOptions) { ?>
+				<div id="opt">
 					<?php foreach($productOptions as $value) { ?>
 						<div class="box-heading-checkbox"><?php echo  $value['name']; ?> </div>
 						<div class="checkboxDiv">
@@ -74,13 +73,14 @@
 							<div>
 								<div class="checkbox product-options" id="">
 									<input  id="<?php echo $child['child_id']; ?>" type="checkbox" class="myinput large custom" param="product-option" name="product-option[]" value="<?php echo $child['child_id']; ?>">
-									<label for="<?php echo $child['child_id']; ?>"><?php echo  $child['child_name']; ?></label>
+									
 								</div>
-								
+								<label id="<?php echo $child['child_id']; ?>" for="<?php echo $child['child_id']; ?>" class="op"><?php echo  $child['child_name']; ?></label>
 							</div>
 						<?php } ?>
 						</div>
 					<?php } ?>
+					</div>
 				<?php } ?>
 				
                 </div>
@@ -129,49 +129,33 @@
         
     })();
           
-            $(document).ready(function(){
-                //	$(".radio").dgStyle();
-                //$(".checkbox").dgStyle();
-			
-				//  $('input').iCheck({
-				//	checkboxClass: 'icheckbox_minimal',
-				//	radioClass: 'iradio_minimal',
-				//	increaseArea: '10%' // optional
-				//  });
-            });
-
             function getSortingParams(){
                 var getParams;
-                $("select option:selected").each(function() {
+            //    $("input:checked").each(function() {
 
-                    var val = $(this).val();
-                    //console.log("Value = "+val);
-                    if(getParams == null && val != null){
-                            getParams = val;
-                    } else {
-                        if(getParams != null && val != null){
-                            getParams = "&"+getParams+"="+val;
-                        }
-                    }
+            //        var val = $(this).val();
+			//		var spin = $(this).attr('param');
+        //console.log("spin = "+spin);
+			//		if(spin == 'manufacturer' && val != null){
+			//			getParams = "&brand="+val;
+			//		}
+			//		if(spin == 'product-attribute' && val != null){
+			//			getParams = "&pat="+val;
+			//		}
+            //        if(getParams == null && val != null){
+            //                getParams = val;
+             //       } else {
+            //            if(getParams != null && val != null){
+            //                getParams = "&"+getParams+"="+val;
+            //            }
+            //        }
                     //console.log(getParams);
-                });
+            //    });
                 return getParams;
             }
-            function dropdown(dp){             
-                var arrData = getFilterParams();
-                var getParams = getSortingParams();                
-                sendRequest(arrData, getParams);
-            }
+            
             function getFilterParams(){
 				var arrData = new Array();
-					
-                $('.checkboxDiv > checkbox:selected').each(function() {
-                    var item = {};
-                    item.param = $(this).parent().attr('id');
-                    item.val = $(this).val();    
-                    arrData.push(item);
-                });
-					
 				
 				$('.price-slide').each(function() {
                     var item = {};
@@ -202,6 +186,7 @@
                 if(getParams != null){
                     url = url+"&"+getParams;
                 }
+		//console.log(url);
             $.ajax({
                 url: url,
                 type: "POST",
@@ -220,46 +205,64 @@
                 $('div').remove('.pagination');
                 $('div').remove('.buttons');
                 $(data.html_output).insertAfter('.product-compare');
-			
-				//if (data.attributes) {
-					updateAttibutes(data.attributes);
-				//}
-				//if (data.manufes) {
+				
 					updateManufes(data.manufes);
+				
+					updateAttibutes(data.attributes);
+					
+					updateOptions(data.opt);
+				
+				//if (data.manufes) {
+					
 				//}
             });
         }
 
-        function updateAttibutes(attributes){
-            if(attributes.length!=0) {
-                $('#attributes :input').attr('disabled', true);
-                $('#attributes ,label').addClass('disabled');
-                $.each(attributes, function (index, element) {
-console.log(element);
+		function updateOptions(opt){
+            //if(opt.length!=0) {
+                $('#opt :input').attr('disabled', true);
+                $('#opt .op').addClass('disabled');
+                $.each(opt, function (index, element) {
                     $('#' + element).prop('disabled', false);
-                    $('#lbl-' + element).removeClass('disabled');
-					//$("label[for='"+ element +"']").removeClass('disabled');
+                    $('#' + element).removeClass('disabled');
+					$("label[for=" + element + "]").removeClass('disabled');
                 });
-            }else{
-				$('#attributes :input').attr('disabled', false);
-                $('#attributes ,label').removeClass('disabled');
-            }
+            //}else{
+			//	$('#opt :input').attr('disabled', false);
+            //    $('#opt .op').removeClass('disabled');
+            //}
+
+        }
+		
+        function updateAttibutes(attributes){
+            //if(attributes.length!=0) {
+                $('#attributes :input').attr('disabled', true);
+                $('#attributes .pa').addClass('disabled');
+                $.each(attributes, function (index, element) {
+				   $('#' + element).prop('disabled', false);
+				   $('#pa-' + element).removeClass('disabled');
+				   $("label[for=" + element + "]").removeClass('disabled');
+                });
+            //}else{
+			//	$('#attributes :input').attr('disabled', false);
+            //    $('#attributes .pa').removeClass('disabled');
+            //}
 
         }
 
 		function updateManufes(manufes){
-            if(manufes.length!=0) {
+            //if(manufes.length!=0) {
                 $('#manufes :input').attr('disabled', true);
-                $('#manufes ,label').addClass('disabled');
+                $('#manufes .ma').addClass('disabled');
                 $.each(manufes, function (index, element) {
                     $('#' + element).prop('disabled', false);
                     $('#' + element).removeClass('disabled');
-					$("label[for='"+ element +"']").removeClass('disabled');
+					$("label[for=" + element + "]").removeClass('disabled');
                 });
-            }else{
-				$('#manufes :input').attr('disabled', false);
-                $('#manufes ,label').removeClass('disabled');
-            }
+            //}else{
+			//	$('#manufes :input').attr('disabled', false);
+            //    $('#manufes .ma').removeClass('disabled');
+            //}
 
         }
 

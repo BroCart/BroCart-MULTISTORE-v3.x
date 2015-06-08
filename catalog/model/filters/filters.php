@@ -92,7 +92,7 @@ class ModelFiltersFilters extends Model {
 	 */
 	public function getAttributesByProductIds($product_ids){
 
-		$sql = "SELECT DISTINCT(CONCAT(attribute_id,'-',text)) as attributes
+		$sql = "SELECT CONCAT(attribute_id,'-',text) as pa_id
 				FROM " . DB_PREFIX . "product_attribute
 				WHERE product_id IN (".$product_ids.")";
 
@@ -100,12 +100,13 @@ class ModelFiltersFilters extends Model {
 
 		$attributes = array();
 		foreach ($query->rows as $row) {
-			$attributes[]=$row['attributes'];
+			$pa_id = str_replace(" ","_",$row['pa_id']);
+			$attributes[$pa_id]=$pa_id;
 		}
 
 		return $attributes;
 	}
-	
+
 	/**
 	 * получаем manufs выбранных товаров
 	 * в виде атрибут ид| значение атрибута
@@ -127,10 +128,38 @@ class ModelFiltersFilters extends Model {
 
 		return $manufes;
 	}
+	
+	/**
+	 * получаем manufs выбранных товаров
+	 * в виде атрибут ид| значение атрибута
+	 * @param array $product_ids
+	 * @return array
+	 */
+	public function getOptionsByProductIds($product_ids){
+		
+		$sql = "SELECT OVD.option_value_id as opt FROM
+                    " . DB_PREFIX . "product_option_value POD 
+					join " . DB_PREFIX . "option_description OD
+                    on POD.option_id = OD.option_id
+                    join " . DB_PREFIX . "option_value_description OVD
+                    on OVD.option_value_id = POD.option_value_id
+                    join " . DB_PREFIX . "product P
+                    on P.product_id = POD.product_id
+                    AND P.status = 1
+                    where OD.language_id = " . (int) $this->config->get('config_language_id') . " AND OVD.language_id = " . (int) $this->config->get('config_language_id') . " AND POD.product_id IN (".$product_ids.") group by OVD.option_value_id";
+
+		$query = $this->queryCacher($sql);
+		$opts = array();
+		foreach ($query->rows as $row) {
+			$opts[]=$row['opt'];
+		}
+
+		return $opts;
+	}
 
 	public function getAttributes($categoryId) {
-	//TODO:смущает меня дистинкт на тексте, а вдруг у разных атрибутов одно одинаковое значение
-		$sql = "SELECT DISTINCT pa.text, a.`attribute_id`, ad.`name`, ag.attribute_group_id, agd.name as attribute_group_name
+
+		$sql = "SELECT DISTINCT CONCAT(pa.attribute_id,'-',pa.text) as pa_id, pa.text, a.`attribute_id`, ad.`name`, ag.attribute_group_id, agd.name as attribute_group_name
 				FROM `" . DB_PREFIX . "product_attribute` pa" .
 			   " LEFT JOIN " . DB_PREFIX . "attribute a ON(pa.attribute_id=a.`attribute_id`) " .
 			   " LEFT JOIN " . DB_PREFIX . "attribute_description ad ON(a.attribute_id=ad.`attribute_id`) " .
@@ -164,15 +193,21 @@ class ModelFiltersFilters extends Model {
 				);
 			}
 
+			$pa_id = $row['pa_id'];
+			$pa_id = str_replace(" ","_",$pa_id);
+
 			if(!isset($attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']])) {
 				$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['name']=$row['name'];
-				$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['values'][]=$row['text'];
+				$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['values'][$pa_id]=$row['text'];
 			}
 			
 			$row['text'] = htmlspecialchars_decode($row['text'], ENT_COMPAT);
 			foreach(explode(';', $row['text']) as $text) {
 				if(!in_array($text, $attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['values'])) {
-					$attributes[$row['attribute_group_id']]['attribute_values'][$row['attribute_id']]['values'][] = htmlspecialchars($text, ENT_COMPAT);
+
+					$attribute_group_id = $row['attribute_group_id'];
+					$attribute_id = $row['attribute_id'];
+					$attributes[$attribute_group_id]['attribute_values'][$attribute_id]['values'][$pa_id] = htmlspecialchars($text, ENT_COMPAT);
 
 				}
 			}
@@ -182,7 +217,7 @@ class ModelFiltersFilters extends Model {
 		foreach($attributes as $attribute_group_id => $attribute_group) {
 
 			foreach($attribute_group['attribute_values'] as $attribute_id => $attribute) {
-				sort($attributes[$attribute_group_id]['attribute_values'][$attribute_id]['values']);
+				ksort($attributes[$attribute_group_id]['attribute_values'][$attribute_id]['values']);
 			}
 		}
 
@@ -268,7 +303,7 @@ class ModelFiltersFilters extends Model {
 					$attribute = explode("-", $attribute);
 					//значения - распределяем по переменным
 					list($attribute_id, $attribute_text) = $attribute;
-
+					$attribute_text = str_replace("_"," ",$attribute_text);
 					$sql .= $separator." ( PA.attribute_id =" . (int)$attribute_id . "  AND PA.text = '" . $attribute_text . "')";
 					$separator = " OR ";
 				}
@@ -401,7 +436,7 @@ class ModelFiltersFilters extends Model {
 
 			$product_data = array();
 
-			$query = $this->queryCacher($sql);
+			$query = $this->db->query($sql);
 
             $this->load->model('catalog/product');
 			foreach ($query->rows as $result) {                           

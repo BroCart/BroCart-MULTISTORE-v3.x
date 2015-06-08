@@ -353,7 +353,7 @@ class ControllerModuleFilters extends Controller {
                 'minPrice' => $minPrice,
                 'maxPrice' => $maxPrice
             );
-	//$this->log->write('Product_image:'. print_r($filterCond,true));		
+
             $data = array_merge($data, $filterCond);
 			
             $product_total = $this->model_catalog_product->getTotalProducts($data);
@@ -415,9 +415,11 @@ class ControllerModuleFilters extends Controller {
 
             //получаем атрибуты по товарам
             $attributes = $this->model_filters_filters->getAttributesByProductIds($product_ids);
-//$this->log->write('Pr$attributes:'. print_r($attributes,true));		
-			$manufacturers = $this->model_filters_filters->getManufByProductIds($product_ids);
 
+			$manufacturers = $this->model_filters_filters->getManufByProductIds($product_ids);
+			
+			$options = $this->model_filters_filters->getOptionsByProductIds($product_ids);
+			
             $url = '';
 
             if (isset($this->request->get['limit'])) {
@@ -567,6 +569,7 @@ class ControllerModuleFilters extends Controller {
             $result = array(
                 'html_output'=>$this->render(),
                 'attributes'=>$attributes,
+				'opt' => $options,
 				'manufes'=>$manufacturers
             );
             $this->response->setOutput(json_encode($result));

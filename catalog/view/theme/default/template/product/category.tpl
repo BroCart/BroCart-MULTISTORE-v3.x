@@ -1,12 +1,16 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
-
- <div class="breadcrumb">
-        <?php foreach ($breadcrumbs as $i=> $breadcrumb) { ?><?php echo $breadcrumb['separator']; ?>
-		<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" style="display: inline"><?php if($i+1<count($breadcrumbs)) { ?><a href="<?php echo $breadcrumb['href']; ?>" itemprop="url"><?php echo $breadcrumb['text']; ?></a> <?php } else { ?><span itemprop="title"><?php echo $breadcrumb['text']; ?></span><?php } ?></div>
-        <?php } ?>
+ <div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
+    <?php foreach ($breadcrumbs as $i=> $breadcrumb) { ?><?php echo $breadcrumb['separator']; ?>
+		<div style="display: inline" typeof="v:Breadcrumb">
+			<?php if($i+1<count($breadcrumbs)) { ?>
+				<a href="<?php echo $breadcrumb['href']; ?>" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a> 
+			<?php } else { ?>
+				<span rel="v:url" href="<?php echo $breadcrumb['href']; ?>" property="v:title"><?php echo $breadcrumb['text']; ?></span>
+			<?php } ?>
+		</div>
+    <?php } ?>
   </div>
-
   <h1><?php echo $heading_title; ?></h1>
   <?php if ($useo_heading_title2) { ?>
   <h2><?php echo $useo_heading_title2; ?></h2>
@@ -69,6 +73,41 @@
   <div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
   <div class="product-list">
     <?php foreach ($products as $product) { ?>
+	<span itemscope itemtype="http://schema.org/Product">				
+		<meta itemprop="name" content="<?php echo $product['name']; ?>" >
+		<meta itemprop="url" content="<?php echo $product['href']; ?>" >
+		<?php if ($product['description']) { ?>
+			<meta itemprop="description" content="<?php echo $product['description']; ?>" >
+		<?php } ?>
+		<?php if ($product['model']) { ?>
+			<meta itemprop="model" content="<?php echo $product['model']; ?>" >
+		<?php } ?>
+		<?php if ($product['manufacturer']) { ?>
+			<meta itemprop="brand" content="<?php echo $product['manufacturer']; ?>" >
+		<?php } ?>
+		<?php if ($product['thumb']) { ?>
+			<meta itemprop="image" content="<?php echo $product['thumb']; ?>" >
+		<?php } ?>
+		<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">						
+			<meta itemprop="priceCurrency" content="<?php echo $product['valuta']; ?>" />
+			<meta itemprop="price" content="<?php echo $product['microprice']; ?>" />						
+			<link itemprop="availability" href="http://schema.org/<?php echo ($product['qntos'] ? "InStock" : "OutOfStock") ?>" />
+			<meta itemprop="url" content="<?php echo $product['href']; ?>" >
+		</span>
+		<?php if ($product['reviews'] && $product['rating']) { ?>
+		<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+			<meta itemprop="reviewCount" content="<?php echo $product['reviews']; ?>">				
+			<meta itemprop="ratingValue" content="<?php echo $product['rating']; ?>">
+			<meta itemprop="bestRating" content="5">
+			<meta itemprop="worstRating" content="1">
+		</span>
+		<?php } ?>
+		<span itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+			<meta itemprop="lowPrice" content="<?php echo $product['microprice']; ?>">
+			<meta itemprop="highPrice" content="<?php echo $product['microprice']; ?>">
+			<meta itemprop="priceCurrency" content="<?php echo $product['valuta']; ?>">
+		</span>
+	</span>
     <div>	
       <?php if ($product['thumb']) { ?>
       <div class="image">
@@ -145,9 +184,9 @@
         <?php } ?>
       </div>
       <?php } ?>
-
+	<?php if ($product['reviews'] && $product['rating']) { ?>
       <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
-
+	<?php } ?>
       <div class="cart">
       <?php if (empty($product['key'])) { ?>
 		<input id="nekupleno" type="button" value="<?php echo $button_cart; ?>" onclick="add_bc('<?php echo $product['product_id']; ?>');" class="button <?php echo $product['product_id']; ?>" />

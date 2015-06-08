@@ -131,9 +131,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 		<?php if ($logo) { ?>
 			<?php if (strlen ($_SERVER['REQUEST_URI']) > 1 ){ ?>
-				<div id="logo" itemscope="" itemtype="http://schema.org/Organization"><a itemprop="url" href="<?php echo $home; ?>"><img itemprop="logo" src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a></div>
+				<div id="logo"><a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a></div>
 			<?php } else  { ?>
-				<div id="logo" itemscope="" itemtype="http://schema.org/Organization"><img itemprop="logo" src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></div>
+				<div id="logo"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></div>
 			<?php } ?>
 		<?php } ?>
 

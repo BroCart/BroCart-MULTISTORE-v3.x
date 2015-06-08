@@ -239,13 +239,7 @@ class ControllerProductProduct extends Controller {
 					
 			
 			$this->document->setDescription($product_info['meta_description']);
-			$this->document->setKeywords($product_info['meta_keyword']);
-			if($this->model_catalog_product->getCategoryPath($this->request->get['product_id'])!='0'){
-				$this->document->addLink($this->url->link('product/product', 'path=' . $this->model_catalog_product->getCategoryPath($this->request->get['product_id']) . '&product_id=' . $this->request->get['product_id']), 'canonical');
-			}else{
-				$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');
-			}
-						
+			$this->document->setKeywords($product_info['meta_keyword']);				
 			$this->document->setOpengraph('og:title', $product_info['name']);
 			$this->document->setOpengraph('og:type', 'product');
 			$this->document->setOpengraph('og:url', $this->url->link('product/product', 'product_id=' . $product_id, 'SSL'));
@@ -253,27 +247,19 @@ class ControllerProductProduct extends Controller {
 			$this->load->model('tool/image');
 			
 			if ($product_info['image']) {
-				$image_meta = $this->model_tool_image->resize($product_info['image'], 100,100);
-			} else {
-				$image_meta = '';
+				$this->document->setOpengraph('og:image', $this->model_tool_image->resize($product_info['image'], 100,100));
 			}
-			
-			$this->document->setOpengraph('og:image', $image_meta);
 			$this->document->setOpengraph('og:description', str_replace("\"", "&quot;",utf8_substr(trim(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), " \t\n\r"), 0, 200) . '...'));
 			
 			$this->document->addScript('catalog/view/javascript/jquery/tabs.js');
 			$this->document->addScript('catalog/view/javascript/jquery/colorbox/jquery.colorbox-min.js');
+			$this->document->addScript('catalog/view/javascript/jquery/jquery.ddslick.min.js');
 			
-			$fox = @file_get_contents(DIR_APPLICATION . 'view/javascript/jquery/tabs.js');
-			
-			$glock = $this->minify_js($fox);
-//$this->log->write('Product_$fox:'. print_r($glock,true));			
 			$this->document->addStyle('catalog/view/javascript/jquery/colorbox/colorbox.css');
 			
 			if (isset($product_info['u_h1']) && !empty($product_info['u_h1'] ) ) { 
 				$this->data['heading_title'] = trim($product_info['u_h1']);
-			}
-			else {
+			} else {
 				$this->data['heading_title'] = $product_info['name'];
 			}
 			if (isset($product_info['u_h2']) && !empty($product_info['u_h2'] ) ) { 
@@ -366,6 +352,8 @@ class ControllerProductProduct extends Controller {
 				$this->data['stock'] = $this->language->get('text_instock');
 			}
 			
+			$this->data['quantity'] = $product_info['quantity'];
+			
 			$key ='';
 			$product_in_cart = $this->searchSubArray($products_in_cart,'product_id',$product_info['product_id']);
 			if (isset($product_in_cart['key'])) $key = $product_in_cart['key'];
@@ -408,6 +396,12 @@ class ControllerProductProduct extends Controller {
 			} else {
 				$this->data['special'] = false;
 			}
+				
+			if ((float)$product_info['special']) {
+				$this->data['microprice'] = $this->currency->reformat($product_info['special']);
+			} else {
+				$this->data['microprice'] = $this->currency->reformat($product_info['price']);
+			}
 			
 			if ($this->config->get('config_tax')) {
 				$this->data['tax'] = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price']);
@@ -429,9 +423,9 @@ class ControllerProductProduct extends Controller {
 			$this->data['options'] = array();
 			
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) { 
-				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') { 
-					$option_value_data = array();
-					
+			
+				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'mixed' || $option['type'] == 'checkbox' || $option['type'] == 'image') { 
+					$option_value_data = array(); 					
 					foreach ($option['option_value'] as $option_value) {
 						if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 							if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
@@ -444,8 +438,9 @@ class ControllerProductProduct extends Controller {
 								'product_option_value_id' => $option_value['product_option_value_id'],
 								'option_value_id'         => $option_value['option_value_id'],
 								'name'                    => $option_value['name'],
-								'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
-								'price'                   => $price,
+								'image'                   => $option_value['image'],
+								'price'                   => $option_value['price'],
+								'fullprice'               => $price,
 								'price_prefix'            => $option_value['price_prefix']
 							);
 						}
@@ -824,97 +819,6 @@ class ControllerProductProduct extends Controller {
 		
 		$this->response->setOutput(json_encode($json));		
 	}
-	private function minify_js($str) {
-		$res = '';
-		$maybe_regex = true;
-		$i=0;
-		$current_char = '';
-		while ($i+1<strlen($str)) {
-			if ($maybe_regex && $str[$i]=='/' && $str[$i+1]!='/' && $str[$i+1]!='*' && @$str[$i-1]!='*') {//regex detected
-				if (strlen($res) && $res[strlen($res)-1] === '/') $res .= ' ';
-				do {
-					if ($str[$i] == '\\') {
-						$res .= $str[$i++];
-					} elseif ($str[$i] == '[') {
-						do {
-							if ($str[$i] == '\\') {
-								$res .= $str[$i++];
-							}
-							$res .= $str[$i++];
-						} while ($i<strlen($str) && $str[$i]!=']');
-					}
-					$res .= $str[$i++];
-				} while ($i<strlen($str) && $str[$i]!='/');
-				$res .= $str[$i++];
-				$maybe_regex = false;
-				continue;
-			} elseif ($str[$i]=='"' || $str[$i]=="'") {//quoted string detected
-				$quote = $str[$i];
-				do {
-					if ($str[$i] == '\\') {
-						$res .= $str[$i++];
-					}
-					$res .= $str[$i++];
-				} while ($i<strlen($str) && $str[$i]!=$quote);
-				$res .= $str[$i++];
-				continue;
-			} elseif ($str[$i].$str[$i+1]=='/*' && @$str[$i+2]!='@') {//multi-line comment detected
-				$i+=3;
-				while ($i<strlen($str) && $str[$i-1].$str[$i]!='*/') $i++;
-				if ($current_char == "\n") $str[$i] = "\n";
-				else $str[$i] = ' ';
-			} elseif ($str[$i].$str[$i+1]=='//') {//single-line comment detected
-				$i+=2;
-				while ($i<strlen($str) && $str[$i]!="\n" && $str[$i]!="\r") $i++;
-			}
-			
-
-
-			$LF_needed = false;
-			if (preg_match('/[\n\r\t ]/', $str[$i])) {
-				if (strlen($res) && preg_match('/[\n ]/', $res[strlen($res)-1])) {
-					if ($res[strlen($res)-1] == "\n") $LF_needed = true;
-					$res = substr($res, 0, -1);
-				}
-				while ($i+1<strlen($str) && preg_match('/[\n\r\t ]/', $str[$i+1])) {
-					if (!$LF_needed && preg_match('/[\n\r]/', $str[$i])) $LF_needed = true;
-					$i++;
-				}
-			}
-			
-			if (strlen($str) <= $i+1) break;
-			
-			$current_char = $str[$i];
-			
-			if ($LF_needed) $current_char = "\n";
-			elseif ($current_char == "\t") $current_char = " ";
-			elseif ($current_char == "\r") $current_char = "\n";
-			
-			// detect unnecessary white spaces
-			if ($current_char == " ") {
-				if (strlen($res) &&
-					(
-					preg_match('/^[^(){}[\]=+\-*\/%&|!><?:~^,;"\']{2}$/', $res[strlen($res)-1].$str[$i+1]) ||
-					preg_match('/^(\+\+)|(--)$/', $res[strlen($res)-1].$str[$i+1]) // for example i+ ++j;
-					)) $res .= $current_char;
-			} elseif ($current_char == "\n") {
-				if (strlen($res) &&
-					(
-					preg_match('/^[^({[=+\-*%&|!><?:~^,;\/][^)}\]=+\-*%&|><?:,;\/]$/', $res[strlen($res)-1].$str[$i+1]) ||
-					(strlen($res)>1 && preg_match('/^(\+\+)|(--)$/', $res[strlen($res)-2].$res[strlen($res)-1])) ||
-					(strlen($str)>$i+2 && preg_match('/^(\+\+)|(--)$/', $str[$i+1].$str[$i+2])) ||
-					preg_match('/^(\+\+)|(--)$/', $res[strlen($res)-1].$str[$i+1])// || // for example i+ ++j;
-					)) $res .= $current_char;
-			} else $res .= $current_char;
-			
-			// if the next charachter be a slash, detects if it is a divide operator or start of a regex
-			if (preg_match('/[({[=+\-*\/%&|!><?:~^,;]/', $current_char)) $maybe_regex = true;
-			elseif (!preg_match('/[\n ]/', $current_char)) $maybe_regex = false;
-			
-			$i++;
-		}
-		if ($i<strlen($str) && preg_match('/[^\n\r\t ]/', $str[$i])) $res .= $str[$i];
-		return $res;
-	}
+	
 }
 ?>

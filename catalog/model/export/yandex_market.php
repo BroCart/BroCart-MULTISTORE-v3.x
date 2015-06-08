@@ -11,5 +11,11 @@ class ModelExportYandexMarket extends Model {
 
 		return $query->rows;
 	}
+		
+	public function getDefaultCurrencyCode() {
+		$query = $this->db->query("SELECT code FROM " . DB_PREFIX . "currency WHERE value = '1.00000000'");
+	
+		return $query->row['code'];
+	}
 }
 ?>

@@ -45,6 +45,17 @@ class ControllerCommonFooter extends Controller {
 		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');			
 		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 		
+		//Microdata for seo
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$server = $this->config->get('config_ssl');
+		} else {
+			$server = $this->config->get('config_url');
+		}
+		$this->data['org_name'] = $this->config->get('config_name');
+		$this->data['org_tel'] = str_replace("+", "", $this->config->get('config_telephone'));
+		$this->data['org_url'] = $this->url->link('common/home');
+		$this->data['org_logo'] = $server . 'image/' . $this->config->get('config_logo');
+		
 		if ($this->config->get('config_to_top') == '1') {
 			$this->data['to_top'] = $this->model_tool_image->resize($this->config->get('config_top_image'),50,50);
 		}else{

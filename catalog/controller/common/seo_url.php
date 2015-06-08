@@ -114,12 +114,12 @@ class ControllerCommonSeoUrl extends Controller {
 			$route_ = $this->request->get['_route_'];
 
 			$tokens = explode('/', $this->request->get['_route_']);
-			
+//		if ($this->config->get('config_seo_url')) { 	
 			if(array_key_exists($tokens[0], $this->languages)) {
 				$code = $tokens[0];
 				$this->request->get['_route_'] = substr($this->request->get['_route_'], strlen($code) + 1);
 			}
-
+//		}
 			if(trim($this->request->get['_route_']) == '' || trim($this->request->get['_route_']) == 'index.php') {
 				unset($this->request->get['_route_']);
 			}
@@ -357,10 +357,15 @@ class ControllerCommonSeoUrl extends Controller {
 	}
 
 	public function rewrite($link, $code = '') {
+		
+		if (!$this->config->get('config_seo_url')) { 
+			return $link; 
+		}
+		
 		if(!$code) {
 			$code = $this->session->data['language'];
 		}
-		if (!$this->config->get('config_seo_url')) return $link;
+		
 		$seo_url = '';
 		$p_url='';
         $l_url = ''; 
@@ -587,9 +592,12 @@ class ControllerCommonSeoUrl extends Controller {
 		        } elseif ($key === 'page') {
  				    $p_url = '/'. $this->setvar['page'] . $value;    
                          unset($data[$key]);
-				}                
+				} elseif ($key === 'remove') {
+					$seo_url .= '/?remove=' . $value;
+					unset($data[$key]);
+				}
 			}
-		       $seo_url .=  $o_url . $l_url .  $p_url;
+		    $seo_url .=  $o_url . $l_url .  $p_url;
 		}
 		
 	    return $seo_url;
@@ -683,15 +691,19 @@ class ControllerCommonSeoUrl extends Controller {
 	}
 
 	private function validate() {
-	
 		if (isset($this->request->get['route']) && $this->request->get['route'] == 'error/not_found') {
 			return;
 		}
+		if (ltrim($this->request->server['REQUEST_URI'], '/') =='sitemap.xml') {
+			$this->request->get['route'] = 'feed/google_sitemap';
+			return;
+		}
+
 		if(empty($this->request->get['route'])) {
 			$this->request->get['route'] = 'common/home';
 		}
 
-		if (isset($this->request->server['HTTP_X_REQUESTED_WITH']) && utf8_strtolower($this->request->server['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+		if (isset($this->request->server['HTTP_X_REQUESTED_WITH']) && strtolower($this->request->server['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 			return;
 		}
 

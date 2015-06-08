@@ -294,7 +294,17 @@ class ControllerProductCategory extends Controller {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
 				} else {
 					$special = false;
-				}	
+				}
+				
+				$manufacturer = $result['manufacturer'];
+				
+				$model = $result['model'];
+
+				if ((float)$result['special']) {
+					$microprice = $this->currency->reformat($result['special']);
+				} else {
+					$microprice = $this->currency->reformat($result['price']);
+				}
 				
 				if ($this->config->get('config_tax')) {
 					$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
@@ -302,10 +312,22 @@ class ControllerProductCategory extends Controller {
 					$tax = false;
 				}				
 				
-				if ($this->config->get('config_review_status')) {
+				if ($this->config->get('config_review_status') && $result['rating'] > 0) {
 					$rating = (int)$result['rating'];
 				} else {
 					$rating = false;
+				}
+				
+				if ($result['quantity'] > 0) {
+					$qntos = true;				
+				} else {
+					$qntos = false;
+				}
+				
+				if ($result['reviews'] > 0) {
+					$reviews = $result['reviews'];
+				} else {
+					$reviews = false;
 				}
 				
 				$product_lable = $this->model_catalog_product->getLabels($result['product_id']);
@@ -352,11 +374,16 @@ class ControllerProductCategory extends Controller {
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,
+					'qntos'        => $qntos,
+					'manufacturer'  => $manufacturer,
+					'model'        => $model,
+					'valuta'	 => $this->currency->getCode(),
+					'microprice'	 => $microprice,
 					'options'	  => $options,
 					'label'     => $tumbler ? $lables_all : false ,
 					'price_value' => $result['price'],
-					'rating'      => $result['rating'],
-					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
+					'rating'      => $rating,
+					'reviews'      => $reviews,
 					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
 				);
 			}

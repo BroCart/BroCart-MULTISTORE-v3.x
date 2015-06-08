@@ -10,10 +10,16 @@
 <?php } ?>
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>    
-  <div class="breadcrumb">
+  <div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
     <?php foreach ($breadcrumbs as $i=> $breadcrumb) { ?><?php echo $breadcrumb['separator']; ?>
-		<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" style="display: inline"><?php if($i+1<count($breadcrumbs)) { ?><a href="<?php echo $breadcrumb['href']; ?>" itemprop="url"><?php echo $breadcrumb['text']; ?></a> <?php } else { ?><span itemprop="title"><?php echo $breadcrumb['text']; ?></span><?php } ?></div>
-        <?php } ?>
+		<div style="display: inline" typeof="v:Breadcrumb">
+			<?php if($i+1<count($breadcrumbs)) { ?>
+				<a href="<?php echo $breadcrumb['href']; ?>" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a> 
+			<?php } else { ?>
+				<span rel="v:url" href="<?php echo $breadcrumb['href']; ?>" property="v:title"><?php echo $breadcrumb['text']; ?></span>
+			<?php } ?>
+		</div>
+    <?php } ?>
   </div>
     <?php if($settings){?>   
   <h1><?php echo $heading_title; ?>
@@ -193,7 +199,7 @@
           <br />
           <br />
 		  <span class="required">*</span> <?php echo $entry_zone; ?><br />
-            <select name="zone_id" onchange="updateShM($('#country_id').val(), this.value);" class="large-field">
+            <select name="zone_id" onchange="updateShM($('#country_id').val(), this.value);" class="large-field">			
             </select>
 			<br />
           <br />
@@ -234,10 +240,14 @@
           <div class="shipping-methods">
             <div class="shipping_and_payment">
             <script type="text/javascript"><!--
-                function updateShM(country_id,zone_id){
-                        $('#shippmetloading, #paymetloading').html(' <img src="catalog/view/theme/default/image/loading.gif"  style="margin-top:-3px;vertical-align:middle;">');
-                        $('#shipping_methods').load('index.php?route=checkout/cart/getShippingMethods&country_id=' + country_id+ '&zone_id=' + zone_id, function(){$('#shippmetloading').empty();});
-                        $('#payment_methods').load('index.php?route=checkout/cart/getPaymentMethods&country_id=' + country_id+ '&zone_id=' + zone_id, function(){$('#paymetloading').empty();});
+                function updateShM(country_id, zone_id){
+                    $('#shippmetloading, #paymetloading').html(' <img src="catalog/view/theme/default/image/loading.gif"  style="margin-top:-3px;vertical-align:middle;">');
+                    $('#shipping_methods').load('index.php?route=checkout/cart/getShippingMethods&country_id=' + country_id+ '&zone_id=' + zone_id, function(){
+						$('#shippmetloading').empty();
+					});
+                    $('#payment_methods').load('index.php?route=checkout/cart/getPaymentMethods&country_id=' + country_id+ '&zone_id=' + zone_id, function(){
+						$('#paymetloading').empty();
+					});
                 }
                 function getPaymentForm(code, callback){
                     $.ajax({
@@ -264,11 +274,12 @@
               <?php foreach ($shipping_method['quote'] as $quote) { ?>
               <tr>
                 <td style="width: 1px;"><?php if ($quote['code'] == $code || !$code) { ?>
-                  <?php $code = $quote['code']; ?>
-                  <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" checked="checked" />
-                  <?php } else { ?>
-                  <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
-                  <?php } ?></td>
+					<?php $code = $quote['code']; ?>
+						<input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" checked="checked" />
+					<?php } else { ?>
+						<input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
+					<?php } ?>
+				</td>
                 <td><label for="<?php echo $quote['code']; ?>"><?php echo $quote['title']; ?></label></td>
                 <td style="text-align: right;"><label for="<?php echo $quote['code']; ?>"><?php echo $quote['text']; ?></label></td>
               </tr>
@@ -334,7 +345,7 @@
         </div>
         <input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" style="display:none" />
         <script type="text/javascript"><!--
-        $('#checkout-form select[name=\'zone_id\']').load('index.php?route=checkout/guest/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id;?>');
+			$('#checkout-form select[name=\'zone_id\']').load('index.php?route=checkout/cart/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id;?>');
         //--></script>
     </div>
     </div>
@@ -534,7 +545,6 @@
 <script type="text/javascript"><!--
 $('input[name=\'next\']').bind('change', function() {
 	$('.cart-module > div').hide();
-
 	$('#' + this.value).show();
 });
 
@@ -642,6 +652,24 @@ $('#button-quote').live('click', function() {
 	});
 });
 <?php if($settings){?>
+$('#shipping_methods input[type=\'radio\']:checked').live('click', function() {
+	$.ajax({        
+        url: 'index.php?route=checkout/cart/recalcTotal',
+        type: 'post',
+        data: 'shipping_method=' + this.value,
+        dataType: 'json',
+        success: function(json) {
+			html = '';
+			for (i in json['totals']) {
+				html += '<tr>';
+				html += '  <td colspan="5" class="right"><b>' + json['totals'][i]['title'] + '</b></td>';
+				html += '  <td class="right">' + json['totals'][i]['text'] + '</td>';
+				html += '</tr>';
+			}
+        $('#total').html(html);
+        }
+    });
+});
 $('#button-checkout').live('click', function() {
 	$.ajax({
 		url: 'index.php?route=checkout/cart',
@@ -731,7 +759,7 @@ $('#button-checkout').live('click', function() {
 
 					$('.warning').fadeIn('slow');
 				}
-                               $('.wait').remove();
+                $('.wait').remove();
 			} else {
                             $.ajax({
                                     url: 'index.php?route=checkout/confirm',
@@ -815,6 +843,6 @@ $('select[name=\'country_id\']').bind('change', function() {
 	});
 });
 
-$('select[name=\'country_id\']').trigger('change');
+//$('select[name=\'country_id\']').trigger('change');
 //--></script>
 <?php echo $footer; ?>

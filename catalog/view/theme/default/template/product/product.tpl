@@ -1,18 +1,17 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
- <div class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#" itemprop="breadcrumb">
-        <?php foreach ($breadcrumbs as $i=> $breadcrumb) { ?><?php echo $breadcrumb['separator']; ?>
-		<div style="display: inline"><?php if($i+1<count($breadcrumbs)) { ?>
-		<i typeof="v:Breadcrumb">
-		<a href="<?php echo $breadcrumb['href']; ?>" itemprop="url" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a> 
-		</i>
-		<?php } else { ?>
-		<span  typeof="v:Breadcrumb" itemprop="title" property="v:title"><?php echo $breadcrumb['text']; ?></span>
-		<?php } ?></div>
-        <?php } ?>
+ <div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
+    <?php foreach ($breadcrumbs as $i=> $breadcrumb) { ?><?php echo $breadcrumb['separator']; ?>
+		<div style="display: inline" typeof="v:Breadcrumb">
+			<?php if($i+1<count($breadcrumbs)) { ?>
+				<a href="<?php echo $breadcrumb['href']; ?>" rel="v:url" property="v:title"><?php echo $breadcrumb['text']; ?></a> 
+			<?php } else { ?>
+				<span rel="v:url" href="<?php echo $breadcrumb['href']; ?>" property="v:title"><?php echo $breadcrumb['text']; ?></span>
+			<?php } ?>
+		</div>
+    <?php } ?>
   </div>
-
-  <div class="product-info" itemscope="" itemtype="http://schema.org/Product">
+  <div class="product-info">
     <?php if ($thumb || $images) { ?>
     <div class="left">
       <?php if ($thumb) { ?>
@@ -28,8 +27,45 @@
     </div>
     <?php } ?>
     <div class="right">
-	<div itemprop="name"><h1><?php echo $heading_title; ?></h1></div>
-		<div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating"><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="Overall Rating" /><meta itemprop="rating" content="<?php echo (int)$rating; ?>"><meta itemprop="count" content="<?php echo (int)$reviews; ?>"><span class="ratingsSep">&nbsp;|&nbsp;</span><span itemprop="ratingValue"><?php echo $rating . '.0'; ?></span><span class="ratingsSep">&nbsp;|&nbsp;</span><span itemprop="reviewCount"><?php echo $reviews_num; ?></span></div>
+	<span itemscope itemtype="http://schema.org/Product">				
+		<meta itemprop="name" content="<?php echo $heading_title; ?>" >
+		<meta itemprop="url" content="<?php echo $breadcrumb['href']; ?>" >
+		<?php if ($description) { ?>
+			<meta itemprop="description" content="<?php echo $description; ?>" >
+		<?php } ?>
+		<?php if ($model) { ?>
+			<meta itemprop="model" content="<?php echo $model; ?>" >
+		<?php } ?>
+		<?php if ($manufacturer) { ?>
+			<meta itemprop="brand" content="<?php echo $manufacturer; ?>" >
+		<?php } ?>
+		<?php if ($thumb) { ?>
+			<meta itemprop="image" content="<?php echo $thumb; ?>" >
+		<?php } ?>				
+		<?php if ($images) { foreach ($images as $image) {?>
+			<meta itemprop="image" content="<?php echo $image['thumb']; ?>" >
+		<?php } } ?>
+		<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">						
+			<meta itemprop="priceCurrency" content="<?php echo $this->currency->getCode(); ?>" />
+			<meta itemprop="price" content="<?php echo $microprice; ?>" />						
+			<link itemprop="availability" href="http://schema.org/<?php echo (($quantity > 0) ? "InStock" : "OutOfStock") ?>" />
+			<meta itemprop="url" content="<?php echo $breadcrumb['href']; ?>" >
+		</span>
+		<?php if ($reviews && $rating) { ?>
+		<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+			<meta itemprop="reviewCount" content="<?php echo $reviews; ?>">				
+			<meta itemprop="ratingValue" content="<?php echo $rating; ?>">
+			<meta itemprop="bestRating" content="5">
+			<meta itemprop="worstRating" content="1">
+		</span>
+		<?php } ?>
+		<span itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+			<meta itemprop="lowPrice" content="<?php echo $microprice; ?>">
+			<meta itemprop="highPrice" content="<?php echo $microprice; ?>">
+			<meta itemprop="priceCurrency" content="<?php echo $this->currency->getCode(); ?>">
+		</span>
+	</span>
+	<h1><?php echo $heading_title; ?></h1>		
 	  <div class="description">
         <?php if ($manufacturer) { ?>
         <span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a><br />
@@ -202,6 +238,26 @@
         </div>
         <br />
         <?php } ?>
+		
+		<!--new type option-->
+		<?php if ($option['type'] == 'mixed') { ?>
+					<div id="option-<?php echo $option['product_option_id']; ?>" class="option">
+						<?php if ($option['required']) { ?>
+							<span class="required">*</span>
+						<?php } ?>
+						<b><?php echo $option['name']; ?>:</b>
+						<select id="htmlselect-<?php echo $option['product_option_id']; ?>" class="<?php echo $option['type']; ?>" name="option[<?php echo $option['product_option_id']; ?>]">
+							<option value="0" data-description="" data-imagesrc="" data-price="" data-prefix="" data-name=""><?php echo $text_select; ?></option>
+							<?php foreach ($option['option_value'] as $option_value) {
+								if (strpos($option_value['image'], 'no_image')) $option_value['image'] = ''; ?>
+								<option value="<?php echo $option_value['product_option_value_id']; ?>" data-description="<?php if ($option_value['price']) { ?><?php echo $option_value['price_prefix']; ?><?php echo $option_value['fullprice']; ?><?php } ?>" data-imagesrc="<?php echo $option_value['image']; ?>" data-prefix="<?php echo $option_value['price_prefix']; ?>" data-name="<?php echo $option['product_option_id']; ?>" data-price="<?php echo $option_value['price']; ?>"><?php echo $option_value['name']; ?>							
+								</option>	
+					<?php } ?>
+						</select>
+					</div>
+				<?php } ?>
+
+		<!--end of new type option-->
         <?php if ($option['type'] == 'time') { ?>
         <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
           <?php if ($option['required']) { ?>
@@ -221,10 +277,10 @@
           <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
           &nbsp;
 		   <?php if (empty($key)) { ?>
-			<input id="button-cart" type="button" value="<?php echo $button_cart; ?>" onclick="this.value='<?php echo $button_cart_already; ?>'" class="button" />
-     <?php } else { ?>
-		<input id="button-cart" type="button" value="<?php echo $button_cart_already; ?>" class="button" />
-     <?php } ?>
+				<input id="button-cart" type="button" value="<?php echo $button_cart; ?>" onclick="this.value='<?php echo $button_cart_already; ?>'" class="button" />
+			<?php } else { ?>
+				<input id="button-cart" type="button" value="<?php echo $button_cart_already; ?>" class="button" />
+			<?php } ?>
           <!--input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" /-->
           <span>&nbsp;&nbsp;<?php echo $text_or; ?>&nbsp;&nbsp;</span>
           <span class="links"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />
@@ -317,7 +373,7 @@
 	<?php } ?>
   <?php if ($review_status) { ?>
   <div id="tab-review" class="tab-content">
-    <div id="review" itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate"></div>
+    <div id="review"></div>
     <h2 id="review-title"><?php echo $text_write; ?></h2>
     <b><?php echo $entry_name; ?></b><br />
     <input type="text" name="name" value="" />
@@ -444,9 +500,18 @@ console.log(foto);
 });
 //--></script>
 <?php if ($options) { ?>
+
 <script type="text/javascript" src="catalog/view/javascript/jquery/ajaxupload.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery.shuffleLetters.js"></script>
 <script type="text/javascript"><!--
+<?php foreach ($options as $option) { ?>
+		<?php if ($option['type'] == 'mixed') { ?>
+		var option_id = <?php echo $option['product_option_id']; ?>;
+		$('#htmlselect-' + option_id).ddslick();
+		//ddData[incr] = $('#htmlselect-' + option_id).data('ddslick');		
+		//incr ++;
+		<?php } ?>
+	<?php } ?>
 var tt="<?php echo $text_tax;?>";var bp='0';var tp='0';var sp='0';var pe;var se;var te;var pl=<?php echo($this->currency->getDecimalPlace())?>;var dc="<?php $dc=$this->language->get('decimal_point');echo $dc;?>";<?php if($price){?>bp='<?php  $filter="/[^0-9\\".$dc."]/";echo preg_replace($filter,"",$price)?>';bp=bp.replace(dc, ".");<?php if($tax){?>tp="<?php echo preg_replace($filter,"",$tax)?>";tp=tp.replace(dc, ".");tt="<?php echo $text_tax;?> ";<?php }?><?php if(!$special){?><?php }else{?>sp="<?php echo preg_replace($filter,"",$special)?>";sp=sp.replace(dc, ".");<?php }?><?php }?>var priceMod={};var optPrices={};var symLeft=<?php echo($this->currency->getSymbolLeft()!='')?"'".$this->currency->getSymbolLeft()."'":"''";?>;var symRight=<?php echo($this->currency->getSymbolRight()!='')?"'".$this->currency->getSymbolRight()."'":"''";?>;function addCommas(a){a+="";x=a.split(".");x1=x[0];x2=x.length>1?dc+x[1]:"";var b=/(\d+)(\d{3})/;if(dc!=","){while(b.test(x1)){x1=x1.replace(b,"$1"+","+"$2")}}return x1+x2}function updatePrice(){var a=0;for(var b in optPrices){a=a+parseFloat(optPrices[b])}if(parseFloat(bp)+a!=parseFloat(c)){var c=(parseFloat(bp)+a).toFixed(pl);var d=(parseFloat(tp)+a*(parseFloat(tp)/parseFloat(bp))).toFixed(pl);var e=(parseFloat(sp)+a).toFixed(pl);c=symLeft.toString()+addCommas(c)+symRight.toString();e=symLeft.toString()+addCommas(e)+symRight.toString();d=tt+symLeft.toString()+addCommas(d)+symRight.toString();$("span.#price").stop().text("").animate({percent:100},"slow",function(){$(this).shuffleLetters({text:c})});$("span.price-old").stop().text("").animate({percent:100},"slow",function(){$(this).shuffleLetters({text:c})});$("span.price-new").stop().text("").animate({percent:100},"slow",function(){$(this).shuffleLetters({text:e})});$("span.price-tax").stop().text("").animate({percent:100},"slow",function(){$(this).shuffleLetters({text:d})})}}<?php foreach($options as $option){?><?php if($option['type']=='select'){?>priceMod["<?php echo $option['product_option_id'];?>"]=[];optPrices["<?php echo $option['product_option_id'];?>"]='0';priceMod["<?php echo $option['product_option_id'];?>"].push('+0');<?php foreach($option['option_value'] as $option_value){?>priceMod["<?php echo $option['product_option_id'];?>"].push('<?php if($option_value['price']){echo $option_value['price_prefix'];$c_s=preg_replace($filter,"",$option_value['price']);$c_s= str_replace($dc, ".", $c_s);echo $c_s;}else{echo "+0";}?>');<?php }?>$('select[name="option[<?php echo $option['product_option_id'];?>]"]').change(function(){optPrices[<?php echo $option['product_option_id'];?>]=priceMod[<?php echo $option['product_option_id'];?>][this.selectedIndex];updatePrice();});<?php }?><?php if($option['type']=='radio'){?><?php foreach($option['option_value'] as $option_value){?>priceMod["<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>"]={};optPrices["<?php echo $option['product_option_id'];?>"]='0';priceMod["<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>"]="<?php if($option_value['price']){echo $option_value['price_prefix'];$c_s=preg_replace($filter,"",$option_value['price']);$c_s=str_replace($dc,".",$c_s);echo $c_s;}else{echo "+0";}?>";$('#option-value-<?php echo $option_value['product_option_value_id'];?>').click(function(){if(this.checked){optPrices['<?php echo $option['product_option_id'];?>']=priceMod['<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>'];}else{optPrices['<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>']='0';}updatePrice();});<?php }?><?php }?><?php if($option['type']=='checkbox'){?><?php foreach($option['option_value'] as $option_value){?>priceMod["<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>"]={};optPrices["<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>"]='0';priceMod["<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>"]="<?php if($option_value['price']){echo $option_value['price_prefix'];$c_s=preg_replace($filter,"",$option_value['price']);$c_s=str_replace($dc,".",$c_s);echo $c_s;}else{echo "+0";}?>";$('#option-value-<?php echo $option_value['product_option_value_id'];?>').click(function(){if(this.checked){optPrices['<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>']=priceMod['<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>'];}else{optPrices['<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>']='0';}updatePrice();});<?php }?><?php }?><?php if($option['type']=='image'){?><?php foreach($option['option_value'] as $option_value){?>priceMod["<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>"]={};optPrices["<?php echo $option['product_option_id'];?>"]='0';priceMod["<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>"]="<?php if($option_value['price']){echo $option_value['price_prefix'];$c_s=preg_replace($filter,"",$option_value['price']);$c_s=str_replace($dc,".",$c_s);echo $c_s;}else{echo "+0";}?>";$('#option-value-<?php echo $option_value['product_option_value_id'];?>').click(function(){if(this.checked){optPrices['<?php echo $option['product_option_id'];?>']=priceMod['<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>'];}else{optPrices['<?php echo $option['product_option_id'];?>_<?php echo $option_value['product_option_value_id'];?>']='0';}updatePrice();});<?php }?><?php }?><?php }?>
 //--></script>
 <?php foreach ($options as $option) { ?>

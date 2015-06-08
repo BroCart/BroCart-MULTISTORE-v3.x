@@ -5,7 +5,7 @@ class ModelLocalisationCurrency extends Model {
 	
 		return $query->row;
 	}
-	
+		
 	public function getCurrencies() {
 		$currency_data = $this->cache->get('currency');
 

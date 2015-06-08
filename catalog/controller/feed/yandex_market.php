@@ -36,13 +36,15 @@ class ControllerFeedYandexMarket extends Controller {
 			$offers_currency = $this->config->get('yandex_market_currency');
 			if (!$this->currency->has($offers_currency)) exit();
 
-			$decimal_place = $this->currency->getDecimalPlace($offers_currency);
+			$decimal_place = intval($this->currency->getDecimalPlace($offers_currency));
 
 			$shop_currency = $this->config->get('config_currency');
 
 			$this->setCurrency($offers_currency, 1);
 
 			$currencies = $this->model_localisation_currency->getCurrencies();
+			
+			$curr_def = $this->model_export_yandex_market->getDefaultCurrencyCode();
 
 			$supported_currencies = array('RUR', 'RUB', 'USD', 'BYR', 'KZT', 'EUR', 'UAH');
 
@@ -50,8 +52,8 @@ class ControllerFeedYandexMarket extends Controller {
 
 			foreach ($currencies as $currency) {
 				if ($currency['code'] != $offers_currency && $currency['status'] == 1) {
-					$this->setCurrency($currency['code'], number_format(1/$this->currency->convert($currency['value'], $offers_currency, $shop_currency), 4, '.', ''));
-				}
+					$this->setCurrency($currency['code'], number_format($this->currency->convert(1, $currency['code'], $offers_currency), 4, '.', ''));
+				} 
 			}
 
 			// Категории
@@ -79,7 +81,8 @@ class ControllerFeedYandexMarket extends Controller {
 
 				// Параметры товарного предложения
 				$data['url'] = $this->url->link('product/product', 'path=' . $this->getPath($product['category_id']) . '&product_id=' . $product['product_id']);
-				$data['price'] = number_format($this->currency->convert($this->tax->calculate($product['price'], $product['tax_class_id']), $shop_currency, $offers_currency), $decimal_place, '.', '');
+	//			$data['price'] = number_format($this->currency->convert($this->tax->calculate($product['price'], $product['tax_class_id']), $shop_currency, $offers_currency), $decimal_place, '.', '');
+				$data['price'] = round($this->currency->convert($this->tax->calculate($product['price'], $product['tax_class_id']), $curr_def, $offers_currency), 0);
 				$data['currencyId'] = $offers_currency;
 				$data['categoryId'] = $product['category_id'];
 				$data['delivery'] = 'true';
@@ -153,7 +156,7 @@ class ControllerFeedYandexMarket extends Controller {
 	 *		и означает на сколько увеличить курс в процентах от курса выбранного банка
 	 * @return bool
 	 */
-	private function setCurrency($id, $rate = 'CBRF', $plus = 0) {
+	private function setCurrency($id, $rate = 'NBU', $plus = 0) {		
 		$allow_id = array('RUR', 'RUB', 'USD', 'BYR', 'KZT', 'EUR', 'UAH');
 		if (!in_array($id, $allow_id)) {
 			return false;
@@ -178,6 +181,7 @@ class ControllerFeedYandexMarket extends Controller {
 			if (!(is_numeric($rate) && $rate > 0)) {
 				return false;
 			}
+
 			$this->currencies[] = array(
 				'id'=>$this->prepareField(strtoupper($id)),
 				'rate'=>(float)$rate

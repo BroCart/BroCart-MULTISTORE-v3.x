@@ -94,5 +94,16 @@ svetlofor();
 });
 <?php } ?>
 //--></script>
-
+<script type="application/ld+json">
+	{ "@context" : "http://schema.org",
+	  "@type" : "Organization",
+	  "name" : "<?php echo $org_name; ?>",
+	  "url" : "<?php echo $org_url; ?>",
+	  "logo": "<?php echo $org_logo; ?>",
+	  "contactPoint" : [
+		{ "@type" : "ContactPoint",
+		  "telephone" : "+<?php echo $org_tel; ?>",
+		  "contactType" : "customer service"
+		} ] }
+	</script>
 </body></html>
