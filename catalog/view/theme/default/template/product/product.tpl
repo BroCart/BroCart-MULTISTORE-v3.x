@@ -31,7 +31,7 @@
 		<meta itemprop="name" content="<?php echo $heading_title; ?>" >
 		<meta itemprop="url" content="<?php echo $breadcrumb['href']; ?>" >
 		<?php if ($description) { ?>
-			<meta itemprop="description" content="<?php echo $description; ?>" >
+			<meta itemprop="description" content="<?php echo strip_tags($description); ?>" >
 		<?php } ?>
 		<?php if ($model) { ?>
 			<meta itemprop="model" content="<?php echo $model; ?>" >
