@@ -1,1 +1,4 @@
-<?php//Text$_['text_apply']                       = 'Застосувати';?>
+<?php
+//Text
+$_['text_apply']                       = 'Застосувати';
+?>
