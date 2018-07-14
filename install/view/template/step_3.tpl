@@ -19,13 +19,13 @@
         <tr>
           <td>Database Driver:</td>
           <td><select name="db_driver">
-		  <?php if ($db_driver == 'mmysqli') { ?>
-              <option value="mysql">MySQL</option>
-			  <option value="mmysqli" selected="selected">MySQLi</option>
-			  <?php } else { ?>
-			  <option value="mysql">MySQL</option>
-			  <option value="mmysqli">MySQLi</option>
-			  <?php } ?>
+		<?php if ($db_driver == 'mysql') { ?>              		
+			<option value="mysqli" selected="selected">MySQLi</option>
+			<option value="mysql">MySQL</option>
+		<?php } else { ?>			
+			<option value="mysqli">MySQLi</option>
+			<option value="mysql">MySQL</option>
+		<?php } ?>
             </select></td>
         </tr>
         <tr>
