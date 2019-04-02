@@ -1,0 +1,14 @@
+<footer id="footer">{{ text_footer }}<br />{{ text_version }}</footer></div>
+<script id="brocart-admin-tab-script">
+	if (typeof(Storage) !== "undefined") {
+		$(document).on('click', '[data-toggle="tab"]', function(){
+			localStorage.setItem("brocart-active-tab-" + getURLVar('route'), $(this).attr('href'));
+		});
+		if(localStorage.getItem("brocart-active-tab-" + getURLVar('route'))){
+			$('[href="' + localStorage.getItem("brocart-active-tab-" + getURLVar('route')) + '"]').trigger('click');
+		}
+	} else {
+		console.log('Sorry bro... storage not supported !');
+	}
+</script>
+</body></html>

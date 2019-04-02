@@ -1,0 +1,30 @@
+{% if error_warning %}
+<span><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</span>
+{% endif %}
+{% if shipping_methods %}
+<i>{{ text_shipping_method }}</i>
+<select onChange="updateTotal();" name="shipping_method" id="shipping-method-select" class="form-control large-field">
+{% for shipping_method in shipping_methods %}
+	{% if shipping_method.value == code or not code %}
+    {% set code = shipping_method.value %}
+	<option value="{{ shipping_method.value }}" selected="selected" >{{ shipping_method.title }}</option>
+	{% else %}
+	<option value="{{ shipping_method.value }}">{{ shipping_method.title }}</option>
+	 {% endif %}
+{% endfor %}
+</select>
+</br>
+<strong>{{ text_comments }}</strong>
+<input type="checkbox" id="need-comment" value="1" style="vertical-align: top;" />
+<script type="text/javascript"><!--
+$(document).ready(function() {
+    $('#need-comment').change(function() {
+        if(this.checked) {            
+            $('#comments').removeClass('hidden');
+        } else {
+			$('#comments').addClass('hidden');
+		}   
+    });	
+});
+//--></script>
+{% endif %}

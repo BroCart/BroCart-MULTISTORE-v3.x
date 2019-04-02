@@ -1,0 +1,73 @@
+	<li class="dropdown sla-cleaner-widget">
+	  <a class="dropdown-toggle" data-toggle="dropdown">
+	  {% if (text_cleaner_size) %}
+	    <span id="size-all" class="label label-danger">{{ text_cleaner_size.all }}</span>
+	  {% endif %}<i class="fa fa-eraser fa-lg"></i>
+	  </a>
+
+	  <ul class="dropdown-menu dropdown-menu-right clear-dropdown">
+	  {% for key,actions in menu %} 
+		{% if (actions.child) %} 
+		<li class="dropdown-header"><b>{{ actions.text }}</b></li>
+			{% for key_action,action in actions.child %} 
+        <li>
+		<a title="{{ text_clear }}" onclick="goClear('{{ key }}', '{{ key_action }}');"><span data-loading-text="<i class='fa fa-spinner'></i>" data-toggle="tooltip" class="text-danger pull-right" id="button-{{ key }}-{{ key_action }}"><i class="fa fa-trash-o"></i></span>{{ action.text }}</a>		
+        </li>
+		{% endfor %} 
+	    {% endif %} 
+	  {% endfor %} 
+	  </ul>
+	</li>
+<script type="text/javascript"><!--
+$(document).ready(function() {
+	$('.clear-dropdown li').on('click', function(e) {
+		e.stopPropagation();
+	});
+	{% if (storage_cleaner_hidden_opencart) %} 
+	$('a[href*="opencart.com"]').closest('.dropdown').css('display','none');
+	{% endif %} 
+});
+function goClear(type, key) {
+	$.ajax({
+		url: '{{ clear_url }}',
+		type: 'post',
+		data: 'key=' + key + '&type=' + type,
+		dataType: 'json',
+		beforeSend: function() {
+			$('#button-' + type + '-' + key).button('loading');
+			$('.clear-dropdown').prev('a').children('span').html('<i class=\'fa fa-spinner\'></i>');
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		},
+		success: function(json) {
+			$('.clear-dropdown > .alert-success, .clear-dropdown > .alert-danger').remove();
+
+			if (json.success) {
+				$('#button-' + type + '-' + key).closest('li').addClass('bg-success');
+				$('.clear-dropdown').append('<div class="alert alert-success" style="margin: 15px 20px 15px 20px; padding: 5px; font-size: 11px;"><i class="fa fa-check-circle"></i> ' + json.success + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				if (json.size) {
+					for (var entity in json.size){
+						$('#size-' + entity).html(json.size[entity]);
+						
+					}
+				}
+			}
+
+			if (json.error) {
+				$('#button-' + type + '-' + key).closest('li').addClass('bg-danger');
+				$('.clear-dropdown').append('<div class="alert alert-danger" style="margin: 15px 20px 15px 20px; padding: 5px; font-size: 11px;"><i class="fa fa-exclamation-circle"></i> ' + json.error + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+		},
+		complete: function() {
+			$('#button-' + type + '-' + key).button('reset');
+		}
+	});
+}
+//--></script>
+<style>
+.sla-cleaner-widget .clear-dropdown .dropdown-header {text-align:center;text-transform: uppercase;}
+.sla-cleaner-widget .clear-dropdown li {overflow:hidden;margin-bottom:5px;padding:0 5px;}
+.sla-cleaner-widget .dropdown-menu {min-width:180px}
+.sla-cleaner-widget .dropdown-menu li span {vertical-align:middle;cursor: pointer;}
+</style>

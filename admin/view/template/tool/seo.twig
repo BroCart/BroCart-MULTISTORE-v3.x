@@ -1,0 +1,143 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">        
+        <button type="submit" form="form-voucher" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">	
+	{% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-voucher" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+            
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-price-range"><span data-toggle="tooltip" title="{{ help_price_range }}">{{ entry_price_range }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="microdata_price_range" value="{{ microdata_price_range }}" placeholder="{{ entry_price_range }}" id="input-price-range" class="form-control" />
+                </div>
+              </div>			  
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-address-locality"><span data-toggle="tooltip" title="{{ help_address_locality }}">{{ entry_address_locality }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="microdata_address_locality" value="{{ microdata_address_locality }}" placeholder="{{ entry_address_locality }}" id="input-address-locality" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-postal-code">{{ entry_postal_code }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="microdata_postal_code" value="{{ microdata_postal_code }}" placeholder="{{ entry_postal_code }}" id="input-postal-code" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-street-address"><span data-toggle="tooltip" title="{{ help_street_address }}">{{ entry_street_address }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="microdata_street_address" value="{{ microdata_street_address }}" placeholder="{{ entry_street_address }}" id="input-street-address" class="form-control" />                  
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-latitude">{{ help_latitude }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_latitude" value="{{ microdata_latitude }}" placeholder="{{ entry_latitude }}" id="input-latitude" class="form-control" />
+                </div>
+              </div>
+			  <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-longitude">{{ entry_longitude }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="microdata_longitude" value="{{ microdata_longitude }}" placeholder="{{ entry_longitude }}" id="input-longitude" class="form-control" />
+                </div>
+              </div>
+              <!--1-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-monday">{{ entry_monday }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_monday" value="{{ microdata_monday }}" placeholder="{{ entry_monday }}" id="input-monday" class="form-control" />
+                </div>
+              </div>
+              <!--2-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-tuesday">{{ entry_tuesday }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_tuesday" value="{{ microdata_tuesday }}" placeholder="{{ entry_tuesday }}" id="input-tuesday" class="form-control" />
+                </div>
+              </div>
+			  <!--3-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-wednesday">{{ entry_wednesday }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_wednesday" value="{{ microdata_wednesday }}" placeholder="{{ entry_wednesday }}" id="input-wednesday" class="form-control" />
+                </div>
+              </div>
+			  <!--4-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-thursday">{{ entry_thursday }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_thursday" value="{{ microdata_thursday }}" placeholder="{{ entry_thursday }}" id="input-thursday" class="form-control" />
+                </div>
+              </div>
+			  <!--5-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-friday">{{ entry_friday }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_friday" value="{{ microdata_friday }}" placeholder="{{ entry_friday }}" id="input-friday" class="form-control" />
+                </div>
+              </div>
+			  <!--6-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-saturday">{{ entry_saturday }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_saturday" value="{{ microdata_saturday }}" placeholder="{{ entry_saturday }}" id="input-saturday" class="form-control" />
+                </div>
+              </div>
+			  <!--7-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-sunday">{{ entry_sunday }}</label>
+                <div class="col-sm-10">
+					<input type="text" name="microdata_sunday" value="{{ microdata_sunday }}" placeholder="{{ entry_sunday }}" id="input-sunday" class="form-control" />
+                </div>
+              </div>
+              <!--EOF-->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="microdata_microstatus" id="input-status" class="form-control">
+                    {% if microdata_microstatus %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+{{ footer }}

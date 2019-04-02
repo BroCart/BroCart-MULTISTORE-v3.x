@@ -1,0 +1,310 @@
+{{ header }}
+<div class="container">
+    <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+		<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+	</ul>
+  {% if error_warning %}
+  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+    <div class="row">{{ column_left }}
+        {% if column_left and column_right %}
+		{% set class = 'col-sm-6' %}
+		{% elseif column_left or column_right %}
+		{% set class = 'col-sm-9' %}
+		{% else %}
+		{% set class = 'col-sm-12' %}
+		{% endif %}
+        <div id="content" class="{{ class }}">{{ content_top }}
+			<div class="row">
+                <div class="col-md-6">
+                    <h1 class="page-title" id="checkout-f">{{ heading_title2 }}{% if weight %}&nbsp;({{ weight }}){% endif %}</h1>
+						<form>
+							<div class="shop-billing-fields" id="checkout-form">
+								<h3>{{ text_checkout_option }}</h3>                            
+								<p class="form-row form-row-first">
+									<label for="input-payment-firstname" class="">{{ entry_firstname }} <span class="required">*</span></label>
+									<input type="text" class="input-text " name="firstname" id="input-payment-firstname" placeholder="{{ entry_place_firstname }}" value="{{ firstname }}">
+								</p>
+								<p class="form-row form-row-last">
+									<label for="input-payment-lastname" class="">{{ entry_lastname }} <span class="required">*</span></label>
+									<input type="text" class="input-text " name="lastname" id="input-payment-lastname" placeholder="{{ entry_place_lastname }}" value="{{ lastname }}">
+								</p>
+								<div class="clear"></div>
+								<p class="form-row form-row-first">
+									<label for="input-payment-email">{{ entry_email }}<span class="required">*</span></label>
+									<input type="text" class="input-text " name="email" id="input-payment-email" placeholder="{{ entry_email_address }}" value="{{ email }}">
+								</p>
+								<p class="form-row form-row-last">
+									<label for="input-payment-telephone">{{ entry_telephone }}  <span class="required">*</span></label>
+									<input type="text" class="input-text " name="telephone" id="input-payment-telephone" placeholder="{{ entry_place_telephone }}" value="{{ telephone }}">
+								</p>
+								<div class="clear"></div>
+								
+								<p class="form-row">
+									<label for="input-payment-address-1">{{ entry_address_1 }}</label>
+									<input type="text" class="input-text " name="address_1" id="input-payment-address-1" placeholder="{{ entry_place_address_1 }}" value="{{ address_1 }}">
+								</p>
+								
+								<p class="form-row form-row-first">
+									<label class="control-label" for="input-payment-country">{{ entry_country }} <span class="required">*</span></label>
+									<select name="country_id" id="input-payment-country" class="form-control">
+										<option value="">{{ text_select }}</option>										
+										{% for country in countries %}
+											{% if country.country_id == country_id %}
+												<option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+											{% else %}
+												<option value="{{ country.country_id }}">{{ country.name }}</option>
+											{% endif %}
+										{% endfor %}
+									</select>
+								</p>							
+								
+								<p class="form-row form-row-last" id="payment-zone">
+									<label class="control-label" for="input-payment-zone">{{ entry_zone }} <span class="required">*</span></label>
+									<select name="zone_id" id="input-payment-zone" class="form-control" onchange="updateTotal();">
+										<option value="">{{ text_select }}</option>
+											{% for zone in zones %}
+												{% if zone.zone_id == zone_id %}
+													<option value="{{ zone.zone_id }}" selected="selected">{{ zone.name }}</option>
+												{% else %}
+													<option value="{{ zone.zone_id }}">{{ zone.name }}</option>
+												{% endif %}
+											{% endfor %}											
+									</select>
+								</p>							
+								
+								<div class="clear"></div>
+								
+								<p class="form-row form-row-first">
+									<label for="input-payment-city">{{ entry_city }} <span class="required">*</span></label>
+									<input type="text" class="input-text " name="city" id="input-payment-city" placeholder="{{ entry_place_city }}" value="{{ city }}">
+								</p>
+								<p class="form-row form-row-last">
+									<label for="input-payment-postcode">{{ entry_postcode }}  <span class="required">*</span></label>
+									<input type="text" class="input-text " name="postcode" id="input-payment-postcode" placeholder="{{ entry_place_postcode }}" value="{{ postcode }}">
+								</p>
+								<div class="clear"></div>
+								
+								<p class="form-row" id="shipping-method"></p>
+								
+								<p class="hidden form-row notes" id="comments">
+									<textarea name="comment" class="input-text " id="order_comments" placeholder="{{ entry_place_comment }}" rows="1" cols="5"></textarea>
+								</p>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-6">
+						<div id="order_review">
+							<h3>{{ text_you_cart }} <span class="badge" style="float: right;">{{ tovarov }}</span></h3>	
+							<form action="{{ action }}" method="post" enctype="multipart/form-data">
+							<table id="bro-cart" class="shop_table">
+								{% if products %}	
+									<thead>
+										<tr>
+											<th class="product-name">{{ column_name }}</th>
+											<th class="product-total">{{ column_total }}</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for product in products %}
+											<tr class="cart_item">												
+												<td class="product-name">
+												{% if product.thumb %}
+													<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-thumbnail" /></a>
+												<?php } ?>
+												<a href="{{ product.href }}">{{ product.name }}</a>
+													{% if product.option %}
+														{% for option in product.option %}
+															<br />
+															- <small>{{ option.name }} {{ option.value }}</small>
+														{% endfor %}
+													{% endif %}
+													<strong class="product-quantity">× {{ product['quantity'] }}</strong>
+												</td>								  
+												<td class="product-total"><span class="amount">{{ product['total'] }}</span></td>								  
+											</tr>
+										{% endfor %}                          
+									</tbody>
+									<tfoot id="totality">
+									{% for total in totals %}
+										<tr class="order-total">
+											<th>{{ total.title }}</th>
+											<td><span class="amount">{{ total.text }}</span></td>
+										</tr>
+									{% endfor %}
+									</tfoot>    
+							{% endif %}
+							</table>
+							</form>
+							<h3>{{ text_checkout_payment_method }}</h3>
+							<div id="payment-method" class="checkout-payment"></div>
+							<button id="button-order" class="update-cart">{{ text_oformlenie_zakaza }}</button>
+							<div id="payment-form"></div>
+						</div>				
+					</div>		
+				</div>
+            {{ content_bottom }}</div>
+        {{ column_right }}</div>
+</div>
+<script type="text/javascript"><!--
+	$(document).ready(function() {
+		$('#shipping-method').load('index.php?route=checkout/buy/getShipping');	
+		$('#payment-method').load('index.php?route=checkout/buy/getPayment');
+	});
+    $('#checkout-form select[name=\'country_id\']').on('change', function() {
+        $.ajax({
+            url: 'index.php?route=checkout/checkout/country&country_id=' + this.value,
+            dataType: 'json',
+            beforeSend: function() {
+                $('#checkout-form #payment-zone').append('<span class="form-control-feedback"><i class="fa fa-circle-o-notch fa-spin"></i></span>');
+            },
+            complete: function() {
+                $('#checkout-form #payment-zone .form-control-feedback').remove();
+            },
+            success: function(json) {
+                if (json['postcode_required'] == '1') {
+                    $('#checkout-form input[name=\'postcode\']').parent().addClass('required');
+                } else {
+                    $('#checkout-form input[name=\'postcode\']').parent().removeClass('required');
+                }
+
+                html = '<option value="">{{ text_select }}</option>';
+
+                if (json['zone']) {
+                    for (i = 0; i < json['zone'].length; i++) {
+                        html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+                        
+                        if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+							html += ' selected="selected"';
+						}
+
+                        html += '>' + json['zone'][i]['name'] + '</option>';
+                    }
+                } else {
+                    html += '<option value="0" selected="selected">{{ text_select }}</option>';
+                }
+
+                $('#checkout-form select[name=\'zone_id\']').html(html);
+                var zone_id = $('#checkout-form select[name=\'zone_id\']').val();
+                if (zone_id) {
+                    updateTotal();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $('#button-order').click(function() {
+        $.ajax({
+            url: 'index.php?route=checkout/buy/save',
+            type: 'post',
+            data: $('#checkout-form input[type=\'text\'], #checkout-form input[type=\'checkbox\']:checked, #checkout-form select, #order_review input[type=\'radio\']:checked, #checkout-form input[type=\'radio\']:checked, #checkout-form textarea, #checkout-form input[type=\'hidden\']'),
+            dataType: 'json',
+            beforeSend: function() {
+                $('#button-order').button('loading');
+            },
+            complete: function() {
+                $('#button-order').button('reset');
+            },
+            success: function(json) {
+				$('.alert, .text-danger').remove();
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+                if (json['error']) {
+                    if (json['error']['warning']) {
+						$('#checkout-form').prepend('<div class="alert alert-warning">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					}
+					for (i in json['error']) {
+						var element = $('#input-payment-' + i.replace('_', '-'));
+						if (typeof(element) !== 'undefined'){
+							if ($(element).parent().hasClass('input-group')) {
+							$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+							} else {
+								$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+							}
+							$('html, body').animate({
+								scrollTop: ($(element).offset().top - 300)
+							}, 2000);
+						} else {
+							addWarning(json['error'][i]);						
+						}
+						
+					}					
+                } else {
+                    $.ajax({
+                        url: 'index.php?route=checkout/buy/confirm',
+                        type: 'get',
+                        dataType: 'json',
+                        success: function() {
+                            var method = $('#order_review input[name=\'payment_method\']:checked').val();							
+                            confirmation(method, function() {
+                                if ($('p, h1, h2, h3, input[type=text], input[type=radio], input[type=checkbox], input[type=password], select', $('#payment-form')).length > 0) {
+									$('#button-order').hide('fast');
+									$('#button-confirm').addClass('update-cart');
+									$('#payment-form').show('slow');
+									$('html, body').animate({
+										scrollTop: ($('#payment-form').offset().top - 300)
+									}, 2000);
+                                } else {
+									$('#button-confirm').addClass('hidden');
+                                    var payment_form = $('#payment-form form#payment');
+                                    if (payment_form.length) {
+                                        payment_form.submit();
+                                    } else {								
+                                        var href = $('#payment-form div.buttons a').attr('href');
+                                        if (typeof href != 'undefined' && href != '' && href != '#') {
+                                            location = href;
+                                        } else {
+											$('#payment-form input[type=button]').trigger("click");											
+                                        }
+                                    }
+                                }
+                            });
+                        },
+						error: function(xhr, ajaxOptions, thrownError) {
+							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+						}                        
+                    });
+                }
+            }
+        });
+    });
+    function confirmation(method, callback) {
+        $.ajax({
+            url: 'index.php?route=checkout/buy/reConfirmed',
+            type: 'post',
+            data: 'method=' + method.split('.')[0] + '&payment_method=' + method,
+            dataType: 'json',
+            success: function(json) {		
+                $('#payment-form').html(json['output']);
+                callback();
+            }
+        });
+    }
+    
+    function updateTotal(){	
+        if (typeof($('input[name="shipping_method"]')) !== 'undefined'){
+            $.ajax({
+                url: 'index.php?route=checkout/buy/updateTotal',
+                type: 'post',
+                data: 'method=' + $('#shipping-method-select').val(),
+                dataType: 'json',
+                success: function(json) {
+                    if (json['totals']) {
+						$('#totality').hide(300, function() {
+							$(this).html(json['totals']).show(500);
+						});                        
+                    }
+                }
+            });
+        }
+    }    
+//--></script>
+{{ footer }}

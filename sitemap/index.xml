@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://inslife/sitemap/stylesheet.min.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+	<loc>http://inslife/</loc>
+	<changefreq>Always</changefreq>
+	<priority>1</priority>
+	<lastmod>2019-03-26T13:19:25+00:00</lastmod>
+	</url>
+</urlset>

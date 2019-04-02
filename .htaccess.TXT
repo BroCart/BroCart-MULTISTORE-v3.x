@@ -1,134 +1,38 @@
-# 1.To use URL Alias you need to be running apache with mod_rewrite enabled. 
+# 1.To use URL Alias you need to be running apache with mod_rewrite enabled.
 
 # 2. In your opencart directory rename htaccess.txt to .htaccess.
 
 # For any support issues please visit: http://www.opencart.com
 
 Options +FollowSymlinks
-#Options +SymLinksIfOwnerMatch
-# Prevent Directoy listing 
+
+# Prevent Directoy listing
 Options -Indexes
 
 # Prevent Direct Access to files
-<FilesMatch "\.(tpl|ini|log)">
- Order deny,allow
- Deny from all
+<FilesMatch "(?i)((\.tpl|.twig|\.ini|\.log|(?<!robots)\.txt))">
+ Require all denied
+## For apache 2.2 and older, replace "Require all denied" with these two lines :
+# Order deny,allow
+# Deny from all
 </FilesMatch>
-<FilesMatch "error.(txt)$">
-Order Allow,Deny
-Deny from all
-</FilesMatch>
+
 # SEO URL Settings
 RewriteEngine On
-# If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/ 
+# If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/
 
 RewriteBase /
-RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
-RewriteRule ^yandex.yml$ index.php?route=feed/yandex_market [L]
-RewriteRule ^googlebase.xml$ index.php?route=feed/google_base [L]
-RewriteRule ^download/(.*) /index.php?route=error/not_found [L]
-#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
-#RewriteRule ^index\.php$ http://www.brocart.net/ [R=301,L]
-#Убираем редирект на главной
-#RewriteCond %{HTTP_HOST} !^www
-#RewriteRule (.*) http://www.brocart.net/$1 [R=301,L]
-#Добавляем перенаправление на www если название сайта было без префикса
+
+#Bro generate static sitemap
+#RewriteRule ^sitemap.xml$ index.php?route=extension/feed/google_sitemap [L]
+RewriteRule ^googlebase.xml$ index.php?route=extension/feed/google_base [L]
+RewriteRule ^system/storage/(.*) index.php?route=error/not_found [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
 RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 
-# Add "gzip Encoding" to already gzipped files
-AddType text/css .css .cssgz
-AddType text/javascript .js .jsgz
-AddEncoding x-gzip .cssgz .jsgz
- 
-# Enable Gzip into use mod_gzip.c
-<IfModule mod_gzip.c>
-    mod_gzip_on         Yes
-    mod_gzip_dechunk    Yes
-    mod_gzip_item_include file      \.(html?|txt|css|js|php|pl)$
-    mod_gzip_item_include mime      ^text\.*
-    mod_gzip_item_include mime      ^application/x-javascript.*
-    mod_gzip_item_include mime      ^application/x-font-woff.*
-    mod_gzip_item_exclude mime      ^image\.*
-    mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
-</IfModule>
- 
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
-</IfModule>
-
-# remove browser bugs
-BrowserMatch ^Mozilla/4 gzip-only-text/html
-BrowserMatch ^Mozilla/4\.0[678] no-gzip
-BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-Header append Vary User-Agent
-
-# EXPIRES CACHING
-<IfModule mod_expires.c>
-	ExpiresActive On
-	<filesmatch ".(jpg|jpeg|gif|png|ico|css|js|cssgz|jsgz)$">
-        ExpiresDefault "access plus 1 year"
-    </filesmatch>
-    ExpiresDefault "access 7 days"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType text/javascript "access plus 1 year"
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType text/html "access plus 7 day"
-    ExpiresByType text/x-javascript "access 1 year"
-    ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/x-icon "access 1 year"
-    ExpiresByType application/x-shockwave-flash "access 1 year"
-</IfModule>
-# EXPIRES CACHING
-
-<IfModule mod_headers.c>
-    Header unset Last-Modified
-# 120 days
-    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|cssgz|jsgz)$">
-    Header set Cache-Control "max-age=7776000, public"
-    </FilesMatch>
-# 120 days + Append Accept Encoding
-    <FilesMatch "\.(css|js|cssgz|jsgz)$">
-    Header set Cache-Control "max-age=7776000, public"
-    Header append Vary: Accept-Encoding
-    </FilesMatch>   
-# 120 days
-    <FilesMatch "\.(xml|txt)$">
-    Header set Cache-Control "max-age=7776000, public, must-revalidate"
-    </FilesMatch>
-# 120 days
-    <FilesMatch "\.(html|htm|php)$">
-        Header set Cache-Control "max-age=7776000, private, must-revalidate"
-    </FilesMatch>
-# Compatible with old browsers
-    <FilesMatch "\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|oex|xpi|safariextz|vcf)$" >
-        Header unset X-UA-Compatible
-    </FilesMatch>
-</IfModule>
-
-<IfModule mod_gzip.c>
-    mod_gzip_on         Yes
-    mod_gzip_dechunk    Yes
-    mod_gzip_item_include file		\.(html?|txt|css|js|php|pl)$
-    mod_gzip_item_include mime		^text\.*
-    mod_gzip_item_include mime		^application/x-javascript.*
-    mod_gzip_item_exclude mime		^image\.*
-    mod_gzip_item_exclude rspheader	^Content-Encoding:.*gzip.*
-</IfModule>
-
-<IfModule mod_setenvif.c>
-    BrowserMatch "MSIE" force-no-vary
-    BrowserMatch "Mozilla/4.[0-9]{2}" force-no-vary
-    BrowserMatch ^Mozilla/4\.0[678] no-gzip
-    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-</IfModule>
-
-### Additional Settings that may need to be enabled for some servers 
+### Additional Settings that may need to be enabled for some servers
 ### Uncomment the commands by removing the # sign in front of it.
 ### If you get an "Internal Server Error 500" after enabling any of the following settings, restore the # as this means your host doesn't allow that.
 

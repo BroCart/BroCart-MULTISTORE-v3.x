@@ -1,0 +1,56 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><i class="fa fa-globe"></i> {{ heading_title }}</h3>
+  </div>
+  <div class="panel-body">
+    <div id="vmap" style="width: 100%; height: 260px;"></div>
+	<div id="description-box" style="display:none;"></div>
+  </div>
+</div>
+<link type="text/css" href="view/javascript/jquery/jqvmap/jqvmap.css" rel="stylesheet" media="screen" />
+<script type="text/javascript" src="view/javascript/jquery/jqvmap/jquery.vmap.js"></script> 
+<script type="text/javascript" src="view/javascript/jquery/jqvmap/maps/{{ dashboard_map_js }}.js"></script> 
+<script type="text/javascript"><!--
+$(document).ready(function() {
+	$.ajax({
+		url: 'index.php?route=extension/dashboard/map/map&user_token={{ user_token }}',
+		dataType: 'json',
+		success: function(json) {
+			data = [];					
+			for (i in json) {
+				data[i] = json[i]['total'];
+			}			
+			$('#vmap').vectorMap({
+				map: '{{ map_location }}',				
+				{% if map_regions %}
+				pins: {
+				{% for regionale in region %}
+					"{{ regionale.code }}" : '\u003ci class=\"fa pin-color fa-opencart\" \u003e \u003cspan style=\"background-color: {{ regionale.color }};\" class=\"pin-count\" \u003e 8 \u003c/span\u003e \u003c/i\u003e', 
+				{% endfor %}
+				},
+				{% endif %}
+				backgroundColor: '#FFFFFF',
+				borderColor: '#FFFFFF',
+				color: '#9FD5F1',
+				hoverOpacity: 0.7,
+				selectedColor: '#36c1ed',
+				enableZoom: true,
+				showTooltip: true,
+				values: data,
+				normalizeFunction: 'polynomial',				
+				onLabelShow: function(event, label, code) {
+					if (json[code]) {
+						label.html('<strong>' + label.text() + '</strong><br />' + '{{ text_order }} ' + json[code]['total'] + '<br />' + '{{ text_sale }} ' + json[code]['amount']);
+					}
+				},
+				onRegionClick: function(event, code, region){
+					event.preventDefault();
+				}
+			});			
+		},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+	});	
+});
+//--></script> 

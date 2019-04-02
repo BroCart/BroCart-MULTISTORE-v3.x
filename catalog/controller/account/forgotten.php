@@ -3,105 +3,66 @@ class ControllerAccountForgotten extends Controller {
 	private $error = array();
 
 	public function index() {
+		$this->document->addRobots('noindex, follow');
 		if ($this->customer->isLogged()) {
-			$this->redirect($this->url->link('account/account', '', 'SSL'));
+			$this->response->redirect($this->url->link('account/account', '', true));
 		}
 
-		$this->language->load('account/forgotten');
+		$this->load->language('account/forgotten');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		
-		$this->load->model('account/customer');
-		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->language->load('mail/forgotten');
-			
-			$password = substr(sha1(uniqid(mt_rand(), true)), 0, 10);
-			
-			$this->model_account_customer->editPassword($this->request->post['email'], $password);
-			
-			$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
-			
-			$message  = sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
-			$message .= $this->language->get('text_password') . "\n\n";
-			$message .= $password;
 
-			$mail = new Mail();
-			$mail->protocol = $this->config->get('config_mail_protocol');
-			$mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->hostname = $this->config->get('config_smtp_host');
-			$mail->username = $this->config->get('config_smtp_username');
-			$mail->password = $this->config->get('config_smtp_password');
-			$mail->port = $this->config->get('config_smtp_port');
-			$mail->timeout = $this->config->get('config_smtp_timeout');				
-			$mail->setTo($this->request->post['email']);
-			$mail->setFrom($this->config->get('config_email'));
-			$mail->setSender($this->config->get('config_name'));
-			$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
-			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
-			$mail->send();
-			
+		$this->load->model('account/customer');
+
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			$this->model_account_customer->editCode($this->request->post['email'], token(40));
+
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('account/login', '', 'SSL'));
+			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-      	$this->data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = array();
 
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),        	
-        	'separator' => false
-      	); 
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('text_home'),
+			'href' => $this->url->link('common/home')
+		);
 
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),     	
-        	'separator' => $this->language->get('text_separator')
-      	);
-		
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_forgotten'),
-			'href'      => $this->url->link('account/forgotten', '', 'SSL'),       	
-        	'separator' => $this->language->get('text_separator')
-      	);
-		
-		$this->data['heading_title'] = $this->language->get('heading_title');
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('text_account'),
+			'href' => $this->url->link('account/account', '', true)
+		);
 
-		$this->data['text_your_email'] = $this->language->get('text_your_email');
-		$this->data['text_email'] = $this->language->get('text_email');
-
-		$this->data['entry_email'] = $this->language->get('entry_email');
-
-		$this->data['button_continue'] = $this->language->get('button_continue');
-		$this->data['button_back'] = $this->language->get('button_back');
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('text_forgotten'),
+			'href' => $this->url->link('account/forgotten', '', true)
+		);
 
 		if (isset($this->error['warning'])) {
-			$this->data['error_warning'] = $this->error['warning'];
+			$data['error_warning'] = $this->error['warning'];
 		} else {
-			$this->data['error_warning'] = '';
+			$data['error_warning'] = '';
 		}
-		
-		$this->data['action'] = $this->url->link('account/forgotten', '', 'SSL');
- 
-		$this->data['back'] = $this->url->link('account/login', '', 'SSL');
-		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/forgotten.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/forgotten.tpl';
+
+		$data['action'] = $this->url->link('account/forgotten', '', true);
+
+		$data['back'] = $this->url->link('account/login', '', true);
+
+		if (isset($this->request->post['email'])) {
+			$data['email'] = $this->request->post['email'];
 		} else {
-			$this->template = 'default/template/account/forgotten.tpl';
+			$data['email'] = '';
 		}
-		
-		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
-			'common/footer',
-			'common/header'	
-		);
-								
-		$this->response->setOutput($this->render());		
+
+		$data['column_left'] = $this->load->controller('common/column_left');
+		$data['column_right'] = $this->load->controller('common/column_right');
+		$data['content_top'] = $this->load->controller('common/content_top');
+		$data['content_bottom'] = $this->load->controller('common/content_bottom');
+		$data['footer'] = $this->load->controller('common/footer');
+		$data['header'] = $this->load->controller('common/header');
+
+		$this->response->setOutput($this->load->view('account/forgotten', $data));
 	}
 
 	protected function validate() {
@@ -110,12 +71,14 @@ class ControllerAccountForgotten extends Controller {
 		} elseif (!$this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
 		}
+		
+		// Check if customer has been approved.
+		$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
 
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
+		if ($customer_info && !$customer_info['status']) {
+			$this->error['warning'] = $this->language->get('error_approved');
 		}
+
+		return !$this->error;
 	}
 }
-?>

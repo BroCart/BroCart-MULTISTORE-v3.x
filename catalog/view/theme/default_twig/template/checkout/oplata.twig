@@ -1,0 +1,25 @@
+{% if error_warning %}
+<div class="alert alert-warning alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+{% endif %}
+{% if payment_methods %}
+    <ul class="payment_methods methods">
+		{% for payment_method in payment_methods %}
+        <li class="payment_method_bro">
+			<input id="payment-method-{{ payment_method.code }}" type="radio" class="input-radio" name="payment_method" value="{{ payment_method.code }}" >	
+				{% if payment_method.code == code or not code %}
+				{% set code = payment_method.code %}
+				<input id="payment-method-{{ payment_method.code }}" type="radio" class="input-radio" name="payment_method" value="{{ payment_method.code }}" checked="checked" />
+					{% else %}
+				<input id="payment-method-{{ payment_method.code }}" type="radio" class="input-radio" name="payment_method" value="{{ payment_method.code }}" />
+				{% endif %}			
+			<label for="payment-method-{{ payment_method.code }}">{{ payment_method.title }}</label>			
+            {% if payment_method.terms %}
+			<div class="payment_box payment_method_bro">
+				<p>{{ payment_method.terms }}</p>
+			</div>
+			{% endif %}           
+        </li>  
+		{% endfor %}
+    </ul>
+    <div class="clear"></div>
+{% endif %}

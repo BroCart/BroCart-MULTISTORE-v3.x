@@ -1,0 +1,81 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right">
+				<button type="submit" form="form" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+			</div>
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %} 
+				<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %} 
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %} 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+			</div>
+			<div class="panel-body">
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tab-settings" data-toggle="tab"><i class="fa fa-cog"></i> {{ tab_settings }}</a></li>
+						<li><a href="#tab-help" data-toggle="tab"><i class="fa fa-comment"></i> {{ tab_help }}</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab-settings">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-storage_cleaner_status">{{ entry_status }}</label>
+								<div class="col-sm-10">
+								{% set checked = storage_cleaner_status? 'checked="checked"':'' %} 
+<label class="switcher" title="{{ entry_status }}">
+<input name="storage_cleaner_status" value="1" type="checkbox" {{ checked }}>
+<span><span></span></span></label>							
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-storage_cleaner_size">{{ entry_size }}</label>
+								<div class="col-sm-10">
+								{% set checked = storage_cleaner_size? 'checked="checked"':'' %} 
+<label class="switcher" title="{{ entry_size }}">
+<input name="storage_cleaner_size" value="1" type="checkbox" {{ checked }}>
+<span><span></span></span></label>							
+								</div>
+							</div>
+{#
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-storage_hidden_opencart">{{ entry_hidden_opencart }}</label>
+								<div class="col-sm-10">
+								{% set checked = storage_cleaner_hidden_opencart? 'checked="checked"':'' %} 
+<label class="switcher" title="{{ entry_hidden_opencart }}">
+<input name="storage_cleaner_hidden_opencart" value="1" type="checkbox" {{ checked }}>
+<span><span></span></span></label>							
+								</div>
+							</div>
+#}							
+						</div>
+						<div class="tab-pane" id="tab-help">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+label.switcher input[type="checkbox"] {display:none}
+label.switcher input[type="checkbox"] + span {position:relative;display:inline-block;vertical-align:middle;width:36px;height:17px;margin:0 5px 0 0;background:#ccc;border:solid 1px #999;border-radius:10px;box-shadow:inset 0 1px 2px #999;cursor:pointer;transition:all ease-in-out .2s;}
+label.switcher input[type="checkbox"]:checked + span {background:#8fbb6c;border:solid 1px #7da35e;}
+label.switcher input[type="checkbox"]:checked + span span {right:0;left:auto}
+label.switcher span span{position:absolute;background:white;height:17px;width:17px;display:inlaine-box;left:0;top:-1px;border-radius:50{{ '%}' }}
+</style>
+
+{{ footer }}

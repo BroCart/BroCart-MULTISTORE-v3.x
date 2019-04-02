@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="{{ direction }}">
+<head>
+<meta charset="UTF-8" />
+<title>{{ heading_title }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<link rel="shortcut icon" href="view/image/lock.png" />
+<script type="text/javascript" src="view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<link href="view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="view/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="screen" />
+<style rel="stylesheet">
+.login_pg{overflow-x:hidden;background:#1872A2;background-image:url(view/image/bg-pattern.png),radial-gradient(ellipse at top,rgb(43, 144, 198) 2%,rgb(31, 158, 227) 35%,rgb(0, 62, 95) 75%)}
+.login_painel{box-shadow:0 10px 3px -5px #0f648b;border:1px solid #1872A2;border-radius:3px;transition:all .5s ease 0s;-webkit-transition:all .5s ease 0s;-moz-transition:all .5s ease 0s}
+.panel-heading{border-top-left-radius:10px;border-top-right-radius:10px}
+.panel-body{padding:25px}
+.panel-title{font-size: 1.3em;text-transform: uppercase;padding: 20px 0;text-align: left;}
+.panel-heading i{font-size: 2.5em;color: rgb(10, 174, 0);float: left;padding-right: 10px;}
+.btn-primary{font-size:1.7em;font-weight:700;text-transform:uppercase;border-radius:5px;background-color:#1872a2;border:1px solid #0F648B;box-shadow:0 3px 0 #0F648B;transition:.3s ease-in}
+.btn-primary:hover{background-color:#1E91CF}
+.login-container {margin-top:5%;}
+</style>
+</head>
+<body class="login_pg">
+<div id="content">
+	<div class="container">
+		<div class="row">
+			<div class="login-container col-xs-12 col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4">
+				<div class="login_painel panel panel-default">
+					<div class="panel-heading text-center">
+						<h1 class="panel-title"><i class="fa fa-lock"></i> {{ text_login }}<br /><b class="text-danger">IP:&nbsp;{{ ipper }}</b></h1>
+					</div>
+					<div class="panel-body">
+						{% if success %}
+						<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+						</div>
+						{% endif %}
+						{% if error_warning %}
+						<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+						</div>
+						{% endif %}
+						<form action="{{ action }}" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<div class="input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span>
+									<input type="text" name="username" value="{{ username }}" placeholder="{{ entry_username }}" id="input-username" class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span>
+									<input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
+								</div>
+								{% if forgotten %}
+								<span class="help-block"><small><a href="{{ forgotten }}"><i class="fa fa-exclamation-circle"></i>&nbsp;{{ text_forgotten }}</a></span></small>
+								{% endif %}
+							</div>
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-unlock"></i> {{ button_login }}</button>
+							</div>
+							{% if redirect %}
+							<input type="hidden" name="redirect" value="{{ redirect }}" />
+							{% endif %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	</body>
+</html>
