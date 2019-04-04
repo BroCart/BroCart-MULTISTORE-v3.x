@@ -15,7 +15,7 @@
 $('#button-confirm').on('click', function() {
 	$.ajax({
 		type: 'get',
-		url: 'index.php?route=payment/cheque/confirm',
+		url: 'index.php?route=extension/payment/cheque/confirm',
 		cache: false,
 		beforeSend: function() {
 			$('#button-confirm').button('loading');
@@ -23,7 +23,7 @@ $('#button-confirm').on('click', function() {
 		complete: function() {
 			$('#button-confirm').button('reset');
 		},
-		success: function() {
+		success: function(json) {
 			location = json['redirect'];
 		}
 	});
