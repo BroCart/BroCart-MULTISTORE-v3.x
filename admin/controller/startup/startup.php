@@ -14,7 +14,10 @@ class ControllerStartupStartup extends Controller {
 
 		// Theme
 		$this->config->set('template_cache', $this->config->get('developer_theme'));
-				
+		
+		// Url
+		$this->registry->set('url', new Url($this->config->get('config_url'), $this->config->get('config_ssl')));
+		
 		// Language
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE code = '" . $this->db->escape($this->config->get('config_admin_language')) . "'");
 		
