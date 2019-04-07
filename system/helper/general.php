@@ -15,12 +15,31 @@ function token($length = 32) {
 }
 
 /**
+* sanitize()
+* 
+* @param mixed $string
+* @param bool $trim
+* @return
+*/
+function sanitize($string, $trim = false) {
+	$string = filter_var($string, FILTER_SANITIZE_STRING); 
+	$string = trim($string);
+	$string = stripslashes($string);
+	$string = strip_tags($string);
+	$string = str_replace(array('‘','’','“','”'), array("'","'",'"','"'), $string);
+	if ($trim) {
+		$string = substr($string, 0, $trim);
+	}	
+	return $string;
+}
+
+/**
  * Backwards support for timing safe hash string comparisons
  * 
  * http://php.net/manual/en/function.hash-equals.php
  */
 
-if(!function_exists('hash_equals')) {
+if (!function_exists('hash_equals')) {
 	function hash_equals($known_string, $user_string) {
 		$known_string = (string)$known_string;
 		$user_string = (string)$user_string;
