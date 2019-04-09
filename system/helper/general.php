@@ -15,7 +15,7 @@ function token($length = 32) {
 }
 
 /**
-* sanitize()
+* Function to sanitize string ()
 * 
 * @param mixed $string
 * @param bool $trim
