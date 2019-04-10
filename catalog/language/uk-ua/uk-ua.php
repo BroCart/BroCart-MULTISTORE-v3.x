@@ -1,6 +1,6 @@
 <?php
 // Локаль
-$_['code'] = 'ua';
+$_['code'] = 'uk';
 $_['direction'] = 'ltr';
 $_['date_format_short'] = 'd.m.Y';
 $_['date_format_long'] = 'l, d F Y';

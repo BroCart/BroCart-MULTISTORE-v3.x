@@ -8,7 +8,7 @@ $_['url_autostart']        = true;
 
 // Language
 $_['language_directory']   = 'ru-ru';
-$_['language_autoload']    = array('en-gb','ru-ru','ua-uk');
+$_['language_autoload']    = array('en-gb','ru-ru','uk-ua');
 
 // Date
 $_['date_timezone']        = 'UTC';

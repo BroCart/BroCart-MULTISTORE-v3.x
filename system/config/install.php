@@ -5,7 +5,7 @@ $_['site_ssl']          = HTTP_SERVER;
 
 // Language
 $_['language_default']  = 'ru-ru';
-$_['language_autoload'] = array('en-gb','ru-ru','ua-uk');
+$_['language_autoload'] = array('en-gb','ru-ru','uk-ua');
 
 // Session
 $_['session_engine']     = 'file';
