@@ -22,18 +22,11 @@ class ModelExtensionDashboardMap extends Model {
 				$implode[] = (int)$order_status_id;
 			}
 		}		
-		/* if ($implode) {
+		if ($implode) {
 			$query = $this->db->query("SELECT z.code AS regcode, os.color FROM `" . DB_PREFIX . "order` o LEFT JOIN `" . DB_PREFIX . "zone` z ON (o.payment_zone_id = z.zone_id) LEFT JOIN `" . DB_PREFIX . "order_status` os ON (o.order_status_id = os.order_status_id) WHERE o.order_status_id IN('" . (int)implode(',', $implode) . "') GROUP BY o.payment_zone_id");
 			return $query->rows;
 		} else {
 			return array();
-		}*/
-		return array (
-			array('regcode'=>'om','color'=>''),
-			array('regcode'=>'kr','color'=>'#0b13e3'),
-			array('regcode'=>'ch','color'=>'#26b869'),
-			array('regcode'=>'km','color'=>'#ff0000')
-		);
-		//return array('regcode'=>'om','regcode'=>'kr','regcode'=>'km','regcode'=>'ch');
+		}
 	}
 }
