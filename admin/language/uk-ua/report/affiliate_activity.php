@@ -1,17 +1,17 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'Звіт активності партнера';
 
-// Text
+// Текстові
 $_['text_list'] = 'Список активності';
-$_['text_edit'] = '<a href="affiliate_id=%d>%s</a> - оновлена інформація про обліковому записі.';
+$_['text_edit'] = '<a href="affiliate_id=%d>%s</a> - оновлена інформація про обліковому запису.';
 $_['text_forgotten'] = '<a href="affiliate_id=%d>%s</a> - запропоновано новий пароль';
 $_['text_login'] = '<a href="affiliate_id=%d>%s</a> - виконаний вхід.';
 $_['text_password'] = '<a href="affiliate_id=%d>%s</a> - оновлено пароль.';
 $_['text_payment'] = '<a href="affiliate_id=%d>%s</a> - оновлені деталі оплати.';
 $_['text_register'] = '<a href="affiliate_id=%d>%s</a> - зареєстровано новий аккаунт.';
 
-// Column
+// Колонки
 $_['column_affiliate'] = 'Партнер';
 $_['column_comment'] = 'Коментарі';
 $_['column_ip'] = 'IP';

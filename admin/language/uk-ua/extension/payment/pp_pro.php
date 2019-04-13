@@ -1,8 +1,8 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'PayPal Pro';
 
-// Text
+// Текстові
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_edit'] = 'Редагувати';
 $_['text_pp_pro'] = '<a target="_BLANK" href="https://www.paypal.com/uk/mrb/pal=V4T754QB63XXL"><img src="view/image/payment/paypal.png" alt="PayPal Website Payment Pro" title="PayPal Website Payment Pro iFrame" style="border: 1px solid #EEEEEE;" /></a>';
@@ -21,11 +21,11 @@ $_['entry_geo_zone'] = 'Географічна зона';
 $_['entry_status'] = 'Статус';
 $_['entry_sort_order'] = 'Порядок сортування';
 
-// Help
+// Довідка
 $_['help_test'] = 'Use the live or testing (sandbox) gateway server to process transactions?';
 $_['help_total'] = 'The checkout total the order must reach before this payment method becomes active';
 
-// Error
+// Помилки
 $_['error_permission'] = 'У Вас немає прав для управління даним модулем!';
 $_['error_username'] = 'Необхідно заповнити API Username!';
 $_['error_password'] = 'Необхідно заповнити API Password!';

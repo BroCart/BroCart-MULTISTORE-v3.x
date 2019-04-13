@@ -1,15 +1,15 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'Теми';
 
-// Text
+// Текстові
 $_['text_success'] = 'Налаштування успішно оновлені!';
 $_['text_list'] = 'Список тем';
 
-// Column
+// Колонки
 $_['column_name'] = 'Назва';
 $_['column_status'] = 'Статус';
 $_['column_action'] = 'Дія';
 
-// Error
+// Помилки
 $_['error_permission'] = 'У Вас немає прав для управління цим модулем!';

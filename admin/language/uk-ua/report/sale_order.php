@@ -1,8 +1,8 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'Звіт по продажах';
 
-// Text
+// Текстові
 $_['text_list'] = 'Продажі';
 $_['text_year'] = 'Рік';
 $_['text_month'] = 'Місяць';
@@ -10,7 +10,7 @@ $_['text_week'] = 'Тиждень';
 $_['text_day'] = 'День';
 $_['text_all_status'] = 'Всі статуси';
 
-// Column
+// Колонки
 $_['column_date_start'] = 'Дата';
 $_['column_date_end'] = 'Дата закінчення';
 $_['column_orders'] = 'Кількість замовлень';

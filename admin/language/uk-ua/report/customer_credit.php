@@ -1,8 +1,8 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'Звіт по кредиту клієнтів';
 
-// Column
+// Колонки
 $_['text_list'] = 'Кредити клієнтів';
 $_['column_customer'] = 'Ім&#39;я клієнта';
 $_['column_email'] = 'E-Mail';

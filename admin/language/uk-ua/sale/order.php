@@ -1,8 +1,8 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'Замовлення';
 
-// Text
+// Текстові
 $_['text_success'] = 'Замовлення успішно змінено!';
 $_['text_list'] = 'Замовлення';
 $_['text_add'] = 'Додати';
@@ -27,13 +27,13 @@ $_['text_shipping_address'] = 'Адреса доставки';
 $_['text_comment'] = 'Коментар';
 $_['text_history'] = 'Історія замовлення';
 $_['text_history_add'] = 'Додати в історію';
-$_['text_account_custom_field'] = 'Клієнт (доп)';
-$_['text_payment_custom_field'] = 'Адреса оплати (доп)';
-$_['text_shipping_custom_field'] = 'Адреса доставки (доп)';
-$_['text_browser'] = 'Browser';
+$_['text_account_custom_field'] = 'Клієнт (дод)';
+$_['text_payment_custom_field'] = 'Адреса оплати (дод)';
+$_['text_shipping_custom_field'] = 'Адреса доставки (дод)';
+$_['text_browser'] = 'Браузер';
 $_['text_ip'] = 'IP-адреса';
 $_['text_forwarded_ip'] = 'Переадресація IP';
-$_['text_user_agent'] = 'User Agent';
+$_['text_user_agent'] = 'Користувач';
 $_['text_accept_language'] = 'Мова';
 $_['text_order_id'] = '№ Замовлення';
 $_['text_fax'] = 'Факс';
@@ -60,7 +60,7 @@ $_['text_restock'] = 'Виконано: Складські запаси онов
 $_['text_upload'] = 'Файл успішно завантажений!';
 $_['text_picklist'] = 'Список доставки';
 
-// Column
+// Колонки
 $_['column_order_id'] = '№ Замовлення';
 $_['column_customer'] = 'Клієнт';
 $_['column_status'] = 'Статус';
@@ -96,8 +96,8 @@ $_['entry_postcode'] = 'Індекс:';
 $_['entry_country'] = 'Країна';
 $_['entry_zone'] = 'Область';
 $_['entry_zone_code'] = 'id';
-$_['entry_product'] = 'Виберіть товар';
-$_['entry_option'] = 'Виберіть варіант(и)';
+$_['entry_product'] = 'Оберіть товар';
+$_['entry_option'] = 'Оберіть варіант(и)';
 $_['entry_quantity'] = 'Кількість';
 $_['entry_to_name'] = 'Ім&#39;я одержувача';
 $_['entry_to_email'] = 'Email одержувача';
@@ -122,11 +122,11 @@ $_['entry_total'] = 'Разом';
 $_['entry_date_added'] = 'Дата додавання';
 $_['entry_date_modified'] = 'Дата зміни';
 
-// Help
-$_['help_override'] = 'Якщо замовлення заблокований системою Захисту від шахраїв, встановлюючи криж, можна встановити свій статус замовлення, не залежно від системи захисту.';
+// Довідка
+$_['help_override'] = 'Якщо замовлення заблоковане системою захисту від шахраїв, можна встановити свій статус замовлення, не залежно від системи захисту.';
 
-// Error
+// Помилки
 $_['error_warning'] = 'Уважно перевірте форму на помилки!!';
 $_['error_permission'] = 'У Вас немає прав для зміни налаштувань Замовлень!';
 $_['error_action'] = 'Не вдалося завершити дію!';
-$_['error_filetype'] = 'Неправильний тип файла!';
+$_['error_filetype'] = 'Неправильний тип файлу!';

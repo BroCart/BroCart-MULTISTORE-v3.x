@@ -1,13 +1,13 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'Останні замовлення';
 
-// Text
+// Текстові
 $_['text_extension'] = 'Розширення';
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_edit'] = 'Налаштування';
 
-// Column
+// Колонки
 $_['column_order_id'] = '№';
 $_['column_customer'] = 'Покупець';
 $_['column_status'] = 'Стан';
@@ -21,5 +21,5 @@ $_['entry_width'] = 'Ширина';
 $_['entry_status'] = 'Статус';
 $_['entry_sort_order'] = 'Порядок сортування';
 
-// Error
+// Помилки
 $_['error_permission'] = 'У Вас немає прав для управління даними розширенням!';

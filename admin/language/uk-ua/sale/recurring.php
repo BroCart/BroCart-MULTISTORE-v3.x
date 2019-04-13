@@ -1,11 +1,11 @@
 <?php
-// Heading
+// Заголовок
 $_['heading_title'] = 'Періодичні замовлення';
 
-// Text
+// Текстові
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_list'] = 'Періодичні замовлення';
-$_['text_recurring_detail'] = 'Подробности';
+$_['text_recurring_detail'] = 'Деталі';
 $_['text_order_detail'] = 'Замовлення';
 $_['text_product_detail'] = 'Товар';
 $_['text_transaction'] = 'Транзакції';
@@ -47,7 +47,7 @@ $_['text_transaction_outstanding_failed'] = 'Помилки платежу';
 $_['text_transaction_expired'] = 'Минув';
 $_['text_cancelled'] = 'Періодичний платіж відключений';
 
-// Column
+// Колонки
 $_['column_order_recurring_id'] = '№ періодичного замовлення';
 $_['column_order_id'] = '№ замовлення';
 $_['column_reference'] = 'Оплата';
@@ -76,6 +76,6 @@ $_['entry_recurring'] = 'Профіль';
 $_['entry_payment_method'] = 'Спосіб оплати';
 $_['entry_cancel_payment'] = 'Скасування оплати';
 
-// Error
+// Помилки
 $_['error_not_cancelled'] = 'Помилка: %s';
-$_['error_not_found'] = 'не Можна відключити профіль';
+$_['error_not_found'] = 'Не можна відключити профіль';

@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_customer_approval']    = 'Затвердження клєнтів';
+$_['text_customer_approval']    = 'Затвердження клієнтів';
 $_['text_marketplace']          = 'Магазин модулів';
 $_['text_seo_url']              = 'SEO URL';
 $_['text_language_editor']      = 'Редактор мов';
