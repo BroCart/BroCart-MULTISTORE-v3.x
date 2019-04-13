@@ -15,7 +15,7 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'HTTP_SERVER\', \'' . HTTP_OPENCART . '\');' . "\n\n";
 
 			$output .= '// HTTPS' . "\n";
-			$output .= 'define(\'HTTP_SERVER\', \'' . HTTPS_OPENCART . '\');' . "\n\n";
+			$output .= 'define(\'HTTPS_SERVER\', \'' . HTTP_OPENCART . '\');' . "\n\n";
 
 			$output .= '// DIR' . "\n";
 			$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
@@ -53,8 +53,8 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'HTTP_CATALOG\', \'' . HTTP_OPENCART . '\');' . "\n\n";
 
 			$output .= '// HTTPS' . "\n";
-			$output .= 'define(\'HTTP_SERVER\', \'' . HTTPS_OPENCART . 'admin/\');' . "\n";
-			$output .= 'define(\'HTTP_CATALOG\', \'' . HTTPS_OPENCART . '\');' . "\n\n";
+			$output .= 'define(\'HTTPS_SERVER\', \'' . HTTP_OPENCART . 'admin/\');' . "\n";
+			$output .= 'define(\'HTTPS_CATALOG\', \'' . HTTP_OPENCART . '\');' . "\n\n";
 
 			$output .= '// DIR' . "\n";
 			$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'admin/\');' . "\n";
