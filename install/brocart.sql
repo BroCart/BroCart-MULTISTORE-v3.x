@@ -4377,7 +4377,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `code`, `key`, `value`, `ser
 (3264, 0, 'config', 'config_name', 'Your Store', 0),
 (3263, 0, 'config', 'config_layout_id', '4', 0),
 (3262, 0, 'config', 'config_theme', 'default', 0),
-(3261, 0, 'config', 'config_meta_keyword_3', 'Мета-тег Keywords Укр', 0),
+(3261, 0, 'config', 'config_meta_keyword_3', 'Мета-тег Keywords Рус', 0),
 (3260, 0, 'config', 'config_meta_description_3', 'Мета-тег Description Рус', 0),
 (3254, 0, 'config', 'config_meta_description_1', 'Мета-тег Description En', 0),
 (3255, 0, 'config', 'config_meta_keyword_1', 'Мета-тег Keywords En', 0),
