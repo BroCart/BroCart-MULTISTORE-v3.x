@@ -5,7 +5,6 @@
     <ul class="payment_methods methods">
 		{% for payment_method in payment_methods %}
         <li class="payment_method_bro">
-			<input id="payment-method-{{ payment_method.code }}" type="radio" class="input-radio" name="payment_method" value="{{ payment_method.code }}" >	
 				{% if payment_method.code == code or not code %}
 				{% set code = payment_method.code %}
 				<input id="payment-method-{{ payment_method.code }}" type="radio" class="input-radio" name="payment_method" value="{{ payment_method.code }}" checked="checked" />

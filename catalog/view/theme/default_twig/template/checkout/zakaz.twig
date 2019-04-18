@@ -151,10 +151,20 @@
         {{ column_right }}</div>
 </div>
 <script type="text/javascript"><!--
-	$(document).ready(function() {
-		$('#shipping-method').load('index.php?route=checkout/buy/getShipping');	
-		$('#payment-method').load('index.php?route=checkout/buy/getPayment');
-	});
+	$(document).ready(function() {		
+		$('input, textarea').focus(function(){
+			$(this).attr('placeholder','');
+		});
+		$('#payment-method').on('click', function(e) {
+			updateTotal();
+		});
+		$('#shipping-method').on('change', function() {
+			updateTotal();
+		});
+	});	
+	$('#shipping-method').load('index.php?route=checkout/zakaz/getShipping');
+	$('#payment-method').load('index.php?route=checkout/zakaz/getPayment');
+	
     $('#checkout-form select[name=\'country_id\']').on('change', function() {
         $.ajax({
             url: 'index.php?route=checkout/checkout/country&country_id=' + this.value,
@@ -199,10 +209,10 @@
             }
         });
     });
-
+	$('#checkout-form select[name=\'country_id\']').trigger('change');
     $('#button-order').click(function() {
         $.ajax({
-            url: 'index.php?route=checkout/buy/save',
+            url: 'index.php?route=checkout/zakaz/save',
             type: 'post',
             data: $('#checkout-form input[type=\'text\'], #checkout-form input[type=\'checkbox\']:checked, #checkout-form select, #order_review input[type=\'radio\']:checked, #checkout-form input[type=\'radio\']:checked, #checkout-form textarea, #checkout-form input[type=\'hidden\']'),
             dataType: 'json',
@@ -239,7 +249,7 @@
 					}					
                 } else {
                     $.ajax({
-                        url: 'index.php?route=checkout/buy/confirm',
+                        url: 'index.php?route=checkout/zakaz/confirm',
                         type: 'get',
                         dataType: 'json',
                         success: function() {
@@ -278,7 +288,7 @@
     });
     function confirmation(method, callback) {
         $.ajax({
-            url: 'index.php?route=checkout/buy/reConfirmed',
+            url: 'index.php?route=checkout/zakaz/reConfirmed',
             type: 'post',
             data: 'method=' + method.split('.')[0] + '&payment_method=' + method,
             dataType: 'json',
@@ -290,9 +300,9 @@
     }
     
     function updateTotal(){	
-        if (typeof($('input[name="shipping_method"]')) !== 'undefined'){
+        if (typeof($('#shipping-method-select').val()) !== 'undefined'){
             $.ajax({
-                url: 'index.php?route=checkout/buy/updateTotal',
+                url: 'index.php?route=checkout/zakaz/updateTotal',
                 type: 'post',
                 data: 'method=' + $('#shipping-method-select').val(),
                 dataType: 'json',
@@ -305,6 +315,6 @@
                 }
             });
         }
-    }    
+    }   
 //--></script>
 {{ footer }}
