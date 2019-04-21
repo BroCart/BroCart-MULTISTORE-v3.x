@@ -20,7 +20,7 @@ class File {
 
 	public function get($key) {
 		$files = glob(DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.*');		
-		if (isset($files[0])) {
+		if (isset($files[0]) && is_file($files[0])) {
 			$handle = fopen($files[0], 'r');
 			flock($handle, LOCK_SH);
 			$data = fread($handle, filesize($files[0]));
