@@ -9,7 +9,7 @@ $_['datetime_format']               = 'd.m.Y H:i:s';
 $_['decimal_point']                 = ',';
 $_['thousand_point']                = ' ';
 
-// Text
+// Текстові
 $_['text_yes']                      = 'Так';
 $_['text_no']                       = 'Ні';
 $_['text_enabled']                  = 'Ввімкнено';
@@ -19,7 +19,7 @@ $_['text_select']                   = ' --- Виберіть --- ';
 $_['text_select_all']               = 'Вибрати все';
 $_['text_unselect_all']             = 'Скасувати вибір';
 $_['text_all_zones']                = 'Всі області';
-$_['text_default']                  = ' <b>(За промовчанням)</b>';
+$_['text_default']                  = ' <b>(За замовчуванням)</b>';
 $_['text_close']                    = 'Закрити';
 $_['text_pagination']               = 'Відображено з %d по %d з %d (%d Сторінок)';
 $_['text_loading']                  = 'Завантаження...';
@@ -139,8 +139,9 @@ $_['tab_activity']                  = 'Останні дії';
 $_['tab_recurring']                 = 'Профілі підписки';
 $_['tab_action']                    = 'Дія';
 $_['tab_google']                    = 'Google';
+$_['tab_seo']                       = 'SEO';
 
-// Error
+// Помилки
 $_['error_exception']               = 'Помилка Code(%s): %s на %s на %s лінії';
 $_['error_upload_1']                = 'Попередження: Розмір вивантаженого файлу перевищує ліміт вказаний у php.ini, директива upload_max_filesize!';
 $_['error_upload_2']                = 'Попередження: Вивантажений файл перевищує MAX_FILE_SIZE директиву, вказану в HTML формі!';

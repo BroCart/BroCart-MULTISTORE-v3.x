@@ -1,5 +1,5 @@
 <?php
-// Text
+// Текстові
 $_['text_customer_approval']    = 'Затвердження клієнтів';
 $_['text_marketplace']          = 'Магазин модулів';
 $_['text_seo_url']              = 'SEO URL';
@@ -104,7 +104,7 @@ $_['text_openbay_report_price'] = 'Pricing report';
 $_['text_openbay_order_import'] = 'Order import';
 $_['text_paypal'] = 'PayPal';
 $_['text_paypal_search'] = 'Пошук транзакції';
-$_['text_complete_status'] = 'Замовлення завершені'; 
-$_['text_processing_status'] = 'Замовлення у процесі'; 
+$_['text_complete_status'] = 'Замовлення завершені';
+$_['text_processing_status'] = 'Замовлення у процесі';
 $_['text_other_status'] = 'Інші замовлення';
 $_['text_maintenance']          = 'Інструменти';
