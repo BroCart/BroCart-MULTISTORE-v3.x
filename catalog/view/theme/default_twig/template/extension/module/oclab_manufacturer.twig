@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+	{% if display_view == 3 %}
+	<div class="panel-heading">{{ header_title }}</div>
+	<div>
+		{% for alphabet in alphabets %}
+        &nbsp;&nbsp;&nbsp;<a href="{{ alphabet.href }}">{{ alphabet.name }}</a>
+        {% endfor %}
+	</div>
+	{% else %}
+	<div class="panel-heading">{{ header_title }}</div>
+	<div class="list-group">
+		{% if display_view == 1 %}
+		{% for manufacturer in manufacturers %}
+			<a href="{{ manufacturer.href }}" class="list-group-item {% if manufacturer.manufacturer_id == manufacturer_id %}active{% endif %}">{{ manufacturer.name }}</a>
+		{% endfor %}
+		{% else %}
+			<select onchange="location=value" class="form-control">
+				<option value=""></option>
+				{% for manufacturer in manufacturers %}
+					<option value="{{ manufacturer.href }}" {% if manufacturer.manufacturer_id == manufacturer_id %}selected="selected"{% endif %}>{{ manufacturer.name }}</option>
+				{% endfor %}
+			</select>
+		{% endif %}
+	</div>
+	{% endif %}
+</div>
