@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title']                        = 'Периодические платежи';
 
-// Текстовые
+// Text
 $_['text_account']                         = 'Аккаунт';
 $_['text_recurring']                       = 'Периодические платежи';
 $_['text_recurring_detail']                = 'Детали периодического платежа';
@@ -44,7 +44,7 @@ $_['column_status']                        = 'Статус';
 $_['column_product']                       = 'Товар';
 $_['column_order_recurring_id']            = 'ID Профиля';
 
-// Ошибки
+// Error
 $_['error_not_cancelled']                  = 'Ошибка: %s';
 $_['error_not_found']                      = 'Нельзя отключить профиль';
 

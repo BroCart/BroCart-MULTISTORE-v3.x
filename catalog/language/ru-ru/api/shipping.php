@@ -1,9 +1,9 @@
 <?php
-// Текстовые
+// Text
 $_['text_address']       = 'Success: Shipping address has been set!';
 $_['text_method']        = 'Success: Shipping method has been set!';
 
-// Ошибки
+// Error
 $_['error_permission']   = 'Warning: You do not have permission to access the API!';
 $_['error_firstname']    = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']     = 'Last Name must be between 1 and 32 characters!';

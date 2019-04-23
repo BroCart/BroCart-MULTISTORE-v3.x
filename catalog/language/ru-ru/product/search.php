@@ -3,7 +3,7 @@
 $_['heading_title']     = 'Поиск';
 $_['heading_tag']       = 'По тегу - ';
 
-// Текстовые
+// Text
 $_['text_search']       = 'Результаты поиска';
 $_['text_keyword']      = 'Ключевые слова';
 $_['text_category']     = 'Все категории';
@@ -29,7 +29,7 @@ $_['text_model_asc']    = 'Модель (А - Я)';
 $_['text_model_desc']   = 'Модель (Я - А)';
 $_['text_limit']        = 'Показать:';
 
-// Поля ввода
+// Entry
 $_['entry_search']      = 'Поиск:';
 $_['entry_description'] = 'Искать в описании товаров';
 

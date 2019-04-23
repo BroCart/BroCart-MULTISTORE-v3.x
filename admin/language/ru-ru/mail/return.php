@@ -1,5 +1,5 @@
 <?php
-// Текстовые
+// Text
 $_['text_subject']       = '%s - возврат обновлен %s';
 $_['text_return_id']     = '№ возврата';
 $_['text_date_added']    = 'Дата возврата';

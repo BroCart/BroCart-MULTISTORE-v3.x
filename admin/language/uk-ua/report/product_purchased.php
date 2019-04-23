@@ -1,12 +1,12 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Звіт по придбаних товарах';
 
-// Текстові
+// Text
 $_['text_list'] = 'Куплені товари';
 $_['text_all_status'] = 'Всі статуси';
 
-// Колонки
+// Column
 $_['column_date_start'] = 'Дата';
 $_['column_date_end'] = 'Дата закінчення';
 $_['column_name'] = 'Назва товару';

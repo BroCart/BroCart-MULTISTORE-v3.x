@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']        = 'Возвраты товаров';
 
-// Текстовые
+// Text
 $_['text_success']         = 'Настройки успешно изменены!';
 $_['text_list']            = 'Список возвратов';
 $_['text_add']             = 'Добавить';
@@ -14,7 +14,7 @@ $_['text_product']         = 'Товары';
 $_['text_history']         = 'Добавить';
 $_['text_history_add']     = 'Добавить в историю';
 
-// Колонки
+// Column
 $_['column_return_id']     = '№ Возврата';
 $_['column_order_id']      = '№ Заказа';
 $_['column_customer']      = 'Клиент';
@@ -27,7 +27,7 @@ $_['column_comment']       = 'Комментарий';
 $_['column_notify']        = 'Клиент уведомлен';
 $_['column_action']        = 'Действие';
 
-// Поля ввода
+// Entry
 $_['entry_customer']       = 'Клиент';
 $_['entry_order_id']       = '№ Заказа';
 $_['entry_date_ordered']   = 'Дата заказа';
@@ -48,10 +48,10 @@ $_['entry_return_id']      = '№ Возврата';
 $_['entry_date_added']     = 'Дата добавления';
 $_['entry_date_modified']  = 'Дата изменения';
 
-// Инфо
+// Help
 $_['help_product']         = '(Автодополнение)';
 
-// Ошибки
+// Error
 $_['error_warning']        = 'Внимательно проверьте форму на ошибки!';
 $_['error_permission']     = 'У Вас нет прав для изменения настроек Возвратов!';
 $_['error_order_id']       = 'Необходим № заказа!';

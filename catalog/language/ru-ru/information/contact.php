@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title']  = 'Контакты';
 
-// Текстовые
+// Text
 $_['text_location']  = 'Наше местонахождение';
 $_['text_store']     = 'Наши магазины';
 $_['text_contact']   = 'Форма обратной связи';
@@ -15,7 +15,7 @@ $_['text_success']   = '<p>Ваше сообщение успешно отпра
 $_['text_agree']     = 'Я прочитал <a href="%s" class="agree"><b>%s</b></a> и согласен с <br /> условиями безопасности и обработки персональных данных <input name="personal" checked required type="checkbox">  ';
 $_['button_submit']  = 'Отправить сообщение';
 
-// Поля ввода
+// Entry
 $_['entry_name']     = 'Ваше имя';
 $_['entry_email']    = 'Ваш E-Mail';
 $_['entry_enquiry']  = 'Ваш вопрос или сообщение';

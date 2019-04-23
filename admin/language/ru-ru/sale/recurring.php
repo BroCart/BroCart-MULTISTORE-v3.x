@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']                        = 'Периодические заказы';
 
-// Текстовые
+// Text
 $_['text_success']                         = 'Настройки успешно изменены!';
 $_['text_list']                            = 'Периодические заказы';
 $_['text_filter']                          = 'Фильтр';
@@ -48,7 +48,7 @@ $_['text_transaction_outstanding_failed']  = 'Ошибки платежа';
 $_['text_transaction_expired']             = 'Истек';
 $_['text_cancelled']                       = 'Периодический платеж отключен';
 
-// Колонки
+// Column
 $_['column_order_recurring_id']             = '№ периодического заказа';
 $_['column_order_id']                       = '№ заказа';
 $_['column_reference']                      = 'Оплата';
@@ -59,7 +59,7 @@ $_['column_amount']                         = 'Сумма';
 $_['column_type']                           = 'Тип';
 $_['column_action']                         = 'Действие';
 
-// Поля ввода
+// Entry
 $_['entry_order_recurring_id']             = '№ периодического заказа';
 $_['entry_order_id']                       = '№ Заказа';
 $_['entry_reference']                      = 'Способ оплаты';
@@ -77,7 +77,7 @@ $_['entry_recurring']                      = 'Профиль';
 $_['entry_payment_method']                 = 'Способ оплаты';
 $_['entry_cancel_payment']                 = 'Отмена оплаты';
 
-// Ошибки
+// Error
 $_['error_not_cancelled']                  = 'Ошибка: %s';
 $_['error_not_found']                      = 'Нельзя отключить профиль';
 

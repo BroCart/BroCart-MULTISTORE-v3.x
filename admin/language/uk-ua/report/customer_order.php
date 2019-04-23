@@ -1,12 +1,12 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Звіт по замовленнях клієнтів';
 
-// Текстові
+// Text
 $_['text_list'] = 'Замовлення клієнтів';
 $_['text_all_status'] = 'Всі статуси';
 
-// Колонки
+// Column
 $_['column_customer'] = 'Ім&#39;я клієнта';
 $_['column_email'] = 'E-Mail';
 $_['column_customer_group'] = 'Група клієнта';

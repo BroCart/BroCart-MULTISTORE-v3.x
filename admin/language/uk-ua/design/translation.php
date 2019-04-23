@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Переклад';
 
-// Текстові
+// Text
 $_['text_edit'] = 'Редагувати';
 $_['text_list'] = 'Переклад';
 $_['text_translation'] = 'Вибрати';
@@ -16,7 +16,7 @@ $_['text_default']     = 'За замовчуванням';
 $_['text_store']       = 'Магазин';
 $_['text_language']    = 'Мова';
 
-// Колонки
+// Column
 $_['column_flag'] = 'Прапор';
 $_['column_country'] = 'Країна';
 $_['column_progress'] = 'Процес перекладу';
@@ -40,6 +40,6 @@ $_['entry_key']        = 'Ключ';
 $_['entry_default']    = 'За замовчуванням';
 $_['entry_value']      = 'Значеня';
 
-// Помилки
+// Error
 $_['error_permission'] = 'У Вас немає прав для зміни налаштувань!';
 $_['error_key']        = 'Ключ повинен бути від 3 до 64 символів!';

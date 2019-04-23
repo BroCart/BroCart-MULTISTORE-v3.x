@@ -10,7 +10,7 @@ $_['decimal_point'] = '.';
 $_['thousand_point'] = '';
 $_['text_page'] = ' сторінка ';
 
-// Текстові
+// Text
 $_['text_home'] = '<i class="fa fa-home"></i>';
 $_['text_microhome']  = 'Головна';
 $_['text_yes'] = 'Так';
@@ -60,7 +60,7 @@ $_['button_list'] = 'Список';
 $_['button_grid'] = 'Сітка';
 $_['button_map'] = 'Показати карту';
 
-// Помилки
+// Error
 $_['error_exception'] = 'Помилка коду(%s): %s у %s у рядку %s';
 $_['error_upload_1'] = 'Попередження: Розмір файлу перевищує значення upload_max_filesize в php.ini!';
 $_['error_upload_2'] = 'Попередження: Завантажений файл перевищує MAX_FILE_SIZE значення, яка була вказана в налаштуваннях!';

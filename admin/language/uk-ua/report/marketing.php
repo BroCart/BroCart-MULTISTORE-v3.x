@@ -1,12 +1,12 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Звіт по маркетингових акціях';
 
-// Текстові
+// Text
 $_['text_list'] = 'Список акцій';
 $_['text_all_status'] = 'Всі статуси';
 
-// Колонки
+// Column
 $_['column_campaign'] = 'Назва акції';
 $_['column_code'] = 'Код';
 $_['column_clicks'] = 'Переходів';

@@ -7,7 +7,7 @@ $_['column_date_added']  = 'Добавлено';
 $_['column_description'] = 'Описание';
 $_['column_amount']      = 'Сумма (%s)';
 
-// Текстовые
+// Text
 $_['text_account']       = 'Личный Кабинет';
 $_['text_transaction']   = 'Ваши транзакции';
 $_['text_total']         = 'Ваш текущий баланс';

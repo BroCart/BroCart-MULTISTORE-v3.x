@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']			  = 'View Transaction';
 
-// Текстовые
+// Text
 $_['text_pp_express']		  = 'PayPal Express Checkout';
 $_['text_product_lines']	  = 'Product lines';
 $_['text_ebay_txn_id']		  = 'eBay transaction ID';

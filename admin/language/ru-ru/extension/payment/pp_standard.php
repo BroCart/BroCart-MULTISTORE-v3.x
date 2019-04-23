@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']					 = 'PayPal Payments Standard';
 
-// Текстовые
+// Text
 $_['text_extension']				 = 'Расширения';
 $_['text_success']					 = 'Настройки успешно изменены!';
 $_['text_edit']                      = 'Редактирование';
@@ -10,7 +10,7 @@ $_['text_pp_standard']				 = '<a target="_BLANK" href="https://www.paypal.com/uk
 $_['text_authorization']			 = 'Авторизация';
 $_['text_sale']						 = 'Продажа'; 
 
-// Поля ввода
+// Entry
 $_['entry_email']					 = 'E-Mail';
 $_['entry_test']					 = 'Режим отладки';
 $_['entry_transaction']				 = 'Метод транзакции';
@@ -34,12 +34,12 @@ $_['entry_sort_order']				 = 'Порядок сортировки';
 $_['tab_general']					 = 'Основное';
 $_['tab_order_status']       		 = 'Статус заказа';
 
-// Инфо
+// Help
 $_['help_test']						 = 'Use the live or testing (sandbox) gateway server to process transactions?';
 $_['help_debug']			    	 = 'Logs additional information to the system log';
 $_['help_total']					 = 'The checkout total the order must reach before this payment method becomes active';
 
-// Ошибки
+// Error
 $_['error_permission']				 = 'У Вас нет прав для управления данным модулем!';
 $_['error_email']					 = ' Необходимо заполнить поле E-Mail!';
 

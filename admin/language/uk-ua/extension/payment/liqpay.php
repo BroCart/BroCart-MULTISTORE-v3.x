@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'LIQPAY';
 
-// Текстові
+// Text
 $_['text_extension'] = 'Розширення';
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_edit'] = 'Редагувати';
@@ -20,10 +20,10 @@ $_['entry_geo_zone'] = 'Географічна зона';
 $_['entry_status'] = 'Статус';
 $_['entry_sort_order'] = 'Порядок сортування';
 
-// Довідка
+// Help
 $_['help_total'] = 'Мінімальна сума замовлення. Нижче цієї суми, спосіб оплати буде недоступний';
 
-// Помилки
+// Error
 $_['error_permission'] = 'У Вас немає прав для управління даним модулем!!';
 $_['error_merchant'] = 'Невірний Merchant ID !';
 $_['error_signature'] = 'Відсутня Signature!';

@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Звіт по податках';
 
-// Текстові
+// Text
 $_['text_list'] = 'Звіт по податках';
 $_['text_year'] = 'Рік';
 $_['text_month'] = 'Місяць';
@@ -10,7 +10,7 @@ $_['text_week'] = 'Тиждень';
 $_['text_day'] = 'День';
 $_['text_all_status'] = 'Всі статуси';
 
-// Колонки
+// Column
 $_['column_date_start'] = 'Дата';
 $_['column_date_end'] = 'Дата закінчення';
 $_['column_title'] = 'Назва податку';

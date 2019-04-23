@@ -9,7 +9,7 @@ $_['datetime_format']               = 'd/m/Y H:i:s';
 $_['decimal_point']                 = '.';
 $_['thousand_point']                = '';
 
-// Текстовые
+// Text
 $_['text_yes']                      = 'Да';
 $_['text_no']                       = 'Нет';
 $_['text_enabled']                  = 'Включено';
@@ -145,7 +145,7 @@ $_['tab_recurring']                 = 'Периодичность';
 $_['tab_action']                    = 'Действие';
 $_['tab_google']                    = 'Google';
 
-// Ошибки
+// Error
 $_['error_exception']               = 'Ошибка кода (%s): %s в %s на строке %s';
 $_['error_upload_1']                = 'Предупреждение: Размер загружаемого файла превышает значение upload_max_filesize в php.ini!';
 $_['error_upload_2']                = 'Предупреждение: Загруженный файл превышает MAX_FILE_SIZE значение, которая была указана в настройках!';

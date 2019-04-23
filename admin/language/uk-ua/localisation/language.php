@@ -1,14 +1,14 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Мови';
 
-// Текстові
+// Text
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_list'] = 'Мови';
 $_['text_add'] = 'Додати';
 $_['text_edit'] = 'Редагувати';
 
-// Колонки
+// Column
 $_['column_name'] = 'Мова';
 $_['column_code'] = 'Код';
 $_['column_sort_order'] = 'Порядок сортування';
@@ -22,12 +22,12 @@ $_['entry_status'] = 'Статус';
 $_['entry_sort_order'] = 'Порядок сортування';
 $_['entry_prefix'] = 'Введіть SEO префікс';
 
-// Довідка
+// Help
 $_['help_locale'] = 'Приклад: en_US.UTF-8,ан,en-gb,en_gb,english або <br> uk_ua.UTF-8,uk_ua,russian';
 $_['help_status'] = 'Показати/Приховати перемикачі мов (вітрина магазину).';
 $_['help_prefix'] = 'Наприклад: ua, і сайт буде мати вигляд: www.site.com/ua/';
 
-// Помилки
+// Error
 $_['error_permission'] = 'У Вас немає прав для зміни списку мов!';
 $_['error_exists'] = 'Увага: Спочатку додайте мову!';
 $_['error_name'] = 'Назва мови повинна бути від 3 до 32 символів!';

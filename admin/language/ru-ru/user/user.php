@@ -1,20 +1,20 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']         = 'Пользователи';
 
-// Текстовые
+// Text
 $_['text_success']          = 'Настройки успешно изменены!';
 $_['text_list']             = 'Список пользователей';
 $_['text_add']              = 'Добавить';
 $_['text_edit']             = 'Редактирование';
 
-// Колонки
+// Column
 $_['column_username']       = 'Логин';
 $_['column_status']         = 'Статус';
 $_['column_date_added']     = 'Добавлено';
 $_['column_action']         = 'Действие';
 
-// Поля ввода
+// Entry
 $_['entry_username']        = 'Логин';
 $_['entry_user_group']      = 'Группа пользователей';
 $_['entry_password']        = 'Пароль';
@@ -25,7 +25,7 @@ $_['entry_email']           = 'E-Mail';
 $_['entry_image']           = 'Изображение';
 $_['entry_status']          = 'Статус';
 
-// Ошибки
+// Error
 $_['error_permission']      = 'У Вас нет прав для управления данным модулем!';
 $_['error_account']         = 'Вы не можете удалить свой аккаунт!';
 $_['error_exists_username'] = 'Внимание: Указанное имя уже используется!';

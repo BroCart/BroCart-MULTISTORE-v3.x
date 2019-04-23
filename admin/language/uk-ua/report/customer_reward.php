@@ -1,11 +1,11 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Звіт з бонусними балами клієнта';
 
-// Текстові
+// Text
 $_['text_list'] = 'Бонусні бали клієнтів';
 
-// Колонки
+// Column
 $_['column_customer'] = 'Ім&#39;я клієнта';
 $_['column_email'] = 'E-Mail';
 $_['column_customer_group'] = 'Група клієнта';

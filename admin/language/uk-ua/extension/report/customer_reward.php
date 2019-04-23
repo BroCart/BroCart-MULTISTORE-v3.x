@@ -1,14 +1,14 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']         = 'Бали Клієнтів';
 
-// Текстовые
+// Text
 $_['text_extension']        = 'Розширення';
 $_['text_edit']             = 'Редагування';
 $_['text_success']          = 'Настройки успішно змінені!';
 $_['text_filter']           = 'Фільтр';
 
-// Колонки
+// Column
 $_['column_customer']       = 'Клієнт';
 $_['column_email']          = 'E-Mail';
 $_['column_customer_group'] = 'Група';
@@ -18,13 +18,13 @@ $_['column_orders']         = 'К-сть замовлень';
 $_['column_total']          = 'Разом';
 $_['column_action']         = 'Дія';
 
-// Поля ввода
+// Entry
 $_['entry_date_start']      = 'Дата початку';
 $_['entry_date_end']        = 'Дата закінчення';
 $_['entry_customer']        = 'Клієнт';
 $_['entry_status']          = 'Статус';
 $_['entry_sort_order']      = 'Порядок сортування';
 
-// Помилки
+// Error
 $_['error_permission']  = 'У Вас немає прав для управління модулем!';
 

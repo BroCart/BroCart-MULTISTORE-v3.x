@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Періодичні замовлення';
 
-// Текстові
+// Text
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_list'] = 'Періодичні замовлення';
 $_['text_recurring_detail'] = 'Деталі';
@@ -47,7 +47,7 @@ $_['text_transaction_outstanding_failed'] = 'Помилки платежу';
 $_['text_transaction_expired'] = 'Минув';
 $_['text_cancelled'] = 'Періодичний платіж відключений';
 
-// Колонки
+// Column
 $_['column_order_recurring_id'] = '№ періодичного замовлення';
 $_['column_order_id'] = '№ замовлення';
 $_['column_reference'] = 'Оплата';
@@ -76,6 +76,6 @@ $_['entry_recurring'] = 'Профіль';
 $_['entry_payment_method'] = 'Спосіб оплати';
 $_['entry_cancel_payment'] = 'Скасування оплати';
 
-// Помилки
+// Error
 $_['error_not_cancelled'] = 'Помилка: %s';
 $_['error_not_found'] = 'Не можна відключити профіль';

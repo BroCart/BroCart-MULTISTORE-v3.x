@@ -1,5 +1,5 @@
 <?php
-// Текстові
+// Text
 $_['text_extension'] = 'Платіжна інформація';
 $_['text_capture_status'] = 'Захопити статус';
 $_['text_amount_authorised'] = 'Дозволена сума';
@@ -17,7 +17,7 @@ $_['text_partial_refund'] = 'Часткове повернення';
 
 $_['text_current_refunds'] = 'Повернення вже зробив для цієї угоди. Макс повернення ';
 
-// Колонки
+// Column
 $_['column_transaction'] = 'ID транзакції';
 $_['column_amount'] = 'Сума';
 $_['column_type'] = 'Тип оплати';
@@ -33,7 +33,7 @@ $_['entry_full_refund'] = 'Повний повернення';
 $_['entry_amount'] = 'Сума';
 $_['entry_note'] = 'Нотатки';
 
-// Довідка
+// Help
 $_['help_capture_complete'] = 'Якщо це останнє захоплення.';
 
 // Tab
@@ -45,7 +45,7 @@ $_['button_void'] = 'Скасувати';
 $_['button_capture'] = 'Захопити';
 $_['button_refund'] = 'Питання по захопленню';
 
-// Помилки
+// Error
 $_['error_capture'] = 'Введіть суму захоплення';
 $_['error_transaction'] = 'Угода не може бути здійснена!';
 $_['error_not_found'] = 'Угода не знайдено!';

@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']      = 'Администрирование';
 
-// Текстовые
+// Text
 $_['text_profile']       = 'Ваш профиль';
 $_['text_order']          		= 'Заказы';
 $_['text_processing_status']    = 'В процессе';

@@ -1,5 +1,5 @@
 <?php
-// Текстовые
+// Text
 $_['text_subject']      = '%s - Заказ %s';
 $_['text_received']     = 'Вы получили заказ.';
 $_['text_order_id']     = '№ заказа:';

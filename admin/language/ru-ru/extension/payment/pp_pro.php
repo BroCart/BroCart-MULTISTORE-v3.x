@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']		 = 'PayPal Pro';
 
-// Текстовые
+// Text
 $_['text_extension']     = 'Расширения';
 $_['text_success']		 = 'Настройки успешно изменены!';
 $_['text_edit']          = 'Редактирование';
@@ -10,7 +10,7 @@ $_['text_pp_pro']		 = '<a target="_BLANK" href="https://www.paypal.com/uk/mrb/pa
 $_['text_authorization'] = 'Авторизация';
 $_['text_sale']			 = 'Продажа';
 
-// Поля ввода
+// Entry
 $_['entry_username']	 = 'API Username';
 $_['entry_password']	 = 'API Password';
 $_['entry_signature']	 = 'API Signature';
@@ -22,11 +22,11 @@ $_['entry_geo_zone']	 = 'Географическая зона';
 $_['entry_status']		 = 'Статус';
 $_['entry_sort_order']	 = 'Порядок сортировки';
 
-// Инфо
+// Help
 $_['help_test']			 = 'Use the live or testing (sandbox) gateway server to process transactions?';
 $_['help_total']		 = 'The checkout total the order must reach before this payment method becomes active';
 
-// Ошибки
+// Error
 $_['error_permission']	 = 'У Вас нет прав для управления данным модулем!';
 $_['error_username']	 = 'Необходимо заполнить API Username!';
 $_['error_password']	 = 'Необходимо заполнить API Password!';

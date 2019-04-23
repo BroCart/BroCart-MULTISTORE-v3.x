@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']			   = 'Поиск транзакции';
 
-// Текстовые
+// Text
 $_['text_pp_express']		   = 'PayPal Экспресс-платежи';
 $_['text_date_search']		   = 'Поиск по дате';
 $_['text_searching']		   = 'Поиск';
@@ -11,7 +11,7 @@ $_['text_buyer_info']		   = 'Информация о покупателе';
 $_['text_view']				   = 'Посмотреть';
 $_['text_format']			   = 'Формат';
 
-// Колонки
+// Column
 $_['column_date']			   = 'Дата';
 $_['column_type']			   = 'Тип';
 $_['column_email']			   = 'Email';
@@ -24,7 +24,7 @@ $_['column_fee']			   = 'Комиссия';
 $_['column_netamt']		       = 'Без суммы';
 $_['column_action']		       = 'Действие';
 
-// Поля ввода
+// Entry
 $_['entry_trans_all']		   = 'Все';
 $_['entry_trans_sent']		   = 'Отправленные';
 $_['entry_trans_received']     = 'Возвращенные';

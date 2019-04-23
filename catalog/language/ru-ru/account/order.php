@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title']         = 'История заказов';
 
-// Текстовые
+// Text
 $_['text_account']          = 'Личный Кабинет';
 $_['text_order']            = 'Заказ';
 $_['text_order_detail']     = 'Детали заказа';
@@ -33,6 +33,6 @@ $_['column_date_added']     = 'Добавлено';
 $_['column_status']         = 'Статус';
 $_['column_comment']        = 'Комментарий';
 
-// Ошибки
+// Error
 $_['error_reorder']         = '%s в данный момент не доступен....';
 

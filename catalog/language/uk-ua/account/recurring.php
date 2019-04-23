@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title'] = 'Періодичні платежі';
 
-// Текстові
+// Text
 $_['text_account'] = 'Запис';
 $_['text_recurring'] = 'Періодичні платежі';
 $_['text_recurring_detail'] = 'Деталі періодичного платежу';
@@ -111,7 +111,7 @@ $_['column_product'] = 'Товар';
 $_['column_action'] = 'Дія';
 $_['column_recurring_id'] = 'ID Профілю';
 
-// Помилки
+// Error
 $_['error_not_cancelled'] = 'Помилка: %s';
 $_['error_not_found'] = 'не Можна відключити профіль';
 

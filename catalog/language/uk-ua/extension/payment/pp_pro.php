@@ -1,11 +1,11 @@
 <?php
-// Текстові
+// Text
 $_['text_title'] = 'Карти Visa і MasterCard (PayPal)';
 $_['text_wait'] = 'Будь ласка, почекайте!';
 $_['text_credit_card'] = 'Інформація платіжної картки';
 $_['text_loading'] = 'Завантаження';
 
-// Поля вводу
+// Entry
 $_['entry_cc_type'] = 'Тип карти:';
 $_['entry_cc_number'] = 'Номер картки:';
 $_['entry_cc_start_date'] = 'Дата початку терміну дії картки:';

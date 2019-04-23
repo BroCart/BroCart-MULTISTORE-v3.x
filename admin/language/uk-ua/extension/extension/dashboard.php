@@ -1,17 +1,17 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Панель управління';
 
-// Текстові
+// Text
 $_['text_success'] = 'Налаштування успішно оновлені!';
 $_['text_list'] = 'Список';
 
-// Колонки
+// Column
 $_['column_name'] = 'Назва';
 $_['column_width'] = 'Ширина';
 $_['column_status'] = 'Статус';
 $_['column_sort_order'] = 'Порядок сортування';
 $_['column_action'] = 'Дія';
 
-// Помилки
+// Error
 $_['error_permission'] = 'У Вас немає прав для зміни панелі управління!';

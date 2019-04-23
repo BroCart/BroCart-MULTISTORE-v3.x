@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title'] = 'Реєстрація';
 
-// Текстові
+// Text
 $_['text_account'] = 'Особистий Кабінет';
 $_['text_register'] = 'Реєстрація';
 $_['text_account_already'] = 'Якщо Ви вже зареєстровані, перейдіть на сторінку <a href="%s">авторизації</a>.';
@@ -12,7 +12,7 @@ $_['text_newsletter'] = 'Розсилка новин';
 $_['text_your_password'] = 'пароль';
 $_['text_agree'] = 'Я прочитав <a href="%s" class="agree"><b>%s</b></a> і згоден з умовами';
 
-// Поля вводу
+// Entry
 $_['entry_customer_group'] = 'Напрям бізнесу';
 $_['entry_firstname'] = 'Ім&#39;я';
 $_['entry_lastname'] = 'Прізвище';
@@ -30,7 +30,7 @@ $_['entry_newsletter'] = 'Підписка на новини';
 $_['entry_password'] = 'Пароль';
 $_['entry_confirm'] = 'Підтвердження пароля';
 
-// Помилки
+// Error
 $_['error_exists'] = 'Цей E-Mail вже зареєстрований!';
 $_['error_firstname'] = 'Ім&#39;я повинно містити від 1 до 32 символів!';
 $_['error_lastname'] = 'Прізвище повинна бути від 1 до 32 символів!';

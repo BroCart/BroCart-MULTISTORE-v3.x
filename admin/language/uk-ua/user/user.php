@@ -1,14 +1,14 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Користувачі';
 
-// Текстові
+// Text
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_list'] = 'Користувачі';
 $_['text_add'] = 'Додати';
 $_['text_edit'] = 'Редагувати';
 
-// Колонки
+// Column
 $_['column_username'] = 'Логін';
 $_['column_status'] = 'Статус';
 $_['column_date_added'] = 'Додано';
@@ -25,7 +25,7 @@ $_['entry_email'] = 'E-Mail';
 $_['entry_image'] = 'Зображення';
 $_['entry_status'] = 'Статус';
 
-// Помилки
+// Error
 $_['error_permission'] = 'У Вас немає прав для управління даним модулем!';
 $_['error_account'] = 'Ви не можете видалити свій аккаунт!';
 $_['error_exists_username'] = 'Увага: Вказане ім&#39;я вже використовується!';

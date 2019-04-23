@@ -1,5 +1,5 @@
 <?php
-// Текстові
+// Text
 $_['text_customer_approval']    = 'Затвердження клієнтів';
 $_['text_marketplace']          = 'Магазин модулів';
 $_['text_seo_url']              = 'SEO URL';

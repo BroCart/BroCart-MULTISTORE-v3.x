@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Звіт активності партнера';
 
-// Текстові
+// Text
 $_['text_list'] = 'Список активності';
 $_['text_edit'] = '<a href="affiliate_id=%d>%s</a> - оновлена інформація про обліковому запису.';
 $_['text_forgotten'] = '<a href="affiliate_id=%d>%s</a> - запропоновано новий пароль';
@@ -11,7 +11,7 @@ $_['text_password'] = '<a href="affiliate_id=%d>%s</a> - оновлено пар
 $_['text_payment'] = '<a href="affiliate_id=%d>%s</a> - оновлені деталі оплати.';
 $_['text_register'] = '<a href="affiliate_id=%d>%s</a> - зареєстровано новий аккаунт.';
 
-// Колонки
+// Column
 $_['column_affiliate'] = 'Партнер';
 $_['column_comment'] = 'Коментарі';
 $_['column_ip'] = 'IP';

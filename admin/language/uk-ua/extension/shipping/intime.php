@@ -1,5 +1,5 @@
 <?php
-// заголовок
+// Heading
 $_['heading_title'] = 'Iнтайм';
 
 // Текст

@@ -1,20 +1,20 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']    = 'Чат Google Hangouts';
 
-// Текстовые
+// Text
 $_['text_extension']   = 'Расширения';
 $_['text_success']     = 'Настройки успешно изменены!';
 $_['text_edit']        = 'Настройки модуля';
 
-// Поля ввода
+// Entry
 $_['entry_code']       = 'Код Google Hangouts';
 $_['entry_status']     = 'Статус';
 
-// Инфо
+// Help
 $_['help_code']        = 'Перейдите <a href="https://developers.google.com/+/hangouts/button" target="_blank">Создайте  Google Hangout профиль </a>, далее скопируйте и вставьте полученный код в текстовое поле .';
 
-// Ошибки
+// Error
 $_['error_permission'] = 'У Вас нет прав для управления данным модулем!';
 $_['error_code']       = 'Необходим код';
 

@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']    = 'Корректна Sitemap [FIA]';
 
-// Текстові
+// Text
 $_['text_form']   = 'Карта сайту для Google';
 $_['text_extension']   = 'Розширення';
 $_['text_success']     = 'Налаштування модуля оновлені!';
@@ -31,6 +31,6 @@ $_['entry_furious_status'] = 'Статус карти';
 $_['entry_data_feed']  = 'Шлях карти:';
 $_['entry_syfix']  = 'Останній символ в ЛПУ, напр. слеш /';
 
-// Помилки
+// Error
 $_['error_permission'] = 'У Вас нема прав для керування цим модулем!';
 

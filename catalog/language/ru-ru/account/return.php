@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title']      = 'Возврат товара';
 
-// Текстовые
+// Text
 $_['text_account']       = 'Личный Кабинет';
 $_['text_return']        = 'Информация о возврате';
 $_['text_return_detail'] = 'Детали возврата';
@@ -36,7 +36,7 @@ $_['column_comment']     = 'Комментарий';
 $_['column_reason']      = 'Причина';
 $_['column_action']      = 'Действие';
 
-// Поля ввода
+// Entry
 $_['entry_order_id']     = '№ Заказа';
 $_['entry_date_ordered'] = 'Дата заказа';
 $_['entry_firstname']    = 'Имя';
@@ -50,7 +50,7 @@ $_['entry_reason']       = 'Причина возврата';
 $_['entry_opened']       = 'Товар распакован';
 $_['entry_fault_detail'] = 'Описание дефектов';
 
-// Ошибки
+// Error
 $_['text_error']         = 'Запрос на возврат не найден!';
 $_['error_order_id']     = 'Не указан № заказа!';
 $_['error_firstname']    = 'Имя должно быть от 1 до 32 символов!';

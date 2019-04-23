@@ -1,5 +1,5 @@
 <?php
-// Текстові
+// Text
 $_['text_information'] = 'Інформація';
 $_['text_service'] = 'Служба підтримки';
 $_['text_extra'] = 'Додатково';

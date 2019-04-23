@@ -1,8 +1,8 @@
 <?php
-// Текстовые
+// Text
 $_['text_success']       = 'You have successfully modified customers';
 
-// Ошибки
+// Error
 $_['error_permission']   = 'Warning: You do not have permission to access the API!';
 $_['error_customer']     = 'You must select a customer!';
 $_['error_firstname']    = 'First Name must be between 1 and 32 characters!';

@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Звіт діяльності клієнтів';
 
-// Текстові
+// Text
 $_['text_list'] = 'Список активності клієнтів';
 $_['text_address_add'] = '<a href="customer_id=%d>%s</a> - додана нова адреса.';
 $_['text_address_edit'] = '<a href="customer_id=%d>%s</a> - оновлено адресу.';
@@ -18,7 +18,7 @@ $_['text_return_guest'] = '%s - запитано повернення ванта
 $_['text_order_account'] = '<a href="customer_id=%d>%s</a> - створене <a href="order_id=%d">нове замовлення</a>.';
 $_['text_order_guest'] = '%s - створене <a href="order_id=%d">нове замовлення</a>.';
 
-// Колонки
+// Column
 $_['column_customer'] = 'Клієнт';
 $_['column_comment'] = 'Коментарі';
 $_['column_ip'] = 'IP';

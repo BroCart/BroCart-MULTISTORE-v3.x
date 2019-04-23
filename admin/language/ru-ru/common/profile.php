@@ -1,18 +1,18 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']         = 'Профиль';
 
-// Текстовые
+// Text
 $_['text_success']          = 'Настройки успешно изменены!';
 $_['text_edit']             = 'Редактирование';
 
-// Колонки
+// Column
 $_['column_username']       = 'Имя';
 $_['column_status']         = 'Статус';
 $_['column_date_added']     = 'Дата добавления';
 $_['column_action']         = 'Действие';
 
-// Поля ввода
+// Entry
 $_['entry_username']        = 'Логин';
 $_['entry_password']        = 'Пароль';
 $_['entry_confirm']         = 'Подтвердите пароль';
@@ -21,7 +21,7 @@ $_['entry_lastname']        = 'Фамилия';
 $_['entry_email']           = 'E-Mail';
 $_['entry_image']           = 'Изображение';
 
-// Ошибки
+// Error
 $_['error_permission']      = 'У Вас нет прав для изменения настроек профиля!';
 $_['error_exists_username'] = 'Внимание. Данное имя уже используется!';
 $_['error_username']        = 'Имя должен быть от 3 до 20 символов!';

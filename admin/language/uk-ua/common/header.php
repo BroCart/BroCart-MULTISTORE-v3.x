@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Адміністрування';
 
-// Текстові
+// Text
 $_['text_order'] = 'Замовлення';
 $_['text_processing_status'] = 'Статуси замовлень';
 $_['text_complete_status'] = 'Завершено';

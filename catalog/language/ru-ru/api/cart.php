@@ -1,8 +1,8 @@
 <?php
-// Текстовые
+// Text
 $_['text_success']     = 'Success: You have modified your shopping cart!';
 
-// Ошибки
+// Error
 $_['error_permission'] = 'Warning: You do not have permission to access the API!';
 $_['error_stock']      = 'Products marked with *** are not available in the desired quantity or not in stock!';
 $_['error_minimum']    = 'Minimum order amount for %s is %s!';

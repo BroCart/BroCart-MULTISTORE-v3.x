@@ -7,7 +7,7 @@ $_['column_date_added'] = 'Додано';
 $_['column_description'] = 'Опис';
 $_['column_amount'] = 'Сума (%s)';
 
-// Текстові
+// Text
 $_['text_account'] = 'Кабінет Партнера';
 $_['text_transaction'] = 'Виплати';
 $_['text_balance'] = 'Ваш поточний баланс';

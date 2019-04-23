@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title'] = 'Партнерська програма';
 
-// Текстові
+// Text
 $_['text_account'] = 'Кабінет Партнера';
 $_['text_register'] = 'Реєстрація Партнера';
 $_['text_account_already'] = 'Якщо у Вас вже є партнерський логін, будь ласка <a href="%s">авторизуйтесь</a>.';
@@ -16,7 +16,7 @@ $_['text_paypal'] = 'PayPal';
 $_['text_bank'] = 'Банківський переказ';
 $_['text_agree'] = 'Я прочитав <a href="%s" class="agree"><b>%s</b></a> і згоден з умовами';
 
-// Поля вводу
+// Entry
 $_['entry_firstname'] = 'Ім&#39;я, по Батькові';
 $_['entry_lastname'] = 'Прізвище';
 $_['entry_email'] = 'E-Mail';
@@ -42,7 +42,7 @@ $_['entry_bank_account_number'] = 'рахунок';
 $_['entry_password'] = 'Пароль';
 $_['entry_confirm'] = 'Підтвердження пароля';
 
-// Помилки
+// Error
 $_['error_exists'] = 'Цей E-Mail вже зареєстрований!';
 $_['error_firstname'] = 'Ім&#39;я повинно містити від 1 до 32 символів!';
 $_['error_lastname'] = 'Прізвище повинна бути від 1 до 32 символів!';

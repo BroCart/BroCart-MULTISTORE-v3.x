@@ -1,5 +1,5 @@
 <?php
-// Текстовые
+// Text
 $_['text_extension']		 = 'Платежная информация';
 $_['text_capture_status']	 = 'Захватить статус';
 $_['text_amount_authorised'] = 'Разрешенная сумма';
@@ -17,7 +17,7 @@ $_['text_partial_refund']	 = 'Частичный возврат';
 $_['text_payment']		 	 = 'Оплата';
 $_['text_current_refunds']   = 'Возврат уже сделал для этой сделки. Макс возврат ';
 
-// Колонки
+// Column
 $_['column_transaction']	 = 'ID транзакции';
 $_['column_amount']			 = 'Сумма';
 $_['column_type']			 = 'Тип оплаты';
@@ -26,14 +26,14 @@ $_['column_pending_reason']	 = 'Причина ожидания';
 $_['column_date_added']		 = 'Создан';
 $_['column_action']			 = 'Действие';
 
-// Поля ввода
+// Entry
 $_['entry_capture_amount']	 = 'Сумма захвата';
 $_['entry_capture_complete'] = 'Захват завершен';
 $_['entry_full_refund']		 = 'Полный возврат';
 $_['entry_amount']			 = 'Сумма';
 $_['entry_note']             = 'Заметка';
 
-// Инфо
+// Help
 $_['help_capture_complete']  = 'Если это последний захват.';
 
 // Tab
@@ -45,7 +45,7 @@ $_['button_void']			 = 'Аннулировать';
 $_['button_capture']		 = 'Захватить';
 $_['button_refund']		     = 'Вопрос по захвату';
 
-// Ошибки
+// Error
 $_['error_capture']		     = 'Введите сумму захвата';
 $_['error_transaction']	     = 'Сделка не может быть осуществлена!';
 $_['error_not_found']	     = 'Сделка не найден!';

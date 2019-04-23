@@ -1,13 +1,13 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Пошукові запити';
 
-// Текстові
+// Text
 $_['text_list'] = 'Пошукові запити';
 $_['text_guest'] = 'Гість';
 $_['text_customer'] = '<a href="%s">%s</a>';
 
-// Колонки
+// Column
 $_['column_keyword'] = 'Запит';
 $_['column_products'] = 'Не знайдено товарів';
 $_['column_category'] = 'Категорія';

@@ -1,12 +1,12 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']           = 'Очистка кеша і логів';
 
 // Tab
 $_['tab_settings']            = 'Налаштування';
 $_['tab_help']                = 'Допомога';
 
-// Текстові
+// Text
 $_['text_module']             = 'Модулі';
 $_['text_success']            = 'Налаштування модуля оновлені!';
 $_['text_success_clear']      = 'Успішно очищено!';
@@ -34,5 +34,5 @@ $_['entry_status']            = 'Статус';
 $_['entry_size']              = 'Підраховувати розмір';
 $_['entry_hidden_opencart']   = 'Заховати кнопку переходу до Opencart';
 
-// Помилки
+// Error
 $_['error_permission']        = 'У вас немає прав для зміни модуля!';

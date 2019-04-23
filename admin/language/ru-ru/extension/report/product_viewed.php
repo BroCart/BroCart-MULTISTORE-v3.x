@@ -1,22 +1,22 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']    = 'Просмотр товаров';
 
-// Текстовые
+// Text
 $_['text_extension']   = 'Расширения';
 $_['text_edit']        = 'Редактирование';
 $_['text_success']     = 'Сброс отчета успешно выполнен!';
 
-// Колонки
+// Column
 $_['column_name']      = 'Название товара';
 $_['column_model']     = 'Модель';
 $_['column_viewed']    = 'Просмотров';
 $_['column_percent']   = 'Процент';
 
-// Поля ввода
+// Entry
 $_['entry_status']     = 'Статус';
 $_['entry_sort_order'] = 'Порядок сортировки';
 
-// Ошибки
+// Error
 $_['error_permission'] = 'У Вас нет прав для управления модулем!';
 

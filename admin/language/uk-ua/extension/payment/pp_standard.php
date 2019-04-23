@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'PayPal Payments Standard';
 
-// Текстові
+// Text
 $_['text_extension'] = 'Розширення';
 $_['text_success'] = 'Налаштування успішно змінено!';
 $_['text_edit'] = 'Редагувати';
@@ -34,11 +34,11 @@ $_['entry_sort_order'] = 'Порядок сортування';
 $_['tab_general'] = 'Основне';
 $_['tab_order_status'] = 'Статус замовлення';
 
-// Довідка
+// Help
 $_['help_test'] = 'Use the live or testing (sandbox) gateway server to process transactions?';
 $_['help_debug'] = 'Logs additional information to the system log';
 $_['help_total'] = 'The checkout total the order must reach before this payment method becomes active';
 
-// Помилки
+// Error
 $_['error_permission'] = 'У Вас немає прав для управління даним модулем!';
 $_['error_email'] = ' Необхідно заповнити поле E-Mail!';

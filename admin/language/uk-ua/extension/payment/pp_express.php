@@ -1,5 +1,5 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] ='Експрес-платежі PayPal';
 
 // Текст

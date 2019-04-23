@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']                = 'Недавняя активность';
 
-// Текстовые
+// Text
 $_['text_extension']               = 'Расширения';
 $_['text_success']                 = 'Настройки успешно изменены!';
 $_['text_edit']                    = 'Редактирование';
@@ -23,11 +23,11 @@ $_['text_activity_affiliate_add']  = '<a href="customer_id=%d">%s</a> зарег
 $_['text_activity_affiliate_edit'] = '<a href="customer_id=%d">%s</a> обновлена информация партнера.';
 $_['text_activity_transaction']    = '<a href="customer_id=%d">%s</a> получена комиссия от нового <a href="order_id=%d">заказа</a>.';
 
-// Поля ввода
+// Entry
 $_['entry_status']                 = 'Статус';
 $_['entry_sort_order']             = 'Порядок сортировки';
 $_['entry_width']                  = 'Ширина';
 
-// Ошибки
+// Error
 $_['error_permission']             = 'У Вас нет прав для управления данным расширением!';
 

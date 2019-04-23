@@ -2,7 +2,7 @@
 // Заголовок
 $_['heading_title']             = 'Моя информация';
 
-// Текстовые
+// Text
 $_['text_account']              = 'Кабинет Партнера';
 $_['text_affiliate']            = 'Партнер';
 $_['text_my_affiliate']         = 'Мой партнерский аккаунт';
@@ -13,7 +13,7 @@ $_['text_bank']                 = 'Банковский перевод';
 $_['text_success']              = 'Учетные данные Партнера успешно обновлены.';
 $_['text_agree']                = 'Я прочитал и согласен с <a href="%s" class="agree"><b>%s</b></a>';
 
-// Поля ввода
+// Entry
 $_['entry_company']             = 'Компания';
 $_['entry_website']             = 'Веб-сайт';
 $_['entry_tax']                 = 'ИНН';
@@ -26,7 +26,7 @@ $_['entry_bank_swift_code']     = 'БИК';
 $_['entry_bank_account_name']   = 'Корр. счет';
 $_['entry_bank_account_number'] = 'Расчетный счет';
 
-// Ошибки
+// Error
 $_['error_agree']               = 'Вы должны согласиться с %s!';
 $_['error_cheque']              = 'Имя получателя чека необходимо!';
 $_['error_paypal']              = 'PayPal Email аккаунт не корректный!';

@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']                = 'Активність клиеніов';
 
-// Текстовые
+// Text
 $_['text_extension']               = 'Розширення';
 $_['text_edit']                    = 'Редагування';
 $_['text_success']                 = 'Налаштування успішно зроблені!';
@@ -24,13 +24,13 @@ $_['text_activity_affiliate_add']  = '<a href="customer_id=%d">%s</a> зареє
 $_['text_activity_affiliate_edit'] = '<a href="customer_id=%d">%s</a> оновлена інформація партнера.';
 $_['text_activity_transaction']    = '<a href="customer_id=%d">%s</a> отримана комісія від нового <a href="order_id=%d">замовлення</a>.';
 
-// Колонки
+// Column
 $_['column_customer']              = 'Клієнт';
 $_['column_comment']               = 'Коментарій';
 $_['column_ip']                    = 'IP';
 $_['column_date_added']            = 'Дата';
 
-// Поля ввода
+// Entry
 $_['entry_customer']               = 'Клієнт';
 $_['entry_ip']                     = 'IP';
 $_['entry_date_start']             = 'Дата додавання';
@@ -38,6 +38,6 @@ $_['entry_date_end']               = 'Дата закінчення';
 $_['entry_status']                 = 'Статус';
 $_['entry_sort_order']             = 'Порядок сортування';
 
-// Помилки
+// Error
 $_['error_permission']             = 'У Вас немає прав для управління даними модулем!';
 

@@ -9,7 +9,7 @@ $_['datetime_format']               = 'd.m.Y H:i:s';
 $_['decimal_point']                 = ',';
 $_['thousand_point']                = ' ';
 
-// Текстові
+// Text
 $_['text_yes']                      = 'Так';
 $_['text_no']                       = 'Ні';
 $_['text_enabled']                  = 'Ввімкнено';
@@ -141,7 +141,7 @@ $_['tab_action']                    = 'Дія';
 $_['tab_google']                    = 'Google';
 $_['tab_seo']                       = 'SEO';
 
-// Помилки
+// Error
 $_['error_exception']               = 'Помилка Code(%s): %s на %s на %s лінії';
 $_['error_upload_1']                = 'Попередження: Розмір вивантаженого файлу перевищує ліміт вказаний у php.ini, директива upload_max_filesize!';
 $_['error_upload_2']                = 'Попередження: Вивантажений файл перевищує MAX_FILE_SIZE директиву, вказану в HTML формі!';

@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title'] = 'Пошук транзакції';
 
-// Текстові
+// Text
 $_['text_pp_express'] = 'PayPal Експрес-платежі';
 $_['text_date_search'] = 'Пошук по даті';
 $_['text_searching'] = 'Пошук';
@@ -11,7 +11,7 @@ $_['text_buyer_info'] = 'Інформація про покупця';
 $_['text_view'] = 'Показати';
 $_['text_format'] = 'Формат';
 
-// Колонки
+// Column
 $_['column_date'] = 'Дата';
 $_['column_type'] = 'Тип';
 $_['column_email'] = 'Email';

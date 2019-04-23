@@ -1,8 +1,8 @@
 <?php
-// Заголовок
+// Heading
 $_['heading_title']					 = 'PayPal Экспресс-платежи';
 
-// Текстовые
+// Text
 $_['text_extension']				 = 'Расширения';
 $_['text_success']				 	 = 'Настройки успешно изменены!';
 $_['text_edit']                      = 'Редактирование';
@@ -29,7 +29,7 @@ $_['text_incontext_not_supported']	 = '* Not supported with In-Context Checkout'
 $_['text_retrieve']	 				 = 'Your details have been entered from PayPal';
 $_['text_enable_button']			 = 'We recommend offering PayPal Express Shortcut to maximise checkout conversion, this allows customers to use their PayPal address book and <strong>checkout is as little as three taps</strong> from the basket page. Click enable to install the extension and access the layout manager, you will ned to add "PayPal Express Checkout Button" to the checkout layout';
 
-// Поля ввода
+// Entry
 $_['entry_username']				 = 'API Username';
 $_['entry_password']				 = 'API Password';
 $_['entry_signature']				 = 'API Signature';
@@ -66,14 +66,14 @@ $_['tab_api']				         = 'API информация';
 $_['tab_order_status']				 = 'Статус заказа';
 $_['tab_checkout']					 = 'Оформление';
 
-// Инфо
+// Help
 $_['help_ipn']						 = 'Требуется для подписки';
 $_['help_total']					 = 'Минимальная сумма для включения метода оплаты';
 $_['help_logo']						 = 'Максимум 750px(ш) x 90px(в)<br />Вы должны использовать логотип, если установили SSL';
 $_['help_colour']					 = 'HTML цвет в формате HEX, например D6D7F5';
 $_['help_currency']					 = 'Использовать при поиске транзакции';
 
-// Ошибки
+// Error
 $_['error_permission']				 = 'У Вас нет прав для управления данным модулем!';
 $_['error_username']				 = 'Необходимо заполнить API Username!';
 $_['error_password']				 = 'Необходимо заполнить API Password!';

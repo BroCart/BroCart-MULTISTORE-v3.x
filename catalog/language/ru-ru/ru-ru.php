@@ -10,7 +10,7 @@ $_['decimal_point']         = '.';
 $_['thousand_point']        = '';
 $_['text_page']       	    = ' страница ';
 
-// Текстовые
+// Text
 $_['text_home']             = '<i class="fa fa-home"></i>';
 $_['text_microhome']		= 'Главная';
 $_['text_yes']              = 'Да';
@@ -60,7 +60,7 @@ $_['button_list']           = 'Список';
 $_['button_grid']           = 'Сетка';
 $_['button_map']            = 'Посмотреть карту';
 
-// Ошибки
+// Error
 $_['error_exception']       = 'Ошибка кода(%s): %s в %s на строке %s';
 $_['error_upload_1']        = 'Предупреждение: Размер загружаемого файла превышает значение upload_max_filesize в php.ini!';
 $_['error_upload_2']        = 'Предупреждение: Загруженный файл превышает MAX_FILE_SIZE значение, которая была указана в настройках!';
