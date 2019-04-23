@@ -58,6 +58,7 @@ $_['action_event'] = array(
 	//	1000  => 'event/debug/before'
 	//),
 	'controller/*/after'  => array(
-		'event/debug/after'
+		0 => 'event/language/after',
+		1 => 'event/debug/after'
 	)
 );
