@@ -52,7 +52,7 @@ class ControllerToolUpload extends Controller {
 				$json['error'] = $this->language->get('error_filetype');
 			}*/
 			
-			preg_match('/(<\?php|exec|shell_exec|passthru|eval|base64_encode)/i', $content, $math, PREG_OFFSET_CAPTURE);
+			preg_match('/(<\?php|exec|shell_exec|passthru|eval|base64_encode|create_function)/i', $content, $math, PREG_OFFSET_CAPTURE);
 
 			if (isset($math) && !empty($math)) {
 			    $json['error'] = $this->language->get('error_filetype');
