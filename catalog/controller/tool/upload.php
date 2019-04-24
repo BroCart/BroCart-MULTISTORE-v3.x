@@ -46,9 +46,16 @@ class ControllerToolUpload extends Controller {
 
 			// Check to see if any PHP files are trying to be uploaded
 			$content = file_get_contents($this->request->files['file']['tmp_name']);
-
+			
+			/*
 			if (preg_match('/\<\?php/i', $content)) {
 				$json['error'] = $this->language->get('error_filetype');
+			}*/
+			
+			preg_match('/(<\?php|exec|shell_exec|passthru|eval|base64_encode)/i', $content, $math, PREG_OFFSET_CAPTURE);
+
+			if (isset($math) && !empty($math)) {
+			    $json['error'] = $this->language->get('error_filetype');
 			}
 
 			// Return any upload error
