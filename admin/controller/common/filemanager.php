@@ -15,7 +15,20 @@ class ControllerCommonFileManager extends Controller {
 		} else {
 			$filter_name = '';
 		}
-
+		
+		if (!isset($this->request->get['directory'])) {
+			if (!isset($this->request->get['parent'])) {
+				$this->request->get['directory'] = isset($this->request->cookie['filemanager']['directory']) ? $this->request->cookie['filemanager']['directory'] : '';
+				$this->request->get['page'] = isset($this->request->cookie['filemanager']['page']) ? $this->request->cookie['filemanager']['page'] : 1;
+			} else {
+				setcookie('filemanager[directory]', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
+				setcookie('filemanager[page]', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
+			}
+		} else {
+			setcookie('filemanager[directory]', $this->request->get['directory'], time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
+			setcookie('filemanager[page]', isset($this->request->get['page']) ? $this->request->get['page'] : 1, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
+		}
+		
 		// Make sure we have the correct directory
 		if (isset($this->request->get['directory'])) {
 			$directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
@@ -122,7 +135,7 @@ class ControllerCommonFileManager extends Controller {
 		}
 
 		// Parent
-		$url = '';
+		$url = '&parent=parent';
 
 		if (isset($this->request->get['directory'])) {
 			$pos = strrpos($this->request->get['directory'], '/');
@@ -230,7 +243,7 @@ class ControllerCommonFileManager extends Controller {
 				if (is_file($file['tmp_name'])) {
 					// Sanitize the filename
 					//$filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
-					$filename = basename($this->rechanger(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8')));
+					$filename = basename($this->translit(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8')));
 
 					// Validate the filename length
 					if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 255)) {
@@ -317,7 +330,7 @@ class ControllerCommonFileManager extends Controller {
 			// Sanitize the folder name
 			//$folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
 			
-			$folder = basename($this->rechanger(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8')));
+			$folder = basename($this->translit(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8')));
 
 			// Validate the filename length
 			if ((utf8_strlen($folder) < 3) || (utf8_strlen($folder) > 128)) {
@@ -341,18 +354,6 @@ class ControllerCommonFileManager extends Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
-	}
-	
-	protected function rechanger($text) {
-		$cyr = array("а","А","б","Б","в","В","г","Г","д","Д","е","Е","ё","Ё","є","Є","ж", "Ж",  "з","З","и","И","і","І","ї","Ї","й","Й","к","К","л","Л","м","М","н","Н","о","О","п","П","р","Р", "с","С","т","Т","у","У","ф","Ф","х","Х","ц","Ц","ч", "Ч", "ш", "Ш", "щ",  "Щ", "ъ","Ъ", "ы","Ы","ь","Ь","э","Э","ю", "Ю", "я","Я",'/',' ');
-		$eng =array("a","A","b","B","v","V","g","G","d","D","e","E","e","E","e","E", "zh","ZH","z","Z","i","I","i","I","yi","YI","j","J","k","K","l","L","m","M","n","N","o","O", "p","P","r","R","s","S","t","T","u","U","f","F","h","H","c","C","ch","CH", "sh","SH","sch","SCH","", "", "y","Y","","","e","E","ju","JU","ja","JA",'','-');
-		$text = strtolower(str_replace($cyr, $eng, $text));
-		$text = trim($text, '-');
-		$disallow_symbols = array(
-			' ' => '-', '"' => '', '@' => '', '#' => '', '№' => '', '%' => '', '\\' => '-', '/' => '-', ':' => '-', '*' => '',
-			'?' => '', ',' => '', '"' => '', '\'' => '', '<' => '', '>' => '', '|' => ''
-		);
-		return trim(strip_tags(str_replace(array_keys($disallow_symbols), array_values($disallow_symbols), trim(html_entity_decode($text, ENT_QUOTES, 'UTF-8')))), '-');
 	}
 
 	public function delete() {
@@ -433,5 +434,34 @@ class ControllerCommonFileManager extends Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
+	}
+	
+	private function translit($name) {
+		$name = (string)$name;
+		$name = strip_tags($name);
+		$name = str_replace(array("\n", "\r"), " ", $name);
+		$name = preg_replace("/\s+/", ' ', $name);
+		$name = trim($name);
+		$name = utf8_strtolower($name);
+		
+		$lang_tr = array(
+			'а'=>'a','б'=>'b','в'=>'v',
+			'г'=>'g','д'=>'d','е'=>'e',
+			'ё'=>'e','ж'=>'j','з'=>'z',
+			'и'=>'i','й'=>'y','к'=>'k',
+			'л'=>'l','м'=>'m','н'=>'n',
+			'о'=>'o','п'=>'p','р'=>'r',
+			'с'=>'s','т'=>'t','у'=>'u',
+			'ф'=>'f','х'=>'h','ц'=>'c',
+			'ч'=>'ch','ш'=>'sh','щ'=>'shch',
+			'ы'=>'y','э'=>'e','ю'=>'yu',
+			'я'=>'ya','ъ'=>'','ь'=>''
+		);
+		
+		$name = strtr($name, $lang_tr);
+		$name = preg_replace("/[^0-9a-z-_ ]/i", "", $name);
+		$name = str_replace(" ", "-", $name);
+		
+		return $name;
 	}
 }
