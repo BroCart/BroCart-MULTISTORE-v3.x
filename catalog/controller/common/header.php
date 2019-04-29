@@ -2,6 +2,10 @@
 class ControllerCommonHeader extends Controller {
 	public function index() {
 		$this->load->model('setting/extension');
+		
+		$this->load->helper('csrf_helper');
+		csrf_start();
+		
 		$data['analytics'] = array();
 		$analytics = $this->model_setting_extension->getExtensions('analytics');
 		foreach ($analytics as $analytic) {
