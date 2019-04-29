@@ -1,6 +1,7 @@
 <?php
 class ControllerExtensionExtensionPromotion extends Controller {
 	public function index() {
+		/*
 		if ($this->config->get('config_marketplace')) {
 			$main_url = BRO_SERVER;
 		} else {
@@ -20,5 +21,8 @@ class ControllerExtensionExtensionPromotion extends Controller {
 		} else {
 			return '';
 		}
+		*/
+		
+		return '';
 	}
 }
