@@ -8,7 +8,10 @@ class ControllerCommonHeader extends Controller {
 		} else {
 			$data['base'] = HTTP_SERVER;
 		}
-
+		
+		$this->load->helper('csrf_helper');
+		csrf_start();
+		
 		$data['description'] = $this->document->getDescription();
 		$data['keywords'] = $this->document->getKeywords();
 		$data['links'] = $this->document->getLinks();
