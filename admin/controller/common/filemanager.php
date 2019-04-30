@@ -455,7 +455,8 @@ class ControllerCommonFileManager extends Controller {
 			'ф'=>'f','х'=>'h','ц'=>'c',
 			'ч'=>'ch','ш'=>'sh','щ'=>'shch',
 			'ы'=>'y','э'=>'e','ю'=>'yu',
-			'я'=>'ya','ъ'=>'','ь'=>''
+			'я'=>'ya','ъ'=>'','ь'=>'',
+			'і'=>'i','ї'=>'ji','є'=>'e'
 		);
 		
 		$name = strtr($name, $lang_tr);
