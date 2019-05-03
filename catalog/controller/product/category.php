@@ -153,7 +153,6 @@ class ControllerProductCategory extends Controller {
 				$data['thumb'] = '';
 			}
 
-			$data['description'] = html_entity_decode($category_info['description'], ENT_QUOTES, 'UTF-8');
 			$data['compare'] = $this->url->link('product/compare');
 			
 			if ('2.3' == VER_TMPL) {
