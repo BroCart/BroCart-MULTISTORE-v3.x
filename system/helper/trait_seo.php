@@ -220,7 +220,7 @@ trait seoBroker {
 				if (!in_array($key, $allow_gets)) {
 					unset($data[$key]);
 				}
-				if ($key == 'page') {
+				/* if ($key == 'page') {
 					if ($value == 1) {
 						unset($data[$key]);
 					} else {
@@ -228,7 +228,7 @@ trait seoBroker {
 							$data[$key] = $this->session->data['maxpage'];
 						}
 					}
-				}
+				} */
 			}
 		}
 		if (empty($queries)) {
