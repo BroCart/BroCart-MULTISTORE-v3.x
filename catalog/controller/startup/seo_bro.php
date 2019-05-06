@@ -171,7 +171,7 @@ class ControllerStartupSeoBro extends Controller {
 			$seo_rewrite_config = array(
 				'config_language_id'			=> $this->config->get('config_language_id'),
 				'config_language'				=> self::$config_language,
-				'current_language_code'			=> self::$curr_code,
+				'current_language_code'			=> (self::$curr_code ? self::$curr_code : self::$config_language),
 				'config_seo_url_prefix'			=> self::$config_prifix_lang,
 				'config_seo_url_prefix_def'		=> self::$config_prifix_hide,
 				'config_seo_url_include_path'	=> self::$incl_path,
