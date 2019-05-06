@@ -671,3 +671,6 @@ div.ckeditor {
     height: 16px;
     text-align: center;
 }
+#extension-list .ext {
+	height: 250px;
+}
