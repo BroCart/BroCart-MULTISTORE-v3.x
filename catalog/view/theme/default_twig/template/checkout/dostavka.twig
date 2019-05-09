@@ -3,7 +3,7 @@
 {% endif %}
 {% if shipping_methods %}
 <i>{{ text_shipping_method }}</i>
-<select onChange="updateTotal();" name="shipping_method" id="shipping-method-select" class="form-control large-field">
+<select name="shipping_method" id="shipping-method-select" class="form-control large-field">
 {% for shipping_method in shipping_methods %}
 	{% if shipping_method.value == code or not code %}
     {% set code = shipping_method.value %}
