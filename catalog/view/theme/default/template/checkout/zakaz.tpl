@@ -165,7 +165,7 @@
 		$('input, textarea').focus(function(){
 			$(this).attr('placeholder','');
 		});
-		$('#payment-method').on('click', function(e) {
+		$('#payment-method').on('change', function(e) {
 			updateTotal();
 		});
 		$('#shipping-method').on('change', function() {
