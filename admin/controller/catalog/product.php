@@ -131,20 +131,28 @@ class ControllerCatalogProduct extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('catalog/product');
-
+		
+		if (isset($this->request->get['product_id']) && $this->request->get['product_id']) {
+			$this->request->post['selected'][] = $this->request->get['product_id'];
+		}
+		
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $product_id) {
 				$mainimage = $this->model_catalog_product->getMainImage($product_id);
+				
 				if (is_file(DIR_IMAGE . $mainimage)) {
 					unlink(DIR_IMAGE . $mainimage);
 				}
+				
 				$dopimages = $this->model_catalog_product->getProductImages($product_id);
+				
 				foreach ($dopimages as  $dopimage) {
 					$dopname = $dopimage['image'];
 					if(is_file(DIR_IMAGE . $dopname)) {
 						unlink(DIR_IMAGE . $dopname);						  
 					}
 				}
+				
 				$this->model_catalog_product->deleteProduct($product_id);
 			}
 
@@ -200,7 +208,11 @@ class ControllerCatalogProduct extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('catalog/product');
-
+		
+		if (isset($this->request->get['product_id']) && $this->request->get['product_id']) {
+			$this->request->post['selected'][] = $this->request->get['product_id'];
+		}
+		
 		if (isset($this->request->post['selected']) && $this->validateCopy()) {
 			foreach ($this->request->post['selected'] as $product_id) {
 				$this->model_catalog_product->copyProduct($product_id);
@@ -413,6 +425,7 @@ class ControllerCatalogProduct extends Controller {
 				'special'    => $special,
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'href_view'	 => ($this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG) .'index.php?route=product/product&product_id='.$result['product_id'],
 				'edit'       => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $result['product_id'] . $url, true)
 			);
 		}
@@ -623,7 +636,13 @@ class ControllerCatalogProduct extends Controller {
 		}
 
 		$data['cancel'] = $this->url->link('catalog/product', 'user_token=' . $this->session->data['user_token'] . $url, true);
-
+		
+		$data['href_view'] = false;
+			
+		if (isset($this->request->get['product_id']) && $this->request->get['product_id']) {
+			$data['href_view'] = ($this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG) .'index.php?route=product/product&product_id='.$this->request->get['product_id'];
+		}
+		
 		if (isset($this->request->get['product_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);
 		}
