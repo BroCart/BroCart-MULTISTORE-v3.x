@@ -138,21 +138,6 @@ class ControllerCatalogProduct extends Controller {
 		
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $product_id) {
-				$mainimage = $this->model_catalog_product->getMainImage($product_id);
-				
-				if (is_file(DIR_IMAGE . $mainimage)) {
-					unlink(DIR_IMAGE . $mainimage);
-				}
-				
-				$dopimages = $this->model_catalog_product->getProductImages($product_id);
-				
-				foreach ($dopimages as  $dopimage) {
-					$dopname = $dopimage['image'];
-					if(is_file(DIR_IMAGE . $dopname)) {
-						unlink(DIR_IMAGE . $dopname);						  
-					}
-				}
-				
 				$this->model_catalog_product->deleteProduct($product_id);
 			}
 

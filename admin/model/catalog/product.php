@@ -361,16 +361,38 @@ class ModelCatalogProduct extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "review WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'product_id=" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "coupon_product WHERE product_id = '" . (int)$product_id . "'");
-
+		$this->delImage($product_id);
+		
 		$this->cache->delete('catalog.seo_bro');
 		$this->cache->delete('catalog.path.pro');
 		$this->cache->delete('catalog.path.cat');
 	}
 	
-	public function getMainImage($product_id) {
+	private function delImage($product_id) {		
+		$image_array = array();
 		$query = $this->db->query("SELECT image FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'");
 		if ($query->num_rows) {
-			return $query->row['image'];
+			$image_array[] = $query->row['image'];
+		}
+		$images = $this->getProductImages($product_id);
+		foreach ($images as  $image) {
+			$image_array[] = $image['image'];				
+		}		
+		if ($image_array) {
+			foreach ($image_array as  $risynok) {
+				$check = false;
+				$second_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product WHERE image LIKE '" . $risynok . "'");
+				if ($second_query->num_rows) {
+					$check = true;
+				}
+				$query_three = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_image WHERE image LIKE '" . $risynok . "'");
+				if ($query_three->num_rows) {
+					$check = true;
+				}
+				if (!$check && is_file(DIR_IMAGE . $risynok)) {
+					unlink(DIR_IMAGE . $risynok);
+				}
+			}
 		}
 	}
 
