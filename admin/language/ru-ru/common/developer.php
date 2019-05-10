@@ -18,8 +18,8 @@ $_['entry_sass']       = 'SASS';
 $_['entry_cache']      = 'Кеш';
 
 // Button
-$_['button_on']        = 'Включен';
-$_['button_off']       = 'Выключен';
+$_['button_on']        = 'Вкл';
+$_['button_off']       = 'Выкл';
 
 // Error
 $_['error_permission'] = 'У Вас нет прав для изменения настроек разработчика!';
