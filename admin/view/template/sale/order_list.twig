@@ -44,28 +44,18 @@
             <label class="control-label" for="input-order-status">{{ entry_order_status }}</label>
             <select name="filter_order_status_id" id="input-order-status" class="form-control">
               <option value=""></option>
-              
               {% if filter_order_status_id == '0' %}
-              
               <option value="0" selected="selected">{{ text_missing }}</option>
-              
               {% else %}
-              
               <option value="0">{{ text_missing }}</option>
-              
               {% endif %}
               {% for order_status in order_statuses %}
               {% if order_status.order_status_id == filter_order_status_id %}
-              
               <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
-              
               {% else %}
-              
               <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
-              
               {% endif %}
               {% endfor %}
-            
             </select>
           </div>
           <div class="form-group">
@@ -101,7 +91,7 @@
         </div>
         <div class="panel-body">
           <form method="post" action="" enctype="multipart/form-data" id="form-order">
-            <div class="table-responsive">
+            <div class="table-responsive" style="overflow:visible;">
               <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
@@ -116,7 +106,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                
                 {% if orders %}
                 {% for order in orders %}
                 <tr>
@@ -128,13 +117,13 @@
                     <input type="hidden" name="shipping_code[]" value="{{ order.shipping_code }}" /></td>
                   <td class="text-right">{{ order.order_id }}</td>
                   <td class="text-left">{{ order.customer }}</td>
-					<td class="text-left">
-					  {% if order.status_color is not empty %}
-						<span class="label label-default" style="background: {{ order.status_color }} !important; font-size: 12px;">{{ order.order_status }}</span>
-					  {% else %}
-						{{ order.order_status }}
-					  {% endif %}
-					</td>
+		  <td class="text-left">
+		  {% if order.status_color is not empty %}
+			<span class="label label-default" style="background: {{ order.status_color }} !important; font-size: 12px;">{{ order.order_status }}</span>
+		  {% else %}
+			{{ order.order_status }}
+		  {% endif %}
+		  </td>
                   <td class="text-right">{{ order.total }}</td>
                   <td class="text-left">{{ order.date_added }}</td>
                   <td class="text-left">{{ order.date_modified }}</td>
