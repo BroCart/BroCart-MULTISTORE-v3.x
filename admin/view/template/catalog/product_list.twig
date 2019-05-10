@@ -90,7 +90,7 @@
           </div>
           <div class="panel-body">
             <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-product">
-              <div class="table-responsive">
+              <div class="table-responsive" style="overflow:visible;">
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr>
@@ -125,7 +125,16 @@
                       {% endif %}</td>
                     <td class="text-right">{% if product.quantity <= 0 %} <span class="label label-warning">{{ product.quantity }}</span> {% elseif product.quantity <= 5 %} <span class="label label-danger">{{ product.quantity }}</span> {% else %} <span class="label label-success">{{ product.quantity }}</span> {% endif %}</td>
                     <td class="text-left">{{ product.status }}</td>
-                    <td class="text-right"><a href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                    <td class="text-right">
+				<div class="btn-group"> <a href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+			<button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"><span class="caret"></span></button>
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="{{ product.href_view }}" target="_blank"><i class="fa fa-eye"></i> {{ button_view }}</a></li>
+						<li><a href="{{ copy }}&product_id={{ product.product_id }}"><i class="fa fa-copy"></i> {{ button_copy }}</a></li>
+						<li><a href="javascript:;" onclick="confirm('{{ text_confirm }}') ? location = '{{ delete }}&product_id={{ product.product_id }}' : false;"><i class="fa fa-trash-o"></i> {{ button_delete }}</a></li>
+					</ul>
+				</div>
+			</td>
                   </tr>
                   {% endfor %}
                   {% else %}
