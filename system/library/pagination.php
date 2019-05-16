@@ -24,10 +24,10 @@ class Pagination {
 	public $prev = null;
 	
 	/**
-     * 
-     *
-     * @return	text
-     */
+	 * 
+	 *
+	 * @return	text
+	 */
 	public function render() {
 		$total = $this->total;
 
@@ -49,12 +49,12 @@ class Pagination {
 		$this->url = str_replace('%7Bpage%7D', '{page}', $this->url);
 		$first_page_href = str_replace(array('&amp;page={page}', '?page={page}', 'page={page}',), '', $this->url);		
 		if ($page > 1) {	
-			if($page == 2) {
-				$this->prev = str_replace('&', '&', rtrim( str_replace('page={page}', '', $this->url), '?&'));
+			if ($page == 2) {
+				$this->prev = str_replace('&', '&', rtrim(str_replace('page={page}', '', $this->url), '?&'));
 			} else {
 				$this->prev = str_replace('{page}', $page - 1, $this->url);
 			}			
-    	}
+		}
 		
 		$output = '<ul class="pagination">';
 

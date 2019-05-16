@@ -13,8 +13,8 @@ $_['entry_title']       = 'Заголовок';
 $_['entry_status']      = 'Статус';
 $_['entry_display']     	= 'Варианты отображения';
 $_['txt_display_link']  	= 'Ссылка';
-$_['txt_display_select']  	= 'Select';
-$_['txt_display_alphabet']  = 'Алфавит';
+$_['txt_display_select'] = 'Select';
+$_['txt_display_alphabet'] = 'Алфавит';
 
 // Error
 $_['error_permission']  = 'Warning: У Вас нет прав на управление модулем OCappLab - Manufacturers!';

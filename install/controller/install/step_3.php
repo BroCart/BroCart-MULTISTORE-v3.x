@@ -262,7 +262,7 @@ class ControllerInstallStep3 extends Controller {
 				$need_shop_id = $rnd;
 			}
 		}
-		$sha =''; $need_shop_id ='';
+		$sha = ''; $need_shop_id = '';
 		if (file_exists('/dev/urandom')) {
 			$fp = fopen('/dev/urandom', 'rb');
 			if ($fp) {
@@ -273,14 +273,14 @@ class ControllerInstallStep3 extends Controller {
 				fclose($fp);
 			}
 		}
-		for ($i=0; $i<$length; $i++) {
-			$sha  = hash('sha256',$sha.mt_rand());
-			$char = mt_rand(0,62);
-			$need_shop_id .= chr(hexdec($sha[$char].$sha[$char+1]));
+		for ($i = 0; $i < $length; $i++) {
+			$sha  = hash('sha256', $sha . mt_rand());
+			$char = mt_rand(0, 62);
+			$need_shop_id .= chr(hexdec($sha[$char] . $sha[$char + 1]));
 		}
 		
 		$hash = sha1($need_shop_id);
-		return sprintf('%08s-%04s-%04x-%04x-%12s',substr($hash, 0, 8), substr($hash, 8, 4), (hexdec(substr($hash, 12, 4)) & 0x0fff) | 0x5000, (hexdec(substr($hash, 16, 4)) & 0x3fff) | 0x8000, substr($hash, 20, 12));
+		return sprintf('%08s-%04s-%04x-%04x-%12s', substr($hash, 0, 8), substr($hash, 8, 4), (hexdec(substr($hash, 12, 4)) & 0x0fff) | 0x5000, (hexdec(substr($hash, 16, 4)) & 0x3fff) | 0x8000, substr($hash, 20, 12));
 	}
 
 	private function validate() {
@@ -311,7 +311,7 @@ class ControllerInstallStep3 extends Controller {
 				if (is_resource($db)) {
 					$db->close();
 				}
-			} catch(Exception $e) {
+			} catch (Exception $e) {
 				$this->error['warning'] = $mysql->connect_error;
 			}
 		} elseif ($this->request->post['db_driver'] == 'mpdo') {
@@ -321,7 +321,7 @@ class ControllerInstallStep3 extends Controller {
 				if (is_resource($db)) {
 					$db->close();
 				}
-			} catch(Exception $e) {
+			} catch (Exception $e) {
 				$this->error['warning'] = $e->getMessage();
 			}
 		}			

@@ -26,7 +26,7 @@ $_['entry_sort_order']  = 'Порядок сортировки';
 $_['entry_type']        = 'Тип';
 $_['entry_description']         = 'Описание';
 $_['entry_meta_title']          = 'HTML-тег Title';
-$_['entry_meta_h1']          	= 'HTML-тег H1';
+$_['entry_meta_h1'] = 'HTML-тег H1';
 $_['entry_meta_keyword']        = 'Мета-тег Keywords';
 $_['entry_meta_description']    = 'Мета-тег Description';
 

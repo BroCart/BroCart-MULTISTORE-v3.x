@@ -93,10 +93,10 @@ class ModelLocalisationOrderStatus extends Model {
 	}
 	
 	public function getOrderStatusColor($order_status_id) {
-      	$query = $this->db->query("SELECT color FROM " . DB_PREFIX . "order_status WHERE order_status_id = '" . (int) $order_status_id . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+	  	$query = $this->db->query("SELECT color FROM " . DB_PREFIX . "order_status WHERE order_status_id = '" . (int) $order_status_id . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
       
-      	return $query->row['color'];
-    }
+	  	return $query->row['color'];
+	}
 
 	public function getTotalOrderStatuses() {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order_status WHERE language_id = '" . (int)$this->config->get('config_language_id') . "'");

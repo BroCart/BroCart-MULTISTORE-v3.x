@@ -12,7 +12,7 @@ $_['text_page'] = ' сторінка ';
 
 // Text
 $_['text_home'] = '<i class="fa fa-home"></i>';
-$_['text_microhome']  = 'Головна';
+$_['text_microhome'] = 'Головна';
 $_['text_yes'] = 'Так';
 $_['text_no'] = 'Ні';
 $_['text_none'] = ' --- Не вибрано --- ';

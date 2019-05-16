@@ -30,7 +30,7 @@ $_['text_home']                     = '<i class="fa fa-home fa-lg"></i>';
 // Кнопочные
 $_['button_add']                    = 'Добавить';
 $_['button_delete']                 = 'Удалить';
-$_['button_apply'] 					= 'Применить';
+$_['button_apply'] = 'Применить';
 $_['button_save']                   = 'Сохранить';
 $_['button_cancel']                 = 'Отменить';
 $_['button_cancel_recurring']       = 'Отменить профиль';

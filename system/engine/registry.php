@@ -14,40 +14,40 @@ final class Registry {
 	private static $data = array();
 
 	/**
-     * 
-     *
-     * @param	string	$key
+	 * 
+	 *
+	 * @param	string	$key
 	 * 
 	 * @return	mixed
-     */
+	 */
 	public function get($key) {
 		return (isset(self::$data[$key]) ? self::$data[$key] : null);
 	}
 
-    /**
-     * 
-     *
-     * @param	string	$key
+	/**
+	 * 
+	 *
+	 * @param	string	$key
 	 * @param	string	$value
-     */	
+	 */	
 	public function set($key, $value) {
 		self::$data[$key] = $value;
 	}
 	
-    /**
-     * 
-     *
-     * @param	string	$key
+	/**
+	 * 
+	 *
+	 * @param	string	$key
 	 *
 	 * @return	bool
-     */
+	 */
 	public function has($key) {
 		return isset(self::$data[$key]);
 	}
 	
 	public function remove($name) {
-        if ($this->has($name)) {
-            unset(self::$data[$name]);
-        }
-    }
+		if ($this->has($name)) {
+			unset(self::$data[$name]);
+		}
+	}
 }

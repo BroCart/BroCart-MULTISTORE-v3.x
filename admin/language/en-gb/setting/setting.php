@@ -32,7 +32,7 @@ $_['text_general']                   = 'General';
 $_['text_security']                  = 'Security';
 $_['text_upload']                    = 'Uploads';
 $_['text_error']                     = 'Error Handling';
-$_['text_market']					 = 'Server BroCart';
+$_['text_market'] = 'Server BroCart';
 
 // Entry
 $_['entry_meta_title']               = 'Meta Title';
@@ -130,17 +130,17 @@ $_['text_seo_url']					   = 'Default';
 $_['text_seo_bro']					   = 'SEO BRO';
 $_['entry_seo_url_type']			   = 'SEO type:';
 $_['entry_seo_url_one']				   = 'URL main:';
-$_['help_seo_url_one']				   = 'URL only config language (with prefix) as old versions';
+$_['help_seo_url_one'] = 'URL only config language (with prefix) as old versions';
 $_['entry_seo_url_include_path']	   = 'SEO in hierarchy:';
-$_['entry_seo_url_include_path_help']  = '<b>Full</b> - full category path and product</br> <b>Last</b> - last category in product and category URL</br> <b>None</b> - without additional URL (product and category with site URL)';
-$_['entry_seo_url_postfix']			   = 'SEO postfix';
+$_['entry_seo_url_include_path_help'] = '<b>Full</b> - full category path and product</br> <b>Last</b> - last category in product and category URL</br> <b>None</b> - without additional URL (product and category with site URL)';
+$_['entry_seo_url_postfix'] = 'SEO postfix';
 $_['entry_seo_url_postfix_help']	   = 'Example as .html';
-$_['entry_seo_url_prefix_def']		   = 'Hide prefix default language';
-$_['entry_seo_url_prefix_def_help']	   = 'Example as '.HTTPS_CATALOG.' - default version, '.HTTPS_CATALOG.'ru/ - russian version';
+$_['entry_seo_url_prefix_def'] = 'Hide prefix default language';
+$_['entry_seo_url_prefix_def_help'] = 'Example as ' . HTTPS_CATALOG . ' - default version, ' . HTTPS_CATALOG . 'ru/ - russian version';
 $_['entry_seo_url_prefix']			   = 'SEO prefix';
-$_['entry_seo_url_prefix_help']		   = 'Example as '.HTTPS_CATALOG.'ua/';
+$_['entry_seo_url_prefix_help'] = 'Example as ' . HTTPS_CATALOG . 'ua/';
 $_['entry_seo_url_syfix']		 	   = 'SEO syfix for category, manufacturer';
-$_['entry_seo_url_syfix_help']	       = 'Example as /';
+$_['entry_seo_url_syfix_help'] = 'Example as /';
 
 // Help
 $_['help_geocode']                   = 'Please enter your store location geocode manually.';

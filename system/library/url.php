@@ -60,7 +60,7 @@ if (trait_exists('seoBroker')) {
 		 * @param	string	$url
 		 * @param	string	$ssl
 		 *
-		*/
+		 */
 		public function __construct($url, $ssl = '') {
 			$this->url = $url;
 			$this->ssl = $ssl;		
@@ -69,7 +69,7 @@ if (trait_exists('seoBroker')) {
 		 *
 		 *
 		 * @param	object	$rewrite
-		*/	
+		 */	
 		public function addRewrite($rewrite) {
 			$this->rewrite[] = $rewrite;
 		}
@@ -82,7 +82,7 @@ if (trait_exists('seoBroker')) {
 		 * @param	bool		$secure
 		 *
 		 * @return	string
-		*/
+		 */
 		public function link($route, $args = '', $secure = false, $code = false) {
 			if ($this->ssl && $secure) {
 				$url = $this->ssl . 'index.php?route=' . $route;

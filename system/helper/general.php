@@ -26,7 +26,7 @@ function sanitize($string, $trim = false) {
 	$string = trim($string);
 	$string = stripslashes($string);
 	$string = strip_tags($string);
-	$string = str_replace(array('‘','’','“','”'), array("'","'",'"','"'), $string);
+	$string = str_replace(array('‘', '’', '“', '”'), array("'", "'", '"', '"'), $string);
 	if ($trim) {
 		$string = substr($string, 0, $trim);
 	}	
@@ -44,13 +44,13 @@ if (!function_exists('hash_equals')) {
 		$known_string = (string)$known_string;
 		$user_string = (string)$user_string;
 
-		if(strlen($known_string) != strlen($user_string)) {
+		if (strlen($known_string) != strlen($user_string)) {
 			return false;
 		} else {
 			$res = $known_string ^ $user_string;
 			$ret = 0;
 
-			for($i = strlen($res) - 1; $i >= 0; $i--) $ret |= ord($res[$i]);
+			for ($i = strlen($res) - 1; $i >= 0; $i--) $ret |= ord($res[$i]);
 
 			return !$ret;
 		}

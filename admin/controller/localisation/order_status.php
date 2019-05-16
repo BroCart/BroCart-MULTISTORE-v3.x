@@ -306,15 +306,15 @@ class ControllerLocalisationOrderStatus extends Controller {
 		}
 		
 		$this->document->addStyle('view/javascript/bootstrap/css/bootstrap-colorpicker.min.css');
-        $this->document->addScript('view/javascript/bootstrap/js/bootstrap-colorpicker.min.js');
+		$this->document->addScript('view/javascript/bootstrap/js/bootstrap-colorpicker.min.js');
         
-        if (isset($this->request->post['color'])) {
-    		$data['color'] = $this->request->post['color'];
-    	} elseif (!empty($this->request->get['order_status_id'])) {
-    		$data['color'] = $this->model_localisation_order_status->getOrderStatusColor($this->request->get['order_status_id']);
-    	} else {
-    		$data['color'] = NULL;
-    	}
+		if (isset($this->request->post['color'])) {
+			$data['color'] = $this->request->post['color'];
+		} elseif (!empty($this->request->get['order_status_id'])) {
+			$data['color'] = $this->model_localisation_order_status->getOrderStatusColor($this->request->get['order_status_id']);
+		} else {
+			$data['color'] = NULL;
+		}
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

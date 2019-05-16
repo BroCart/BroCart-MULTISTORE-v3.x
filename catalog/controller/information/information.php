@@ -22,7 +22,7 @@ class ControllerInformationInformation extends Controller {
 		
 		if ($langs) {
 			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('information/information', 'information_id=' .  $information_id, $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
+				$this->document->addHreflang($this->url->link('information/information', 'information_id=' . $information_id, $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
 			}
 		}
 
@@ -40,7 +40,7 @@ class ControllerInformationInformation extends Controller {
 
 			$data['breadcrumbs'][] = array(
 				'text' => $information_info['title'],
-				'href' => $this->url->link('information/information', 'information_id=' .  $information_id)
+				'href' => $this->url->link('information/information', 'information_id=' . $information_id)
 			);
 
 			if ($information_info['meta_h1']) {

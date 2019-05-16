@@ -24,8 +24,8 @@ class ControllerStartupSeoBro extends Controller {
 	protected static $curr_code = false;	
 	
 	use seoHelper {
-        seoHelper::__construct as private __rocketLayer;
-    }
+		seoHelper::__construct as private __rocketLayer;
+	}
 	
 	public function __construct($registry) {
 		$this->__rocketLayer();
@@ -90,7 +90,7 @@ class ControllerStartupSeoBro extends Controller {
 									}
 								}
 							}					
-						} elseif(isset(self::$curr_code)) {
+						} elseif (isset(self::$curr_code)) {
 							$code = self::$curr_code;
 						}					
 					}
@@ -106,7 +106,7 @@ class ControllerStartupSeoBro extends Controller {
 		} else {
 			if (isset($this->session->data['language'])) {
 				$code = $this->session->data['language'];
-			} elseif(self::$curr_code) {
+			} elseif (self::$curr_code) {
 				$code = self::$curr_code;
 			} else {
 				$code = self::$config_language;
@@ -208,7 +208,7 @@ class ControllerStartupSeoBro extends Controller {
 						$parts[] = array('keyword' => $keyword, 'query' => $this->cache_stack['keywords'][$keyword]);
 					}
 				}			
-				if (isset($this->cache_stack['keywords'][$route])){
+				if (isset($this->cache_stack['keywords'][$route])) {
 					$keyword = $route;
 					$chunks = array($keyword);
 					$parts = array(array('keyword' => $keyword, 'query' => $this->cache_stack['keywords'][$keyword]));
@@ -220,7 +220,9 @@ class ControllerStartupSeoBro extends Controller {
 					}
 					reset($chunks);
 					foreach ($chunks as $part) {
-						if (!isset($queries[$part])) return false;
+						if (!isset($queries[$part])) {
+							return false;
+						}
 						$url = explode('=', $queries[$part], 2);
 						if ($url[0] == 'category_id') {
 							if (!isset($this->request->get['path'])) {
@@ -249,7 +251,7 @@ class ControllerStartupSeoBro extends Controller {
 					$this->request->get['route'] = 'product/manufacturer/info';
 				} elseif (isset($this->request->get['information_id'])) {
 					$this->request->get['route'] = 'information/information';
-				} elseif(isset($this->cache_stack['queries'][$route])) {
+				} elseif (isset($this->cache_stack['queries'][$route])) {
 					header($this->request->server['SERVER_PROTOCOL'] . ' 301 Moved Permanently');
 					$this->response->redirect($this->cache_stack['queries'][$route], 301);
 				} else {					
@@ -276,7 +278,7 @@ class ControllerStartupSeoBro extends Controller {
 			return;
 		}
 		if (((isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && (strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') || (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && strtolower($_SERVER['HTTP_X_FORWARDED_SSL']) == 'on')))) {
-         	$server_way = rtrim(HTTP_SERVER, '/');
+		 	$server_way = rtrim(HTTP_SERVER, '/');
 		} else {
 			$server_way = rtrim(HTTPS_SERVER, '/');
 		}

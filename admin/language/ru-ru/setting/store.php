@@ -18,7 +18,7 @@ $_['text_payment']                 = 'Адрес плательщика';
 
 // Column
 $_['column_name']                  = 'Название магазина';
-$_['column_url']	               = 'URL магазина';
+$_['column_url'] = 'URL магазина';
 $_['column_action']                = 'Действие';
 
 // Entry

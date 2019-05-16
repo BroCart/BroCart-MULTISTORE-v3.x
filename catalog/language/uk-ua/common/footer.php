@@ -14,4 +14,4 @@ $_['text_account'] = 'Особистий Кабінет';
 $_['text_order'] = 'Історія замовлень';
 $_['text_wishlist'] = 'Закладки';
 $_['text_newsletter'] = 'Розсилка';
-$_['text_powered']      = 'Розробка <a href="https://www.brocart.net">CMS BroCart [OpenCart]</a> %s &copy; %s';
+$_['text_powered'] = 'Розробка <a href="https://www.brocart.net">CMS BroCart [OpenCart]</a> %s &copy; %s';
