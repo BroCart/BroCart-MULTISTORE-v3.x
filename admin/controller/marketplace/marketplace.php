@@ -53,7 +53,8 @@ class ControllerMarketplaceMarketplace extends Controller {
 			$page = 1;
 		}
 
-		$url = '';
+		$url = '';		
+		$shop_data = array();
 
 		if (isset($this->request->get['filter_search'])) {
 			$url .= '&filter_search=' . $this->request->get['filter_search'];
@@ -115,56 +116,71 @@ class ControllerMarketplaceMarketplace extends Controller {
 		$url .= '&version=' . urlencode(VERSION);
 		$url .= '&time=' . $time;
 		$url .= '&signature=' . rawurlencode($signature);
-		if ($this->config->get('config_marketplace')) {
-			$url .= '&shop_id=' . SHOP_ID;
-		}
-
+		
 		if (isset($this->request->get['filter_search'])) {
 			$url .= '&filter_search=' . urlencode($this->request->get['filter_search']);
+			$shop_data['filter_search'] = urlencode($this->request->get['filter_search']);
 		}
 
 		if (isset($this->request->get['filter_category'])) {
 			$url .= '&filter_category=' . $this->request->get['filter_category'];
+			$shop_data['filter_category'] = $this->request->get['filter_category'];
 		}
 
 		if (isset($this->request->get['filter_license'])) {
 			$url .= '&filter_license=' . $this->request->get['filter_license'];
+			$shop_data['filter_license'] = $this->request->get['filter_license'];
 		}
 
 		if (isset($this->request->get['filter_rating'])) {
 			$url .= '&filter_rating=' . $this->request->get['filter_rating'];
+			$shop_data['filter_rating'] = $this->request->get['filter_rating'];
 		}
 
 		if (isset($this->request->get['filter_member_type'])) {
 			$url .= '&filter_member_type=' . $this->request->get['filter_member_type'];
+			$shop_data['filter_member_type'] = $this->request->get['filter_member_type'];
 		}
 
 		if (isset($this->request->get['filter_member'])) {
 			$url .= '&filter_member=' . $this->request->get['filter_member'];
+			$shop_data['filter_member'] = $this->request->get['filter_member'];
 		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
+			$shop_data['sort'] = $this->request->get['sort'];
 		}
 
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
+			$shop_data['page'] = $this->request->get['page'];
 		}
-		
+		//BRO_CONFIG
 		if ($this->config->get('config_marketplace')) {
-			$main_url = BRO_SERVER;
-		} else {
-			$main_url = OPENCART_SERVER;
+			$shop_data['domain'] = $this->request->server['HTTP_HOST'];
+			$shop_data['version'] = urlencode(VERSION);	
+			$shop_data['time'] = $time;
+			$shop_data['language_id'] = (int)$this->config->get('config_language_id');
+			$shop_data['shop_id'] = SHOP_ID;
+			
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, BRO_SERVER . 'index.php?route=marketplace/api');
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
+			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_POST, count($shop_data));
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $shop_data);	
+		} else {			
+			$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api' . $url);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
+			curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
+			curl_setopt($curl, CURLOPT_POST, 1);
 		}
-
-		$curl = curl_init($main_url . 'index.php?route=marketplace/api' . $url);
-
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
-		curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
-		curl_setopt($curl, CURLOPT_POST, 1);
-
+		//BRO_CONFIG
+		
 		$response = curl_exec($curl);
 
 		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -525,7 +541,7 @@ class ControllerMarketplaceMarketplace extends Controller {
 		}
 
 		$time = time();
-
+		$shop_data = array();
 		// We create a hash from the data in a similar method to how amazon does things.
 		$string  = 'marketplace/api/info' . "\n";
 		$string .= $this->config->get('opencart_username') . "\n";
@@ -542,14 +558,32 @@ class ControllerMarketplaceMarketplace extends Controller {
 		$url .= '&extension_id=' . $extension_id;
 		$url .= '&time=' . $time;
 		$url .= '&signature=' . rawurlencode($signature);
-
-		$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/info' . $url);
-
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
-		curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
-		curl_setopt($curl, CURLOPT_POST, 1);
+		
+		//BRO_CONFIG
+		if ($this->config->get('config_marketplace')) {
+			$shop_data['domain'] = $this->request->server['HTTP_HOST'];
+			$shop_data['version'] = urlencode(VERSION);	
+			$shop_data['time'] = $time;
+			$shop_data['extension_id'] = $extension_id;
+			$shop_data['language_id'] = (int)$this->config->get('config_language_id');
+			$shop_data['shop_id'] = SHOP_ID;
+			
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, BRO_SERVER . 'index.php?route=marketplace/api/info');
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
+			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_POST, count($shop_data));
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $shop_data);
+		} else {			
+			$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/info' . $url);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
+			curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
+			curl_setopt($curl, CURLOPT_POST, 1);
+		}
+		//BRO_CONFIG
 
 		$response = curl_exec($curl);
 
@@ -567,7 +601,7 @@ class ControllerMarketplaceMarketplace extends Controller {
 			if (isset($response_info['error'])) {
 				$data['error_signature'] = $response_info['error'];
 			} else {
-        $data['error_signature'] = '';
+				$data['error_signature'] = '';
 			}
 
 			$data['user_token'] = $this->session->data['user_token'];
@@ -729,14 +763,32 @@ class ControllerMarketplaceMarketplace extends Controller {
 			$url .= '&time=' . $time;
 			$url .= '&signature=' . rawurlencode($signature);
 
-			$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/purchase' . $url);
-
-			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
-			curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
-			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-
+			//BRO_CONFIG
+			if ($this->config->get('config_marketplace')) {
+				$shop_data['domain'] = $this->request->server['HTTP_HOST'];
+				$shop_data['version'] = urlencode(VERSION);	
+				$shop_data['time'] = $time;
+				$shop_data['extension_id'] = $extension_id;
+				$shop_data['language_id'] = (int)$this->config->get('config_language_id');
+				$shop_data['shop_id'] = SHOP_ID;
+				
+				$curl = curl_init();
+				curl_setopt($curl, CURLOPT_URL, BRO_SERVER . 'index.php?route=marketplace/api/purchase');
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
+				curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($curl, CURLOPT_POST, count($shop_data));
+				curl_setopt($curl, CURLOPT_POSTFIELDS, $shop_data);	
+			} else {			
+				$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/purchase' . $url);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
+				curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
+				curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+			}
+			//BRO_CONFIG
+				
 			$response = curl_exec($curl);
 
 			curl_close($curl);
@@ -858,21 +910,39 @@ class ControllerMarketplaceMarketplace extends Controller {
 			$url .= '&extension_download_id=' . $extension_download_id;
 			$url .= '&time=' . $time;
 			$url .= '&signature=' . rawurlencode($signature);
-
-			$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/download&extension_download_id=' . $extension_download_id . $url);
-
-			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
-			curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
-			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+			
+			//BRO_CONFIG
+			if ($this->config->get('config_marketplace')) {
+				$shop_data['domain'] = $this->request->server['HTTP_HOST'];
+				$shop_data['version'] = urlencode(VERSION);	
+				$shop_data['time'] = $time;
+				$shop_data['extension_id'] = $extension_id;
+				$shop_data['extension_download_id'] = $extension_download_id;
+				$shop_data['language_id'] = (int)$this->config->get('config_language_id');
+				$shop_data['shop_id'] = SHOP_ID;
+				
+				$curl = curl_init();
+				curl_setopt($curl, CURLOPT_URL, BRO_SERVER . 'index.php?route=marketplace/api/download');
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
+				curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($curl, CURLOPT_POST, count($shop_data));
+				curl_setopt($curl, CURLOPT_POSTFIELDS, $shop_data);
+			} else {			
+				$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/download&extension_download_id=' . $extension_download_id . $url);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
+				curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
+				curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+			}
+			//BRO_CONFIG
 
 			$response = curl_exec($curl);
 
 			$response_info = json_decode($response, true);
 
 			curl_close($curl);
-
 			if (isset($response_info['download'])) {
 				if (substr($response_info['filename'], -10) == '.ocmod.zip') {
 					$this->session->data['install'] = token(10);
@@ -953,8 +1023,24 @@ class ControllerMarketplaceMarketplace extends Controller {
 			$url .= '&parent_id=' . $parent_id;
 			$url .= '&time=' . $time;
 			$url .= '&signature=' . rawurlencode($signature);
+			
+			//BRO_CONFIG
+			if ($this->config->get('config_marketplace')) {
+				$murl = '&domain=' . $this->request->server['HTTP_HOST'];
+				$murl .= '&version=' . urlencode(VERSION);
+				$murl .= '&time=' . $time;
+				$murl .= '&language_id=' . (int)$this->config->get('config_language_id');
+				$murl .= '&shop_id=' . $time;
+				$murl .= '&extension_id=' . $extension_id;
+				$murl .= '&parent_id=' . $parent_id;
+				$url = $murl;
+				$main_url = BRO_SERVER;				
+			} else {
+				$main_url = OPENCART_SERVER;
+			}
+			//BRO_CONFIG
 
-			$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/addcomment&extension_id=' . $extension_id . $url);
+			$curl = curl_init($main_url . 'index.php?route=marketplace/api/addcomment&extension_id=' . $extension_id . $url);
 
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -1000,8 +1086,16 @@ class ControllerMarketplaceMarketplace extends Controller {
 
 		$data['button_more'] = $this->language->get('button_more');
 		$data['button_reply'] = $this->language->get('button_reply');
+		
+		//BRO_CONFIG
+			if ($this->config->get('config_marketplace')) {	
+				$main_url = BRO_SERVER;				
+			} else {
+				$main_url = OPENCART_SERVER;
+			}
+		//BRO_CONFIG
 
-		$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/comment&extension_id=' . $extension_id . '&page=' . $page);
+		$curl = curl_init($main_url . 'index.php?route=marketplace/api/comment&extension_id=' . $extension_id . '&page=' . $page);
 
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -1076,8 +1170,16 @@ class ControllerMarketplaceMarketplace extends Controller {
 		} else {
 			$page = 1;
 		}
+		
+		//BRO_CONFIG
+		if ($this->config->get('config_marketplace')) {				
+			$main_url = BRO_SERVER;				
+		} else {
+			$main_url = OPENCART_SERVER;
+		}
+		//BRO_CONFIG
 
-		$curl = curl_init(OPENCART_SERVER . 'index.php?route=marketplace/api/comment&extension_id=' . $extension_id . '&parent_id=' . $parent_id . '&page=' . $page);
+		$curl = curl_init($main_url . 'index.php?route=marketplace/api/comment&extension_id=' . $extension_id . '&parent_id=' . $parent_id . '&page=' . $page);
 
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
