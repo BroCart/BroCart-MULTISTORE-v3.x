@@ -375,8 +375,8 @@ class ControllerExtensionFeedFuriousSitemap extends Controller {
 						if ($product['image']) {
 							$output .= '	<image:image>'. "\n";
 							$output .= '		<image:loc>' . $this->model_tool_image->resize($product['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height')) . '</image:loc>'. "\n";
-							$output .= '		<image:title>' . trim(strip_tags(html_entity_decode($product['name'], ENT_QUOTES, 'UTF-8'))) . '</image:title>'. "\n";
-							$output .= '		<image:caption>' . trim(strip_tags(html_entity_decode($product['name'], ENT_QUOTES, 'UTF-8'))) . '</image:caption>'. "\n";					
+							$output .= '		<image:title>' . trim(htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8')) . '</image:title>'. "\n";
+							$output .= '		<image:caption>' . trim(htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8')) . '</image:caption>'. "\n";					
 							$output .= '	</image:image>'. "\n";
 						}
 							$output .= '</url>'. "\n";				
@@ -416,8 +416,8 @@ class ControllerExtensionFeedFuriousSitemap extends Controller {
 							if ($product['image']) {
 								$output .= '	<image:image>';
 								$output .= '		<image:loc>' . $this->model_tool_image->resize($product['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height')) . '</image:loc>';
-								$output .= '		<image:title>' . trim(strip_tags(html_entity_decode($product['name'], ENT_QUOTES, 'UTF-8'))) . '</image:title>';
-								$output .= '		<image:caption>' . trim(strip_tags(html_entity_decode($product['name'], ENT_QUOTES, 'UTF-8'))) . '</image:caption>';			
+								$output .= '		<image:title>' . trim(htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8')) . '</image:title>';
+								$output .= '		<image:caption>' . trim(htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8')) . '</image:caption>';			
 								$output .= '	</image:image>';
 							}
 								$output .= '</url>';				
