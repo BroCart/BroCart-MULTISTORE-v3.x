@@ -120,9 +120,8 @@ final class Loader {
 				
 			foreach ($data as $key => $value) {
 				$template->set($key, $value);
-			}
-
-			$output = $template->render($this->registry->get('config')->get('template_directory') . $route, $this->registry->get('config')->get('template_cache'));		
+			}			
+			$output = $template->render($this->registry->get('config')->get('template_directory') . $route, $this->registry->get('config')->get('template_cache'), $this->registry);		
 		}
 		
 		// Trigger the post events
