@@ -47,7 +47,9 @@ class Template {
 	 *
 	 * @return	string
  	*/	
-	public function render($template, $cache = false) {
-		return $this->adaptor->render($template, $cache);
+	public function render($template, $cache = false, $registr) {
+		$this->adaptor->set('registry', $registr);
+		$templater = $registr->get('config')->get('theme_' . $registr->get('config')->get('config_theme') . '_directory');
+		return $this->adaptor->render($template, $cache, $templater);
 	}
 }
