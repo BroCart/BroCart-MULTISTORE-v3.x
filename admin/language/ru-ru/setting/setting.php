@@ -32,7 +32,7 @@ $_['text_general']                   = 'Основное';
 $_['text_security']                  = 'Защита';
 $_['text_upload']                    = 'Загрузка';
 $_['text_error']                     = 'Ошибки';
-$_['text_market']					 = 'Сервер BroCart';
+$_['text_market'] = 'Сервер BroCart';
 
 // Entry
 $_['entry_meta_title']               = 'Мета-тег Title';
@@ -130,17 +130,17 @@ $_['text_seo_url']					   = 'По умолчанию';
 $_['text_seo_bro']					   = 'SEO BRO';
 $_['entry_seo_url_type']			   = 'Тип ЧПУ:';
 $_['entry_seo_url_one']				   = 'URL основной:';
-$_['help_seo_url_one']				   = 'URL для языка по умолчанию (с префиксом) как в старых версиях';
+$_['help_seo_url_one'] = 'URL для языка по умолчанию (с префиксом) как в старых версиях';
 $_['entry_seo_url_include_path']	   = 'ЧПУ в иерархии:';
-$_['entry_seo_url_include_path_help']  = '<b>Full</b> - полный путь товаров и категорий</br> <b>Last</b> - главная категория для товара и категория без родительских URL</br> <b>None</b> - без дополнительных URL (товар и категория привязаны к URL домена)';
-$_['entry_seo_url_postfix']			   = 'Окончание ЧПУ для товара, статьи';
+$_['entry_seo_url_include_path_help'] = '<b>Full</b> - полный путь товаров и категорий</br> <b>Last</b> - главная категория для товара и категория без родительских URL</br> <b>None</b> - без дополнительных URL (товар и категория привязаны к URL домена)';
+$_['entry_seo_url_postfix'] = 'Окончание ЧПУ для товара, статьи';
 $_['entry_seo_url_postfix_help']	   = 'Например .html';
-$_['entry_seo_url_prefix_def']		   = 'Прятать префикс языка по умолчанию';
-$_['entry_seo_url_prefix_def_help']	   = 'Например: '.HTTPS_CATALOG.' - язык по умолчанию, '.HTTPS_CATALOG.'ru/ - русская версия';
+$_['entry_seo_url_prefix_def'] = 'Прятать префикс языка по умолчанию';
+$_['entry_seo_url_prefix_def_help'] = 'Например: ' . HTTPS_CATALOG . ' - язык по умолчанию, ' . HTTPS_CATALOG . 'ru/ - русская версия';
 $_['entry_seo_url_prefix']			   = 'SEO префикс языков';
-$_['entry_seo_url_prefix_help']		   = 'Например '.HTTPS_CATALOG.'ua/';
+$_['entry_seo_url_prefix_help'] = 'Например ' . HTTPS_CATALOG . 'ua/';
 $_['entry_seo_url_syfix']		 	   = 'SEO окончание для категорий, производителей';
-$_['entry_seo_url_syfix_help']	       = 'Например /';
+$_['entry_seo_url_syfix_help'] = 'Например /';
 
 // Help
 $_['help_geocode']                   = 'Пожалуйста, введите ваше местонахождение как GeoCode.';

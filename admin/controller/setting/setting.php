@@ -183,7 +183,7 @@ class ControllerSettingSetting extends Controller {
 			} else {
 				$data['config_meta_keyword'][$result['code']] = $this->config->get('config_meta_keyword_' . $result['language_id']);
 			}
-			$data['languages'][$key]['flag'] = 'language/'.$result['code'].'/'.$result['code'].'.png';
+			$data['languages'][$key]['flag'] = 'language/' . $result['code'] . '/' . $result['code'] . '.png';
 		}
 
 		if (isset($this->request->post['config_theme'])) {
@@ -856,62 +856,62 @@ class ControllerSettingSetting extends Controller {
 		}
 		
 		$qu = $this->db->query("DESCRIBE " . DB_PREFIX . "product_to_category `main_category`");
-        if (!$qu->num_rows) {
-            $this->db->query("ALTER TABLE " . DB_PREFIX ."product_to_category ADD `main_category` tinyint(1) COLLATE utf8_general_ci NOT NULL DEFAULT '0' AFTER `category_id`");
-        }
+		if (!$qu->num_rows) {
+			$this->db->query("ALTER TABLE " . DB_PREFIX ."product_to_category ADD `main_category` tinyint(1) COLLATE utf8_general_ci NOT NULL DEFAULT '0' AFTER `category_id`");
+		}
 		$qu = $this->db->query("DESCRIBE " . DB_PREFIX . "language `prefix`");
-        if (!$qu->num_rows) {
-            $this->db->query("ALTER TABLE " . DB_PREFIX ."language ADD `prefix` varchar(3) COLLATE utf8_general_ci NOT NULL AFTER `directory`");
-        }
-        if (isset($this->request->post['config_seo_url_type'])) {
-        	$data['config_seo_url_type'] = $this->request->post['config_seo_url_type'];
-        } elseif ($this->config->get('config_seo_url_type')) {
-        	$data['config_seo_url_type'] = $this->config->get('config_seo_url_type');
-        } else {
-        	$data['config_seo_url_type'] = 'seo_url';
-        }
+		if (!$qu->num_rows) {
+			$this->db->query("ALTER TABLE " . DB_PREFIX ."language ADD `prefix` varchar(3) COLLATE utf8_general_ci NOT NULL AFTER `directory`");
+		}
+		if (isset($this->request->post['config_seo_url_type'])) {
+			$data['config_seo_url_type'] = $this->request->post['config_seo_url_type'];
+		} elseif ($this->config->get('config_seo_url_type')) {
+			$data['config_seo_url_type'] = $this->config->get('config_seo_url_type');
+		} else {
+			$data['config_seo_url_type'] = 'seo_url';
+		}
 
-        $data['seo_types'] = array();
-        $data['seo_types'][] = array('type' => 'seo_url', 'name' => $this->language->get('text_seo_url'));
+		$data['seo_types'] = array();
+		$data['seo_types'][] = array('type' => 'seo_url', 'name' => $this->language->get('text_seo_url'));
 		$data['seo_types'][] = array('type' => 'seo_bro', 'name' => $this->language->get('text_seo_bro'));
 		
 		$data['seo_include_opt'] = array('full', 'last', 'none');
 
-        if (isset($this->request->post['config_seo_url_include_path'])) {
-        	$data['config_seo_url_include_path'] = $this->request->post['config_seo_url_include_path'];
-        } else {
-        	$data['config_seo_url_include_path'] = $this->config->get('config_seo_url_include_path');
-        }
+		if (isset($this->request->post['config_seo_url_include_path'])) {
+			$data['config_seo_url_include_path'] = $this->request->post['config_seo_url_include_path'];
+		} else {
+			$data['config_seo_url_include_path'] = $this->config->get('config_seo_url_include_path');
+		}
 
-        if (isset($this->request->post['config_seo_url_postfix'])) {
-        	$data['config_seo_url_postfix'] = $this->request->post['config_seo_url_postfix'];
-        } else {
-        	$data['config_seo_url_postfix'] = $this->config->get('config_seo_url_postfix');
-        }
+		if (isset($this->request->post['config_seo_url_postfix'])) {
+			$data['config_seo_url_postfix'] = $this->request->post['config_seo_url_postfix'];
+		} else {
+			$data['config_seo_url_postfix'] = $this->config->get('config_seo_url_postfix');
+		}
 		
 		if (isset($this->request->post['config_seo_url_one'])) {
-        	$data['config_seo_url_one'] = $this->request->post['config_seo_url_one'];
-        } else {
-        	$data['config_seo_url_one'] = $this->config->get('config_seo_url_one');
-        }
+			$data['config_seo_url_one'] = $this->request->post['config_seo_url_one'];
+		} else {
+			$data['config_seo_url_one'] = $this->config->get('config_seo_url_one');
+		}
 		
 		if (isset($this->request->post['config_seo_url_syfix'])) {
-        	$data['config_seo_url_syfix'] = $this->request->post['config_seo_url_syfix'];
-        } else {
-        	$data['config_seo_url_syfix'] = $this->config->get('config_seo_url_syfix');
-        }
+			$data['config_seo_url_syfix'] = $this->request->post['config_seo_url_syfix'];
+		} else {
+			$data['config_seo_url_syfix'] = $this->config->get('config_seo_url_syfix');
+		}
 		
 		if (isset($this->request->post['config_seo_url_prefix_def'])) {
-        	$data['config_seo_url_prefix_def'] = $this->request->post['config_seo_url_prefix_def'];
-        } else {
-        	$data['config_seo_url_prefix_def'] = $this->config->get('config_seo_url_prefix_def');
-        }
+			$data['config_seo_url_prefix_def'] = $this->request->post['config_seo_url_prefix_def'];
+		} else {
+			$data['config_seo_url_prefix_def'] = $this->config->get('config_seo_url_prefix_def');
+		}
 		
 		if (isset($this->request->post['config_seo_url_prefix'])) {
-        	$data['config_seo_url_prefix'] = $this->request->post['config_seo_url_prefix'];
-        } else {
-        	$data['config_seo_url_prefix'] = $this->config->get('config_seo_url_prefix');
-        }
+			$data['config_seo_url_prefix'] = $this->request->post['config_seo_url_prefix'];
+		} else {
+			$data['config_seo_url_prefix'] = $this->config->get('config_seo_url_prefix');
+		}
 
 		if (isset($this->request->post['config_file_max_size'])) {
 			$data['config_file_max_size'] = $this->request->post['config_file_max_size'];

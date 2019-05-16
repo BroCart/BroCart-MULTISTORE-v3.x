@@ -20,7 +20,7 @@ class Session {
 	 *
 	 * @param	string	$adaptor
 	 * @param	object	$registry
- 	*/
+	 */
 	public function __construct($adaptor, $registry = '') {
 		$class = 'Session\\' . $adaptor;
 		
@@ -42,7 +42,7 @@ class Session {
 	 * 
 	 *
 	 * @return	string
- 	*/	
+	 */	
 	public function getId() {
 		return $this->session_id;
 	}
@@ -53,7 +53,7 @@ class Session {
 	 * @param	string	$session_id
 	 *
 	 * @return	string
- 	*/	
+	 */	
 	public function start($session_id = '') {
 		if (!$session_id) {
 			if (function_exists('random_bytes')) {
@@ -76,14 +76,14 @@ class Session {
 	
 	/**
 	 * 
- 	*/
+	 */
 	public function close() {
 		$this->adaptor->write($this->session_id, $this->data);
 	}
 	
 	/**
 	 * 
- 	*/	
+	 */	
 	public function __destroy() {
 		$this->adaptor->destroy($this->session_id);
 	}

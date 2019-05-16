@@ -8,11 +8,11 @@ $_['time_format']           = 'H:i:s';
 $_['datetime_format']       = 'd/m/Y H:i:s';
 $_['decimal_point']         = '.';
 $_['thousand_point']        = '';
-$_['text_page']       	    = ' страница ';
+$_['text_page'] = ' страница ';
 
 // Text
 $_['text_home']             = '<i class="fa fa-home"></i>';
-$_['text_microhome']		= 'Главная';
+$_['text_microhome'] = 'Главная';
 $_['text_yes']              = 'Да';
 $_['text_no']               = 'Нет';
 $_['text_none']             = ' --- Не выбрано --- ';
@@ -73,5 +73,5 @@ $_['error_upload_999']      = 'Предупреждение: Неизвестн�
 $_['error_curl']            = 'CURL: Ошибка кода(%s): %s';
 
 // Datepicker
-$_['datepicker']                    = 'ru';
+$_['datepicker'] = 'ru';
 

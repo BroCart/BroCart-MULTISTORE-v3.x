@@ -286,7 +286,7 @@ class ControllerCommonFileManager extends Controller {
 				}
 				if (!$json) {									
 					if (is_file($directory . '/' . $filename)) {
-						$json['error'] = "File '$filename' is exists at catalog '".$directory."'!";
+						$json['error'] = "File '$filename' is exists at catalog '" . $directory . "'!";
 					}		
 				}
 
@@ -445,18 +445,18 @@ class ControllerCommonFileManager extends Controller {
 		$name = utf8_strtolower($name);
 		
 		$lang_tr = array(
-			'а'=>'a','б'=>'b','в'=>'v',
-			'г'=>'g','д'=>'d','е'=>'e',
-			'ё'=>'e','ж'=>'j','з'=>'z',
-			'и'=>'i','й'=>'y','к'=>'k',
-			'л'=>'l','м'=>'m','н'=>'n',
-			'о'=>'o','п'=>'p','р'=>'r',
-			'с'=>'s','т'=>'t','у'=>'u',
-			'ф'=>'f','х'=>'h','ц'=>'c',
-			'ч'=>'ch','ш'=>'sh','щ'=>'shch',
-			'ы'=>'y','э'=>'e','ю'=>'yu',
-			'я'=>'ya','ъ'=>'','ь'=>'',
-			'і'=>'i','ї'=>'ji','є'=>'e'
+			'а'=>'a', 'б'=>'b', 'в'=>'v',
+			'г'=>'g', 'д'=>'d', 'е'=>'e',
+			'ё'=>'e', 'ж'=>'j', 'з'=>'z',
+			'и'=>'i', 'й'=>'y', 'к'=>'k',
+			'л'=>'l', 'м'=>'m', 'н'=>'n',
+			'о'=>'o', 'п'=>'p', 'р'=>'r',
+			'с'=>'s', 'т'=>'t', 'у'=>'u',
+			'ф'=>'f', 'х'=>'h', 'ц'=>'c',
+			'ч'=>'ch', 'ш'=>'sh', 'щ'=>'shch',
+			'ы'=>'y', 'э'=>'e', 'ю'=>'yu',
+			'я'=>'ya', 'ъ'=>'', 'ь'=>'',
+			'і'=>'i', 'ї'=>'ji', 'є'=>'e'
 		);
 		
 		$name = strtr($name, $lang_tr);

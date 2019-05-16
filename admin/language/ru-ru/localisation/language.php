@@ -20,12 +20,12 @@ $_['entry_code']        = 'Код';
 $_['entry_locale']      = 'Кодировка';
 $_['entry_status']      = 'Статус';
 $_['entry_sort_order']  = 'Порядок сортировки';
-$_['entry_prefix']		= 'Введите SEO префикс';
+$_['entry_prefix'] = 'Введите SEO префикс';
 
 // Help
 $_['help_locale']       = 'Пример: en_US.UTF-8,en_US,en-gb,en_gb,english или <br> ru_RU.UTF-8,ru_RU,russian';
 $_['help_status']       = 'Показывать/Скрыть переключатели языков (витрина магазина).';
-$_['help_prefix']		= 'Например: ru, и сайт будет иметь вид: www.site.com/ru/';
+$_['help_prefix'] = 'Например: ru, и сайт будет иметь вид: www.site.com/ru/';
 
 // Error
 $_['error_permission']  = 'У Вас нет прав для изменения списка языков!';

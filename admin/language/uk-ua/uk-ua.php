@@ -28,9 +28,9 @@ $_['text_confirm']                  = 'Ви впевнені?';
 $_['text_home']                     = 'Головна';
 
 // Button
-$_['button_add']               		= 'Додати новий';
+$_['button_add'] = 'Додати новий';
 $_['button_delete']                 = 'Видалити';
-$_['button_apply'] 					= 'Застосувати';
+$_['button_apply'] = 'Застосувати';
 $_['button_save']                   = 'Зберегти';
 $_['button_cancel']                 = 'Скасувати';
 $_['button_cancel_recurring']       = 'Скасувати Регулярні платежі';

@@ -1,9 +1,9 @@
 <?php
 // Heading
-$_['heading_title']    = 'Правильная Sitemap [FIA]';
+$_['heading_title'] = 'Правильная Sitemap [FIA]';
 
 // Text
-$_['text_form']   = 'Карта сайта для Google';
+$_['text_form'] = 'Карта сайта для Google';
 $_['text_extension']   = 'Расширения';
 $_['text_success']     = 'Настройки модуля обновлены!';
 $_['text_edit']        = 'Редактирование';
@@ -28,8 +28,8 @@ $_['entry_product_frequency'] = 'Частота страницы товаров'
 $_['entry_information_frequency'] = 'Частота страницы статей';
 
 $_['entry_furious_status'] = 'Статус карты';
-$_['entry_data_feed']  = 'Адрес карты:';
-$_['entry_syfix']  = 'Последний символ в ЧПУ, напр. слэш /';
+$_['entry_data_feed'] = 'Адрес карты:';
+$_['entry_syfix'] = 'Последний символ в ЧПУ, напр. слэш /';
 
 // Error
 $_['error_permission'] = 'У Вас нет прав для управления этим модулем!';

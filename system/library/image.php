@@ -23,7 +23,7 @@ class Image {
 	 *
 	 * @param	string	$file
 	 *
- 	*/
+	 */
 	public function __construct($file) {
 		if (!extension_loaded('gd')) {
 			exit('Error: PHP GD is not installed!');
@@ -52,65 +52,65 @@ class Image {
 	}
 	
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getFile() {
 		return $this->file;
 	}
 
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	array
-     */
+	 */
 	public function getImage() {
 		return $this->image;
 	}
 	
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getWidth() {
 		return $this->width;
 	}
 	
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getHeight() {
 		return $this->height;
 	}
 	
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getBits() {
 		return $this->bits;
 	}
 	
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getMime() {
 		return $this->mime;
 	}
 	
 	/**
-     * 
-     *
-     * @param	string	$file
+	 * 
+	 *
+	 * @param	string	$file
 	 * @param	int		$quality
-     */
+	 */
 	public function save($file, $quality = 90) {
 		$info = pathinfo($file);
 
@@ -130,12 +130,12 @@ class Image {
 	}
 	
 	/**
-     * 
-     *
-     * @param	int	$width
+	 * 
+	 *
+	 * @param	int	$width
 	 * @param	int	$height
 	 * @param	string	$default
-     */
+	 */
 	public function resize($width = 0, $height = 0, $default = '') {
 		if (!$this->width || !$this->height) {
 			return;
@@ -187,13 +187,13 @@ class Image {
 	}
 	
 	/**
-     * 
-     *
-     * @param	string	$watermark
+	 * 
+	 *
+	 * @param	string	$watermark
 	 * @param	string	$position
-     */
+	 */
 	public function watermark($watermark, $position = 'bottomright') {
-		switch($position) {
+		switch ($position) {
 			case 'topleft':
 				$watermark_pos_x = 0;
 				$watermark_pos_y = 0;
@@ -232,21 +232,21 @@ class Image {
 				break;
 		}
 		
-		imagealphablending( $this->image, true );
-		imagesavealpha( $this->image, true );
+		imagealphablending($this->image, true);
+		imagesavealpha($this->image, true);
 		imagecopy($this->image, $watermark->getImage(), $watermark_pos_x, $watermark_pos_y, 0, 0, $watermark->getWidth(), $watermark->getHeight());
 
 		imagedestroy($watermark->getImage());
 	}
 	
 	/**
-     * 
-     *
-     * @param	int		$top_x
+	 * 
+	 *
+	 * @param	int		$top_x
 	 * @param	int		$top_y
 	 * @param	int		$bottom_x
 	 * @param	int		$bottom_y
-     */
+	 */
 	public function crop($top_x, $top_y, $bottom_x, $bottom_y) {
 		$image_old = $this->image;
 		$this->image = imagecreatetruecolor($bottom_x - $top_x, $bottom_y - $top_y);
@@ -259,11 +259,11 @@ class Image {
 	}
 	
 	/**
-     * 
-     *
-     * @param	int		$degree
+	 * 
+	 *
+	 * @param	int		$degree
 	 * @param	string	$color
-     */
+	 */
 	public function rotate($degree, $color = 'FFFFFF') {
 		$rgb = $this->html2rgb($color);
 
@@ -274,24 +274,24 @@ class Image {
 	}
 	
 	/**
-     * 
-     *
-     */
+	 * 
+	 *
+	 */
 	private function filter() {
-        $args = func_get_args();
+		$args = func_get_args();
 
-        call_user_func_array('imagefilter', $args);
+		call_user_func_array('imagefilter', $args);
 	}
 	
 	/**
-     * 
-     *
-     * @param	string	$text
+	 * 
+	 *
+	 * @param	string	$text
 	 * @param	int		$x
 	 * @param	int		$y 
 	 * @param	int		$size
 	 * @param	string	$color
-     */
+	 */
 	private function text($text, $x = 0, $y = 0, $size = 5, $color = '000000') {
 		$rgb = $this->html2rgb($color);
 
@@ -299,24 +299,24 @@ class Image {
 	}
 	
 	/**
-     * 
-     *
-     * @param	object	$merge
+	 * 
+	 *
+	 * @param	object	$merge
 	 * @param	object	$x
 	 * @param	object	$y
 	 * @param	object	$opacity
-     */
+	 */
 	private function merge($merge, $x = 0, $y = 0, $opacity = 100) {
 		imagecopymerge($this->image, $merge->getImage(), $x, $y, 0, 0, $merge->getWidth(), $merge->getHeight(), $opacity);
 	}
 	
 	/**
-     * 
-     *
-     * @param	string	$color
+	 * 
+	 *
+	 * @param	string	$color
 	 * 
 	 * @return	array
-     */
+	 */
 	private function html2rgb($color) {
 		if ($color[0] == '#') {
 			$color = substr($color, 1);

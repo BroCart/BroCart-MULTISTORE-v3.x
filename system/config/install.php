@@ -5,7 +5,7 @@ $_['site_ssl']          = HTTP_SERVER;
 
 // Language
 $_['language_default']  = 'ru-ru';
-$_['language_autoload'] = array('en-gb','ru-ru','uk-ua');
+$_['language_autoload'] = array('en-gb', 'ru-ru', 'uk-ua');
 
 // Session
 $_['session_engine']     = 'file';
@@ -28,7 +28,7 @@ $_['action_pre_action'] = array(
 
 // Action Events
 $_['action_event'] = array(
-    'view/*/before' => array(
+	'view/*/before' => array(
 		'event/theme'
 	)
 );

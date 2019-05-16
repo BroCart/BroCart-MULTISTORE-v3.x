@@ -24,67 +24,67 @@ class Document {
 	private $og_image;
 
 	/**
-     * 
-     *
-     * @param	string	$title
-     */
+	 * 
+	 *
+	 * @param	string	$title
+	 */
 	public function setTitle($title) {
 		$this->title = $title;
 	}
 
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getTitle() {
 		return $this->title;
 	}
 
 	/**
-     * 
-     *
-     * @param	string	$description
-     */
+	 * 
+	 *
+	 * @param	string	$description
+	 */
 	public function setDescription($description) {
 		$this->description = $description;
 	}
 
 	/**
-     * 
-     *
-     * @param	string	$description
+	 * 
+	 *
+	 * @param	string	$description
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getDescription() {
 		return $this->description;
 	}
 
 	/**
-     * 
-     *
-     * @param	string	$keywords
-     */
+	 * 
+	 *
+	 * @param	string	$keywords
+	 */
 	public function setKeywords($keywords) {
 		$this->keywords = $keywords;
 	}
 
 	/**
-     *
+	 *
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getKeywords() {
 		return $this->keywords;
 	}
 	
 	/**
-     * 
-     *
-     * @param	string	$href
+	 * 
+	 *
+	 * @param	string	$href
 	 * @param	string	$rel
-     */
+	 */
 	public function addLink($href, $rel) {
 		$this->links[$href] = array(
 			'href' => $href,
@@ -93,21 +93,21 @@ class Document {
 	}
 
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	array
-     */
+	 */
 	public function getLinks() {
 		return $this->links;
 	}
 
 	/**
-     * 
-     *
-     * @param	string	$href
+	 * 
+	 *
+	 * @param	string	$href
 	 * @param	string	$rel
 	 * @param	string	$media
-     */
+	 */
 	public function addStyle($href, $rel = 'stylesheet', $media = 'screen') {
 		$this->styles[$href] = array(
 			'href'  => $href,
@@ -117,31 +117,31 @@ class Document {
 	}
 
 	/**
-     * 
+	 * 
 	 * 
 	 * @return	array
-     */
+	 */
 	public function getStyles() {
 		return $this->styles;
 	}
 
 	/**
-     * 
-     *
-     * @param	string	$href
+	 * 
+	 *
+	 * @param	string	$href
 	 * @param	string	$postion
-     */
+	 */
 	public function addScript($href, $postion = 'header') {
 		$this->scripts[$postion][$href] = $href;
 	}
 
 	/**
-     * 
-     *
-     * @param	string	$postion
+	 * 
+	 *
+	 * @param	string	$postion
 	 * 
 	 * @return	array
-     */
+	 */
 	public function getScripts($postion = 'header') {
 		if (isset($this->scripts[$postion])) {
 			return $this->scripts[$postion];
@@ -159,11 +159,11 @@ class Document {
 	}
 	
 	public function addHreflang($href = '', $hreflang = 'x-default') {
-        $this->hreflang[] = array(
-            'href' => $href,
-            'hreflang'  => $hreflang
-        );
-    }
+		$this->hreflang[] = array(
+			'href' => $href,
+			'hreflang'  => $hreflang
+		);
+	}
 	
 	public function getHreflang() {
 		return $this->hreflang;
@@ -171,9 +171,9 @@ class Document {
 	
 	public function setOpengraph($meta, $content = '') {
 		$this->opengraph[] = array(
-		    'meta'   => $meta,
-		    'content' => $content
-         );
+			'meta'   => $meta,
+			'content' => $content
+		 );
 	}
 	
 	public function getOpengraph() {
@@ -192,19 +192,19 @@ class Document {
 	}
 	
 	/**
-     * 
-     *
-     * @param	string	$image
-     */
+	 * 
+	 *
+	 * @param	string	$image
+	 */
 	public function setOgImage($image) {
 		$this->og_image = $image;
 	}
 
 	/**
-     *
+	 *
 	 * 
 	 * @return	string
-     */
+	 */
 	public function getOgImage() {
 		return $this->og_image;
 	}

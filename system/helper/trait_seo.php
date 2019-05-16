@@ -15,17 +15,19 @@ trait seoBroker {
 	protected static $cache_langs = array();
 	
 	public function __construct() {
-		if (!defined('DB_DRIVER')) exit();
+		if (!defined('DB_DRIVER')) {
+			exit();
+		}
 		self::$cached = new Cache('file', 3600);
 		self::$cache_langs = self::$cached->get('catalog.seolang');
 		self::$cookies = $this->cleaner($_COOKIE);		
-    }
+	}
 	
 	private function initConnection() {		
-        if (is_null(self::$connection)) {
-            self::$connection = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
-        }
-    }
+		if (is_null(self::$connection)) {
+			self::$connection = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+		}
+	}
 	
 	private function getSeoSettings() {
 		$configuration = array();
@@ -54,9 +56,9 @@ trait seoBroker {
 			self::$cached->set('catalog.seoconfig', $configuration);
 		}
 		return $configuration;
-    }
+	}
 	
-    public function rewriter($link, $config = array(), $code = false) {
+	public function rewriter($link, $config = array(), $code = false) {
 		$seo_bro = true;
 	//	$this->debug(__LINE__, $config);
 		if (!$config) {
@@ -194,9 +196,9 @@ trait seoBroker {
 			$link .= '&amp;' . urldecode(http_build_query($data, '', '&amp;'));
 		}		
 		$queries = array();
-		if(!in_array($route, array('product/search'))) {
-			foreach($data as $key => $value) {
-				switch($key) {
+		if (!in_array($route, array('product/search'))) {
+			foreach ($data as $key => $value) {
+				switch ($key) {
 					case 'product_id':
 					case 'manufacturer_id':
 					case 'category_id':
@@ -209,7 +211,7 @@ trait seoBroker {
 						break;
 					case 'path':
 						$categories = explode('_', $value);
-						foreach($categories as $category) {
+						foreach ($categories as $category) {
 							$queries[] = 'category_id=' . $category;
 						}
 						unset($data[$key]);
@@ -236,17 +238,17 @@ trait seoBroker {
 		}
 		$this->cache_stack = $this->getSeoDataByLangId($config['config_language_id']);
 		$rows = array();
-		foreach($queries as $query) {
-			if(isset($this->cache_stack['queries'][$query])) {
+		foreach ($queries as $query) {
+			if (isset($this->cache_stack['queries'][$query])) {
 				$rows[] = array('query' => $query, 'keyword' => $this->cache_stack['queries'][$query]);
 			}
 		}		
-		if(count($rows) == count($queries)) {
+		if (count($rows) == count($queries)) {
 			$aliases = array();
-			foreach($rows as $row) {
+			foreach ($rows as $row) {
 				$aliases[$row['query']] = $row['keyword'];				
 			}
-			foreach($queries as $query) {
+			foreach ($queries as $query) {
 				$seo_url .= '/' . rawurlencode($aliases[$query]);
 			}
 		}
@@ -257,7 +259,7 @@ trait seoBroker {
 			if ($config['config_seo_url_prefix_def']) {
 				if ($lang_prefix != self::$cache_langs[$config['config_language']]['prefix']) {
 					$seo_url = $lang_prefix . '/' . trim($seo_url, '/');
-				} else{
+				} else {
 					$seo_url = trim($seo_url, '/');
 				}
 			} else {
@@ -306,7 +308,9 @@ trait seoBroker {
 	}	
 	
 	private function getCatPath($category_id = false, $include = 'full') {
-		if (!$category_id) return false;
+		if (!$category_id) {
+			return false;
+		}
 		$cat_path = self::$cached->get('catalog.path.cat');		
 		if (!isset($cat_path[$category_id])) {
 			$this->initConnection();			
@@ -319,7 +323,7 @@ trait seoBroker {
 					if (!$query->row['trix']) {
 						$cat_path[$category_id] = $category_id;
 					} else {
-						$cat_path[$category_id] = $query->row['trix'].'_'.$category_id;
+						$cat_path[$category_id] = $query->row['trix'] . '_' . $category_id;
 					}
 				}
 			} else {
@@ -332,15 +336,15 @@ trait seoBroker {
 	
 	private function getSeoDataByLangId($lang_id) {		
 		$lang_data = array();
-		$lang_data = self::$cached->get('catalog.seo_bro.0.'.(int)$lang_id);
+		$lang_data = self::$cached->get('catalog.seo_bro.0.' . (int)$lang_id);
 		if (!$lang_data) {
 			$this->initConnection();
-			$query = self::$connection->query("SELECT LOWER(`keyword`) as 'keyword', `query` FROM " . DB_PREFIX . "seo_url WHERE store_id='0' AND language_id = '".(int)$lang_id."' ORDER BY seo_url_id");
+			$query = self::$connection->query("SELECT LOWER(`keyword`) as 'keyword', `query` FROM " . DB_PREFIX . "seo_url WHERE store_id='0' AND language_id = '" . (int)$lang_id . "' ORDER BY seo_url_id");
 			foreach ($query->rows as $row) {
 				$lang_data['keywords'][$row['keyword']] = $row['query'];
 				$lang_data['queries'][$row['query']] = $row['keyword'];
 			}
-			self::$cached->set('catalog.seo_bro.0.'.(int)$lang_id, $lang_data);
+			self::$cached->set('catalog.seo_bro.0.' . (int)$lang_id, $lang_data);
 		}		
 		return $lang_data;
 	}
@@ -359,7 +363,7 @@ trait seoBroker {
 		
 	private function debug($line, $code = '') {
 		$debug = fopen(DIR_LOGS . 'error.log', 'a');
-		fwrite($debug, '['.date('G:i:s').'('.$line.')] ' . print_r($code, true) . "\n");
+		fwrite($debug, '[' . date('G:i:s') . '(' . $line . ')] ' . print_r($code, true) . "\n");
 		fclose($debug);
 	}
 }

@@ -78,11 +78,11 @@ class ControllerCommonLogin extends Controller {
 		
 		$data['ipper'] = false;
 		
-		foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
-			if (array_key_exists($key, $this->request->server) === true){
-				foreach (explode(',', $this->request->server[$key]) as $ip){
+		foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
+			if (array_key_exists($key, $this->request->server) === true) {
+				foreach (explode(',', $this->request->server[$key]) as $ip) {
 					$ip = trim($ip);
-					if (filter_var($ip, FILTER_VALIDATE_IP) !== false){
+					if (filter_var($ip, FILTER_VALIDATE_IP) !== false) {
 						$data['ipper'] = $ip;
 						break;
 					}

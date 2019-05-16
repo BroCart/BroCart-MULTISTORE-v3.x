@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']                  = 'Налаштування';
+$_['heading_title'] = 'Налаштування';
 
 // Text
 $_['text_stores'] = 'Магазини';
@@ -136,9 +136,9 @@ $_['entry_seo_url_include_path_help'] = '<b> Full </ b> - повний шлях 
 $_['entry_seo_url_postfix'] = 'Закінчення ЧПУ для товару, статті';
 $_['entry_seo_url_postfix_help'] = 'Наприклад .html';
 $_['entry_seo_url_prefix_def'] = 'Ховати префікс мови за замовчуванням';
-$_['entry_seo_url_prefix_def_help'] = 'Наприклад: '.HTTPS_CATALOG.' - мова за замовчуванням, '.HTTPS_CATALOG.'ru / - російська версія';
+$_['entry_seo_url_prefix_def_help'] = 'Наприклад: ' . HTTPS_CATALOG . ' - мова за замовчуванням, ' . HTTPS_CATALOG . 'ru / - російська версія';
 $_['entry_seo_url_prefix'] = 'SEO префікс мов';
-$_['entry_seo_url_prefix_help'] = 'Наприклад'.HTTPS_CATALOG.'ua/';
+$_['entry_seo_url_prefix_help'] = 'Наприклад' . HTTPS_CATALOG . 'ua/';
 $_['entry_seo_url_syfix'] = 'SEO закінчення для категорій, виробників';
 $_['entry_seo_url_syfix_help'] = 'Наприклад /';
 

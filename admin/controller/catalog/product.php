@@ -257,10 +257,10 @@ class ControllerCatalogProduct extends Controller {
 		}
 		
 		if (isset($this->request->get['filter_category'])) {
-            $filter_category = $this->request->get['filter_category'];
-        } else {
-            $filter_category = '';
-        }
+			$filter_category = $this->request->get['filter_category'];
+		} else {
+			$filter_category = '';
+		}
 
 		if (isset($this->request->get['filter_model'])) {
 			$filter_model = $this->request->get['filter_model'];
@@ -307,8 +307,8 @@ class ControllerCatalogProduct extends Controller {
 		$url = '';
 		
 		if (isset($this->request->get['filter_category'])) {
-            $url .= '&filter_category=' . $this->request->get['filter_category'];
-        }
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
 
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
@@ -410,7 +410,7 @@ class ControllerCatalogProduct extends Controller {
 				'special'    => $special,
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'href_view'	 => ($this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG) .'index.php?route=product/product&product_id='.$result['product_id'],
+				'href_view'	 => ($this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG) . 'index.php?route=product/product&product_id=' . $result['product_id'],
 				'edit'       => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $result['product_id'] . $url, true)
 			);
 		}
@@ -524,7 +524,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['filter_status'] = $filter_status;
 		$data['column_category'] = $this->language->get('column_category');
 		$data['filter_category'] = $filter_category;
-        $data['show_category'] = $this->language->get('show_category');
+		$data['show_category'] = $this->language->get('show_category');
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
@@ -625,7 +625,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['href_view'] = false;
 			
 		if (isset($this->request->get['product_id']) && $this->request->get['product_id']) {
-			$data['href_view'] = ($this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG) .'index.php?route=product/product&product_id='.$this->request->get['product_id'];
+			$data['href_view'] = ($this->request->server['HTTPS'] ? HTTPS_CATALOG : HTTP_CATALOG) . 'index.php?route=product/product&product_id=' . $this->request->get['product_id'];
 		}
 		
 		if (isset($this->request->get['product_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
@@ -928,12 +928,12 @@ class ControllerCatalogProduct extends Controller {
 		}
 		
 		if (isset($this->request->post['main_category_id'])) {
-            $data['main_category_id'] = $this->request->post['main_category_id'];
-        } elseif (isset($product_info)) {
-            $data['main_category_id'] = $this->model_catalog_product->getProductMainCategoryId($this->request->get['product_id']);
-        } else {
-            $data['main_category_id'] = 0;
-        }
+			$data['main_category_id'] = $this->request->post['main_category_id'];
+		} elseif (isset($product_info)) {
+			$data['main_category_id'] = $this->model_catalog_product->getProductMainCategoryId($this->request->get['product_id']);
+		} else {
+			$data['main_category_id'] = 0;
+		}
 
 		$data['product_categories'] = array();
 
@@ -1092,7 +1092,7 @@ class ControllerCatalogProduct extends Controller {
 				'priority'          => $product_special['priority'],
 				'price'             => $product_special['price'],
 				'date_start'        => ($product_special['date_start'] != '0000-00-00') ? $product_special['date_start'] : '',
-				'date_end'          => ($product_special['date_end'] != '0000-00-00') ? $product_special['date_end'] :  ''
+				'date_end'          => ($product_special['date_end'] != '0000-00-00') ? $product_special['date_end'] : ''
 			);
 		}
 		

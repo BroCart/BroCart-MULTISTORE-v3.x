@@ -452,7 +452,7 @@ class ControllerSaleVoucher extends Controller {
 		if ($voucher_info) {
 			if (!isset($this->request->get['voucher_id'])) {
 				$this->error['warning'] = $this->language->get('error_exists');
-			} elseif ($voucher_info['voucher_id'] != $this->request->get['voucher_id'])  {
+			} elseif ($voucher_info['voucher_id'] != $this->request->get['voucher_id']) {
 				$this->error['warning'] = $this->language->get('error_exists');
 			}
 		}
@@ -628,7 +628,7 @@ class ControllerSaleVoucher extends Controller {
 							$mail->send();
 			
 						// If voucher does not belong to an order
-						}  else {
+						} else {
 							$data['title'] = sprintf($this->language->get('text_subject'), $voucher_info['from_name']);
 			
 							$data['text_greeting'] = sprintf($this->language->get('text_greeting'), $this->currency->format($voucher_info['amount'], $this->config->get('config_currency')));

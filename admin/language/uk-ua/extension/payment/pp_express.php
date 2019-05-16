@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title'] ='Експрес-платежі PayPal';
+$_['heading_title'] = 'Експрес-платежі PayPal';
 
 // Текст
 $_['text_extension'] = 'Розширення';

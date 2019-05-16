@@ -45,7 +45,7 @@ class ControllerCommonHeader extends Controller {
 		}
 		
 		//OG data
-		$data['og_url'] = $server . utf8_substr($this->request->server['REQUEST_URI'], 1, (utf8_strlen($this->request->server['REQUEST_URI'])-1));		
+		$data['og_url'] = $server . utf8_substr($this->request->server['REQUEST_URI'], 1, (utf8_strlen($this->request->server['REQUEST_URI']) - 1));		
 		$data['og_image'] = $this->document->getOgImage();
 		
 		$this->load->language('common/header');		
