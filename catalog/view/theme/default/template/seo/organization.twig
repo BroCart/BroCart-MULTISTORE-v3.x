@@ -1,0 +1,85 @@
+<script type="application/ld+json"> {
+"@context": "http://schema.org",
+"@type": "LocalBusiness",
+"name": "{{ name }}",
+"url": "{{ href }}",
+"image": "{{ image }}",
+"telephone" : "{{ telephone }}",
+"email": "{{ email }}",
+"priceRange": "{{ pricerange }}",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "{{ address_locality }}",
+"postalCode": "{{ postal_code }}",
+"streetAddress": "{{ street_address }}"
+},
+"location": {
+"@type": "Place",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "{{ address_locality }}",
+"postalCode": "{{ postal_code }}",
+"streetAddress": "{{ street_address }}"
+},
+"geo": {
+"@type": "GeoCoordinates",
+"latitude": "{{ latitude }}",
+"longitude": "{{ longitude }}"
+}
+},
+"potentialAction": {
+"@type": "SearchAction",
+"target": "{{ search }}?search={search_term_string}",
+"query-input": "required name=search_term_string"
+},	  
+"contactPoint" : [
+{
+"@type" : "ContactPoint",
+"telephone" : "{{ telephone }}",
+"contactType" : "customer service"
+}],
+"openingHoursSpecification":[
+
+{
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": "Monday",
+"opens": "{{ monday_o }}",
+"closes": "{{ monday_c }}"
+},
+{
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": "Tuesday",
+"opens": "{{ tuesday_o }}",
+"closes": "{{ tuesday_c }}"
+},
+{
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": "Wednesday",
+"opens": "{{ wednesday_o }}",
+"closes": "{{ wednesday_c }}"
+},
+{
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": "Thursday",
+"opens": "{{ thursday_o }}",
+"closes": "{{ thursday_c }}"
+},
+{
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": "Friday",
+"opens": "{{ friday_o }}",
+"closes": "{{ friday_c }}"
+},
+{
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": "Saturday",
+"opens": "{{ saturday_o }}",
+"closes": "{{ saturday_c }}"
+},
+{
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": "Sunday",
+"opens": "{{ sunday_o }}",
+"closes": "{{ sunday_c }}"
+}]}
+</script>

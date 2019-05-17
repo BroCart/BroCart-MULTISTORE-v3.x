@@ -44,13 +44,6 @@ class ControllerStartupStartup extends Controller {
 			}			
 		}
 		
-		$theme_ext = 'twig';		
-		if ('tpl' == $this->config->get('theme_default_ext')) {
-			$theme_ext = 'template';
-		}		
-		$this->config->set('template_engine', $theme_ext);
-		$this->config->set('template_directory', $this->config->get('theme_default_directory') . '/template/');
-		
 		if ($this->config->get('config_seo_url')) {			
 			$code = $this->config->get('config_seo_url_type');
 			if ($code == 'seo_bro') {

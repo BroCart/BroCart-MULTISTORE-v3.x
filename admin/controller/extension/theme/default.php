@@ -144,16 +144,6 @@ class ControllerExtensionThemeDefault extends Controller {
 			$data['theme_default_product_limit'] = 15;
 		}
 		
-		$data['theme_extensions'] = array('twig', 'tpl');
-
-		if (isset($this->request->post['theme_default_ext'])) {
-			$data['theme_default_ext'] = $this->request->post['theme_default_ext'];
-		} elseif (isset($setting_info['theme_default_ext'])) {
-			$data['theme_default_ext'] = $setting_info['theme_default_ext'];
-		} else {
-			$data['theme_default_ext'] = 'twig';
-		}
-		
 		$data['current_versions'] = VERSION;
 		
 		$data['theme_versions'] = array(VERSION, '2.3');

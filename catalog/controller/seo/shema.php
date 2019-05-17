@@ -21,7 +21,7 @@ class ControllerSeoShema extends Controller {
 		
 	public function index() {
 		if (self::$status) {
-			$data['crmbs'] = array();
+			$data['microdata'] = array();
 			
 			if (isset($this->request->get['route'])) {
 				$route = (string)$this->request->get['route'];
@@ -32,14 +32,14 @@ class ControllerSeoShema extends Controller {
 			if ($route == 'product/product' && isset($this->request->get['product_id'])) {
 				$pro_id = (int)$this->request->get['product_id'];
 				$pro_info = $this->getProduct($pro_id, $this->config->get('config_language_id'));
-				$data['crmbs']['pro'] = array(
+				$data['microdata'] = array(
 					'href'				=> $this->url->link('product/product', 'product_id=' . $pro_id),
 					'category'			=> $pro_info['category'],
 					'image'				=> HTTP_SERVER . 'image/' . $pro_info['image'],
 					'manufacturer'		=> $pro_info['manufacturer'],
 					'brand'				=> $pro_info['manufacturer'],
 					'model'				=> $pro_info['model'],
-					'sku'				=> $pro_info['sku'],
+					'sku'				=> ($pro_info['sku'] ? $pro_info['sku'] : $pro_info['model']),
 					'ratingval'			=> $pro_info['rating'],
 					'reviews'			=> $pro_info['reviews'],
 					'totalreviews'		=> $this->getBestReviewsByProId($pro_id),
@@ -51,7 +51,8 @@ class ControllerSeoShema extends Controller {
 					'pricecurrency'		=> $this->config->get('config_currency')
 					
 				);
-			}		
+			}
+			
 			return $this->load->view('seo/products', $data);
 		} else {
 			return;
@@ -60,7 +61,7 @@ class ControllerSeoShema extends Controller {
 	
 	public function getOrganization() {
 		if (self::$status) {
-			$data['microdata'] = array();
+			$data = array();
 			$microdata = self::$settings;
 			$monday = explode("-", $microdata['microdata_monday']);
 			$tuesday = explode("-", $microdata['microdata_tuesday']);
@@ -69,9 +70,10 @@ class ControllerSeoShema extends Controller {
 			$friday = explode("-", $microdata['microdata_friday']);
 			$saturday = explode("-", $microdata['microdata_saturday']);
 			$sunday = explode("-", $microdata['microdata_sunday']);
-			$data['microdata'] = array(
+			$data = array(
 				'name' => $this->config->get('config_name'),
 				'href' 		=> $this->url->link('common/home'),
+				'search' => $this->url->link('product/search'),
 				'image' => HTTPS_SERVER . 'image/' . $this->config->get('config_image'),
 				'telephone' => $this->config->get('config_telephone'),
 				'email' => $this->config->get('config_email'),
@@ -110,8 +112,9 @@ class ControllerSeoShema extends Controller {
 			if (isset($this->request->get['route'])) {
 				$route = (string)$this->request->get['route'];
 			} else {
-				$route = 'home';
+				$route = 'common/home';
 			}
+			if ($route == 'common/home') return;
 			$data['breads'][] = array(
 				'text' => $this->language->get('text_microhome'),
 				'href' => $this->url->link('common/home')

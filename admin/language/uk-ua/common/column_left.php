@@ -3,6 +3,7 @@
 $_['text_customer_approval']    = 'Затвердження клієнтів';
 $_['text_marketplace']          = 'Магазин модулів';
 $_['text_seo_url']              = 'SEO URL';
+$_['text_seo_mic']              = 'SEO Мікродані';
 $_['text_language_editor']      = 'Редактор мов';
 $_['text_statistics']           = 'Статистика';
 $_['text_online']               = 'Хто в онлайн';

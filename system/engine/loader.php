@@ -17,7 +17,7 @@ final class Loader {
 	 * Constructor
 	 *
 	 * @param	object	$registry
-	 */
+ 	*/
 	public function __construct($registry) {
 		$this->registry = $registry;
 	}
@@ -29,7 +29,7 @@ final class Loader {
 	 * @param	array	$data
 	 *
 	 * @return	mixed
-	 */	
+ 	*/	
 	public function controller($route, $data = array()) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
@@ -64,7 +64,7 @@ final class Loader {
 	 * 
 	 *
 	 * @param	string	$route
-	 */	
+ 	*/	
 	public function model($route) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
@@ -98,7 +98,7 @@ final class Loader {
 	 * @param	array	$data
 	 *
 	 * @return	string
-	 */
+ 	*/
 	public function view($route, $data = array()) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
@@ -116,12 +116,24 @@ final class Loader {
 		if ($result && !$result instanceof Exception) {
 			$output = $result;
 		} else {
+			if (!defined('DIR_CATALOG')) {
+				$current_dir = $this->registry->get('config')->get('theme_default_directory') . '/template/';
+			} else {
+				$current_dir = $this->registry->get('config')->get('config_theme');
+			}			
+			$pitcher = DIR_TEMPLATE . $current_dir . $route;
+			if (is_file($pitcher . '.tpl')) {
+				$this->registry->get('config')->set('template_engine', 'template');
+				$this->registry->get('config')->set('template_directory', $current_dir);
+			} elseif (is_file($pitcher . '.twig')) {
+				$this->registry->get('config')->set('template_engine', 'twig');
+			}
 			$template = new Template($this->registry->get('config')->get('template_engine'));
 				
 			foreach ($data as $key => $value) {
 				$template->set($key, $value);
-			}			
-			$output = $template->render($this->registry->get('config')->get('template_directory') . $route, $this->registry->get('config')->get('template_cache'), $this->registry);		
+			}
+			$output = $template->render($this->registry->get('config')->get('template_directory') . $route, $this->registry->get('config')->get('template_cache'));		
 		}
 		
 		// Trigger the post events
@@ -133,12 +145,12 @@ final class Loader {
 		
 		return $output;
 	}
-
+	
 	/**
 	 * 
 	 *
 	 * @param	string	$route
-	 */
+ 	*/
 	public function library($route) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
@@ -159,7 +171,7 @@ final class Loader {
 	 * 
 	 *
 	 * @param	string	$route
-	 */	
+ 	*/	
 	public function helper($route) {
 		$file = DIR_SYSTEM . 'helper/' . preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route) . '.php';
 
@@ -174,7 +186,7 @@ final class Loader {
 	 * 
 	 *
 	 * @param	string	$route
-	 */	
+ 	*/	
 	public function config($route) {
 		$this->registry->get('event')->trigger('config/' . $route . '/before', array(&$route));
 		
@@ -190,7 +202,7 @@ final class Loader {
 	 * @param	string	$key
 	 *
 	 * @return	array
-	 */
+ 	*/
 	public function language($route, $key = '') {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);

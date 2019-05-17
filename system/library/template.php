@@ -18,9 +18,9 @@ class Template {
 	 *
 	 * @param	string	$adaptor
 	 *
-	 */
+ 	*/
   	public function __construct($adaptor) {
-		$class = 'Template\\' . $adaptor;
+	    $class = 'Template\\' . $adaptor;
 
 		if (class_exists($class)) {
 			$this->adaptor = new $class();
@@ -34,11 +34,11 @@ class Template {
 	 *
 	 * @param	string	$key
 	 * @param	mixed	$value
-	 */	
+ 	*/	
 	public function set($key, $value) {
 		$this->adaptor->set($key, $value);
 	}
-	
+		
 	/**
 	 * 
 	 *
@@ -46,10 +46,8 @@ class Template {
 	 * @param	bool	$cache
 	 *
 	 * @return	string
-	 */	
-	public function render($template, $cache = false, $registr) {
-		$this->adaptor->set('registry', $registr);
-		$templater = $registr->get('config')->get('theme_' . $registr->get('config')->get('config_theme') . '_directory');
-		return $this->adaptor->render($template, $cache, $templater);
+ 	*/	
+	public function render($template, $cache = false) {			
+		return $this->adaptor->render($template, $cache);
 	}
 }

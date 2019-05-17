@@ -1,0 +1,47 @@
+<script type="application/ld+json"> 
+{
+"@context": "http://schema.org",
+"@type": "Product",
+"url": "{{ microdata.href }}",
+"category": "{{ microdata.category }}",
+"image": "{{ microdata.image }}",
+"brand": "{{ microdata.manufacturer }}",
+"manufacturer": "{{ microdata.manufacturer }}",
+"model": "{{ microdata.model }}",
+"sku": "{{ microdata.sku }}",
+{% if microdata.ratingval %}
+"aggregateRating": {
+"@type": "AggregateRating",
+"ratingValue": "{{ microdata.ratingval }}",
+"reviewCount": "{{ microdata.reviews }}"
+},
+{% endif %}
+"description": "{{ microdata.description }}",
+"name": "{{ microdata.name }}",
+"offers": {
+"@type": "Offer",
+"url": "{{ microdata.href }}",
+"priceValidUntil": "{{ microdata.pricevaliduntil }}",
+"availability": "http://schema.org/{{ microdata.stock }}",
+"price": "{{ microdata.price }}",
+"priceCurrency": "{{ microdata.pricecurrency }}",
+"itemCondition": "http://schema.org/NewCondition"
+}{% if microdata.totalreviews %},
+"review": [
+{% for key, review_item in microdata.totalreviews %}
+{
+"@type": "Review",
+"author": "{{ review_item.author }}",
+"datePublished": "{{ review_item.date_added }}",
+"description": "{{ review_item.text }}",
+"reviewRating": {
+"@type": "Rating",
+"bestRating": "5",
+"ratingValue": "{{ review_item.rating }}",
+"worstRating": "1"
+}
+}{% if key < (microdata.totalreviews|length - 1) %},{% endif %}
+{% endfor %}
+]{% endif %}
+}
+</script>

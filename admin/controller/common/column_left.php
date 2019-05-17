@@ -240,14 +240,6 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
-			if ($this->user->hasPermission('access', 'design/seo_url')) {
-				$design[] = array(
-					'name'	   => $this->language->get('text_seo_url'),
-					'href'     => $this->url->link('design/seo_url', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()		
-				);
-			}
-						
 			if ($design) {
 				$data['menus'][] = array(
 					'id'       => 'menu-design',
@@ -626,6 +618,22 @@ class ControllerCommonColumnLeft extends Controller {
 				$maintenance[] = array(
 					'name'	   => $this->language->get('text_log'),
 					'href'     => $this->url->link('tool/log', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'design/seo_url')) {
+				$maintenance[] = array(
+					'name'	   => $this->language->get('text_seo_url'),
+					'href'     => $this->url->link('design/seo_url', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'tool/seo')) {
+				$maintenance[] = array(
+					'name'	   => $this->language->get('text_seo_mic'),
+					'href'     => $this->url->link('tool/seo', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
 			}

@@ -42,10 +42,10 @@
     <p><?php echo $powered; ?></p>
   </div>
 </footer>
-<?php if (isset($organization)) { ?>
+<?php if ($organization) { ?>
 <?php echo $organization; ?>
 <?php } ?>
-<?php if (isset($brcrmbs)) { ?>
+<?php if ($brcrmbs) { ?>
 <?php echo $brcrmbs; ?>
 <?php } ?>
 </body></html>

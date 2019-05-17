@@ -155,7 +155,7 @@ class ControllerStartupSeoBro extends Controller {
 							self::$is_config = true;
 						}
 					}
-				} elseif (isset($chunks[0]) && (utf8_strlen($chunks[0]) == 2) && array_key_exists(self::$prefix[$chunks[0]], self::$languages)) {
+				} elseif (isset($chunks[0]) && (utf8_strlen($chunks[0]) == 2) && isset(self::$prefix[$chunks[0]]) && array_key_exists(self::$prefix[$chunks[0]], self::$languages)) {
 					$language_prefix = array_shift($chunks);					
 					self::$curr_code = self::$prefix[$language_prefix];
 					self::$is_config = false;

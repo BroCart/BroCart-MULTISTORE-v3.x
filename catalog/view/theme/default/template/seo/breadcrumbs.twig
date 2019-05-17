@@ -1,0 +1,16 @@
+<script type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "BreadcrumbList",
+"itemListElement": [{% for key, breadcrumb in breads %}
+{
+"@type": "ListItem",
+"position": {{ key }},
+"item": {
+"@id": "{{ breadcrumb.href }}",
+"name": "{{ breadcrumb.text }}"
+}
+}{% if key < (breads|length - 1) %},{% endif %}
+{% endfor %}]
+}	  
+</script>

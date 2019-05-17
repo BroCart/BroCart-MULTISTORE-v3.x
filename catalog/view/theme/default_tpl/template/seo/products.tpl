@@ -1,5 +1,5 @@
 <script type="application/ld+json"> 
-<?php foreach ($crmbs as $key => $microdata){ ?>
+<?php if ($microdata){ ?>
 {
 "@context": "http://schema.org",
 "@type": "Product",

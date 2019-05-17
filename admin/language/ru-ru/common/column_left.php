@@ -52,6 +52,7 @@ $_['text_return_status']        = 'Статусы возврата';
 $_['text_sale']                 = 'Продажи';
 $_['text_setting']              = 'Настройки';
 $_['text_seo_url']              = 'SEO URL';
+$_['text_seo_mic']              = 'SEO Микроданные';
 $_['text_statistics']           = 'Статистика';
 $_['text_stock_status']         = 'Состояние на складе';
 $_['text_system']               = 'Система';
