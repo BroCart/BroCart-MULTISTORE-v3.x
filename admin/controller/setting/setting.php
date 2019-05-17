@@ -857,11 +857,11 @@ class ControllerSettingSetting extends Controller {
 		
 		$qu = $this->db->query("DESCRIBE " . DB_PREFIX . "product_to_category `main_category`");
 		if (!$qu->num_rows) {
-			$this->db->query("ALTER TABLE " . DB_PREFIX ."product_to_category ADD `main_category` tinyint(1) COLLATE utf8_general_ci NOT NULL DEFAULT '0' AFTER `category_id`");
+			$this->db->query("ALTER TABLE " . DB_PREFIX . "product_to_category ADD `main_category` tinyint(1) COLLATE utf8_general_ci NOT NULL DEFAULT '0' AFTER `category_id`");
 		}
 		$qu = $this->db->query("DESCRIBE " . DB_PREFIX . "language `prefix`");
 		if (!$qu->num_rows) {
-			$this->db->query("ALTER TABLE " . DB_PREFIX ."language ADD `prefix` varchar(3) COLLATE utf8_general_ci NOT NULL AFTER `directory`");
+			$this->db->query("ALTER TABLE " . DB_PREFIX . "language ADD `prefix` varchar(3) COLLATE utf8_general_ci NOT NULL AFTER `directory`");
 		}
 		if (isset($this->request->post['config_seo_url_type'])) {
 			$data['config_seo_url_type'] = $this->request->post['config_seo_url_type'];
