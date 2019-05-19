@@ -1,7 +1,7 @@
 <?php
 /**
  * @package		OpenCart
- * @author		Daniel Kerr
+ * @author		Daniel Kerr (recoded ALarik)
  * @copyright	Copyright (c) 2005 - 2017, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
  * @link		https://www.opencart.com
@@ -119,7 +119,7 @@ final class Loader {
 			if (!defined('DIR_CATALOG')) {
 				$current_dir = $this->registry->get('config')->get('theme_default_directory') . '/template/';
 			} else {
-				$current_dir = $this->registry->get('config')->get('config_theme');
+				$current_dir = '/';
 			}			
 			$pitcher = DIR_TEMPLATE . $current_dir . $route;
 			if (is_file($pitcher . '.tpl')) {
