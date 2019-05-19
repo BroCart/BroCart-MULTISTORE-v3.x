@@ -23,7 +23,7 @@ class ControllerCheckoutZakaz extends Controller {
         );
 
         $data['breadcrumbs'][] = array(
-            'href' => $this->url->link('checkout/buy'),
+            'href' => $this->url->link('checkout/zakaz'),
             'text' => $this->language->get('heading_title')
         );
 
@@ -53,7 +53,7 @@ class ControllerCheckoutZakaz extends Controller {
                 $data['success'] = '';
             }
 
-            $data['action'] = $this->url->link('checkout/buy/edit');
+            $data['action'] = $this->url->link('checkout/zakaz/edit');
 
             if ($this->config->get('config_cart_weight')) {
                 $data['weight'] = $this->weight->format($this->cart->getWeight(), $this->config->get('config_weight_class_id'), $this->language->get('decimal_point'), $this->language->get('thousand_point'));
@@ -428,13 +428,13 @@ class ControllerCheckoutZakaz extends Controller {
             }
 
             if ($product['minimum'] > $product_total) {
-                $json['redirect'] = $this->url->link('checkout/buy');
+                $json['redirect'] = $this->url->link('checkout/zakaz');
                 break;
             }
         }
 		
         if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
-            $json['redirect'] = $this->url->link('checkout/buy');
+            $json['redirect'] = $this->url->link('checkout/zakaz');
         }
 
         if (!$json) {
