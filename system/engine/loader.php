@@ -108,7 +108,7 @@ final class Loader {
 		
 		// Template contents. Not the output!
 		$template = '';
-		
+		$current_dir = '';
 		// Trigger the pre events
 		$result = $this->registry->get('event')->trigger('view/' . $trigger . '/before', array(&$route, &$data, &$template));
 		
@@ -118,8 +118,6 @@ final class Loader {
 		} else {
 			if (!defined('DIR_CATALOG')) {
 				$current_dir = $this->registry->get('config')->get('theme_default_directory') . '/template/';
-			} else {
-				$current_dir = '/';
 			}			
 			$pitcher = DIR_TEMPLATE . $current_dir . $route;
 			if (is_file($pitcher . '.tpl')) {
