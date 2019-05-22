@@ -43,7 +43,7 @@ class ControllerSeoShema extends Controller {
 					'ratingval'			=> $pro_info['rating'],
 					'reviews'			=> $pro_info['reviews'],
 					'totalreviews'		=> $this->getBestReviewsByProId($pro_id),
-					'description'		=> $pro_info['description'],
+					'description'		=> addslashes(html_entity_decode($pro_info['description'], ENT_QUOTES, 'UTF-8')),
 					'name'				=> $pro_info['name'],
 					'stock'				=> $pro_info['quantity'] ? 'InStock' : 'OutOfStock',
 					'price'				=> round($pro_info['price'], 2),
