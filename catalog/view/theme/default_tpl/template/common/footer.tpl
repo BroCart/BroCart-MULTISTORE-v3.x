@@ -42,6 +42,9 @@
     <p><?php echo $powered; ?></p>
   </div>
 </footer>
+<?php foreach ($scripts as $script) { ?>
+<script src="<?php echo $script; ?>" defer></script>
+<?php } ?>
 <?php if ($organization) { ?>
 <?php echo $organization; ?>
 <?php } ?>
