@@ -95,8 +95,8 @@ class ControllerSeoShema extends Controller {
 				'friday_c' => trim($friday[1]),			
 				'saturday_o' => trim($saturday[0]),
 				'saturday_c' => trim($saturday[1]),			
-				'sunday_o' => trim($monday[0]),
-				'sunday_c' => trim($monday[1])			
+				'sunday_o' => trim($sunday[0]),
+				'sunday_c' => trim($sunday[1])			
 			);
 			
 			return $this->load->view('seo/organization', $data);
