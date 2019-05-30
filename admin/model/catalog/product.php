@@ -91,7 +91,7 @@ class ModelCatalogProduct extends Model {
 		if (isset($data['main_category_id']) && $data['main_category_id'] > 0) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$data['main_category_id'] . "', main_category = 1");
 		} elseif (isset($data['product_category'][0])) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$data['main_category_id'] . "', main_category = 1");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$data['product_category'][0] . "', main_category = 1");
 		}
 
 		if (isset($data['product_filter'])) {
