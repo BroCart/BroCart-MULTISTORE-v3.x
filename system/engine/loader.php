@@ -123,7 +123,7 @@ final class Loader {
 			if (is_file($pitcher . '.tpl')) {
 				$this->registry->get('config')->set('template_engine', 'template');
 				$this->registry->get('config')->set('template_directory', $current_dir);
-			} elseif (is_file($pitcher . '.twig')) {
+			} else {
 				$this->registry->get('config')->set('template_engine', 'twig');
 			}
 			$template = new Template($this->registry->get('config')->get('template_engine'));
