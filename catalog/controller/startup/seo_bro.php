@@ -170,7 +170,7 @@ class ControllerStartupSeoBro extends Controller {
 		if ($this->config->get('config_seo_url')) {
 			$seo_rewrite_config = array(
 				'config_language_id'			=> $this->config->get('config_language_id'),
-				'config_language'				=> self::$config_language,
+				'config_language'			=> self::$config_language,
 				'current_language_code'			=> (self::$curr_code ? self::$curr_code : self::$config_language),
 				'config_seo_url_prefix'			=> self::$config_prifix_lang,
 				'config_seo_url_prefix_def'		=> self::$config_prifix_hide,
@@ -178,7 +178,7 @@ class ControllerStartupSeoBro extends Controller {
 				'config_seo_url_postfix'		=> self::$config_url_postfix,
 				'config_seo_url_syfix'			=> self::$config_url_syfix,
 				'config_seo_url_one'			=> self::$the_one,
-				'config_seo_url'				=> $this->config->get('config_seo_url'),
+				'config_seo_url'			=> $this->config->get('config_seo_url'),
 				'config_seo_url_type'			=> $this->config->get('config_seo_url_type')
 			);			
 			$this->url->addRewrite($seo_rewrite_config);	
