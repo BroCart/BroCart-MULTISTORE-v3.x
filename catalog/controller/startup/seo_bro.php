@@ -1,8 +1,8 @@
 <?php
 /**
- * @package		BroCart v.3.3.3
+ * @package		BroCart v.3.1.5
  * @author		Artur Larin
- * @copyright	Copyright (c) 22019, BroCart & FIA Ltd. (https://www.brocart.net/)
+ * @copyright		Copyright (c) 2019, BroCart & FIA Ltd. (https://www.brocart.net/)
  * @license		https://opensource.org/licenses/GPL-3.0
  * @link		https://forum.brocart.net
 */
