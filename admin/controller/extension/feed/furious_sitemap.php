@@ -166,7 +166,7 @@ class ControllerExtensionFeedFuriousSitemap extends Controller {
 	
 	public function letsGoBro($post_data = array()) {
 		$timer_start = microtime(true);
-		if (!$post_data) {
+		if (!$post_data || !is_array($post_data)) {
 			$post_data = $this->post_data;
 		}
 			$blitz = $this->prepareSitemaps($post_data);
