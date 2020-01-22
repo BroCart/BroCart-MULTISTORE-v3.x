@@ -45,7 +45,8 @@ class ControllerCommonHeader extends Controller {
 		}
 		
 		//OG data
-		$data['og_url'] = $server . utf8_substr($this->request->server['REQUEST_URI'], 1, (utf8_strlen($this->request->server['REQUEST_URI']) - 1));		
+		$data['og_url'] = $server . utf8_substr($this->request->server['REQUEST_URI'], 1, (utf8_strlen($this->request->server['REQUEST_URI']) - 1));
+		
 		$data['og_image'] = $this->document->getOgImage();
 		
 		$this->load->language('common/header');		
@@ -81,7 +82,12 @@ class ControllerCommonHeader extends Controller {
 
 		$data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', true), $this->customer->getFirstName(), $this->url->link('account/logout', '', true));
 		
-		$data['home'] = $this->url->link('common/home');
+		if ($this->url->link('common/home') == $data['og_url']) {
+			$data['home'] = 'javascript:void(0);';
+		} else {
+			$data['home'] = $this->url->link('common/home');
+		}
+		
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
 		$data['logged'] = $this->customer->isLogged();
 		$data['account'] = $this->url->link('account/account', '', true);

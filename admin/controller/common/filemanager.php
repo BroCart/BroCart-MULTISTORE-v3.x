@@ -436,14 +436,15 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 	
-	private function translit($name) {
+	private function translit($name) {		
+		$my_ext = utf8_strtolower(utf8_substr(strrchr($name, '.'), 1));		
+		$name = utf8_substr($name, 0, -utf8_strlen($my_ext));
 		$name = (string)$name;
 		$name = strip_tags($name);
 		$name = str_replace(array("\n", "\r"), " ", $name);
 		$name = preg_replace("/\s+/", ' ', $name);
 		$name = trim($name);
-		$name = utf8_strtolower($name);
-		
+		$name = utf8_strtolower($name);		
 		$lang_tr = array(
 			'а'=>'a', 'б'=>'b', 'в'=>'v',
 			'г'=>'g', 'д'=>'d', 'е'=>'e',
@@ -457,12 +458,10 @@ class ControllerCommonFileManager extends Controller {
 			'ы'=>'y', 'э'=>'e', 'ю'=>'yu',
 			'я'=>'ya', 'ъ'=>'', 'ь'=>'',
 			'і'=>'i', 'ї'=>'ji', 'є'=>'e'
-		);
-		
+		);		
 		$name = strtr($name, $lang_tr);
 		$name = preg_replace("/[^0-9a-z-_ ]/i", "", $name);
-		$name = str_replace(" ", "-", $name);
-		
-		return $name;
+		$name = str_replace(" ", "-", $name);	
+		return $name . '.' .$my_ext;
 	}
 }
