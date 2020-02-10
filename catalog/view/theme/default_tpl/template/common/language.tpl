@@ -16,13 +16,7 @@
     </ul>
   </div>
 	<input type="hidden" name="code" value="" />
-	<?php if ($broker) { ?>
-		<?php foreach ($redirect as $key => $value) { ?>
-		<input type="hidden" name="redirect[<?php echo $key; ?>]" value="<?php echo $value; ?>" />
-		<?php } ?>
-	<?php } else { ?>
 	<input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
-	<?php } ?>
 </form>
 </div>
 <?php } ?>

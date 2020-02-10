@@ -124,18 +124,6 @@ class ControllerProductSearch extends Controller {
 			unset($this->session->data['maxpage']);
 		}
 		
-		$langs = $this->cache->get('catalog.seolang');	
-		
-		if ($langs) {			
-			$url = isset($url) ? $url : '';			
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('product/search', $url, $this->request->server['HTTPS'], $longer['code']), $longer['code']);				
-			}
-		}
-
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('product/search', $url)
@@ -431,13 +419,6 @@ class ControllerProductSearch extends Controller {
 
 			$data['results'] = sprintf($this->language->get('text_pagination'), ($product_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($product_total - $limit)) ? $product_total : ((($page - 1) * $limit) + $limit), $product_total, ceil($product_total / $limit));
 			
-			if ($pagination->getNext()) {
-				$this->document->addLink($pagination->getNext(), 'next');
-			}
-			if ($pagination->getPrev()) {
-				$this->document->addLink($pagination->getPrev(), 'prev');
-			}
-
 			if (isset($this->request->get['search']) && $this->config->get('config_customer_search')) {
 				$this->load->model('account/search');
 

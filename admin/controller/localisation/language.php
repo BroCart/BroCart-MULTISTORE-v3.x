@@ -328,14 +328,6 @@ class ControllerLocalisationLanguage extends Controller {
 			$data['code'] = '';
 		}
 		
-		if (isset($this->request->post['prefix'])) {
-			$data['prefix'] = $this->request->post['prefix'];
-		} elseif (!empty($language_info)) {
-			$data['prefix'] = $language_info['prefix'];
-		} else {
-			$data['prefix'] = '';
-		}
-		
 		$data['languages'] = array();
 		
 		$folders = glob(DIR_LANGUAGE . '*', GLOB_ONLYDIR);

@@ -20,7 +20,7 @@ class File {
 
 	public function get($key) {
 		$files = glob(DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.*');		
-		if (isset($files[0]) && is_file($files[0]) && (filesize($files[0]) > 0)) {
+		if (isset($files[0]) && is_file($files[0])) {
 			$handle = fopen($files[0], 'r');
 			flock($handle, LOCK_SH);
 			$data = fread($handle, filesize($files[0]));
@@ -34,12 +34,15 @@ class File {
 	public function set($key, $value) {
 		$this->delete($key);
 		$file = DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.' . (time() + $this->expire);
-		$handle = fopen($file, 'w');
-		flock($handle, LOCK_EX);
-		fwrite($handle, json_encode($value));
-		fflush($handle);
-		flock($handle, LOCK_UN);
-		fclose($handle);
+		if (touch($file)) {
+			$handle = fopen($file, 'w');
+			flock($handle, LOCK_EX);
+			fwrite($handle, json_encode($value));
+			fflush($handle);
+			flock($handle, LOCK_UN);
+			fclose($handle);
+		}
+		
 	}
 
 	public function delete($key) {

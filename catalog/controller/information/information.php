@@ -18,14 +18,6 @@ class ControllerInformationInformation extends Controller {
 			$information_id = 0;
 		}
 		
-		$langs = $this->cache->get('catalog.seolang');	
-		
-		if ($langs) {
-			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('information/information', 'information_id=' . $information_id, $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
-			}
-		}
-
 		$information_info = $this->model_catalog_information->getInformation($information_id);
 
 		if ($information_info) {

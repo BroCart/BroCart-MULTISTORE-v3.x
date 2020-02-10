@@ -57,13 +57,6 @@ class ControllerCommonFooter extends Controller {
 		}
 
 		$data['scripts'] = $this->document->getScripts('footer');
-		if (trait_exists('microData')) {
-		$data['organization'] = $this->load->controller('seo/shema/getOrganization');
-		$data['brcrmbs'] = $this->load->controller('seo/shema/getBreadcrumbs');
-		} else {
-			$data['organization'] = false;
-			$data['brcrmbs'] = false;
-		}
 		
 		return $this->load->view('common/footer', $data);
 	}	

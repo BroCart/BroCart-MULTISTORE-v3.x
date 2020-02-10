@@ -67,13 +67,16 @@
               <select name="filter_status" id="input-status" class="form-control">
 				{% if filter_status == '1' %}
 					<option value="1" selected="selected">{{ text_enabled }}</option>
+					<option value="0">{{ text_disabled }}</option>
+					<option value="">{{ text_select_all }}</option>
+				{% elseif filter_status == '0' %}
+					<option value="1">{{ text_enabled }}</option>
+					<option value="0" selected="selected">{{ text_disabled }}</option>
+					<option value="">{{ text_select_all }}</option>					
 				{% else %}
 					<option value="1">{{ text_enabled }}</option>
-				{% endif %}
-				{% if filter_status == '0' %}
-					<option value="0" selected="selected">{{ text_disabled }}</option>
-				{% else %}
 					<option value="0">{{ text_disabled }}</option>
+					<option value="" selected="selected">{{ text_select_all }}</option>
 				{% endif %}
               </select>
             </div>
@@ -126,7 +129,7 @@
                     <td class="text-right">{% if product.quantity <= 0 %} <span class="label label-warning">{{ product.quantity }}</span> {% elseif product.quantity <= 5 %} <span class="label label-danger">{{ product.quantity }}</span> {% else %} <span class="label label-success">{{ product.quantity }}</span> {% endif %}</td>
                     <td class="text-left">{{ product.status }}</td>
                     <td class="text-right">
-				<div class="btn-group"> <a href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+				<div class="btn-group"> <a href="{{ product.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary" style="padding: 8px 10px!important;"><i class="fa fa-pencil"></i></a>
 			<button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"><span class="caret"></span></button>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li><a href="{{ product.href_view }}" target="_blank"><i class="fa fa-eye"></i> {{ button_view }}</a></li>

@@ -19,7 +19,6 @@ class ModelLocalisationLanguage extends Model {
 					'language_id' => $result['language_id'],
 					'name'        => $result['name'],
 					'code'        => $result['code'],
-					'prefix'      => $result['prefix'],
 					'locale'      => $result['locale'],
 					'image'       => $result['image'],
 					'directory'   => $result['directory'],

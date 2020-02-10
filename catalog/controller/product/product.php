@@ -225,12 +225,7 @@ class ControllerProductProduct extends Controller {
 			$this->document->setOpengraph('og:description', $product_info['meta_description']);
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
-			$langs = $this->cache->get('catalog.seolang');			
-			if ($langs) {				
-				foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], $this->request->server['HTTPS'], $longer['code']), $longer['code']);
-				}
-			}
+			
 			$this->document->addCanonical($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']));
 			$this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
 			$this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');

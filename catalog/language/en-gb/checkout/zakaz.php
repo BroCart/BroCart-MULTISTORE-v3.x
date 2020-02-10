@@ -82,6 +82,7 @@ $_['entry_shipping']                 = 'My delivery and billing addresses are th
 
 // Error
 $_['error_warning']                  = 'There was a problem while trying to process your order! If the problem persists please try selecting a different payment method or you can contact the store owner by <a href="%s">clicking here</a>.';
+$_['error_stock']              = 'Products marked with *** are not available in the desired quantity or not in stock!';
 $_['error_login']                    = 'Warning: No match for E-Mail Address and/or Password.';
 $_['error_attempts']                 = 'Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.';
 $_['error_approved']                 = 'Warning: Your account requires approval before you can login.';

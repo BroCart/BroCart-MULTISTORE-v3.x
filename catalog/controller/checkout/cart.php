@@ -243,7 +243,7 @@ class ControllerCheckoutCart extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
-
+$this->log->write('DATA|:'. print_r($data,1));
 			$this->response->setOutput($this->load->view('checkout/cart', $data));
 		} else {
 			$data['text_error'] = $this->language->get('text_empty');

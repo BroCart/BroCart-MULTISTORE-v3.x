@@ -93,18 +93,6 @@ class ControllerProductCategory extends Controller {
 			unset($this->session->data['maxpage']);
 		}
 		
-		$langs = $this->cache->get('catalog.seolang');	
-		
-		if ($langs && count($langs) > 1) {	
-			$url = isset($url) ? $url : '';			
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-			foreach ($langs as $longer) {		
-				$this->document->addHreflang($this->url->link('product/category', 'path=' . $category_id . $url, $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
-			}
-		}
-
 		$category_info = $this->model_catalog_category->getCategory($category_id);
 
 		if ($category_info) {			
@@ -387,13 +375,6 @@ class ControllerProductCategory extends Controller {
 				$this->document->addCanonical($this->url->link('product/category', 'path=' . $category_info['category_id']));
 			}
 			
-			if ($pagination->getNext()) {
-				$this->document->addLink($pagination->getNext(), 'next');
-			}
-			if ($pagination->getPrev()) {
-				$this->document->addLink($pagination->getPrev(), 'prev');
-			}
-
 			$data['sort'] = $sort;
 			$data['order'] = $order;
 			$data['limit'] = $limit;

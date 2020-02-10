@@ -17,11 +17,6 @@
 {% if keywords %}
 <meta name="keywords" content="{{ keywords }}" />
 {% endif %}
-{% if hreflangs %}
-{% for hreflang in hreflangs %}
-<link rel="alternate" hreflang="{{ hreflang.hreflang }}" href="{{ hreflang.href }}" />
-{% endfor %}
-{% endif %}
 {% if robots %}
 <meta name="robots" content="{{ robots }}">
 {% endif %}

@@ -16,13 +16,6 @@ class ControllerCommonHome extends Controller {
 			$this->document->addCanonical($this->url->link('common/home', '', true));
 		}
 		
-		$langs = $this->cache->get('catalog.seolang');		
-		if ($langs && count($langs) > 1) {
-			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('common/home', '', $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
-			}
-		}
-
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');

@@ -70,8 +70,7 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'DIR_LOGS\', DIR_STORAGE . \'logs/\');' . "\n";
 			$output .= 'define(\'DIR_MODIFICATION\', DIR_STORAGE . \'modification/\');' . "\n";
 			$output .= 'define(\'DIR_SESSION\', DIR_STORAGE . \'session/\');' . "\n";
-			$output .= 'define(\'DIR_UPLOAD\', DIR_STORAGE . \'upload/\');' . "\n";
-			$output .= 'define(\'DIR_SITEMAP\', \'' . addslashes(DIR_OPENCART) . 'sitemap/\');' . "\n\n";	
+			$output .= 'define(\'DIR_UPLOAD\', DIR_STORAGE . \'upload/\');' . "\n\n";	
 			
 			$output .= '// DB' . "\n";
 			$output .= 'define(\'DB_DRIVER\', \'' . addslashes($this->request->post['db_driver']) . '\');' . "\n";

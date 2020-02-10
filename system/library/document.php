@@ -16,7 +16,6 @@ class Document {
 	private $description;
 	private $keywords;
 	private $opengraph = array();
-	private $hreflang = array();
 	private $links = array();
 	private $canonical = array();	
 	private $styles = array();
@@ -157,18 +156,7 @@ class Document {
 	public function getRobots() {
 		return $this->robots;
 	}
-	
-	public function addHreflang($href = '', $hreflang = 'x-default') {
-		$this->hreflang[] = array(
-			'href' => $href,
-			'hreflang'  => $hreflang
-		);
-	}
-	
-	public function getHreflang() {
-		return $this->hreflang;
-	}
-	
+		
 	public function setOpengraph($meta, $content = '') {
 		$this->opengraph[] = array(
 			'meta'   => $meta,

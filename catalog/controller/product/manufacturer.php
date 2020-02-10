@@ -109,18 +109,6 @@ class ControllerProductManufacturer extends Controller {
 			'href' => $this->url->link('product/manufacturer')
 		);
 		
-		$langs = $this->cache->get('catalog.seolang');
-		
-		if ($langs) {	
-			$url = '';
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer_id . $url, $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
-			}
-		}
-		
 		if (isset($this->session->data['maxpage'])) {
 			unset($this->session->data['maxpage']);
 		}
@@ -377,13 +365,6 @@ class ControllerProductManufacturer extends Controller {
 				$this->document->addCanonical($this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id']));
 			}
 			
-			if ($pagination->getNext()) {
-				$this->document->addLink($pagination->getNext(), 'next');
-			}
-			if ($pagination->getPrev()) {
-				$this->document->addLink($pagination->getPrev(), 'prev');
-			}
-
 			$data['sort'] = $sort;
 			$data['order'] = $order;
 			$data['limit'] = $limit;

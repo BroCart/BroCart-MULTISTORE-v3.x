@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<modification>
+	<name>SlaSoft Seopro On</name>
+	<code>SlaSoft.Seopro.On</code>
+	<version>1.0 #site_name#</version>
+	<author>SlaSoft</author>
+		
+	<file path="system/library/pagination.php">
+		<operation>
+			<search><![CDATA[if ($num_pages > 1)]]></search>
+			<add position="before"><![CDATA[
+		$output = str_replace('page-{page}', '',$output);
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/common/header.php">
+		<operation>
+			<search><![CDATA[return $this->load->view(']]></search>
+			<add position="before"><![CDATA[
+		$data['hreflang'] = $this->document->getLinkHrefLang();
+			]]></add>
+		</operation>
+	</file>
+	
+	<file path="catalog/view/theme/*/template/common/header.twig">
+		<operation>
+			<search><![CDATA[<base]]></search>
+			<add position="after"><![CDATA[
+		{{ hreflang }}
+			]]></add>
+		</operation>
+	</file>
+	
+	<file path="system/library/document.php">
+		<operation>
+			<search><![CDATA[	public function setTitle($title) {]]></search>
+			<add position="before"><![CDATA[
+		private $links_hreflange = array();
+	public function getLinkHrefLang() {
+		$output = '';
+		if ($this->links_hreflange) {
+			foreach($this->links_hreflange as $link) {
+				$output .= '<link rel="' . $link['rel'] . '" href="' . $link['href'] . '" hreflang="' . $link['hreflang'] .'" />' . "\n";
+			}
+		}
+		return $output;
+	}
+
+	public function addLinkHrefLang($href, $rel="alternate", $hreflang) {
+		$this->links_hreflange[$href] = array(
+			'href'     => $href,
+			'rel'      => $rel,
+			'hreflang' => $hreflang
+		);
+	}
+		
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/startup/seo_url.php">
+		<operation>
+			<search><![CDATA[public function index() {]]></search>
+			<add position="before"><![CDATA[
+	private $sla_seo_pro;
+	
+	public function __construct($registry) {
+		parent::__construct($registry);	
+		$this->sla_seo_pro = new SlaSeoPro($registry);
+	}
+			]]></add>
+		</operation>
+
+		<operation>
+			<search><![CDATA[$this->url->addRewrite($this);]]></search>
+			<add position="after"><![CDATA[
+			
+			$page_url = new ControllerStartupSeoUrlPage($this->registry);
+			$this->url->addRewrite($page_url);
+
+			$lang_url = new ControllerStartupSeoUrlLanguage($this->registry);
+			$lang_url->setLangeInfo($this->sla_seo_pro->getLangeInfo());
+			$this->url->addRewrite($lang_url);
+			
+			]]></add>
+		</operation>
+<!--
+		<operation>
+			<search><![CDATA[if ($data) {]]></search>
+			<add position="after"><![CDATA[
+				//$url = $this->sla_seo_pro->getPage($url,$data);
+	]]></add>
+		</operation>
+-->
+		<operation>
+			<search><![CDATA[return $link;]]></search>
+			<add position="before"><![CDATA[
+			return $this->sla_seo_pro->getLink($link);
+	]]></add>
+		</operation>
+
+		<operation>
+			<search><![CDATA[$parts = explode('/', $this->request->get['_route_']);]]></search>
+			<add position="after"><![CDATA[
+			$parts = $this->sla_seo_pro->prepareRoute();
+	]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$this->request->get['route'] = 'information/information';]]></search>
+			<add position="after" offset="3"><![CDATA[
+			$this->sla_seo_pro->validate();
+	]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[parse_str($url_info['query'], $data);]]></search>
+			<add position="after"><![CDATA[
+			$url = $this->sla_seo_pro->rewrite($data);
+	]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[return $url_info['scheme']]]></search>
+			<add position="before"><![CDATA[
+			if ($url === true) $url = '';
+	]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[class ControllerStartupSeoUrl extends Controller]]></search>
+			<add position="before"><![CDATA[
+class ControllerStartupSeoUrlPage extends Controller {
+	public function rewrite($link) {
+		if ($this->config->get('module_sla_seo_pro_seo_page')) {
+			$url_info = parse_url(str_replace('&amp;', '&', $link));
+
+			$data = array();
+			if (isset($url_info['query'])) {
+				parse_str($url_info['query'], $data);
+				if (isset($data['page'])) {
+
+				$url_info['path'] = rtrim($url_info['path'],'/') . '/page-' . $data['page'];
+				unset($data['page']);
+
+				$query = '';
+				
+				foreach ($data as $key => $value) {
+					$query .= '&' . rawurlencode((string)$key) . '=' . rawurlencode((is_array($value) ? http_build_query($value) : (string)$value));
+				}
+				if ($query) {
+					$query = '?' . str_replace('&', '&amp;', trim($query, '&'));
+				}
+				$link = $url_info['scheme'] . '://' . $url_info['host'] . (isset($url_info['port']) ? ':' . $url_info['port'] : '') . str_replace('/index.php', '', $url_info['path']) . $query;
+				
+				}
+			}
+		}
+		return  $link;
+	}
+}
+
+class ControllerStartupSeoUrlLanguage extends Controller {
+	private $language_info;
+	
+	public function setLangeInfo($language_info) {
+		$this->language_info = $language_info;
+//		var_dump($this->language_info);
+	}
+
+	public function rewrite($link) {
+
+
+		if ($this->language_info['use_lang_prefix']) {
+			$url_info = parse_url(str_replace('&amp;', '&', $link));
+
+			$lang_prefix = '';
+			
+			$lang_prefix_detect = $this->language_info['lang_prefix'][$this->config->get('config_language_id')];
+
+			if ($lang_prefix_detect) {
+				$lang_prefix = $lang_prefix_detect . '/';
+			}
+			
+			$data = array();
+			
+			$url_info['path'] = '/' . $lang_prefix .  ltrim($url_info['path'],'/');
+				
+			$query = '';
+			if (isset($url_info['query'])) {
+				$query = '?' . $url_info['query'];
+			}
+			$link = str_replace('&','&amp;',$url_info['scheme'] . '://' . $url_info['host'] . (isset($url_info['port']) ? ':' . $url_info['port'] : '') . $url_info['path'] . $query);
+				
+		}
+		return  $link;
+	}
+}
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/common/language.php">
+		<operation>
+			<search><![CDATA[$data['redirect'] = $this->url->link($route, $url, $this->request->server['HTTPS']);]]></search>
+			<add position="replace"><![CDATA[$redirect_data = ['route' => $route, 'url' => $url, 'protocol' => $this->request->server['HTTPS']];
+				$data['redirect'] = base64_encode(json_encode($redirect_data));
+]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$results = $this->model_localisation_language->getLanguages();]]></search>
+			<add position="after"><![CDATA[
+			$old_language_id = $this->config->get('config_language_id');
+			$old_language_ses = $this->session->data['language'];
+
+
+			$url_data = $this->request->get;
+
+			if (!isset($url_data['route'])) {
+				$route = 'common/home';
+			} else {
+				$route = $url_data['route'];
+			}
+			unset($url_data['_route_']);
+			unset($url_data['route']);
+			$url = '';
+
+			if ($url_data) {
+				$url = '&' . urldecode(http_build_query($url_data, '', '&'));
+			} else {
+				$url = '';
+			}
+			
+			foreach ($results as $result) {
+				if ($result['status']) {
+					$this->config->set('config_language_id', $result['language_id']);
+					$this->session->data['language'] = $result['code'];
+					$this->document->addLinkHrefLang($this->url->link($route,$url), 'alternate', $result['code']);
+				}
+			}
+
+			$this->config->set('config_language_id',$old_language_id);
+			$this->session->data['language'] = $old_language_ses;
+
+
+			]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[public function language() {]]></search>
+			<add position="replace"><![CDATA[
+	private function slasoft_seo_pro_language() {
+		if (isset($this->request->post['code'])) {
+			$this->session->data['language'] = $this->request->post['code'];
+			$languages = $this->model_localisation_language->getLanguages();
+			if (isset($languages[$this->request->post['code']])) {
+				$this->config->set('config_language_id', $languages[$this->request->post['code']]['language_id']);	
+			}
+		}
+
+		if (isset($this->request->post['redirect'])) {
+			$redirect = json_decode(base64_decode($this->request->post['redirect']), true);
+			if (isset($redirect['route']) && isset($redirect['url']) && isset($redirect['protocol'])) {
+				$redirect_url = $this->url->link($redirect['route'], $redirect['url'], $redirect['protocol']);
+			} else {
+				$redirect_url = $this->url->link('common/home');
+			}
+			$this->response->redirect($redirect_url);
+		} else {
+			$this->response->redirect($this->url->link('common/home'));
+		}
+	}
+			
+	public function language() {
+		$this->slasoft_seo_pro_language();
+]]></add>
+		</operation>
+	</file>
+</modification>

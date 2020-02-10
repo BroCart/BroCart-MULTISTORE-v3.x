@@ -17,11 +17,6 @@
 <?php if ($keywords) { ?>
 <meta name="keywords" content= "<?php echo $keywords; ?>" />
 <?php } ?>
-<?php if ($hreflangs) { ?>
-<?php foreach ($hreflangs as $hreflang) { ?>
-<link rel="alternate" hreflang="<?php echo $hreflang['hreflang']; ?>" href="<?php echo $hreflang['href']; ?>" />
-<?php } ?>
-<?php } ?>
 <?php if ($robots) { ?>
 <meta name="robots" content="<?php echo $robots; ?>">
 <?php } ?>

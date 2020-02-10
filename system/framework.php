@@ -84,27 +84,14 @@ if ($config->get('db_autostart')) {
 $session = new Session($config->get('session_engine'), $registry);
 $registry->set('session', $session);
 
-if ($config->get('session_autostart')) {
-	/*
-	We are adding the session cookie outside of the session class as I believe
-	PHP messed up in a big way handling sessions. Why in the hell is it so hard to
-	have more than one concurrent session using cookies!
-
-	Is it not better to have multiple cookies when accessing parts of the system
-	that requires different cookie sessions for security reasons.
-
-	Also cookies can be accessed via the URL parameters. So why force only one cookie
-	for all sessions!
-	*/
-
+if ($config->get('session_autostart')) {	
+	
 	if (isset($_COOKIE[$config->get('session_name')])) {
 		$session_id = $_COOKIE[$config->get('session_name')];
 	} else {
 		$session_id = '';
 	}
-
 	$session->start($session_id);
-
 	setcookie($config->get('session_name'), $session->getId(), ini_get('session.cookie_lifetime'), ini_get('session.cookie_path'), ini_get('session.cookie_domain'));
 }
 
@@ -151,27 +138,12 @@ if ($config->has('model_autoload')) {
 	}
 }
 
-function getSeoController($registry) {	
-	$seo_bro = $registry->get('db')->query("SELECT value FROM " . DB_PREFIX . "setting WHERE store_id = '0' AND `key` = 'config_seo_url_type'");
-	if ($seo_bro->num_rows) {
-		return $seo_bro->row['value'];
-	} else {
-		return false;
-	}
-}
-
 // Route
 $route = new Router($registry);
 
 // Pre Actions
 if ($config->has('action_pre_action')) {
-	foreach ($config->get('action_pre_action') as $value) {
-		if (preg_match('/(seo_)/i', $value)) {
-			$seo_bro = getSeoController($registry);
-			if ($seo_bro) {
-				$value = 'startup/' . $seo_bro;
-			}
-		}		
+	foreach ($config->get('action_pre_action') as $value) {				
 		$route->addPreAction(new Action($value));
 	}
 }

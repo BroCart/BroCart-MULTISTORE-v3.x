@@ -438,6 +438,10 @@ class ControllerCatalogProduct extends Controller {
 		}
 
 		$url = '';
+		
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
 
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
@@ -478,6 +482,10 @@ class ControllerCatalogProduct extends Controller {
 		$data['sort_order'] = $this->url->link('catalog/product', 'user_token=' . $this->session->data['user_token'] . '&sort=p.sort_order' . $url, true);
 
 		$url = '';
+		
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
 
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));

@@ -630,13 +630,13 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
-			if ($this->user->hasPermission('access', 'tool/seo')) {
+			/* if ($this->user->hasPermission('access', 'tool/seo')) {
 				$maintenance[] = array(
 					'name'	   => $this->language->get('text_seo_mic'),
 					'href'     => $this->url->link('tool/seo', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
 				);
-			}
+			} */
 		
 			if ($maintenance) {
 				$system[] = array(

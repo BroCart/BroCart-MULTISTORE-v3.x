@@ -18,13 +18,7 @@
       </ul>
     </div>
     <input type="hidden" name="code" value="" />
-	{% if broker %}
-		{% for key, value in redirect %}
-		<input type="hidden" name="redirect[{{ key }}]" value="{{ value }}" />
-		{% endfor %}
-	{% else %}
-	<input type="hidden" name="redirect" value="{{ redirect }}" />
-	{% endif %}
+    <input type="hidden" name="redirect" value="{{ redirect }}" />
   </form>
 </div>
 {% endif %}

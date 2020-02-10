@@ -1292,103 +1292,7 @@
                       {{ text_no }}
                       {% endif %} </label>
                   </div>
-                </div>
-				<div class="form-group">
-                  <label class="col-sm-2 control-label" for="config_seo_url_type">{{ entry_seo_url_type }}</label>
-                  <div class="col-sm-10">
-                  <select id="config_seo_url_type" class="form-control" name="config_seo_url_type">
-                    {% for seo_type in seo_types %}
-                      {% if seo_type.type == config_seo_url_type %}
-                        <option value="{{ seo_type.type }}" selected="selected">{{ seo_type.name }}</option>
-                      {% else %}
-                        <option value="{{ seo_type.type }}">{{ seo_type.name }}</option>
-                      {% endif %}
-                    {% endfor %}
-                  </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-config-include-path"><span data-toggle="tooltip" title="{{ entry_seo_url_include_path_help }}">{{ entry_seo_url_include_path }}</span></label>
-                  <div class="col-sm-10">					
-					<select name="config_seo_url_include_path" id="input-config-include-path" class="form-control">
-						{% for seo_include in seo_include_opt %}
-							{% if seo_include == config_seo_url_include_path %}
-							<option value="{{ config_seo_url_include_path }}" selected="selected">{{ config_seo_url_include_path|capitalize }}</option>
-							{% else %}
-							<option value="{{ seo_include }}">{{ seo_include|capitalize }}</option>
-							{% endif %}
-						{% endfor %}
-					</select>					
-                  </div>
-                </div>
-				
-				<div class="form-group">
-                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_seo_url_one }}">{{ entry_seo_url_one }}</span></label>
-                  <div class="col-sm-10">
-                    <label class="radio-inline"> 
-					{% if config_seo_url_one %}
-                      <input type="radio" name="config_seo_url_one" value="1" checked="checked" />
-                      {{ text_yes }}
-                      {% else %}
-                      <input type="radio" name="config_seo_url_one" value="1" />
-                      {{ text_yes }}
-                      {% endif %} 
-					</label>
-                    <label class="radio-inline"> 
-					{% if not config_seo_url_one %}
-                      <input type="radio" id="no-way" name="config_seo_url_one" value="0" checked="checked" />
-                      {{ text_no }}
-                      {% else %}
-                      <input type="radio" id="no-way" name="config_seo_url_one" value="0" />
-                      {{ text_no }}
-                      {% endif %} 
-					</label>
-                  </div>
-                </div>
-				
-                <div class="form-group">
-                  <label class="col-sm-2 control-label" for="config_seo_url_postfix"><span data-toggle="tooltip" title="{{ entry_seo_url_postfix_help }}">{{ entry_seo_url_postfix }}</span></label>
-                  <div class="col-sm-10">
-                  <input type="text" name="config_seo_url_postfix" value="{{ config_seo_url_postfix }}" id="config_seo_url_postfix" class="form-control"/>
-                  </div>
-                </div>
-				
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="input-config-prefix-def"><span data-toggle="tooltip" title="{{ entry_seo_url_prefix_def_help }}">{{ entry_seo_url_prefix_def }}</span></label>
-					<div class="col-sm-10">
-						<select name="config_seo_url_prefix_def" id="input-config-prefix-def" class="form-control">
-							{% if config_seo_url_prefix_def %}
-							<option value="1" selected="selected">{{ text_enabled }}</option>
-							<option value="0">{{ text_disabled }}</option>
-							{% else %}
-							<option value="1">{{ text_enabled }}</option>
-							<option value="0" selected="selected">{{ text_disabled }}</option>
-							{% endif %}
-						</select>                  
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="input-config-prefix"><span data-toggle="tooltip" title="{{ entry_seo_url_prefix_help }}">{{ entry_seo_url_prefix }}</span></label>
-					<div class="col-sm-10">
-						<select name="config_seo_url_prefix" id="input-config-prefix" class="form-control">
-							{% if config_seo_url_prefix %}
-							<option value="1" selected="selected">{{ text_enabled }}</option>
-							<option value="0">{{ text_disabled }}</option>
-							{% else %}
-							<option value="1">{{ text_enabled }}</option>
-							<option value="0" selected="selected">{{ text_disabled }}</option>
-							{% endif %}
-						  </select>                  
-					</div>
-				</div>
-				
-				<div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-config-syfix"><span data-toggle="tooltip" title="{{ entry_seo_url_syfix_help }}">{{ entry_seo_url_syfix }}</span></label>
-                  <div class="col-sm-10">
-                  <input type="text" name="config_seo_url_syfix" value="{{ config_seo_url_syfix }}" id="input-config-syfix" class="form-control"/>
-                  </div>
-                </div>
+                </div>				
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-robots"><span data-toggle="tooltip" title="{{ help_robots }}">{{ entry_robots }}</span></label>
                   <div class="col-sm-10">
@@ -1401,33 +1305,6 @@
                     <input type="text" name="config_compression" value="{{ config_compression }}" placeholder="{{ entry_compression }}" id="input-compression" class="form-control" />
                   </div>
                 </div>
-				<script type="text/javascript"><!--					
-				$("input[name=\'config_seo_url_one\']").click(function () {					
-					if ($(this).val() == true) {
-						$("#input-config-prefix").val(1).trigger('click');
-						$("#input-config-prefix-def").val(0).trigger('click');
-					}
-				});				
-				$("#input-config-prefix").on('change', function() {
-					if ($(this).find("option:selected").attr('value') == 0) {
-						$("#no-way").prop("checked", true);
-						$("#input-config-prefix-def").val(0).trigger('click');
-					}
-				});
-				$("#input-config-prefix-def").on('change', function() {
-					if ($(this).find("option:selected").attr('value') == 1) {
-						$("#no-way").prop("checked", true);
-						$("#input-config-prefix").val(1).trigger('click');
-					}
-				});
-				$("#config_seo_url_type").on('change', function() {
-					if ($(this).find("option:selected").attr('value') != 'seo_bro') {
-						$("#no-way").prop("checked", true);
-						$("#input-config-prefix").val(0).trigger('click');
-						$("#input-config-prefix-def").val(0).trigger('click');
-					}
-				});
-				//--></script>				
               </fieldset>
               <fieldset>
                 <legend>{{ text_security }}</legend>

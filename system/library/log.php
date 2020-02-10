@@ -19,7 +19,7 @@ class Log {
 	 * @param	string	$filename
 	 */
 	public function __construct($filename) {
-		$this->handle = fopen(DIR_LOGS . $filename, 'a');
+		$this->handle = fopen(DIR_LOGS . $filename, 'a');	
 	}
 	
 	/**

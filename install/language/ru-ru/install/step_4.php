@@ -7,7 +7,7 @@ $_['text_step_4']                 = 'Установка BroCart завершен
 $_['text_catalog']                = 'Перейти к витрине магазина';
 $_['text_admin']                  = 'Перейти в административную часть';
 $_['text_loading']                = 'Loading modules...';
-$_['text_extension']              = 'visit the extensions store';
+$_['text_extension']              = 'просмотреть дополнения для магазина';
 $_['text_mail']                   = 'Join the mailing list';
 $_['text_mail_description']       = 'Stay informed of BroCart updates and events.';
 $_['text_openbay']                = 'OpenBay Pro gives merchants the ability to link their store with 3rd party markets like eBay and Amazon. Import orders, list items and handle shipping information direct from BroCart...<a href="http://www.openbaypro.com/?utm_source=BroCart_install&utm_medium=referral&utm_campaign=BroCart_install">More information</a>';
@@ -27,7 +27,7 @@ $_['text_download']               = 'Download';
 $_['text_downloads']              = 'Downloads';
 
 // Button
-$_['button_mail']                 = 'Join here';
+$_['button_mail']                 = 'Подписка';
 $_['button_setup']                = 'Set-up now';
 
 // Error

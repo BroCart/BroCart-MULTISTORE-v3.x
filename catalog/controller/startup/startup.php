@@ -44,14 +44,6 @@ class ControllerStartupStartup extends Controller {
 			}			
 		}
 		
-		if ($this->config->get('config_seo_url')) {			
-			$code = $this->config->get('config_seo_url_type');
-			if ($code == 'seo_bro') {
-				$this->load->helper('trait_seo');				
-				$this->load->helper('trait_microdata');
-			}
-		}
-		$this->load->helper('trait_helper');
 		// Url
 		$this->registry->set('url', new Url($this->config->get('config_url'), $this->config->get('config_ssl')));
 		

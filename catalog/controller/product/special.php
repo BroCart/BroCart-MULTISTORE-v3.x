@@ -64,18 +64,6 @@ class ControllerProductSpecial extends Controller {
 			unset($this->session->data['maxpage']);
 		}
 		
-		$langs = $this->cache->get('catalog.seolang');	
-		
-		if ($langs) {			
-			$url = isset($url) ? $url : '';			
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('product/special', $url, $this->request->server['HTTPS'], $longer['code']), $longer['code']);				
-			}
-		}
-
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('product/special', $url)
@@ -265,13 +253,6 @@ class ControllerProductSpecial extends Controller {
 			$this->document->addCanonical($this->url->link('product/special', '', true));
 		}
 		
-		if ($pagination->getNext()) {
-			$this->document->addLink($pagination->getNext(), 'next');
-		}
-		if ($pagination->getPrev()) {
-			$this->document->addLink($pagination->getPrev(), 'prev');
-		}
-
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 		$data['limit'] = $limit;
