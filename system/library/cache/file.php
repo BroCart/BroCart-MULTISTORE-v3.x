@@ -48,9 +48,13 @@ class File {
 	public function delete($key) {
 		$files = glob(DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.*');		
 		if ($files) {
-			foreach ($files as $file) {
+			foreach ($files as $file) {				
 				if (file_exists($file)) {
-					@unlink($file);
+					fclose($file);
+					if (!@unlink($file)) {
+						clearstatcache(false, $file);
+					}
+					unset($file);
 				}
 			}
 		}
