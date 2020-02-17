@@ -50,7 +50,6 @@ class File {
 		if ($files) {
 			foreach ($files as $file) {				
 				if (file_exists($file)) {
-					fclose($file);
 					if (!@unlink($file)) {
 						clearstatcache(false, $file);
 					}
