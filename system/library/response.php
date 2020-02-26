@@ -7,9 +7,6 @@
  * @link		https://www.opencart.com
 */
 
-/**
-* Response class
-*/
 class Response {
 	private $headers = array();
 	private $level = 0;
@@ -32,7 +29,7 @@ class Response {
 	 * @param	int		$status
 	 *
 	 */
-	public function redirect($url, $status = 302) {
+	public function redirect($url, $status = 301) {
 		header('Location: ' . str_replace(array('&amp;', "\n", "\r"), array('&', '', ''), $url), true, $status);
 		exit();
 	}

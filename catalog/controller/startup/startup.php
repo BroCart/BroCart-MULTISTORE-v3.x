@@ -115,6 +115,13 @@ class ControllerStartupStartup extends Controller {
 		
 		// Set the config language_id
 		$this->config->set('config_language_id', $languages[$code]['language_id']);	
+		
+		//Logo
+		if (is_array($this->config->get('config_logo'))) {				
+			if (is_file(DIR_IMAGE . $this->config->get('config_logo')[$this->config->get('config_language_id')])) {
+				$this->config->set('config_logo', $this->config->get('config_logo')[$this->config->get('config_language_id')]);
+			}
+		}
 
 		// Customer
 		$customer = new Cart\Customer($this->registry);
