@@ -5,7 +5,7 @@ class SlaSeoPro {
 	private $use_cache = true;
 	private $language_code = array();
 	private $language_id = array();
-
+	private $multi_keyword = 0;
 	private $use_lang_prefix = 1;
 	private $lang_prefix = array();
 
@@ -24,12 +24,10 @@ class SlaSeoPro {
 	}
 
 	public function __construct($registry) {
-		$this->registry = $registry;
-		
+		$this->registry = $registry;		
 		if ($this->config->get('config_seo_url') && $this->config->get('module_sla_seo_pro_status')) {
-
-			$this->use_lang_prefix = $this->config->get('module_sla_seo_pro_use_lang_prefix');
-			
+			$this->use_lang_prefix = $this->config->get('module_sla_seo_pro_use_lang_prefix');			
+			$this->multi_keyword = $this->config->get('module_sla_seo_pro_multi_keyword');			
 			$this->ajax = (isset($this->request->server['HTTP_X_REQUESTED_WITH']) && strtolower($this->request->server['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 			$query = $this->db->query("SELECT language_id, code FROM " . DB_PREFIX . "language WHERE status = '1'");
 			$sla_seo_pro_lang_prefix = is_array($this->config->get('module_sla_seo_pro_lang_prefix'))?$this->config->get('module_sla_seo_pro_lang_prefix'):array();
@@ -56,21 +54,11 @@ class SlaSeoPro {
 					$query = $this->db->query("SELECT `keyword`, `query`, `seopath`, `language_id` FROM " . DB_PREFIX . "seo_url WHERE store_id = '" . $this->config->get('config_store_id') . "'" . $sql_language);
 					$this->cache_data = array();
 					foreach ($query->rows as $row) {
-
-						$language_id = $row['language_id']?$row['language_id']:$this->config->get('config_language_id');
-	
+						$language_id = $row['language_id']?$row['language_id']:$this->config->get('config_language_id');	
 						if (isset($this->cache_data['keywords'][$language_id][$row['keyword']])){
 							continue;
 						}
-/*
-						$this->cache_data['keywords'][$row['keyword']] = array(
-							'language_id' => $language_id,
-							'query'       => $row['query'],
-						);
-
-*/
 						$this->cache_data['queries'][$language_id][$row['query']] = $row['keyword'];
-
 						if ($row['seopath'])
 							$this->cache_data['seopath'][$row['query']] = $row['seopath'];
 					}
@@ -81,28 +69,19 @@ class SlaSeoPro {
 	}
 
 	public function prepareRoute() {
-
 		if (!$this->config->get('config_seo_url') && !$this->config->get('module_sla_seo_pro_status')) return;
-
-		$prefix = '';
-		
+		$prefix = '';		
 		$old_get = $this->request->get;
 		if (!isset($this->request->get['_route_'])) {
 			$this->validate();
-		} else {
-		
+		} else {		
 			$sla_seo_pro_postfix = trim($this->config->get('module_sla_seo_pro_postfix'));
 			if ($sla_seo_pro_postfix) {
 				$this->request->get['_route_'] = str_replace('.' . $sla_seo_pro_postfix , '', $this->request->get['_route_']);
 			}
 			$route_ = $route = $this->request->get['_route_'];
-
 			$parts = explode('/', trim($route, '/'));
-
-
-
 			$rows = array();
-
 			if ($this->use_lang_prefix && in_array($parts[0],$this->lang_prefix)) {
 				$this->lang_prefix_detect = array_shift($parts);
 			} else {
@@ -157,8 +136,6 @@ class SlaSeoPro {
 				}
 			}
 
-
-
 			if (count($rows) == sizeof($parts)) {
 
 				$language_id = $this->language_id[$this->session->data['language']];
@@ -167,7 +144,7 @@ class SlaSeoPro {
 				$queries = array();
 				$i=0;
 				foreach ($rows as $row) {
-if (isset($row['query']) && $row['query']) {
+			if (isset($row['query']) && $row['query']) {
 					if ($i == 0) {
 						$lang_code = $this->language_code[$row['query']['language_id']];
 						$language_id = $this->language_id[$lang_code];
@@ -179,7 +156,7 @@ if (isset($row['query']) && $row['query']) {
 						break;
 					};
 					$i++;
-}
+			}
 				}
 
 				if ($lang_code != $old_lang_code || $this->lang_prefix_detect) {
@@ -694,12 +671,11 @@ if (isset($row['query']) && $row['query']) {
 	}
 
 	private function getKeyword($query) {
-		if ($this->use_lang_prefix) {
+		if ($this->use_lang_prefix && !$this->multi_keyword) {		
 			$language_id = $this->config->get('module_sla_seo_pro_use_lang_prefix_main');
 		} else {
 			$language_id = $this->language_id[$this->session->data['language']];
 		}
-		
 		
 		if (isset($this->cache_data['queries'][$language_id][$query])) {
 			return array('query' => $query, 'keyword' => $this->cache_data['queries'][$language_id][$query]);
