@@ -249,9 +249,20 @@
                       {% endif %}
                     </div>
                   </div>
-                </div>
+                </div>				
+				<div class="form-group">
+                  <label class="col-sm-2 control-label">{{ entry_multi_keyword }}</label>
+                  <div class="col-sm-10">
+                    <div class="checkbox">
+                      {% if module_sla_seo_pro_multi_keyword %}
+                      <input type="checkbox" name="module_sla_seo_pro_multi_keyword" value="1" checked="checked" class="form-control"/>
+                      {% else %}
+                      <input type="checkbox" name="module_sla_seo_pro_multi_keyword" value="1" class="form-control" />
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>				
                 <div id="use_lang_prefix">
-
                 <div class="form-group">
                   <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_use_lang_prefix }}">{{ entry_lang_prefix }}</span></label>
                   <div class="col-sm-10">

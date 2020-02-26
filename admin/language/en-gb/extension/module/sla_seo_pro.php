@@ -43,7 +43,7 @@ $_['entry_sla_seo_pro_prefix_product_help']        = 'For example: site/product/
 $_['entry_use_lang_prefix']                        = 'Use Language prefix';
 $_['entry_lang_prefix']                            = 'Language prefixes';
 $_['help_use_lang_prefix']                         = 'Use Language prefix';
-
+$_['entry_multi_keyword']                          = 'Use Language URL';
 $_['entry_allow_utm']                              = 'Allow utm label';
 $_['entry_utm']                                    = 'The list of possible UTM marks';
 $_['help_utm']                                     = 'Utm-tags is a tool which helps to transfer the system analysts additional parameters about the source of the traffic.';

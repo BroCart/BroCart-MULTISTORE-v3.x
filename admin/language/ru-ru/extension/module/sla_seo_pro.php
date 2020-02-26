@@ -43,7 +43,7 @@ $_['entry_sla_seo_pro_prefix_product_help']        = 'Например: site/pro
 $_['entry_use_lang_prefix']                        = 'Использовать языковый префикс';
 $_['entry_lang_prefix']                            = 'Языковые префиксы';
 $_['help_use_lang_prefix']                         = 'Использовать языковый префикс (site/ru/entity, site/en/entity)';
-
+$_['entry_multi_keyword']                          = 'Использовать языковые URL';
 $_['entry_allow_utm']                              = 'Разрешить использовать обявленные UTM метки';
 $_['entry_utm']                                    = 'Список возможных UTM меток';
 $_['help_utm']                                     = 'Utm-метки — это инструмент, который помогает передавать в систему аналитики дополнительные параметры об источнике трафика.';
