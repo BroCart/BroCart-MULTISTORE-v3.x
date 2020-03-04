@@ -43,14 +43,14 @@ class ModelCatalogManufacturer extends Model {
 
 			return $query->rows;
 		} else {
-			$manufacturer_data = $this->cache->get('manufacturer.' . (int)$this->config->get('config_store_id'));
+			$manufacturer_data = $this->cache->get('manufacturer.' . (int)$this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id'));
 
 			if (!$manufacturer_data) {
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer m LEFT JOIN " . DB_PREFIX . "manufacturer_to_store m2s ON (m.manufacturer_id = m2s.manufacturer_id) LEFT JOIN " . DB_PREFIX . "manufacturer_description md ON (m.manufacturer_id = md.manufacturer_id) WHERE md.language_id = '" . (int)$this->config->get('config_language_id') . "' && m2s.store_id = '" . (int)$this->config->get('config_store_id') . "' ORDER BY md.name");
 
 				$manufacturer_data = $query->rows;
 
-				$this->cache->set('manufacturer.' . (int)$this->config->get('config_store_id'), $manufacturer_data);
+				$this->cache->set('manufacturer.' . (int)$this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id'), $manufacturer_data);
 			}
 
 			return $manufacturer_data;
