@@ -135,7 +135,7 @@ class ControllerCheckoutZakaz extends Controller {
                     $data['vouchers'][] = array(
                         'key' => $key,
                         'description' => $voucher['description'],
-                        'amount' => $this->currency->format($voucher['amount']),
+                        'amount' => $this->currency->format($voucher['amount'], $this->session->data['currency']),
                         'remove' => $this->url->link('checkout/cart', 'remove=' . $key)
                     );
                 }
