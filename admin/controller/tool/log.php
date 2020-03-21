@@ -38,7 +38,7 @@ class ControllerToolLog extends Controller {
 		);
 
 		$data['download'] = $this->url->link('tool/log/download', 'user_token=' . $this->session->data['user_token'], true);
-		$data['clear'] = $this->url->link('tool/log/clear', 'user_token=' . $this->session->data['user_token'], true);
+		$data['clear'] = str_replace('&amp;','&',$this->url->link('tool/log/cleaner', 'user_token=' . $this->session->data['user_token'], true));
 
 		$data['log'] = '';
 
@@ -101,21 +101,18 @@ class ControllerToolLog extends Controller {
 		}
 	}
 	
-	public function clear() {
+	public function cleaner() {	
 		$this->load->language('tool/log');
-
+		$json = array();
 		if (!$this->user->hasPermission('modify', 'tool/log')) {
-			$this->session->data['error'] = $this->language->get('error_permission');
+			$json['error'] = $this->language->get('error_permission');
 		} else {
 			$file = DIR_LOGS . $this->config->get('config_error_filename');
-
 			$handle = fopen($file, 'w+');
-
 			fclose($handle);
-
-			$this->session->data['success'] = $this->language->get('text_success');
+			$json['success'] = $this->language->get('text_success');
 		}
-
-		$this->response->redirect($this->url->link('tool/log', 'user_token=' . $this->session->data['user_token'], true));
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
 	}
 }
