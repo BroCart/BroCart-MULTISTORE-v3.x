@@ -241,10 +241,13 @@ class ControllerCommonFileManager extends Controller {
 
 			foreach ($files as $file) {
 				if (is_file($file['tmp_name'])) {
-					// Sanitize the filename
+					// Sanitize the filename				
 					//$filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
-					$filename = basename($this->translit(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8')));
-
+					$my_ext = utf8_strtolower(utf8_substr(strrchr(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'), '.'), 1));
+					$name = utf8_substr(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'), 0, -utf8_strlen($my_ext));
+					$normalize_filename = $this->translit($name) . '.' . $my_ext;
+					$filename = basename($normalize_filename);
+					
 					// Validate the filename length
 					if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 255)) {
 						$json['error'] = $this->language->get('error_filename');
@@ -283,11 +286,6 @@ class ControllerCommonFileManager extends Controller {
 					}
 				} else {
 					$json['error'] = $this->language->get('error_upload');
-				}
-				if (!$json) {									
-					if (is_file($directory . '/' . $filename)) {
-						$json['error'] = "File '$filename' is exists at catalog '" . $directory . "'!";
-					}		
 				}
 
 				if (!$json) {
@@ -436,9 +434,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 	
-	private function translit($name) {		
-		$my_ext = utf8_strtolower(utf8_substr(strrchr($name, '.'), 1));		
-		$name = utf8_substr($name, 0, -utf8_strlen($my_ext));
+	private function translit($name) {			
 		$name = (string)$name;
 		$name = strip_tags($name);
 		$name = str_replace(array("\n", "\r"), " ", $name);
@@ -461,7 +457,7 @@ class ControllerCommonFileManager extends Controller {
 		);		
 		$name = strtr($name, $lang_tr);
 		$name = preg_replace("/[^0-9a-z-_ ]/i", "", $name);
-		$name = str_replace(" ", "-", $name);	
-		return $name . '.' .$my_ext;
+		$name = str_replace(" ", "-", $name);		
+		return $name;
 	}
 }
