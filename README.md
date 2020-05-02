@@ -32,7 +32,7 @@ ALarik - SEO, кодинг, совместимость с TPL и TWIG
 
 SlaSoft - кодинг, оптимизация, кеширование, SEO-controller
 
-[OCappLab][1] - безопасность, оптимизация, расширения (mail: dev@ocapplab.com)
+OCappLab - безопасность, оптимизация, расширения
 
 Einshtein - сопровождение, поддержка, консультирование
 
@@ -44,7 +44,6 @@ Sergiosinicin - консультирование и поддержка
 
 Baco - кодинг, тестирование
 
-[1]: https://ocapplab.com
 [2]: https://forum.brocart.net
 [3]: https://www.youtube.com/user/opencartua
 [4]: https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F_MIT
