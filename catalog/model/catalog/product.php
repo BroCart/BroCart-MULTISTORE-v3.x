@@ -71,8 +71,11 @@ class ModelCatalogProduct extends Model {
 	}
 	
 	public function getManufacturerName($manufacturer_id) {
-		$query = $this->db->query("SELECT name FROM " . DB_PREFIX . "manufacturer_description WHERE language_id = '" . (int)$this->config->get('config_language_id') . "' AND manufacturer_id = '" . (int)$manufacturer_id . "'");
-		return $query->row['name'];
+		$query = $this->db->query("SELECT name FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+		if ($query->num_rows) {
+			return $query->row['name'];
+		}
+		return '';
 	}
 
 	public function getProducts($data = array()) {
