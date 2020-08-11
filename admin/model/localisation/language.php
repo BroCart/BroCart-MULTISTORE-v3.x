@@ -283,7 +283,7 @@ class ModelLocalisationLanguage extends Model {
 					);
 				}
 
-				$this->cache->set('admin.language', $language_data);
+				$this->cache->set('language', $language_data);
 			}
 
 			return $language_data;
