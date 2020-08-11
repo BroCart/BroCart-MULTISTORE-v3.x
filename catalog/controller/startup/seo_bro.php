@@ -127,8 +127,10 @@ class ControllerStartupSeoBro extends Controller {
 		if (!isset($this->request->cookie['language']) || $this->request->cookie['language'] != $code) {
 			setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
 		}
-		
-		if (!isset($this->session->data['language']) || $this->session->data['language'] != $code) {
+		if (!is_string($code)) {
+$this->log->write('DEBUG_err_131L_CatalogControllerStartupSeoBro|:'. print_r($code,1));
+		}
+		if (!isset($this->session->data['language']) || (is_string($code) && $this->session->data['language'] != $code)) {
 			$this->session->data['language'] = $code;
 			$language = new Language($code);
 			$language->load($code);			
