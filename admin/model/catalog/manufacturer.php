@@ -90,7 +90,7 @@ class ModelCatalogManufacturer extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "manufacturer m LEFT JOIN " . DB_PREFIX . "manufacturer_description md ON (m.manufacturer_id = md.manufacturer_id) WHERE md.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND d.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND m.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$sort_data = array(
@@ -101,7 +101,7 @@ class ModelCatalogManufacturer extends Model {
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY d.name";
+			$sql .= " ORDER BY m.name";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
