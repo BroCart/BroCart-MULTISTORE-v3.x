@@ -94,7 +94,7 @@ class ModelCatalogManufacturer extends Model {
 		}
 
 		$sort_data = array(
-			'd.name',
+			'm.name',
 			'm.sort_order'
 		);
 
