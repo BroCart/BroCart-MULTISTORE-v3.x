@@ -21,7 +21,7 @@ $_['column_model'] = 'Модель';
 $_['column_category'] = 'Категорія';
 $_['column_image'] = 'Зображення';
 $_['column_price'] = 'Ціна на сайті';
-$_['column_quantity'] = 'Кількість';
+$_['column_quantity'] = 'Кіл-ть';
 $_['column_status'] = 'Статус';
 $_['column_action'] = 'Керування';
 
