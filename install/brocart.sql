@@ -2368,7 +2368,6 @@ DROP TABLE IF EXISTS `oc_manufacturer_description`;
 CREATE TABLE IF NOT EXISTS `oc_manufacturer_description` (
   `manufacturer_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
   `description` text NOT NULL,
   `meta_title` varchar(255) NOT NULL,
   `meta_h1` varchar(255) NOT NULL,
