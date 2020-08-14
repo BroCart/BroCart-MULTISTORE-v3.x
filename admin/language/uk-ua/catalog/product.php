@@ -23,7 +23,7 @@ $_['column_image'] = 'Зображення';
 $_['column_price'] = 'Ціна на сайті';
 $_['column_quantity'] = 'Кількість';
 $_['column_status'] = 'Статус';
-$_['column_action'] = 'Дія';
+$_['column_action'] = 'Керування';
 
 // Entry
 $_['entry_name'] = 'Назва товару';
