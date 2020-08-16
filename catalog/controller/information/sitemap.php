@@ -4,14 +4,6 @@ class ControllerInformationSitemap extends Controller {
 		$this->load->language('information/sitemap');
 
 		$this->document->setTitle($this->language->get('heading_title'));
-		
-		$langs = $this->cache->get('catalog.seolang');	
-		
-		if ($langs) {
-			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('information/sitemap', '', $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
-			}
-		}
 
 		$data['breadcrumbs'] = array();
 
