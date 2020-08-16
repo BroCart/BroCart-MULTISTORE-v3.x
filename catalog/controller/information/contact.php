@@ -7,14 +7,6 @@ class ControllerInformationContact extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
-		$langs = $this->cache->get('catalog.seolang');	
-		
-		if ($langs) {
-			foreach ($langs as $longer) {
-				$this->document->addHreflang($this->url->link('information/contact', '', $this->request->server['HTTPS'], $longer['code']), $longer['code']);					
-			}
-		}
-
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$mail = new Mail($this->config->get('config_mail_engine'));
 			$mail->parameter = $this->config->get('config_mail_parameter');
