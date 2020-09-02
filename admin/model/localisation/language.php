@@ -227,7 +227,7 @@ class ModelLocalisationLanguage extends Model {
 
 	public function getLanguages($data = array()) {
 		if ($data) {
-			$sql = "SELECT * FROM " . DB_PREFIX . "language WHERE status = 1";
+			$sql = "SELECT * FROM " . DB_PREFIX . "language";
 
 			$sort_data = array(
 				'name',
