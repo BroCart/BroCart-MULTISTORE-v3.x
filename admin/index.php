@@ -2,7 +2,7 @@
 // Version
 define('VERSION', '3.0.3.1');
 
-define('DISTRIBUTIVE', 'brocart');
+define('DISTRIBUTIVE', 'BRO');
 
 // Configuration
 if (is_file('config.php')) {
